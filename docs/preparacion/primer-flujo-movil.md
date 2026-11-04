@@ -1,12 +1,12 @@
 # Preparación del primer flujo móvil
 
-Fecha: 2026-10-30. Estado: análisis documental, pendiente de specs/contrato backend y maqueta visual ratificada. No es una spec funcional aprobada ni implementa pantallas. Este documento reúne lo necesario para redactarlas cuando llegue el contrato.
+Fecha inicial: 2026-10-30; revisión 2026-11-03. Estado: preparación documental con boceto disponible; contrato backend y cierre de recorrido pendientes. No es una spec funcional aprobada ni implementa pantallas. Este documento reúne lo necesario para redactarlas cuando llegue el contrato.
 
 ## Fuentes y alcance revisado
 
 Historias_de_usuario_PactoGG.xlsx, hoja Historia de usuario Agile: IDs en columna B y narrativas en G. Componentes_Backend_y_Movil_PactoGG.xlsx, hoja Móvil: IDs MV y descripciones. PactoGG — Descripción del Móvil.docx, secciones 6–9. Requisitos Móvil v3, corte en página 4. Los originales no se modifican.
 
-La descripción DOCX revisada no contiene imágenes incrustadas. No se identificó en esta iteración una captura/prototipo visual ratificado para comparación de componentes. No se acredita fidelidad visual; pedir al equipo versión/enlace o imágenes de la maqueta, sin asumir que toda descripción antigua sigue vigente.
+La descripción DOCX revisada no contiene imágenes incrustadas. Posteriormente se recibió y recorrió Figma Make: sirve de boceto visual; los documentos y acuerdos prevalecen. Falta conciliar el diseño aplicable y no se acredita aún fidelidad de una implementación.
 
 ## Historias originales y componentes relacionados
 
@@ -61,6 +61,12 @@ PF identifica casos de diseño, no pruebas escritas ni historias nuevas. Todos e
 
 ## Qué falta recibir
 
-Spec backend y contrato versionado; URL de entorno; ejemplos sintéticos de éxito/error; reglas de registro/sesión y recursos de prueba acordados; criterio de primer ingreso; versión visual de maqueta. Véase [contrato API](../integracion/contrato-api.md). No se crearán specs funcionales cerradas o clientes hasta disponer de esas entradas.
+Spec backend y contrato versionado; URL de entorno; ejemplos sintéticos de éxito/error; reglas de registro/sesión y recursos de prueba acordados; criterio de primer ingreso y conciliación del boceto disponible. Véase [contrato API](../integracion/contrato-api.md). No se crearán specs funcionales cerradas o clientes hasta disponer de esas entradas.
 
 Se inspeccionaron además los nombres del RAR Integradora y su README, sin extraer o ejecutar aplicaciones: se identifica una landing HTML y una descripción de stack/estilo, no una referencia visual móvil ratificada. No se auditó visualmente todo su contenido ni se adoptaron sus servicios/configuración como decisiones nuevas.
+
+## Actualización de fuente visual — 2026-11-03
+
+Ya se recibió y recorrió el boceto [Figma Make](https://www.figma.com/make/jSaAZiJ20jLRdwieMnJTLp/App-PactoGG-de-Retos-Gamer). La ausencia visual descrita arriba es histórica. No se importan reglas o valores de la demo. Falta conciliar estilo/navegación y cerrar el recorrido funcional del corte con contrato backend.
+
+Expedientes: PG-03 acceso y sesión; PG-04 primer ingreso. Propuesta mínima por revisar: tablero, perfil/apodo y grupos con estados reales. No es una selección textual del profesor ni ratificación del usuario. Play se prepara mediante checklist, no una spec de negocio inventada.

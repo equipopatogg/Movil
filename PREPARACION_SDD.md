@@ -1,8 +1,20 @@
+## Prueba física posterior — 2026-11-04
+
+Cuenta QA y API real comprobadas en teléfono. Acceso, grupos, consulta vacía de torneos, refresh y logout correctos; **crear reto devuelve 503 MODERATION_UNAVAILABLE**, evidencias bloqueadas. APK final instalado; specs abiertas. [Evidencia y pendientes](docs/integracion/verificacion-telefono-2026-11-04.md). Sin push.
+
+## Implementación vigente — 2026-11-04
+
+Usuario autorizó ejecutar las ocho operaciones consumidor: acceso real, sesión, grupo/reto/evidencia y consulta de torneos. MainActivity abre recorrido conectado; diseño y pantallas adelantadas conservados sin entradas. Aviso básico provisional autorizado. [Resultados y límites](docs/integracion/verificacion-consumidor-2026-11-04.md): debug/24 JVM/Lint/Detekt/secretos correctos; falta ejecución Android y verificación funcional con cuentas del proveedor. Sin commit/push. Los estados documentales/prototipo inferiores conservan cronología y quedan superados en este alcance.
+
+## Actualización vigente — 2026-11-04
+
+Contrato backend recibido y preparación documental alineada: [matriz de operaciones/pantallas y pendientes](docs/integracion/alineacion-backend-2026-11-04.md), [Specs activas](specs/README.md). Ocho specs consumidor correspondientes a operaciones existentes. UI conservada; sin spec adicional de disponibilidad ni cambios de navegación. Los párrafos de contrato no recibido son antecedentes. Sin código nuevo ni ejecución/publicación por esta actualización.
+
 # PactoGG — preparación SDD
 
 **Fase vigente: documentación, planes y tareas.** Se conserva la base Android anterior sin ampliar código, dependencias o workflows. Las reglas de fase están en [AGENTS](AGENTS.md) y [.specify/memory/constitution.md](.specify/memory/constitution.md); los principios comunes, en [constitution.md](constitution.md).
 
-Excepción posterior de preparación Git (2026-11-03): se autoriza ajustar/centralizar workflows y verificar configuración/exclusiones/secretos; no funciones ni versiones de app. [Cierre común](../PREPARACION_GIT.md). El párrafo anterior conserva el alcance documental de preparación previa.
+Excepción posterior de preparación Git (2026-11-03): se autoriza ajustar/centralizar workflows y verificar configuración/exclusiones/secretos; no funciones ni versiones de app. Cierre común (referencia histórica externa). El párrafo anterior conserva el alcance documental de preparación previa.
 
 ## Orden de lectura
 
@@ -26,4 +38,8 @@ El historial de preparación, retirada de borradores generales y creación de lo
 
 ## Ubicación desde el 2026-11-03
 
-Todo este expediente está en PactoGG/Movil, junto al proyecto Android, sin carpeta anidada. Decisiones/informes previos conservan rutas/recuentos históricos; D-SDD-08 registra la separación. [Backend](../Backend/README.md) conserva contraste API_SDD y base técnica local posterior. Workflows Android ahora en raíz, conforme a D-SDD-16; sin Git creado o ejecución remota acreditada.
+Todo este expediente está en PactoGG/Movil, junto al proyecto Android, sin carpeta anidada. Decisiones/informes previos conservan rutas/recuentos históricos; D-SDD-08 registra la separación. Backend (referencia histórica externa) conserva contraste API_SDD y base técnica local posterior. Workflows Android ahora en raíz, conforme a D-SDD-16; sin Git creado o ejecución remota acreditada.
+
+## Instrucción posterior — evaluación, 2026-11-03
+
+El usuario solicita preparar specs y lo esencial de evaluación. Se permite editar documentación móvil y checklists, conservando límites de producto; no inicia funcionalidades/dependencias/firma/publicación. Git móvil y CI remoto ya existen: ver docs/preparacion/ci-remoto-android.md. PG-03/PG-04 y checklist-evaluacion-movil.md definen la preparación siguiente, con contrato y decisiones pendientes explícitos.

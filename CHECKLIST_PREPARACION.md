@@ -2,7 +2,7 @@
 
 Los checks de esta página acreditan documentos preparados, no funciones implementadas o controles técnicos ejecutados.
 
-Actualización 2026-11-03: preparación Git/CI acotada posterior, con traslado/configuración de workflows y comprobaciones locales según [informe común](../PREPARACION_GIT.md). PG-00 separa parte local y aceptación completa pendiente. Backend técnico ya existe/verificado localmente; las casillas documentales de abajo son antecedentes, no ausencia actual de código ni autorización de producto.
+Actualización 2026-11-03: preparación Git/CI acotada posterior, con traslado/configuración de workflows y comprobaciones locales según informe común (referencia histórica externa). PG-00 separa parte local y aceptación completa pendiente. Backend técnico ya existe/verificado localmente; las casillas documentales de abajo son antecedentes, no ausencia actual de código ni autorización de producto.
 
 ## Preparación disponible
 

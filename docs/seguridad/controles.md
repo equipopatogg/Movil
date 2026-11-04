@@ -12,7 +12,7 @@
 
 ## Preparados para ejecución
 
-Estado vigente 2026-11-03: workflows Android centralizados en `.github/workflows/` de PactoGG; setup-gradle oficial **v6.4.1**, SHA `8da46b539cd8fe6ab27ca75128919a18d757604c`, validación JAR recursiva habilitada y distribución checksum conservada. Helpers de evidencia con salidas reales y whitelist de campos, JSON sin snippets/matches/valores, recogida always y fallos nativos preservados; retención 7 días y contents:read. Ver [preparación Git](../../../PREPARACION_GIT.md). La consulta previa que detectó la referencia inválida se conserva abajo como historial, ya resuelta en configuración.
+Estado vigente 2026-11-03: workflows Android centralizados en `.github/workflows/` de PactoGG; setup-gradle oficial **v6.4.1**, SHA `8da46b539cd8fe6ab27ca75128919a18d757604c`, validación JAR recursiva habilitada y distribución checksum conservada. Helpers de evidencia con salidas reales y whitelist de campos, JSON sin snippets/matches/valores, recogida always y fallos nativos preservados; retención 7 días y contents:read. Ver preparación Git (referencia histórica externa). La consulta previa que detectó la referencia inválida se conserva abajo como historial, ya resuelta en configuración.
 
 | Control | Android | Backend técnico / pendiente |
 |---|---|---|

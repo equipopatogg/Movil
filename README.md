@@ -1,7 +1,5 @@
-# PactoGG Android — base visual
+# PactoGG Android — acceso y sesión
 
-Rama de preparación codex/base-ui. Conserva el prototipo Compose y sus recursos originales adaptados. Esta rama no autentica ni envía datos: el acceso permite recorrer muestras explícitas. La integración real va en las ramas posteriores; no presentar el prototipo como producto terminado.
+Rama codex/acceso-sesion, basada en codex/base-ui. Ofrece registro/login, custodia cifrada, renovación y logout con diseño aprobado. El contrato compartido incluye DTO/servicios de las operaciones restantes como soporte; sus pantallas conectadas se incorporan en ramas posteriores. No se ofrece el recorrido de muestra como autenticación.
 
-Se conservan colores, tipografías con licencias, iconos, pantallas adelantadas y pruebas visuales. Notas personales, credenciales, caches y builds quedan ignorados. Los workflows se mantienen en .github/ con Android en raíz, sin Backend ni carpeta Movil anidada.
-
-Preparada el 2026-11-04 a partir del trabajo local existente; no se altera la secuencia histórica de UI antes del contrato. Aceptación de producto pendiente.
+[Registro de ramas](docs/preparacion/entrega-por-ramas.md) · [Specs](specs/README.md). La verificación física anterior tiene candidato identificado; esta rama requiere sus comprobaciones locales y revisión. Sin push ni cierre ficticio de specs.

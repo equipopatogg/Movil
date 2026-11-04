@@ -2,7 +2,7 @@
 
 Estado: propuesta de implementación futura. [Spec](spec.md). La preparación no ejecuta pasos.
 
-Actualización 2026-11-03: pasos de configuración/referencias/conservación parcialmente implementados bajo el encargo pre-Git; verificaciones locales afectadas autorizadas. Las rutas `.github/workflows/` de este plan son **desde PactoGG raíz**; configs y app siguen en Movil. [Estado actual](../../../PREPARACION_GIT.md). No sustituye ejecución de acción/motores/runner requerida para aceptación completa.
+Actualización 2026-11-03: pasos de configuración/referencias/conservación parcialmente implementados bajo el encargo pre-Git; verificaciones locales afectadas autorizadas. Las rutas `.github/workflows/` de este plan son **desde PactoGG raíz**; configs y app siguen en Movil. Estado actual (referencia histórica externa). No sustituye ejecución de acción/motores/runner requerida para aceptación completa.
 
 ## 1. Diseño y secuencia
 

@@ -19,7 +19,7 @@ Cada asunto se mantiene en el documento indicado. Las páginas de entrada resume
 | Perfiles, skills y selección por spec | [.opencode](../../.opencode/README.md), [descubrimiento](descubrimiento-skills.md) y [matriz](matriz-skills-por-spec.md) |
 | Profesor: adaptación y procedencia | [comparación móvil](repositorios-moviles-y-agentes.md), [antecedente DevSecOps](revision-profesor.md) e [inventarios](../../referencias/profesor/README.md) |
 | Pendientes y trazabilidad | [pendientes](pendientes.md) y [trazabilidad](trazabilidad.md) |
-| Propuesta backend y correspondencia con Android | [Backend](../../../Backend/README.md) y [plan compartido de contrato](../../../Backend/docs/propuesta-backend.md#6-specs-futuras-y-correspondencia-con-el-móvil) |
+| Propuesta backend y correspondencia con Android | Backend (referencia histórica externa) y plan compartido de contrato (referencia histórica externa) |
 | Verificación documental única | [informe consolidado](verificacion.md) y [checklist de preparación](../../CHECKLIST_PREPARACION.md) |
 
 ## Organización vigente

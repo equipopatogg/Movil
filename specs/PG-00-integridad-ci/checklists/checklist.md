@@ -1,6 +1,6 @@
 # Checklist — PG-00
 
-Estado técnico: configuración/verificación local parcial en preparación Git, 2026-11-03. Aceptación humana/runner pendientes; [informe](../../../../PREPARACION_GIT.md). Casillas completas de criterio requieren todavía evidencia del escenario completo.
+Estado técnico: configuración/verificación local parcial en preparación Git, 2026-11-03. Aceptación humana/runner pendientes; informe (referencia histórica externa). Casillas completas de criterio requieren todavía evidencia del escenario completo.
 
 - [x] [Spec](../spec.md), [plan](../plan.md) y [tareas](../tasks.md) conciliados con autorización acotada y pendientes.
 - [x] Referencia setup-gradle oficial resuelta/fijada; alcance integrado del JAR y orden comprobados en fuente; checksum de distribución conservado. Ejecución de la acción sigue pendiente.
@@ -20,3 +20,7 @@ Estado técnico: configuración/verificación local parcial en preparación Git,
 | PG00-AC5 | PASS configuración local | YAML/actionlint/política/rutas/referencias | Ejecución remota y aceptación humana |
 
 Estados futuros: PASS, FAIL, ERROR, NO_EJECUTADO o NO_APLICA justificado. Preparar documentos no satisface criterios técnicos.
+
+## Evidencia posterior — 2026-11-03
+
+[CI remoto verificado](../../../docs/preparacion/ci-remoto-android.md): calidad/seguridad PASS para 2a9fb5e, artefactos descargados y resúmenes vinculados. Se acreditan ejecución ordinaria, informes y permisos operativos de esas ejecuciones. No marcar PG-00 entero PASS: siguen pendientes fixtures de reglas Semgrep y negativo de Wrapper alterado en runner, revisión completa de criterios y aceptación independiente.

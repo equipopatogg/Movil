@@ -73,3 +73,8 @@ No crear remotos, subir a Git, desplegar, publicar o firmar con credenciales sin
 ## G12. Mantenimiento
 
 Un cambio constitucional registra motivo, fuente, fecha, impacto y documentos afectados en decisiones. Actualizar la constitución SDD solo si cambian reglas de fase; actualizar este documento si cambian principios compartidos. Evitar copias completas en memorias, specs o perfiles. El [mapa SDD](docs/preparacion/mapa-estructura-sdd.md) indica dónde mantener cada asunto.
+
+
+## Autorización vigente — implementar consumidor, 2026-11-04
+
+Usuario solicita empezar implementación de las specs MO-* conforme al backend. Autoriza código Android y comprobaciones locales pertinentes, con dependencias existentes y sin publicación/push o cambios backend. Conservar pantallas adelantadas fuera del recorrido conectado y recordatorios privados ignorados; no reintroducir PG-08. Privacidad real pendiente mantiene registro bloqueado mediante configuración explícita. Las restricciones documentales anteriores son antecedentes superados solo para este alcance.

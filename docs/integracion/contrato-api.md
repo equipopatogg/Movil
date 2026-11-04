@@ -1,8 +1,14 @@
+# Estado vigente del contrato — 2026-11-04
+
+**Recibido:** OpenAPI 1.0.0 y guía del equipo; revisados contra backend externo commit f6c37d8a70de43765f870b78b452832a2c0842b9. [Matriz canónica: operaciones, fuente, discrepancias y pendientes](alineacion-backend-2026-11-04.md). Datos recibidos no equivalen a contrato conciliado ni compatibilidad Android verificada.
+
+La recepción histórica inferior queda superada: ya existen rutas, campos, URL de guía y políticas de sesión. Faltan privacidad vigente, conciliaciones concretas y pruebas de proveedor/consumidor. El backend externo publicado no es el antiguo cierre local BE-00–BE-03 de la carpeta hermana; no se modifica ni sustituye esa carpeta por inferencia.
+
 # Preparación del contrato Android/backend
 
 Estado: pendiente de contrato aprobado. Documento de coordinación, sin endpoints ni DTO de negocio inventados. La app Kotlin consume el backend .NET del equipo; esta preparación no implementa ninguno de los dos.
 
-Actualización del 2026-11-03: [Backend](../../../Backend/README.md) ya tiene soporte técnico BE-00–BE-03 verificado localmente. Su [correspondencia](../../../Backend/docs/propuesta-backend.md#6-specs-futuras-y-correspondencia-con-el-móvil) enlaza funciones futuras con PG-03; no hay contrato funcional o registro/login/logout implementados. La tabla siguiente es checklist de recepción/revisión, no otra definición OpenAPI; la fuente canónica se versionará en Backend antes de crear DTO de producto Android.
+Actualización del 2026-11-03: Backend (referencia histórica externa) ya tiene soporte técnico BE-00–BE-03 verificado localmente. Su correspondencia (referencia histórica externa) enlaza funciones futuras con PG-03; no hay contrato funcional o registro/login/logout implementados. La tabla siguiente es checklist de recepción/revisión, no otra definición OpenAPI; la fuente canónica se versionará en Backend antes de crear DTO de producto Android.
 
 La ubicación del futuro OpenAPI ratificado se acordará con el equipo backend. Este documento enlazará su versión y ubicación; no mantendrá una segunda definición de rutas o campos. Las hojas originales son candidatas que necesitan resolver sus discrepancias.
 

@@ -1,6 +1,6 @@
 # Tasks — PG-00
 
-Estado actualizado 2026-11-03: configuración/verificaciones locales acotadas autorizadas en preparación Git; implementación/aceptación completa parcial. [Spec](spec.md) · [plan](plan.md) · [evidencia](../../../PREPARACION_GIT.md).
+Estado actualizado 2026-11-03: configuración/verificaciones locales acotadas autorizadas en preparación Git; implementación/aceptación completa parcial. [Spec](spec.md) · [plan](plan.md) · evidencia (referencia histórica externa).
 
 - [x] T00.1 Revisar referencia no resoluble de setup-gradle, elegir commit oficial compatible y verificar validación integrada — PG00-AC1/AC5; v6.4.1/SHA oficial, action.yml/código y checksums; no ejecución de acción acreditada.
 - [ ] T00.2 Corregir referencia/opciones necesarias en ambos workflows y comprobar validación del Wrapper bajo Movil/ antes de Gradle, sin acción redundante — PG00-AC1; evidencia: validación positiva y negativa aislada.
