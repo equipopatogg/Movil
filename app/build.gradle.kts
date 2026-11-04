@@ -9,7 +9,9 @@ plugins {
     alias(libs.plugins.cyclonedx)
 }
 
-val apiBaseUrl = providers.gradleProperty("pactogg.apiBaseUrl").orElse("").get()
+val apiBaseUrl = providers.gradleProperty("pactogg.apiBaseUrl").orElse("https://52-3-200-211.sslip.io/").get()
+val privacyVersion = providers.gradleProperty("pactogg.privacyVersion").orElse("2026-10-01").get()
+require(privacyVersion.matches(Regex("[A-Za-z0-9_.-]{1,32}"))) { "Versión de privacidad inválida." }
 require(apiBaseUrl.isEmpty() || URI(apiBaseUrl).let {
     it.scheme == "https" && it.host != null && it.userInfo == null &&
         it.query == null && it.fragment == null && it.path.endsWith("/")
@@ -30,6 +32,7 @@ android {
         versionCode = 1
         versionName = "0.1.0"
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
+        buildConfigField("String", "PRIVACY_VERSION", "\"$privacyVersion\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

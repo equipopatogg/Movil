@@ -5,7 +5,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.pactogg.app.core.navigation.PactoGGApp
+import com.pactogg.app.prototype.AppRoot
 import com.pactogg.app.ui.theme.PactoGGTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +17,6 @@ class MainActivity : ComponentActivity() {
             statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
             navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
         )
-        setContent { PactoGGTheme { PactoGGApp() } }
+        setContent { PactoGGTheme { AppRoot() } }
     }
 }
