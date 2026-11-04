@@ -19,6 +19,7 @@ fun ConnectedGroups(state: ConnectedState, model: ConnectedViewModel) {
             PactCard(group.name, "Grupo confirmado por el servidor", R.drawable.ic_pacto_users) {
                 Text("Código: ${group.inviteCode}")
                 Text("Rol: ${group.role} · Puntos virtuales: ${group.points}")
+                Action("Crear reto en este grupo", enabled = !state.busy) { model.navigate(ConnectedRoute.CREATE) }
             }
         }
         Text("Solo se muestra el último grupo creado aquí. El servicio todavía no permite recuperar tu lista.")

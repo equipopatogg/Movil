@@ -67,9 +67,11 @@ fun ConnectedApp(model: ConnectedViewModel) {
 
 @Composable
 private fun ConnectedNavigation(route: ConnectedRoute, busy: Boolean, nav: (ConnectedRoute) -> Unit) {
-    val routes = listOf(ConnectedRoute.HOME, ConnectedRoute.GROUPS, ConnectedRoute.TOURNAMENTS)
-    val labels = listOf("Inicio", "Grupos", "Torneos")
-    val icons = listOf(R.drawable.ic_pacto_home, R.drawable.ic_pacto_users, R.drawable.ic_pacto_trophy)
+    val routes = listOf(ConnectedRoute.HOME, ConnectedRoute.CREATE,
+        ConnectedRoute.TOURNAMENTS, ConnectedRoute.GROUPS)
+    val labels = listOf("Inicio", "Crear", "Torneos", "Grupos")
+    val icons = listOf(R.drawable.ic_pacto_home, R.drawable.ic_pacto_plus,
+        R.drawable.ic_pacto_trophy, R.drawable.ic_pacto_users)
     NavigationBar(containerColor = MaterialTheme.colorScheme.background) {
         routes.forEachIndexed { index, target ->
             NavigationBarItem(selected = route == target, enabled = !busy, onClick = { nav(target) },
@@ -82,26 +84,31 @@ private fun ConnectedNavigation(route: ConnectedRoute, busy: Boolean, nav: (Conn
 private fun ConnectedContent(state: ConnectedState, model: ConnectedViewModel) {
     when (state.route) {
         ConnectedRoute.HOME -> ConnectedHome(state, model)
-        ConnectedRoute.PROFILE -> ConnectedProfile(state, model)
         ConnectedRoute.GROUPS -> ConnectedGroups(state, model)
+        ConnectedRoute.CREATE -> ConnectedCreate(state, model)
+        ConnectedRoute.CONTRACT -> ConnectedContract(state, model)
+        ConnectedRoute.EVIDENCE -> ConnectedEvidence(state, model)
         ConnectedRoute.TOURNAMENTS -> ConnectedTournaments(state, model)
-        else -> ConnectedHome(state, model)
+        ConnectedRoute.PROFILE -> ConnectedProfile(state, model)
     }
 }
 
 @Composable
 private fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
     AppPage("Tu palabra.\nTu juego.", "Bienvenido, ${state.account?.nickname.orEmpty()}") {
-        HeroPanel("PACTOGG", "Tu palabra cuenta.",
-            "Tu cuenta está conectada al servicio.", R.drawable.ic_pacto_bolt)
-        PactCard("Sesión activa", "Accede a tu perfil para cerrar sesión.", R.drawable.ic_pacto_shield) {
-            Action("Ver mi perfil", enabled = !state.busy) { model.navigate(ConnectedRoute.PROFILE) }
-        }
-        PactCard(state.group?.name ?: "Crea tu grupo", "Grupo creado durante esta sesión.",
+        HeroPanel("JUEGA CON TU GRUPO", "Crea tu próximo reto.",
+            "Grupos, retos manuales y torneos disponibles en el servicio.", R.drawable.ic_pacto_bolt)
+        PactCard(state.group?.name ?: "Crea tu grupo", "Elige un grupo creado durante esta sesión.",
             R.drawable.ic_pacto_users) {
-            Action("Crear o ver grupo", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            Action("Grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+        }
+        if (state.group != null) Action("Crear reto manual", enabled = !state.busy) {
+            model.navigate(ConnectedRoute.CREATE)
         }
         Action("Consultar torneos", enabled = !state.busy) { model.navigate(ConnectedRoute.TOURNAMENTS) }
+        if (state.contract != null) Action("Ver último reto creado", enabled = !state.busy) {
+            model.navigate(ConnectedRoute.CONTRACT)
+        }
     }
 }
 
