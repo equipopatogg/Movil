@@ -58,7 +58,10 @@ jobs:
           cache-read-only: true
           dependency-graph: disabled
       - id: sdk
-        run: sdkmanager "platforms;android-36.1" "build-tools;36.0.0"
+        uses: android-actions/setup-android@035682743ab223ec9c6169af09811dff8247e520
+        with:
+          packages: platforms;android-36.1 build-tools;36.0.0
+          log-accepted-android-sdk-licenses: false
       - name: Generate SBOM
         id: sbom
         working-directory: .
