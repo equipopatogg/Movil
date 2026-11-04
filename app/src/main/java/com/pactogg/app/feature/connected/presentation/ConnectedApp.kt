@@ -67,9 +67,9 @@ fun ConnectedApp(model: ConnectedViewModel) {
 
 @Composable
 private fun ConnectedNavigation(route: ConnectedRoute, busy: Boolean, nav: (ConnectedRoute) -> Unit) {
-    val routes = listOf(ConnectedRoute.HOME, ConnectedRoute.GROUPS)
-    val labels = listOf("Inicio", "Grupos")
-    val icons = listOf(R.drawable.ic_pacto_home, R.drawable.ic_pacto_users)
+    val routes = listOf(ConnectedRoute.HOME, ConnectedRoute.GROUPS, ConnectedRoute.TOURNAMENTS)
+    val labels = listOf("Inicio", "Grupos", "Torneos")
+    val icons = listOf(R.drawable.ic_pacto_home, R.drawable.ic_pacto_users, R.drawable.ic_pacto_trophy)
     NavigationBar(containerColor = MaterialTheme.colorScheme.background) {
         routes.forEachIndexed { index, target ->
             NavigationBarItem(selected = route == target, enabled = !busy, onClick = { nav(target) },
@@ -84,6 +84,7 @@ private fun ConnectedContent(state: ConnectedState, model: ConnectedViewModel) {
         ConnectedRoute.HOME -> ConnectedHome(state, model)
         ConnectedRoute.PROFILE -> ConnectedProfile(state, model)
         ConnectedRoute.GROUPS -> ConnectedGroups(state, model)
+        ConnectedRoute.TOURNAMENTS -> ConnectedTournaments(state, model)
         else -> ConnectedHome(state, model)
     }
 }
@@ -100,6 +101,7 @@ private fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
             R.drawable.ic_pacto_users) {
             Action("Crear o ver grupo", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
         }
+        Action("Consultar torneos", enabled = !state.busy) { model.navigate(ConnectedRoute.TOURNAMENTS) }
     }
 }
 

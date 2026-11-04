@@ -1,5 +1,5 @@
-# PactoGG Android — grupos
+# PactoGG Android — grupos y consulta de torneos
 
-Rama codex/grupos, basada en codex/acceso-sesion. Registro, login, sesión y logout; creación de grupo con configuración/puntos recibidos. No se ofrece listado recuperable ni unión por código sin API. Retos/evidencias y torneos se habilitan después.
+Rama codex/consulta-torneos, basada en codex/grupos. Acceso/sesión, creación de grupos y consulta paginada de torneos/bracket de solo lectura. No ofrece creación/inscripción de torneos. Retos/evidencias permanecen en la rama pendiente por el 503 del proveedor.
 
-[Registro de ramas](docs/preparacion/entrega-por-ramas.md) · [Specs](specs/README.md). Cierre integral y CI remoto pendientes, sin push.
+[Registro de ramas](docs/preparacion/entrega-por-ramas.md) · [Specs](specs/README.md). Datos/bracket reales, casos pendientes y aceptación integral siguen abiertos. Sin push.
