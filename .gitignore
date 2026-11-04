@@ -1,15 +1,29 @@
+# Local settings, caches and generated output
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+.idea/
+.gradle/
+.kotlin/
+**/build/
+.cxx/
+.externalNativeBuild/
 local.properties
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+/captures/
+/artifacts/
+/TestResults/
+
+# Personal references are not project inputs
+/.guias-locales/
+
+# Credentials and signing material
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.local.json

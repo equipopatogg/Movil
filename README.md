@@ -1,9 +1,7 @@
-# PactoGG — Móvil
+# PactoGG Android — base visual
 
-Proyecto Android Kotlin. Abrir **esta carpeta raíz** en Android Studio: `app/`, `gradle/`, `gradlew` y `settings.gradle.kts` están directamente aquí.
+Rama de preparación codex/base-ui. Conserva el prototipo Compose y sus recursos originales adaptados. Esta rama no autentica ni envía datos: el acceso permite recorrer muestras explícitas. La integración real va en las ramas posteriores; no presentar el prototipo como producto terminado.
 
-Incluye la base Compose/Material 3, Hilt, navegación, HTTPS, DTO/mapper, Room, preparación SDD y pruebas técnicas. Registro/login, sesión, integración backend y pantallas funcionales siguen pendientes.
+Se conservan colores, tipografías con licencias, iconos, pantallas adelantadas y pruebas visuales. Notas personales, credenciales, caches y builds quedan ignorados. Los workflows se mantienen en .github/ con Android en raíz, sin Backend ni carpeta Movil anidada.
 
-Los dos workflows Android están en `.github/workflows/` y trabajan desde la raíz. CI remoto, pruebas instrumentadas, cobertura, release de 16 KB y firma/distribución requieren verificación. No se incluyen backend, credenciales ni resultados generados.
-
-Consultar [preparación SDD](PREPARACION_SDD.md) y [specs](specs/README.md). Las referencias históricas a `Movil/`, `../Backend/` o documentación del espacio conjunto describen la organización local original; el backend se gestiona por separado.
+Preparada el 2026-11-04 a partir del trabajo local existente; no se altera la secuencia histórica de UI antes del contrato. Aceptación de producto pendiente.
