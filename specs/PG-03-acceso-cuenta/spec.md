@@ -1,6 +1,6 @@
 # PG-03 — Registro, login y ciclo de sesión PactoGG
 
-Tipo: aplicación/integración/pruebas. Fecha: 2026-10-30. Estado: borrador condicionado; no preparado para implementar por falta de contrato y recorrido visual ratificados.
+Tipo: aplicación/integración/pruebas. Fecha inicial: 2026-10-30; revisión 2026-11-03. Estado: borrador condicionado; boceto disponible, contrato y recorrido funcional sin cerrar.
 Rector: [AGENTS](../../AGENTS.md) y [constitución SDD](../../.specify/memory/constitution.md).
 
 ## 1. Contexto y objetivo
@@ -50,7 +50,7 @@ La versión/ubicación de OpenAPI se enlaza desde docs/integracion/contrato-api.
 
 PG03-AC2–AC6 deben concretar ejemplos del contrato/maqueta al satisfacer PG03-AC1. Sus valores pendientes no se rellenan con los del profesor.
 
-Coordinación actualizada el 2026-11-03: la [propuesta de backend](../../../Backend/docs/propuesta-backend.md#6-specs-futuras-y-correspondencia-con-el-móvil) relaciona candidatos de registro/login/logout con estos criterios. Esa planificación no satisface PG03-AC1 ni acepta código. La conexión Android se implementará después de verificar el backend del alcance acordado; los cambios de contrato se contrastarán con esta spec durante su desarrollo.
+Coordinación actualizada el 2026-11-03: la propuesta de backend (referencia histórica externa) relaciona candidatos de registro/login/logout con estos criterios. Esa planificación no satisface PG03-AC1 ni acepta código. La conexión Android se implementará después de verificar el backend del alcance acordado; los cambios de contrato se contrastarán con esta spec durante su desarrollo.
 
 ## 6. Plan de pruebas
 
@@ -58,7 +58,7 @@ Desarrollar PF-C1–PF-C6 del primer-flujo-movil.md contra reglas reales: valida
 
 ## 7. Riesgos, límites y deuda
 
-Bloqueantes: contrato y URL HTTPS por entorno, JSON de éxito/error, política de sesión/almacenamiento/logout, maqueta y destino tras primer ingreso. Falta decidir si verificación de correo, apodo/avatar y consentimiento condicionan el acceso y dónde se capturan. Las historias 12/16/17/22 no se añaden completas por inferencia; si condicionan el flujo, revisar explícitamente alcance y tareas antes de cerrar diseño.
+Bloqueantes: contrato y URL HTTPS por entorno, JSON de éxito/error, política de sesión/almacenamiento/logout y cierre del diseño/destino tras primer ingreso. El boceto ya se recibió. Falta decidir si verificación de correo, apodo/avatar y consentimiento condicionan el acceso y dónde se capturan. Las historias 12/16/17/22 no se añaden completas por inferencia; si condicionan el flujo, revisar explícitamente alcance y tareas antes de cerrar diseño.
 
 Fuera de alcance: implementar backend/.NET/Redis/nube, proveedor Google/SSO no ratificado, recuperación completa no acordada, cámara/video, FCM, WorkManager, Offline-First, Deep Links y publicación Play. No dar por implementados grupos o todo el onboarding al definir un destino. No fijar nombres/campos HTTP, reglas de contraseña o políticas de reintento sin fuente.
 
@@ -71,3 +71,33 @@ Fuera de alcance: implementar backend/.NET/Redis/nube, proveedor Google/SSO no r
 | Implementación no iniciada | Pendiente | Pendiente | Sin registro/login/sesión aceptados |
 
 Expediente: [plan](plan.md), [tareas](tasks.md), [checklist](checklists/checklist.md).
+
+## Actualización de preparación — 2026-11-03
+
+El boceto Figma Make ya está disponible y fue recorrido; no sigue pendiente recibir un boceto, sino conciliar el diseño funcional aplicable. El contrato funcional backend continúa pendiente. No usar sus mínimos de contraseña, checkbox de demo o datos precargados como contrato.
+
+PG-03 mantiene registro/login/sesión/logout y la transición segura al destino; el destino posterior al ingreso (antecedente retirado del expediente activo) delimita las pantallas posteriores. PG03-AC5 comprueba la transición y ciclo de sesión; PG04-AC2–AC5 comprueban contenido/recorrido de destino, sin duplicar autenticación. PF-C1–PF-C6 siguen pendientes.
+
+Revisión de entrada por operación: registro (correo/contraseña/apodo y consentimiento por cerrar), login (credenciales y errores ratificados), sesión (custodia/renovación/revocación), logout (limpieza y respuesta ante fallo). No crear DTO/cliente hasta que contrato y ejemplos versionados cierren esos puntos. La preparación de evaluación se organiza en [checklist del corte](../../docs/preparacion/checklist-evaluacion-movil.md).
+
+## Etapa UI preparada antes de integración — 2026-11-03
+
+Instrucción vigente: solo specs/diseño, sin Compose todavía. Se acota una primera entrega visual futura separada del flujo completo: UI-A01 acceso y UI-A02 registro del [diseño UI](../../docs/preparacion/diseno-ui-acceso-primer-ingreso.md). El contrato bloquea la conexión real y las reglas de negocio; no bloquea definir composición, estado y eventos de presentación.
+
+| ID | Criterio visual futuro | Evidencia al implementar |
+|---|---|---|
+| PG03-UI1 | Acceso/registro representan los campos y acciones acordados con recursos y estilos propios, sin introducir políticas de contraseña/consentimiento no ratificadas | Revisión de pantallas/Previews identificadas; historias 11/13/18/19 y apodo 21 según alcance |
+| PG03-UI2 | Inicial/edición/contraseña visible/carga/error se representan desde estado explícito; controles/foco/accesibilidad y teclado son coherentes | Pruebas de UI y revisión en Android; no bastan capturas para todos los casos |
+| PG03-UI3 | Formularios emiten intenciones de enviar/navegar, sin autenticar por un booleano local ni guardar credenciales | Inspección y pruebas de ausencia de efectos/red/persistencia en el alcance visual |
+| PG03-UI4 | Variantes sintéticas quedan en Preview/catálogo debug; release no presenta registro/login ficticios ni éxito de API | Revisión de separación de variantes y paquete candidato |
+
+Estos criterios NO sustituyen PG03-AC1–AC6. UI puede quedar verificada y la integración seguir pendiente. Los criterios funcionales originales conservan su requisito de contrato; no se declara login funcional por una pantalla. Recuperación/Google/verificación de correo no se agregan completas por aparecer en fuentes o boceto.
+
+Puntos de integración futura: callbacks de presentación → ViewModel → interfaces/repositorio → DTO/servicio según contrato. Al llegar el contrato se revisan campos, reglas, errores, sesión y tareas con historial real, conservando esta etapa visual.
+
+
+## Actualización vigente — contrato recibido, 2026-11-04
+
+Backend externo fijado al commit f6c37d8a70de43765f870b78b452832a2c0842b9; ver [alineación canónica](../../docs/integracion/alineacion-backend-2026-11-04.md). Ya no falta recibir el contrato: falta conciliar las entradas específicas y verificar integración. El texto anterior conserva etapas históricas, no un estado vigente de ausencia total de contrato.
+
+PG-03 mantiene sus IDs PG03-AC1–AC6 y coordinación, sin duplicar implementación. El detalle se divide en [MO-USR-01](../MO-USR-01-registro/spec.md) (AC2), [MO-AUTH-01](../MO-AUTH-01-login/spec.md) (AC3), [MO-AUTH-03](../MO-AUTH-03-sesion/spec.md) y [MO-AUTH-04](../MO-AUTH-04-logout/spec.md) (AC4); el destino se define en las operaciones de acceso (AC5). AC1 queda PARCIAL documental por recepción y dudas abiertas; AC2–AC6 no están verificados. No marcar aceptación de integración por apariencia o pruebas del prototipo. T03.1 recibe fuente pero conserva conciliación pendiente; T03.2–T03.8 se desglosan en MO-* sin duplicar servicios/custodia. Sin código nuevo por esta actualización.

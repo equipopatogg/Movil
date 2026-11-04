@@ -2,7 +2,7 @@
 
 Tipo: configuración/pipeline. Fecha: 2026-10-30. Estado: borrador de cambio implementable; solo planificación autorizada.
 
-Actualización acotada 2026-11-03: el usuario autorizó preparación Git/ajustes CI y comprobaciones afectadas. Workflows trasladados/configurados en raíz PactoGG; setup-gradle v6.4.1 oficial fijado a SHA, validación integrada/conservación de distribución comprobadas localmente y helpers de informes/estados probados. **Aceptación completa PG00-AC1–AC5 pendiente** de pruebas de acción/motores/runner/descarga; no se reducen criterios. [Evidencia y pendientes](../../../PREPARACION_GIT.md).
+Actualización acotada 2026-11-03: el usuario autorizó preparación Git/ajustes CI y comprobaciones afectadas. Workflows trasladados/configurados en raíz PactoGG; setup-gradle v6.4.1 oficial fijado a SHA, validación integrada/conservación de distribución comprobadas localmente y helpers de informes/estados probados. **Aceptación completa PG00-AC1–AC5 pendiente** de pruebas de acción/motores/runner/descarga; no se reducen criterios. Evidencia y pendientes (referencia histórica externa).
 Rector: [AGENTS](../../AGENTS.md) y [constitución SDD](../../.specify/memory/constitution.md).
 
 ## 1. Contexto y objetivo

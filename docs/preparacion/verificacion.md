@@ -2,7 +2,7 @@
 
 Este informe reúne las comprobaciones de preparación. No sustituye los resultados técnicos de docs/verificacion-local.md ni acredita seguridad completa, conformidad OWASP o aceptación de producto.
 
-Estado posterior al historial inferior: backend técnico BE-00–BE-03 implementado/verificado localmente según [informe propio](../../../Backend/docs/verificacion-base-tecnica.md). La preparación Git/CI posterior centraliza workflows y comprueba referencias/rutas/exclusiones/secretos según [informe común](../../../PREPARACION_GIT.md). Las secciones siguientes mantienen fechas/recuentos y límites de sus revisiones históricas; sus declaraciones «sin código», «sin aplicación backend» o «sin YAML» no describen el estado vigente. Sin aceptación remota o funcional atribuida.
+Estado posterior al historial inferior: backend técnico BE-00–BE-03 implementado/verificado localmente según informe propio (referencia histórica externa). La preparación Git/CI posterior centraliza workflows y comprueba referencias/rutas/exclusiones/secretos según informe común (referencia histórica externa). Las secciones siguientes mantienen fechas/recuentos y límites de sus revisiones históricas; sus declaraciones «sin código», «sin aplicación backend» o «sin YAML» no describen el estado vigente. Sin aceptación remota o funcional atribuida.
 
 ## Estructura física preparada sin código — 2026-11-03
 

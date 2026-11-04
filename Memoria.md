@@ -1,10 +1,80 @@
+# Estado vigente — teléfono y API real, 2026-11-04
+
+Cuenta QA creada por autorización del usuario; APK final instalado y sesión QA iniciada. Registro/login/grupo/torneos vacíos/refresh/logout comprobados; cifrado y renovación al arrancar probados físicamente. Creación de reto falla en proveedor con 503 MODERATION_UNAVAILABLE, lo que bloquea evidencias. No todo funciona ni se aceptan specs completas. [Informe y request_id](docs/integracion/verificacion-telefono-2026-11-04.md).
+
+Se mejoraron mensajes/diagnóstico seguro y busy de sesión. Debug, 24 JVM, Lint/Detekt y pruebas físicas independientes correctos; recorrido completo conserva FAIL por backend. Credenciales privadas fuera del proyecto. Sin modificación/despliegue backend, commit o push. Siguiente paso: proveedor resuelve moderación y se retoman retos/evidencias, sin omitir controles.
+
+# Estado vigente — consumidor implementado localmente, 2026-11-04
+
+- **Estado:** ocho operaciones MO-* implementadas y recorrido conectado en MainActivity. Debug/24 JVM/Lint/Detekt/Gitleaks correctos; androidTest compilado, sin dispositivo disponible para ejecutar. [Evidencia](docs/integracion/verificacion-consumidor-2026-11-04.md).
+- **Decisión/motivo:** usuario solicita empezar; D-SDD-27. Aviso básico provisional autorizado y consentimiento explícito. Conservar diseño/UI futura sin entradas al recorrido conectado y sin PG-08 activo.
+- **Deuda:** ejecución Android/cuentas autorizadas y aceptación; contexto de grupos/contratos no recuperable sin GET. Aviso definitivo, release/Play/base técnica pendiente mantienen sus expedientes.
+- **A evitar:** confundir MockWebServer con proveedor, declarar cifrado probado en dispositivo por compilar, repetir POST incierto, publicar o recuperar recordatorios privados como requisitos.
+- **Siguiente paso:** probar este candidato en dispositivo y con cuentas de prueba autorizadas; actualizar solo criterios demostrados. No se modificó backend ni se hizo commit/push.
+
+# Corrección vigente — 2026-11-04
+
+Specs activas limitadas a operaciones backend, base técnica y coordinación de acceso: 12 expedientes. Los borradores de pantallas adelantadas y PG-08 se retiraron del expediente activo. No hay PG-08 en backend. Recordatorios personales ignorados quedan fuera de las dependencias del proyecto y no se enlazan. Pantallas y código conservados. Solo corrección documental, sin build/tests o push. D-SDD-26 prevalece sobre la propuesta inferior de 17 specs/PG-08, que es antecedente superado.
+
+# Estado vigente — specs alineadas con backend, 2026-11-04
+
+- **Estado:** ocho operaciones proveedor revisadas al commit f6c37d8a70de43765f870b78b452832a2c0842b9. Ocho expedientes MO-* y PG-08 creados; 17 specs móviles totales, abiertas. Solo documentación, no integración ejecutada.
+- **Decisión/motivo:** D-SDD-25; usuario pide equivalentes Android antes de programar. Conservar UI adelantada y planificar exclusión del recorrido conectado. PG-03/04 conciliados; PG-05/06/07 diferidos donde no hay contrato.
+- **Deuda:** privacidad, discrepancias contrato/código, custodia Android real y pruebas; no hay listar grupos/miembros/contratos ni recuperación de contexto. Play y PG-00/01/02 permanecen independientes.
+- **A evitar:** presentar prototipo como conectado, borrar pantallas, ejecutar instrucciones del repositorio, copiar aceptación backend o inventar cronología. No se desactivaron botones aún.
+- **Siguiente paso:** resolver entradas por tarea y abrir implementación de sesión/acceso/alcance cuando lo solicite el usuario. Sin Kotlin/Gradle/XML, build/tests, dependencias, cuentas reales, commit o push en esta preparación.
+
+Fuente: [matriz canónica](docs/integracion/alineacion-backend-2026-11-04.md), [índice](specs/README.md). Los estados inferiores son antecedentes.
+
+# Revisión visual posterior del Make
+
+El usuario pidió conservar diseño de todas las pantallas e incorporar iconos/imágenes. Se revisan Figma visible y CSS del archivo local; se adaptan tipografías originales Inter/Space Grotesk con OFL, composición por sección, iconos y geometría de ilustración. Debug/Lint/Detekt/9 JVM correctos y dos pruebas físicas pasadas (19 vistas y navegación integrada). Se inspeccionaron 20 capturas nativas ignoradas. Ver revision-diseno-make.md y verificacion-ui-local.md. Aprobación del usuario, contrato e integración siguen pendientes; specs abiertas. Sin push.
+
+# Última corrección — aplicación local integrada
+
+Usuario rechaza catálogo y pide la app completa basada en Make. Se elimina su entrada/actividad y se integran navegación inferior, acceso, inicio, exploración, creación, grupos/perfil, torneos, revisión/evidencia, voz de ejemplo, ranking/notificaciones y acceso auxiliar. Código nativo, sin WebView. Estado efímero y aviso de backend pendiente; no autenticación real. PG-07 abierta, fidelidad visual/dispositivo/contratos pendientes. Las instrucciones históricas de catálogo exclusivo debug ya no describen este encargo. Sin subida a GitHub.
+
+# Continuación vigente — PG-05 UI, 2026-11-03
+
+- **Estado:** PG-05 Explorar preparada e implementada solo en catálogo debug; 9 JVM/0 fallos, debug/Lint/Detekt correctos. Ver checklist PG-05.
+- **Decisión:** mantener specs ABIERTAS, con evidencia de avance parcial, sin marcar funciones listas mientras falten revisión/contratos/integración.
+- **Deuda:** revisión visual de Explorar, dispositivo y datos/proveedor reales; PG-03/04 siguen parciales.
+- **A evitar:** tratar filtrado local o usar idea del catálogo como operación backend, falsear aceptación o cerrar specs por compilar.
+- **Siguiente paso:** usuario revisa Explorar; continuar otra UI en expediente delimitado. Creación manual es candidata, aún no implementada por mencionarla. Sin push.
+
+# Última autorización — UI implementada sin backend, 2026-11-03
+
+- **Estado:** usuario autorizó implementar pantallas sin backend. Acceso/registro en arranque y catálogo debug aislado para tablero/perfil/grupos. Builds debug/release, 7 JVM, Lint/Detekt y Gitleaks de fuentes correctos; ver docs/preparacion/verificacion-ui-local.md.
+- **Decisión:** sin cuenta/sesión falsas ni integración; catálogo sin entrada release. Sin dependencias/permisos/versiones nuevos.
+- **Deuda:** dispositivo/revisión visual, criterios UI completos, contrato y AC funcionales, cobertura/16 KB/Play. CI remoto anterior no verifica este árbol local.
+- **A evitar:** presentar pantallas como autenticación, datos sintéticos en producción o pruebas compiladas como ejecutadas.
+- **Siguiente paso:** revisión visual/dispositivo; luego contrato e integración. Sin commit/push de este cambio.
+
+# Actualización vigente — diseño UI, 2026-11-03
+
+- **Estado:** usuario confirma solo specs/diseño. PG-03/04 distinguen etapa UI y conexión posterior; mapa de pantallas/estados/eventos en docs/preparacion/diseno-ui-acceso-primer-ingreso.md.
+- **Decisión:** avanzar composición visual sin contrato HTTP, manteniendo una frontera clara para integración futura. No se alteran fechas/resultados para cambiar la secuencia real.
+- **Deuda:** código UI no iniciado; alcance interno propuesto, contratos/reglas y aceptación funcional pendientes.
+- **A evitar:** datos de demo en producción, login fingido, credenciales persistidas, asumir requisitos de Figma o marcar AC funcionales por UI.
+- **Siguiente paso:** revisar/aceptar diseño; implementar solo cuando se abra esa fase. Sin commit/push de esta preparación.
+
+# Estado vigente — preparación de evaluación, 2026-11-03
+
+- **Estado:** repositorio móvil publicado en equipopatogg/Movil con Android en raíz. CI remoto de 2a9fb5e PASS en calidad/seguridad, 5 JVM correctas, informes descargados. Ver docs/preparacion/ci-remoto-android.md; no implica instrumentación ejecutada o producto.
+- **Decisión/motivo:** preparar specs/esenciales del corte solicitado: PG-03 acceso/sesión y PG-04 primer ingreso; checklist separado de Play y evaluación. Boceto disponible como guía, documentos/decisiones prevalecen.
+- **Deuda:** contrato backend, conciliación de recorrido/estilo, funciones, dispositivo/cobertura/16 KB/Play y requisitos generales. PG-04 propone tablero/perfil/grupos; no está ratificado ni implementado.
+- **A evitar:** copiar reglas/datos de demo, fingir aceptación, subir backend al repo móvil, versionar notas locales o transferir PASS a commits nuevos.
+- **Siguiente paso:** revisar/cerrar base build/CI, núcleo y almacenamiento; resolver PG-00/01/02 aplicables y cerrar en paralelo documental contrato/alcance antes de PG-03; después PG-04/Play. Comparación directa en docs/preparacion/correspondencia-specs-profesor.md. Preparación documental actual sin commit/push ni cambio de funcionalidades.
+
+El texto inferior conserva antecedentes cronológicos; los estados de Git/CI previos quedaron superados por D-SDD-17.
+
 # Memoria de PactoGG
 
 Último estado, 2026-11-03: backend BE-00–BE-03 implementado/verificado localmente; funciones/contrato/aceptación remota pendientes. D-SDD-15 concilia este avance posterior al arranque documental. D-SDD-16 registra preparación Git con workflows Android centralizados/ajustados, referencias oficiales/exclusiones y verificaciones acotadas; no funcionalidades ni cambio de stack de app.
 
 ## Estado actual — preparación para Git
 
-- **Estado:** dos proyectos existentes, tres workflows raíz definidos; backend con 116 correctas/0 fallidas/1 omitida en su ejecución local identificada. Ajustes Android limitados a CI/documentación; evidencia local de política y helpers en [informe común](../PREPARACION_GIT.md), sin build Android nuevo o ejecución GitHub acreditada.
+- **Estado:** dos proyectos existentes, tres workflows raíz definidos; backend con 116 correctas/0 fallidas/1 omitida en su ejecución local identificada. Ajustes Android limitados a CI/documentación; evidencia local de política y helpers en informe común (referencia histórica externa), sin build Android nuevo o ejecución GitHub acreditada.
 - **Decisión/motivo:** fuente expresa del usuario: preparar el primer contenido Git sin crearlo. setup-gradle v6.4.1 oficial, validación integrada del JAR bajo Movil sin duplicar acción, distribución conservada; permisos mínimos e informes sanitizados ante fallos.
 - **Deuda:** funciones/contrato, CI remoto/descarga y negativo de acción Wrapper, fixtures de motores en Linux, cobertura/instrumentación/16 KB, Play, nube/NoSQL/réplicas y pendientes completos del PDF. Corte 3–4 noviembre distinto de evaluación 2 diciembre.
 - **A evitar:** usar resultados históricos como tests recién ejecutados, confundir infraestructura con funciones, publicar credenciales/generados o atribuir aceptación humana/remota. Recomendaciones del PDF no son obligaciones nuevas.
@@ -35,3 +105,11 @@ Entrada: [PREPARACION_SDD](PREPARACION_SDD.md). Decisiones canónicas: [registro
 - **Deuda y pendientes:** carga efectiva de ayudas en OpenCode no probada; habilidades externas se seleccionarán por necesidad concreta.
 - **A evitar:** instalaciones globales o copia literal de stack, credenciales, contratos y estados del profesor.
 - **Slice actual / siguiente paso:** ayudas enlazadas a specs propias y formatos comunes; no crear otras por completar una lista.
+
+## Revisión posterior del usuario — 2026-11-03
+
+Inicio de sesión revisado y apariencia conforme según el usuario («se ve igualito»). Catálogo revisado con observación de interacción rara, pendiente de precisar. No reabrir la aprobación visual del acceso sin nuevo cambio; no transferirla a todo el catálogo, instrumentación o integración. Siguiente paso: precisar el ajuste del catálogo y preparar contrato funcional backend; ninguna subida nueva autorizada por esta observación.
+
+## Último avance: PG-06 interactiva local
+
+Usuario autoriza botones navegables. En catálogo: acceso → tablero; Explorar/detalle → usar idea → borrador → condiciones → rival/acuerdo → resumen/edición → confirmación local. Botón Crear inicia sin plantilla. Datos efímeros y aviso de simulación, no invitación remota ni cuenta creada. PG-05/06 siguen abiertas. Contrato/integración y pruebas de interacción en dispositivo pendientes; sin push.

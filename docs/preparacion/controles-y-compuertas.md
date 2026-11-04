@@ -2,7 +2,7 @@
 
 Estado: preparación documental. No es una política ratificada ni una nueva configuración ejecutable.
 
-Actualización posterior 2026-11-03: base backend técnica verificada localmente y workflows raíz Android ajustados bajo encargo pre-Git; ver [evidencia y alcance](../../../PREPARACION_GIT.md). Las propuestas generales inferiores conservan requisitos futuros y no equivalen a aceptación de producto/CI/entrega. La revisión acotada sí configura referencias/rutas/permisos/informes; no ratifica toda esta matriz.
+Actualización posterior 2026-11-03: base backend técnica verificada localmente y workflows raíz Android ajustados bajo encargo pre-Git; ver evidencia y alcance (referencia histórica externa). Las propuestas generales inferiores conservan requisitos futuros y no equivalen a aceptación de producto/CI/entrega. La revisión acotada sí configura referencias/rutas/permisos/informes; no ratifica toda esta matriz.
 
 | Control | Android | Backend/infra | Evidencia futura |
 |---|---|---|---|

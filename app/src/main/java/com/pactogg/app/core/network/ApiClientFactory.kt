@@ -13,7 +13,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 class ApiClientFactory @Inject constructor() {
     fun create(baseUrl: String, client: OkHttpClient = defaultClient()): Retrofit {
         require(isValidBaseUrl(baseUrl)) { "La API requiere HTTPS, sin credenciales y con / final." }
-        val json = Json { ignoreUnknownKeys = true }
+        val json = Json { ignoreUnknownKeys = true; encodeDefaults = true }
         return Retrofit.Builder().baseUrl(baseUrl).client(client)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType())).build()
     }

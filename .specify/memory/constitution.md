@@ -2,7 +2,7 @@
 
 Versión documental 5 — 2026-10-30. Fase vigente: preparación del proyecto, conforme a la corrección expresa del usuario.
 
-Actualización acotada 2026-11-03: el usuario autoriza ajustes finales pre-Git, centralización/configuración de workflows Android, referencia oficial setup-gradle, exclusiones/escaneo y comprobaciones afectadas. Las prohibiciones históricas de automatización/ejecución de C01/C10 se exceptúan solo para ese alcance. Sin funcionalidades, cambios de stack de app, Git/remotos/commits/push, despliegue/publicación o instalación global. Backend técnico ya implementado/verificado localmente; aceptación remota/producto pendientes. [Estado y evidencia](../../../PREPARACION_GIT.md).
+Actualización acotada 2026-11-03: el usuario autoriza ajustes finales pre-Git, centralización/configuración de workflows Android, referencia oficial setup-gradle, exclusiones/escaneo y comprobaciones afectadas. Las prohibiciones históricas de automatización/ejecución de C01/C10 se exceptúan solo para ese alcance. Sin funcionalidades, cambios de stack de app, Git/remotos/commits/push, despliegue/publicación o instalación global. Backend técnico ya implementado/verificado localmente; aceptación remota/producto pendientes. Estado y evidencia (referencia histórica externa).
 
 ## C01. Alcance
 
@@ -57,3 +57,8 @@ Scrum organiza el equipo y SDD la definición técnica; no se sustituyen entre s
 Los borradores generales MB-01/MB-02/ME-01 se retiraron de specs y se consolidaron en docs. Las specs futuras describirán cambios implementables concretos de aplicación, configuración, pruebas o pipeline, no una repetición de reglas generales. Su estructura es spec.md, plan.md, tasks.md y checklists/checklist.md; la plantilla física está en .specify/templates/spec/. La corroboración permanece fuera de specs y ninguna preparación transfiere aprobación o resultados históricos.
 
 Registrar aprobación con Estado/Revisores/Fecha/Detalle, separada de aceptación de implementación. La memoria usa Estado, Decisión/motivo, Deuda, A evitar y Slice actual/siguiente paso. No se necesita esperar al contrato funcional para preparar la base, pero no se inventan rutas, datos o reglas para cerrar registro/login. Esta ampliación no abre ejecución técnica.
+
+
+## Autorización vigente — implementar consumidor, 2026-11-04
+
+Usuario solicita empezar implementación de las specs MO-* conforme al backend. Autoriza código Android y comprobaciones locales pertinentes, con dependencias existentes y sin publicación/push o cambios backend. Conservar pantallas adelantadas fuera del recorrido conectado y recordatorios privados ignorados; no reintroducir PG-08. Privacidad real pendiente mantiene registro bloqueado mediante configuración explícita. Las restricciones documentales anteriores son antecedentes superados solo para este alcance.

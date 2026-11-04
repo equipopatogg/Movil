@@ -15,7 +15,7 @@ Revisión inicial 2026-10-30; contraste completo actualizado **2026-11-03** con 
 
 La documentación preparada y los tests técnicos anteriores no satisfacen por sí solos estos entregables funcionales. No se afirma una conexión de extremo a extremo ni una publicación.
 
-Actualización de responsabilidad: [Backend](../../../Backend/README.md) ya tiene implementación/verificación técnica local en este espacio; no se espera una implementación funcional externa. Sus sondas y pruebas técnicas **no sustituyen registro/login/logout o los cuatro endpoints adicionales**. La preparación Git/CI no cambia fechas ni acredita nube, funciones, Play o aceptación del corte.
+Actualización de responsabilidad: Backend (referencia histórica externa) ya tiene implementación/verificación técnica local en este espacio; no se espera una implementación funcional externa. Sus sondas y pruebas técnicas **no sustituyen registro/login/logout o los cuatro endpoints adicionales**. La preparación Git/CI no cambia fechas ni acredita nube, funciones, Play o aceptación del corte.
 
 ## Incógnitas que condicionan el corte
 
@@ -71,3 +71,7 @@ La eliminación de carpetas de reserva no elimina responsabilidades del equipo. 
 Las guías de [arquitectura](../arquitectura/android.md), [pruebas](plan-de-pruebas.md) y [compuertas/entrega](controles-y-compuertas.md) conservan los lineamientos. Los [cuatro expedientes concretos](../../specs/README.md) preparan cambios de CI, pruebas, release y acceso a cuenta. PG-03 parte del [primer flujo](primer-flujo-movil.md) y mantiene pendientes contrato backend y alcance/maqueta; su diseño funcional debe cerrarse al recibirlos.
 
 Cada cambio real tendrá especificación, plan, tareas y checklists/checklist.md según la plantilla. Las verificaciones del corte requieren funcionamiento y evidencia; no se completan por organizar carpetas.
+
+## Preparación actual de evaluación — 2026-11-03
+
+[Checklist de corte y Play](checklist-evaluacion-movil.md), PG-03 y PG-04 organizan el siguiente desarrollo sin programarlo. Boceto recibido; contrato/conciliación siguen abiertos. [CI remoto Android](ci-remoto-android.md) ya pasó para commit 2a9fb5e con informes descargados; no cumple funciones del corte. Las menciones superiores a ausencia de Git/CI describen el estado previo a la autorización posterior.

@@ -162,7 +162,7 @@ Se concilian fase, entrada, mapa, checklist y memoria. La verificación se limit
 
 ## D-SDD-15 — base técnica backend posterior, 2026-11-03
 
-Fuente: autorización posterior del usuario para implementar/verificar BE-00–BE-03 y su cierre retomado. Esta amplió el arranque/estructura de D-SDD-13/14: host/DI/configuración/errores/JSON/diagnóstico, cuatro suites, verificadores y SAST/secretos/SCA/SBOM/workflow backend, sin funciones. Resultado local identificado en [verificación backend](../../../Backend/docs/verificacion-base-tecnica.md): RunId b029c954d6bd43aeb26b207d37aa44e3, SDK efectivo 10.0.401, restore locked/build Release exit0, 116 correctas/0 fallidas/1 omitida symlink Windows. Cobertura medida sin umbral; aceptación humana/CI remoto/TLS exterior pendientes. El historial documental anterior se conserva, no describe ausencia actual de backend.
+Fuente: autorización posterior del usuario para implementar/verificar BE-00–BE-03 y su cierre retomado. Esta amplió el arranque/estructura de D-SDD-13/14: host/DI/configuración/errores/JSON/diagnóstico, cuatro suites, verificadores y SAST/secretos/SCA/SBOM/workflow backend, sin funciones. Resultado local identificado en verificación backend (referencia histórica externa): RunId b029c954d6bd43aeb26b207d37aa44e3, SDK efectivo 10.0.401, restore locked/build Release exit0, 116 correctas/0 fallidas/1 omitida symlink Windows. Cobertura medida sin umbral; aceptación humana/CI remoto/TLS exterior pendientes. El historial documental anterior se conserva, no describe ausencia actual de backend.
 
 ## D-SDD-16 — preparación final de contenido Git y workflows raíz, 2026-11-03
 
@@ -170,8 +170,66 @@ Fuente: encargo expreso del usuario de actualizar entradas, centralizar workflow
 
 Se fija setup-gradle v6.4.1 al commit oficial 8da46b539cd8fe6ab27ca75128919a18d757604c tras dereferenciar tag anotado y revisar action.yml/código. Valida JAR recursivamente desde GITHUB_WORKSPACE, incluido Movil; no se agrega acción redundante. El JAR existente es oficial conocido de 9.0/9.1, y la distribución seleccionada sigue 9.5.0 con su checksum: son controles distintos, no requieren igualdad de versiones. Cache basic/read-only; dependency submission/Build Scan desactivados. Al comprobar setup-java v4 se detectó deprecación explícita oficial; se adopta v6.1.0/Node24 con SHA verificada, **JDK21 y versiones de aplicación intactos**. Checkout/upload se alinean con las referencias oficiales ya comprobadas del workflow backend, sin cambiar ese YAML.
 
-Se amplían exclusiones de material local/firma/credenciales, cachés y generados, sin borrar archivos. Se conservan fuentes/recursos/esquemas Room, locks reales, configuraciones reproducibles y Wrapper. Inventario y escaneo actual de candidatos, validaciones de YAML/política/enlaces y decisión de validez de evidencia backend en [preparación Git](../../../PREPARACION_GIT.md). El YAML backend y sus entradas de huella no se modifican; su integridad se comprueba, no se presenta la suite previa como nueva ejecución. Si esa comprobación detecta cambio, exige ejecución nueva.
+Se amplían exclusiones de material local/firma/credenciales, cachés y generados, sin borrar archivos. Se conservan fuentes/recursos/esquemas Room, locks reales, configuraciones reproducibles y Wrapper. Inventario y escaneo actual de candidatos, validaciones de YAML/política/enlaces y decisión de validez de evidencia backend en preparación Git (referencia histórica externa). El YAML backend y sus entradas de huella no se modifican; su integridad se comprueba, no se presenta la suite previa como nueva ejecución. Si esa comprobación detecta cambio, exige ejecución nueva.
 
 Hallazgo de preparación: el escaneo completo detecta cinco digests públicos del manifiesto histórico como generic-api-key. Tras inspección se conserva el original y se acota allowlist Gitleaks a regla/ruta/cinco valores exactos (AND). Cuatro fixtures ejecutadas con el motor real prueban conservación de detección fuera de esos valores/ruta; sin exención a secretos reales, filtro global de hashes o modificación de Semgrep. Informe inicial redactado y resultado final separados en artifacts; no aprobación humana atribuida.
 
 El PDF facilitado en Downloads se relee completo: corte 3–4 noviembre y evaluación general 2 diciembre separados; pendientes funcionales/nube/NoSQL/réplicas/privacidad/push/IA/landing/entrega visibles en [evaluación](../preparacion/evaluacion-unidad-2.md). MCP opcional, Terraform/correo único/GitHub→Play sugeridos; no se añaden cámara/video o reglas de producto por redacción genérica. Preparar archivos/CI no satisface el corte ni acredita runner, permisos efectivos, despliegue o aceptación humana.
+
+## D-SDD-17 — Git móvil, CI real y preparación de evaluación, 2026-11-03
+
+Fuente: el usuario autorizó commit/subida usando equipopatogg, corrigió el destino para publicar contenido Android directamente en raíz de equipopatogg/Movil sin backend, pidió corregir CI y verificarlo, y después preparar specs/esenciales de evaluación. El commit remoto técnico vigente es 2a9fb5e. Resultados y límites en [CI remoto](../preparacion/ci-remoto-android.md). Git local conjunto y exportación remota móvil tienen formatos distintos; no subir todo el espacio conjunto al repo móvil.
+
+La instrucción actual permite preparación documental, no nuevas funcionalidades. Se conserva PG-03 y se añade PG-04 de primer ingreso como cambio implementable, con propuesta de alcance sin aceptación inventada; Play se organiza en checklist de entrega fuera de specs de código. Boceto Figma recibido como referencia, nunca fuente de reglas por encima de documentos/decisiones. No se versionan notas personales, no se instalan dependencias ni se ejecutan builds/tests por esta edición. Las funciones/backend/contrato y aceptación de entrega continúan pendientes. No se autoriza publicar estos cambios documentales por inferencia.
+
+## D-SDD-18 — diseño UI antes de integración, 2026-11-03
+
+El usuario distingue que el ejemplo del profesor ya dispone de contratos y nuestro siguiente avance puede ser visual. Tras consultar el alcance confirma «Solo specs y diseño». Se preparan composición/estados/eventos de PG-03/04 con criterios UI separados de los AC funcionales. Los documentos reflejan la secuencia real: diseño/UI primero, contrato/integración después. No se retrofechan ni inventan resultados. Se conserva tema/navegación aprobados y Figma como boceto; pantallas internas propuestas no ratificadas por inferencia. No se crea Kotlin, dependencias, fixtures ejecutables o red, ni commit/push por este encargo.
+
+## D-SDD-19 — implementar pantallas sin backend, 2026-11-03
+
+Fuente expresa: tras preguntar si implementar o solo subir documentos, el usuario selecciona «Implementar pantallas sin backend». Se autoriza código UI y comprobaciones locales pertinentes. MainActivity muestra acceso desconectado; pantallas post-ingreso se revisan en catálogo no exportado exclusivo debug. No crear cuentas/sesiones por fixtures. Se conservan tema aprobado y restricciones de producto; no cambian backend/contrato/dependencias/permisos/versiones. Ver verificacion-ui-local.md para resultados y límites. No autoriza push nuevo ni publicación; revisión visual/dispositivo sigue pendiente.
+
+## D-SDD-20 — corrección de paleta desde el archivo Make, 2026-11-03
+
+El usuario señala que los colores de la UI no corresponden al boceto y pide revisarlos. Se recuperan los objetos Git empaquetados de su archivo .make, sin ejecutar proyecto web, scripts o conversación interna. Fuente index.css/welcome.css/home.css: fondo azul-negro, tarjetas azul oscuro, títulos lavanda, enlaces/foco cian y principal naranja. Se aplican tokens y contenedores en Compose y se concilia DESIGN; no cambian backend/contrato/dependencias/versiones. Esta petición expresa sustituye la paleta gris/naranja anterior, no las restricciones funcionales. Ver comprobación posterior en verificacion-ui-local.md. Sin commit/push.
+
+## D-SDD-21 — continuar por pantallas con expedientes abiertos, 2026-11-03
+
+El usuario aclara que no existen contratos y pide preparar siguiente spec y pantalla sin marcarlas listas; se actualizarán cuando exista contrato. Se prepara PG-05 Explorar antes de implementar UI, usando boceto y restricciones de PactoGG. Búsqueda/categoría local, detalle y usar idea quedan en catálogo debug; sin API, alta o sesión simuladas. Los resultados técnicos parciales se registran sin cerrar casillas/criterios de aceptación. No se retrofechan etapas ni se atribuye aceptación completa del usuario. No se autoriza push por esta continuación.
+
+## D-SDD-22 — botones navegables sin backend, 2026-11-03
+
+Fuente: el usuario solicita botones funcionales para recorrer maqueta y requisitos sin backend. Se prepara PG-06 antes de extender el catálogo: usar idea abre borrador; crear ofrece tres pasos y resumen editable; confirmar muestra invitación local no enviada. Acceso/registro en catálogo navega al tablero de muestra y descarta los campos, sin sesión. Controlador/fixtures exclusivamente debug; release no cambia. Validación local de campos no vacíos es solo condición del recorrido, no política API. Specs abiertas y sin aceptación final. Sin commit/push.
+
+## D-SDD-23 — retirar catálogo e integrar aplicación local
+
+El usuario corrige que quiere la app con diseño completo, no un catálogo. Se retiran lanzador/actividad/menú de catálogo y se integra navegación nativa desde acceso hacia Inicio/Explorar/Crear/Torneos/Grupos, perfil y notificaciones. Se reutilizan recursos Make y pantallas Compose, sin WebView ni servicios de cuenta. La instrucción permite datos efímeros de prueba en la app local, con aviso de conexión pendiente, y prevalece sobre la antigua separación exclusiva debug. Las operaciones no crean cuentas, envían evidencia o notifican a terceros. PG-07 permanece abierta: fidelidad visual de todas las pantallas y contratos requieren comprobación, sin atribuir cierre por navegación integrada. Sin commit/push.
+
+## D-SDD-24 — conservar diseño de todas las pantallas
+
+El usuario pide revisar Figma y archivo Make e integrar iconos/imágenes, autorizando alternativas si faltan pero conservando colores. Se usan los recursos originales suficientes, fuentes Inter/Space Grotesk con OFL de origen oficial y adaptación por pantalla descrita en revision-diseno-make.md. Se corrige la composición, no se reabre el alcance de producto. Capturas nativas y navegación se comprueban separadamente de aceptación visual; no se cierran specs ni se realiza push.
+
+
+## D-SDD-25 — alinear consumidor móvil con backend recibido, 2026-11-04
+
+Fuente expresa: usuario pide revisar endpoints/specs/desarrollo del backend publicado, preparar specs antes de programar e ir a la par sin borrar pantallas adelantadas. Se fijan fuentes al commit externo f6c37d8a70de43765f870b78b452832a2c0842b9 y se crean ocho expedientes MO-* (registro, login, refresh/custodia, logout, grupo, reto, evidencia y consulta de torneos), más PG-08 de capacidades y navegación. PG-03 coordina sin duplicar servicios y PG-04 se restringe al primer destino posible. PG-05/06/07 conservan UI/evidencia, con funciones no contratadas diferidas. No se copian infraestructura, aceptación o deudas del servidor como resultados Android. El historial público agrupa specs y código en su primer commit: no acredita un orden anterior. La matriz canónica registra discrepancias, contexto no recuperable sin GET y privacidad pendiente. Alcance de esta sesión: Markdown y revisión de enlaces, sin código, desactivación ejecutada, build/tests, instalaciones, cuentas API, cambios backend o push. Ratificación de reglas y aceptación funcional siguen pendientes.
+
+
+## D-SDD-26 — retirar planificación ajena al backend del expediente activo, 2026-11-04
+
+El usuario corrige la creación de PG-08 y solicita que los borradores de funciones adelantadas sean únicamente recordatorios personales ignorados, sin dependencia del proyecto. Se retiran del árbol specs los expedientes PG-04–PG-08 y se eliminan enlaces activos a ellos; los IDs citados en antecedentes describen historia, no tareas vigentes. No existe PG-08 en backend. Se conservan ocho consumidores MO-* de operaciones reales, base técnica PG-00/01/02 y coordinación PG-03. Refresh permanece porque sí existe en API. No se borran o modifican pantallas, no se programa ni publica. La planificación privada no se invoca ni se incorpora como fuente activa.
+
+
+## D-SDD-27 — implementar las ocho operaciones consumidor, 2026-11-04
+
+Fuente expresa: usuario solicita comenzar implementación tras preparar specs. Se implementan transporte Retrofit existente, DTO/mappers en datos, dominio independiente, sesión compartida AES-GCM/Keystore con archivo atómico noBackup, refresh serializado y generación de sesión, salida y recorrido conectado. Sin cambios de versiones ni dependencias nuevas. Se conserva toda la UI adelantada sin entradas en MainActivity conectado; no se reintroduce una spec adicional. UI conserva componentes, iconos, fuentes y colores, pero pasa de muestras a datos reales/estados seguros. Los ocho consumidores de producto comparten feature/connected/data y domain para este corte pequeño; no se crean capas/módulos vacíos por cada endpoint. Auth conserva sus DTO y sesión separadas.
+
+Privacidad: usuario responde que no tienen aviso y autoriza usar uno básico. Se agrega aviso local provisional legible antes del consentimiento, sin casilla preseleccionada; versión de protocolo por propiedad pactogg.privacyVersion (valor de guía 2026-10-01). No se atribuye aprobación legal, retención definitiva ni eliminación automática inexistente. Revisar contenido/versión con equipo antes de distribuir públicamente.
+
+No reintentar automáticamente POST inciertos; 401 protegido puede renovar pero POST exige reenvío manual explícito. GET puede reintentarse una vez tras renovación. Un 403 no cierra sesión. Si se pierde resultado de refresh rotatorio, se elimina custodia y se exige acceso seguro, sin presentar error de red como credenciales incorrectas. Cifrado local y selector tienen pruebas Android preparadas, pendientes de dispositivo disponible. Pruebas consumidor TLS son fixtures, no proveedor. No se crean cuentas de prueba en producción ni se cambia backend, remotos, commits o push.
+
+
+## D-SDD-28 — comprobación física y cuenta QA, 2026-11-04
+
+Usuario autoriza crear cuenta de prueba e instalar/comprobar en teléfono conectado. Se usa una cuenta sintética aislada y credenciales fuera del proyecto; se preservan otras cuentas/ajustes. Evidencia por operación en informe de teléfono: acceso, grupos, torneos vacíos, refresh/logout correctos; reto falla con 503 MODERATION_UNAVAILABLE y evidencias bloqueadas. No modificar backend ni omitir moderación para generar PASS. Correcciones móviles acotadas: request_id sanitizado, mensaje del servicio y busy preservado al cambiar identidad. Cifrado y renovación al arrancar verificados físicamente. Las specs siguen abiertas, sin aceptación total, commit o push.
