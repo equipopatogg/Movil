@@ -1,0 +1,17 @@
+title = "PactoGG secret detection"
+[extend]
+useDefault = true
+[allowlist]
+description = "Generated build and IDE output; source stays in scope"
+paths = ['''(^|/)build/''', '''(^|/)\.gradle/''', '''(^|/)\.idea/''']
+
+# Reviewed public SHA256 values in the immutable historical integrity manifest.
+# This is NOT a file-wide exclusion: only this rule + exact file + exact values.
+[[rules]]
+id = "generic-api-key"
+[[rules.allowlists]]
+description = "Five public file digests, reviewed during pre-Git audit 2026-11-03"
+condition = "AND"
+paths = ['''(^|/)(Movil/)?docs/preparacion/integridad-agentes-inicial\.json$''']
+regexTarget = "secret"
+regexes = ['''^(b8b5731d7af50524786ebf9d79ed704b8329cea1db3717bc76f850ba4106ae6c|3938fc1aa6b47364d7e9abb53a672d11f3f8a1b91f93895daec1047163726689|f8b5f2c5c0c24eb5a1efd3240bf0dc0629410287f2e2138079a792aa7d29f0cb|5caabcecd4836feb5f62c946bf1f1ba4085200d264a64657fb192f89a844c4d4|538974f2d21597c084e47101a6db8252fd1a6f4b6ebe321c7ad471c1f2ac43a0)$''']

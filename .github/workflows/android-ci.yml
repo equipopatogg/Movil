@@ -1,0 +1,68 @@
+name: Android base quality
+on:
+  push:
+    paths: ['**', '.github/workflows/android-ci.yml', '.github/scripts/**', 'AGENTS.md', '.gitignore']
+  pull_request:
+    paths: ['**', '.github/workflows/android-ci.yml', '.github/scripts/**', 'AGENTS.md', '.gitignore']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: .
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        id: checkout
+        with:
+          persist-credentials: false
+      - name: Evidence helper policy tests
+        run: python3 -m unittest discover -s .github/scripts -p test_android_evidence.py
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        id: java
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+        id: gradle
+        with:
+          validate-wrappers: true
+          allow-snapshot-wrappers: false
+          cache-provider: basic
+          cache-read-only: true
+          dependency-graph: disabled
+      - name: Android SDK
+        id: sdk
+        run: sdkmanager "platforms;android-36.1" "build-tools;36.0.0"
+      - name: Build, unit tests, lint, Detekt and instrumented test compilation
+        id: build
+        run: bash ./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:detekt :app:assembleDebugAndroidTest --console=plain
+      - name: Release runtime SBOM
+        id: sbom
+        if: ${{ always() && steps.sdk.outcome == 'success' }}
+        run: bash ./gradlew :app:cyclonedxDirectBom --no-configuration-cache --console=plain
+      - name: Validate current execution evidence
+        id: evidence
+        if: ${{ always() && steps.checkout.outcome == 'success' }}
+        working-directory: .
+        env:
+          STEPS_JSON: ${{ toJSON(steps) }}
+        run: python3 .github/scripts/android-evidence.py quality
+      - name: Reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: android-quality-reports
+          path: |
+            app/build/reports/
+            app/build/test-results/
+            artifacts/android-quality/
+          if-no-files-found: error
+          retention-days: 7

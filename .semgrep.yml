@@ -1,0 +1,22 @@
+rules:
+  - id: pactogg-no-cleartext-source-url
+    languages: [generic]
+    message: No incorporar direcciones HTTP en código de producción.
+    severity: ERROR
+    pattern-regex: 'http://'
+    paths:
+      include: ['app/src/main/**/*.kt']
+  - id: pactogg-no-trust-all-hostname-verifier
+    languages: [generic]
+    message: No desactivar la verificación del nombre del certificado TLS.
+    severity: ERROR
+    pattern-regex: '(?s)hostnameVerifier\s*\{[^}]*\btrue\b'
+    paths:
+      include: ['app/src/main/**/*.kt']
+  - id: pactogg-no-javascript-interface
+    languages: [generic]
+    message: Revisar el puente JavaScript nativo; no está autorizado para este cliente.
+    severity: ERROR
+    pattern-regex: '\.addJavascriptInterface\s*\('
+    paths:
+      include: ['app/src/main/**/*.kt']

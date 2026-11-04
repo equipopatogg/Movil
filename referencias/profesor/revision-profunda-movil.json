@@ -1,0 +1,877 @@
+{
+  "fecha": "2026-10-30",
+  "repository": "https://github.com/edelomeza/MovilSDD",
+  "commit": "763355ac9b8760cde40143b465079d3f7fa789c5",
+  "files_in_tree": 165,
+  "text_files_fetched": 139,
+  "files": [
+    {
+      "path": ".editorconfig",
+      "bytes": 368,
+      "sha256": "913b781d5507b12f4aea423822e1ea831d9d091fb3e60c132f0cf2462ec774c8",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.editorconfig"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 1984,
+      "sha256": "21be31cb096894010ccb2e21d8e12a899057dbed0c6cf4c5710c1a31457e6c5f",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.github/workflows/ci.yml"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 468,
+      "sha256": "6575ac2ec80c529df787147f9223b8eebaec7d90cc9892a5a9079b4f352a6c34",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.gitignore"
+    },
+    {
+      "path": ".opencode/agents/coverage-delta-reporter.md",
+      "bytes": 488,
+      "sha256": "75184a27d94440710b03d5f6feaea3a3a0f2dd7d4ed4319e40c5fb61b06c0572",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/coverage-delta-reporter.md"
+    },
+    {
+      "path": ".opencode/agents/docs-keeper.md",
+      "bytes": 577,
+      "sha256": "d56060bbab46b1e10ef9647037f0610e4e1719b7e3eb329725cf844585005d96",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/docs-keeper.md"
+    },
+    {
+      "path": ".opencode/agents/endpoints-validator.md",
+      "bytes": 413,
+      "sha256": "b0270c0ec9b4356b2af9a0f1f89f39fa15bf2cb4b272c9f92241d381d657b508",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/endpoints-validator.md"
+    },
+    {
+      "path": ".opencode/agents/layer-guardian.md",
+      "bytes": 873,
+      "sha256": "d2b26e966fe10c06d4c68831c97b351d3ddf70908ddd329051e42a60afb67698",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/layer-guardian.md"
+    },
+    {
+      "path": ".opencode/agents/plan-architect.md",
+      "bytes": 1045,
+      "sha256": "09ba60d1a4047122c1ff9751b19557c5e8b668fe65f1b1e3c89d69215ff5c2ca",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/plan-architect.md"
+    },
+    {
+      "path": ".opencode/agents/readme-keeper.md",
+      "bytes": 281,
+      "sha256": "c3a493bdb5b536067534c26eb09ae31f08a5abf2c5d5163e2a47adca54d3e88d",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/readme-keeper.md"
+    },
+    {
+      "path": ".opencode/agents/release-checker.md",
+      "bytes": 632,
+      "sha256": "76d49dd88c381dfb798877539041a4784321be351284e92d53a8b9880da1aeda",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/release-checker.md"
+    },
+    {
+      "path": ".opencode/agents/security-reviewer.md",
+      "bytes": 795,
+      "sha256": "a3ebb836d59395a76d82258c1c4e3308b4701988343bc1c52707a3ba1ce95e88",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/security-reviewer.md"
+    },
+    {
+      "path": ".opencode/agents/slice-scaffolder.md",
+      "bytes": 1071,
+      "sha256": "b059977e8291caf78e82f5056798b0c6e35e838307715c7d16e90e4c4dfa9f08",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/slice-scaffolder.md"
+    },
+    {
+      "path": ".opencode/agents/spec-drafter.md",
+      "bytes": 1077,
+      "sha256": "d62c02cb626e4c6a815d06c9103b4ac68d86c0250fc65a7c061a8ca89c019bef",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/spec-drafter.md"
+    },
+    {
+      "path": ".opencode/agents/task-decomposer.md",
+      "bytes": 603,
+      "sha256": "6c10aad6f03741fe9d268c0fd240fa256e6121bd7081dbb9e9a54ae64fbb1d58",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/task-decomposer.md"
+    },
+    {
+      "path": ".opencode/agents/test-writer.md",
+      "bytes": 579,
+      "sha256": "18170801d1d44ac560ac35c8be8d255519d26074c21b6db0c7fde85a07df5856",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/test-writer.md"
+    },
+    {
+      "path": ".opencode/agents/traceability-clerk.md",
+      "bytes": 528,
+      "sha256": "1580251f922770546289a175a61532ba4006925e6f732f004b3993c070ce6bec",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/agents/traceability-clerk.md"
+    },
+    {
+      "path": ".opencode/skills/android-clean-base/SKILL.md",
+      "bytes": 1640,
+      "sha256": "715043783941403f2651cd113291cdfc604a8f8e3a105f18e6539b5ee8d22636",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/android-clean-base/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/android-testing-generic/SKILL.md",
+      "bytes": 1136,
+      "sha256": "45a3d22f3a854c0cedf7ed3e0226bf1227a579637daf5b5346d8b0ffc203aab1",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/android-testing-generic/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/api-client-integration/SKILL.md",
+      "bytes": 2346,
+      "sha256": "6e1ad3aa8b7b1f17cb54859c0be97f5a486eb69efb50ca32ffdc916aa6bfa0f7",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/api-client-integration/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/auth-session-management/SKILL.md",
+      "bytes": 2681,
+      "sha256": "45f8f50fdf30ee61c4b137d4e13ec7bab36d1916f58313835f4ef614ab714858",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/auth-session-management/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/compose-mvvm-state/SKILL.md",
+      "bytes": 1679,
+      "sha256": "888f920de452493925d2956f3968e8cc4465127d3da5fd2dea736b7e37e9bcea",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/compose-mvvm-state/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/contracts-docs/SKILL.md",
+      "bytes": 754,
+      "sha256": "4785b6cad76224ef1448a32cccd158fba2fde1816394e1911592d36d61b2598a",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/contracts-docs/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/devsecops-gates-generic/SKILL.md",
+      "bytes": 1396,
+      "sha256": "01f733876f3ebba0b70fa4901afe8a70a617cc8c612056ff5c800db546359460",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/devsecops-gates-generic/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/koin-di-generic/SKILL.md",
+      "bytes": 1164,
+      "sha256": "228b48f0fd9a36530a1e68d8ac45fb7cf0e1b690fda81409c7d875e7fc1eeb8b",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/koin-di-generic/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/mobile-app-ui-design/SKILL.md",
+      "bytes": 7969,
+      "sha256": "c1a73953208a1d434c04f0689f4a68f03ecb9e972e0a8131b125a4d198cb8107",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/mobile-app-ui-design/SKILL.md"
+    },
+    {
+      "path": ".opencode/skills/store-local/SKILL.md",
+      "bytes": 895,
+      "sha256": "e77e0489599a1800586a50a77f647763ebaeb1a23672d19a5fbbe6b5f807544c",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.opencode/skills/store-local/SKILL.md"
+    },
+    {
+      "path": ".specify/memory/constitution.md",
+      "bytes": 5972,
+      "sha256": "7670dc587fa255cfbd29a69873ffa1d441e5e8153f2eb1ed20befd520e1885b6",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.specify/memory/constitution.md"
+    },
+    {
+      "path": ".specify/templates/checklist-template.md",
+      "bytes": 303,
+      "sha256": "87177b1e0360c4b3931b7991b5d3d376eb82cbd73e0cc1e41c7359026be54610",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.specify/templates/checklist-template.md"
+    },
+    {
+      "path": ".specify/templates/plan-template.md",
+      "bytes": 549,
+      "sha256": "2eabca5717e05ed0d5095f5b18e9dc8c140e36a25611207d876d8e89bfff87a0",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.specify/templates/plan-template.md"
+    },
+    {
+      "path": ".specify/templates/spec-template.md",
+      "bytes": 1245,
+      "sha256": "ab9a7887414f75982ad96f65e997a31e2de8fff796d912ca232e5ee046c21f50",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.specify/templates/spec-template.md"
+    },
+    {
+      "path": ".specify/templates/tasks-template.md",
+      "bytes": 606,
+      "sha256": "d147405d9a0b2d98012587032167265a1095afbb2fc96ce90af9fe5857831583",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/.specify/templates/tasks-template.md"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 7008,
+      "sha256": "50a08c78183c7de4ae2f84bdea550a5b01f7188c918a0f6541ac2451acb1ad0e",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/AGENTS.md"
+    },
+    {
+      "path": "CHECKLIST_PR.md",
+      "bytes": 1034,
+      "sha256": "ca487b3043e32095001d9a7d36cc0679da54338e03e02afc366543fbe43fef5a",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/CHECKLIST_PR.md"
+    },
+    {
+      "path": "Memoria.md",
+      "bytes": 7007,
+      "sha256": "e37b871b90e21eb281b5bdcb41234448bb36fe8544354ed9235604829a71bf5f",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/Memoria.md"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4603,
+      "sha256": "f85b62f3fc183ae77260c345e98cce31c992c94bff6cf4920bb1c7a44d6f6f7d",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/README.md"
+    },
+    {
+      "path": "app/.gitignore",
+      "bytes": 6,
+      "sha256": "5c3174b74edc6f2b9e0743594b8bd3c7f31e4f4405758cc9872b3fe1de1d28b4",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/.gitignore"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 3829,
+      "sha256": "f27940ebacf2ef6b1dbf86c1c2f3847170e9bf8c97dcaf5b5621f79e2de02ad2",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/build.gradle.kts"
+    },
+    {
+      "path": "app/src/androidTest/java/com/example/movilsdd/ExampleInstrumentedTest.kt",
+      "bytes": 677,
+      "sha256": "0703261bf7bafcbb1cdad6bd6647a04b55e0b5fbb5ef19a5cfd62f4d8fd22b75",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/androidTest/java/com/example/movilsdd/ExampleInstrumentedTest.kt"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "bytes": 1351,
+      "sha256": "ce36d8fc46d9e85bb4adacee76485715b08c8adbf2a034180276170523b129ea",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/AndroidManifest.xml"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/MainActivity.kt",
+      "bytes": 889,
+      "sha256": "ce71e283a0daad7237a24387a14149d7d7471dd7d474fe3c45631333d5cca5c1",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/MainActivity.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/MovilSddApp.kt",
+      "bytes": 397,
+      "sha256": "b035c3e46c892d7d029acf4d73ff230ed3ddaf818064b30c3291c18897f564f8",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/MovilSddApp.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/common/CorrelationId.kt",
+      "bytes": 228,
+      "sha256": "9f87abaab4c70516ad07acf43ed698a852e113305b545c005c922eb2c226c91b",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/common/CorrelationId.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/common/Page.kt",
+      "bytes": 155,
+      "sha256": "8ff15208a39c7b5292e99295be101307a0f612aa1950cbd502f84218ed9ae8f6",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/common/Page.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/common/SealedResult.kt",
+      "bytes": 509,
+      "sha256": "a4634933ce8680ec749d56f7502ca87489b3fa77262d63a76358450826fca12c",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/common/SealedResult.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/README.md",
+      "bytes": 127,
+      "sha256": "0499f8b13b8eace99c5c1ecfe7fbe2c24dba0a78590c9c2d949d93a0d18fe284",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/README.md"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/local/PreferencesLocalDataSource.kt",
+      "bytes": 1136,
+      "sha256": "8b5deefaa6e02e9b1ea9b371b06b02e5a8167b88a8a5ba569f6ba14f080a248a",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/local/PreferencesLocalDataSource.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/local/SessionManagerImpl.kt",
+      "bytes": 1562,
+      "sha256": "1d96e8595f943db83fa9b973f921c4dfc96a2a0238afeadedea25c154a76eee5",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/local/SessionManagerImpl.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/local/TokenLocalDataSource.kt",
+      "bytes": 2123,
+      "sha256": "6d05f8394f477d7d6c089bb5e0c7066db4102ee7a4de85c0dd2a15743a57297f",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/local/TokenLocalDataSource.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/remote/AuthApiService.kt",
+      "bytes": 532,
+      "sha256": "fba951555ac10a86fc789e1e3de62d71350c47f00576273c217a76cd308468aa",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/remote/AuthApiService.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/remote/AuthMappers.kt",
+      "bytes": 965,
+      "sha256": "c832c7cc3500bbdc5b941986871d4272a1ec7793832d338b349da58eae793cc4",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/remote/AuthMappers.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/remote/AuthRemoteDataSource.kt",
+      "bytes": 2705,
+      "sha256": "3b80a67cdf997dd251f04c3cd6004b3d3bc4dafcd17e1665bccf62269d14c662",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/remote/AuthRemoteDataSource.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/remote/dto/AuthDto.kt",
+      "bytes": 422,
+      "sha256": "14672dfbb8b4ec5751ca8859ccb05272f6fab17b017357f6aefae92eb64459bc",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/remote/dto/AuthDto.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/data/repository/AuthRepositoryImpl.kt",
+      "bytes": 1390,
+      "sha256": "1c98b1146854098185bbaf3e8233617781d91a25e9ea2ab8b941ebfe6768cb62",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/data/repository/AuthRepositoryImpl.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/di/AppModule.kt",
+      "bytes": 159,
+      "sha256": "0ede11042b8735d873fe3fc97dd88b613a1d9be72f18f17d850bd2664185be80",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/di/AppModule.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/di/CoreModule.kt",
+      "bytes": 376,
+      "sha256": "5c6061462337a2089f29c42d1c3e3ae4f02abf33b4e5ac24b8015b0c556f8f79",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/di/CoreModule.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/di/DataModule.kt",
+      "bytes": 89,
+      "sha256": "42b5ba285fe01646316f288e31f93ee651d0a805948fcf9c097ae677f6c5411b",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/di/DataModule.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/di/FeatureModule.kt",
+      "bytes": 92,
+      "sha256": "ff361a71157ab00bed5ef3ab576861be296b268317cf2bf6c6fe4c87edf28f86",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/di/FeatureModule.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/di/LoginModule.kt",
+      "bytes": 2651,
+      "sha256": "935ac962a947f62b75fde53f2dd6d9e71ef32fad8c7b6e2214e5533a3e8ec8e5",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/di/LoginModule.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/domain/README.md",
+      "bytes": 122,
+      "sha256": "70c438278a69fb8e4f9d988ffdf3be348476df39a2890192114101efec384313",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/domain/README.md"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/domain/model/AuthModels.kt",
+      "bytes": 337,
+      "sha256": "4a16cf07a8db96acd0fe9db60a02b49f6346cfd9b2487f61347a30cbcf564ba6",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/domain/model/AuthModels.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/domain/repository/AuthRepository.kt",
+      "bytes": 355,
+      "sha256": "98f89c20fc59b04d7cf9de8d210de0a0cc1e5f88b04c1cdc2d23771899f06485",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/domain/repository/AuthRepository.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/domain/repository/SessionManager.kt",
+      "bytes": 439,
+      "sha256": "418dd76fdfae273e88db131e832a6f296d07c7824e37335812addd6d7875bac4",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/domain/repository/SessionManager.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/domain/usecase/LoginUseCase.kt",
+      "bytes": 1079,
+      "sha256": "410f45e9fd4deff195aae4db8b1afd6e71dc1d262d4b4e0f656942d42afa89e3",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/domain/usecase/LoginUseCase.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/domain/usecase/LogoutUseCase.kt",
+      "bytes": 495,
+      "sha256": "4f3b4908221ad63e4e1b66a49bb29f9409f3c99d9c442a0ce3a16ba02493d81c",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/domain/usecase/LogoutUseCase.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/feature/home/HomePlaceholderScreen.kt",
+      "bytes": 2405,
+      "sha256": "2d6a0528b6aa9b8955e2e61c60c6bf1487faaaefb29a849a40a138fc7583aeea",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/feature/home/HomePlaceholderScreen.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/feature/login/LoginScreen.kt",
+      "bytes": 6354,
+      "sha256": "0687453b74a19889222ff81923021bfaef6b1fa03f3839e8711f9a48c09b8147",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/feature/login/LoginScreen.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/feature/login/LoginUiEvent.kt",
+      "bytes": 453,
+      "sha256": "c25c32a23b6921926de3169f303b6093cf7d1c40380ad9f48bf481edc17c3370",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/feature/login/LoginUiEvent.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/feature/login/LoginUiState.kt",
+      "bytes": 253,
+      "sha256": "d818a0735b6b1e5faa9283f10a889dd42a4981b165707113333b9b39197a62f6",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/feature/login/LoginUiState.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/feature/login/LoginViewModel.kt",
+      "bytes": 3441,
+      "sha256": "c41c3b4c65c33127f2ada8f7e34d8601ea7ad6516613fe89a12c1e68d2ffbde2",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/feature/login/LoginViewModel.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/navigation/Home.kt",
+      "bytes": 113,
+      "sha256": "e65df3d12b9a6c78f7cf81586f61488b55c1f62cbc2a21a2d033b83505dcdee3",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/navigation/Home.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/navigation/NavGraph.kt",
+      "bytes": 2465,
+      "sha256": "164d74139ff98837aec7fff3aa9bad3e85e84b9d1808533e92e1cc386d3ce8e6",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/navigation/NavGraph.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/navigation/Routes.kt",
+      "bytes": 208,
+      "sha256": "10cc295c85723997aa1853db73a8bcdb5d4ffeaac2a2b6048562bd03263e1704",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/navigation/Routes.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/theme/Color.kt",
+      "bytes": 323,
+      "sha256": "2fbbf87870c4fb3020081330b8c50d54f9e3bdc21b116a45badfcfd21dc6969d",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/theme/Color.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/theme/Theme.kt",
+      "bytes": 1707,
+      "sha256": "da1f5512d9867a3ca61f30d8e21c5718cf8c5fd87441d93d66048b585e15e3f9",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/theme/Theme.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/ui/theme/Type.kt",
+      "bytes": 1041,
+      "sha256": "90a6563909ccdf1161045bbc94c73096958e72ea5fc49f0a30aa0a9e6d5a106d",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/ui/theme/Type.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/util/Logger.kt",
+      "bytes": 1479,
+      "sha256": "4a81d7bf1bd57dc40c215ef789116b01cf3aa7d65ac785e01e314a40d19bdd3f",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/util/Logger.kt"
+    },
+    {
+      "path": "app/src/main/java/com/example/movilsdd/util/ValidationRules.kt",
+      "bytes": 1016,
+      "sha256": "11094d545f1033b50c93c4b99a943b0d8ecf04a688a7fb691d5d0ccdcfecc03e",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/java/com/example/movilsdd/util/ValidationRules.kt"
+    },
+    {
+      "path": "app/src/main/keepRules/rules.keep",
+      "bytes": 418,
+      "sha256": "cd9f36ade2d8604e1b7cf24eff5b171f9c0816c0aa013ba7eb55be4fe2e1dac7",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/keepRules/rules.keep"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_launcher_background.xml",
+      "bytes": 5606,
+      "sha256": "ed423c73a6f40a4d2909f0901e60527b3a807cd59e1b5593bcaae1808b1c6321",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/drawable/ic_launcher_background.xml"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_launcher_foreground.xml",
+      "bytes": 1702,
+      "sha256": "01d1a6a6c1234eb7fe270d097eb283d72b9c95ae5118886f1b6573aad280f1f7",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/drawable/ic_launcher_foreground.xml"
+    },
+    {
+      "path": "app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "bytes": 343,
+      "sha256": "88f7653499ef524126ea5018a99baf9cc3269e7e584d6205dfdd76db39f39cc0",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+      "path": "app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "bytes": 343,
+      "sha256": "88f7653499ef524126ea5018a99baf9cc3269e7e584d6205dfdd76db39f39cc0",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+      "path": "app/src/main/res/values/colors.xml",
+      "bytes": 378,
+      "sha256": "b5626527d503417f0d8e5b1e08f338de7b31173bf0e122815f03e64932adbd88",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/values/colors.xml"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "bytes": 713,
+      "sha256": "1dac56f653418a22038ef19799e90ae9efe3cf830dbad3b127794cbef1c27580",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/values/strings.xml"
+    },
+    {
+      "path": "app/src/main/res/values/themes.xml",
+      "bytes": 150,
+      "sha256": "27edc8200667671d2ad8a40bfa5c653973aeb4cfcc223e50a4a995f2d2fa9936",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/values/themes.xml"
+    },
+    {
+      "path": "app/src/main/res/xml/backup_rules.xml",
+      "bytes": 478,
+      "sha256": "6cf1a27e6807b1d24e41d3fbe7ddc1bfe1f42226027964f6eaf477d71b43b283",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/xml/backup_rules.xml"
+    },
+    {
+      "path": "app/src/main/res/xml/data_extraction_rules.xml",
+      "bytes": 551,
+      "sha256": "cb1fc47ab4a984530ed60e0e6ee638929c3038290e7e7e0b4b03a3a30fbe7381",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/xml/data_extraction_rules.xml"
+    },
+    {
+      "path": "app/src/main/res/xml/network_security_config.xml",
+      "bytes": 349,
+      "sha256": "79da64ba2cf846d689946469e9122149ec0d7fa6a6211c67254665ec39ecfe0c",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/main/res/xml/network_security_config.xml"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/ExampleUnitTest.kt",
+      "bytes": 221,
+      "sha256": "78e3caeaeb8b4f5089bcee2dc83d9ff27fe75e8bc3ec7c98e75e6ceb32fdbd34",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/ExampleUnitTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/common/SealedResultTest.kt",
+      "bytes": 729,
+      "sha256": "172d10ce3ca45c2c62b167502936f0856815e5a5bb4262e17cd48b6ba02b905c",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/common/SealedResultTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/data/local/SessionManagerImplTest.kt",
+      "bytes": 2869,
+      "sha256": "926a2699605f45513a413108edb15e4e240055c6dd9c487c08c220a9f5155b10",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/data/local/SessionManagerImplTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/data/local/TokenLocalDataSourceTest.kt",
+      "bytes": 2014,
+      "sha256": "2d87499c604af2292dfcbc1d7096493c490ab882a2150e1b5542f688daf3cd3b",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/data/local/TokenLocalDataSourceTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/data/remote/AuthContractTest.kt",
+      "bytes": 3527,
+      "sha256": "bdb93d0ac1a9eca8ce1bce091641518f1d7d88f0f2776395d76c781e79ab3eb5",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/data/remote/AuthContractTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/data/remote/AuthMappersTest.kt",
+      "bytes": 2072,
+      "sha256": "a37ad84314567ab24fc7710a5048f0c4a9ab36d3992a17db076a2f8b00728ad8",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/data/remote/AuthMappersTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/data/remote/AuthRemoteDataSourceTest.kt",
+      "bytes": 5421,
+      "sha256": "11af6e2ce0672327823822ea07273732570de4205e2b800fb36bec9faf664996",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/data/remote/AuthRemoteDataSourceTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/data/repository/AuthRepositoryImplTest.kt",
+      "bytes": 4246,
+      "sha256": "d09ad521d99632ef54faa3ec95029d79b967b35b8f084901280510ac6cdfd3f5",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/data/repository/AuthRepositoryImplTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/domain/DomainDummyTest.kt",
+      "bytes": 222,
+      "sha256": "5480d8c0781e305e1379e85868afc542524a01b40c1becb610878a7be8bbc273",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/domain/DomainDummyTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/domain/usecase/LoginUseCaseTest.kt",
+      "bytes": 3309,
+      "sha256": "365942197d4a631669e17963c483950c53652a715226c1f53b2579202400b30f",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/domain/usecase/LoginUseCaseTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/domain/usecase/LogoutUseCaseTest.kt",
+      "bytes": 1729,
+      "sha256": "b091b4ece212c8af0fd3acee3739814f2ad8468b0f01b7a72adfd3c4f2cc5a9e",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/domain/usecase/LogoutUseCaseTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/security/AuthSecurityTest.kt",
+      "bytes": 3008,
+      "sha256": "39c27c2f18d7dd95db2dced0ca16f152110c3f24f94c33571f65749cafe13261",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/security/AuthSecurityTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/security/SanitizationTest.kt",
+      "bytes": 546,
+      "sha256": "0fbcd559819a613977bd48dd2a0db6ac3772d885f47449f2152917d2c97cbae3",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/security/SanitizationTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/shared/InMemoryTokenStore.kt",
+      "bytes": 842,
+      "sha256": "deef5f04b9d24e30f1e1ff49dd1d56ea3d1625822a6107d1fbc3474730f0f879",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/shared/InMemoryTokenStore.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/shared/TestDataFactory.kt",
+      "bytes": 2222,
+      "sha256": "cbbea034fda64a4d84021d77734d64398db4b4011d5a3fe30ea5a3d5c987a05e",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/shared/TestDataFactory.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/ui/feature/login/LoginViewModelTest.kt",
+      "bytes": 5573,
+      "sha256": "022f52b5ab54b8b4d593a941ce605c922f9f05b005bb58b84f6133ce91eb8a2f",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/ui/feature/login/LoginViewModelTest.kt"
+    },
+    {
+      "path": "app/src/test/java/com/example/movilsdd/util/ValidationRulesTest.kt",
+      "bytes": 2349,
+      "sha256": "56279583a40e1d3f946ebf620f8470e90a6f7446835b3e2a56e5a95c1fbbf75d",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/app/src/test/java/com/example/movilsdd/util/ValidationRulesTest.kt"
+    },
+    {
+      "path": "build.gradle.kts",
+      "bytes": 218,
+      "sha256": "be7dbfa1841b18b020f744e203b995d3dac5709c2a6b8e310fbcfaed0364919a",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/build.gradle.kts"
+    },
+    {
+      "path": "constitution.md",
+      "bytes": 5972,
+      "sha256": "7670dc587fa255cfbd29a69873ffa1d441e5e8153f2eb1ed20befd520e1885b6",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/constitution.md"
+    },
+    {
+      "path": "detekt.yml",
+      "bytes": 439,
+      "sha256": "71105aa9fc4c9616ff4c5e2489a178b0b885a01b6bdde2f6d3d5225e8aed83a0",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/detekt.yml"
+    },
+    {
+      "path": "docs/asvs-l2-checklist.md",
+      "bytes": 1146,
+      "sha256": "94be742b2e088e2a4c637eca6c43c9fc42fc0da81661c13ee9f5922aeba7d0cf",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/docs/asvs-l2-checklist.md"
+    },
+    {
+      "path": "docs/endpoints-internos.md",
+      "bytes": 1015,
+      "sha256": "47576bc614e7d4d16fe310309e9fb2c43d2f4b350f80d528ebbdbf561ff7f498",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/docs/endpoints-internos.md"
+    },
+    {
+      "path": "docs/rate-matrix.md",
+      "bytes": 802,
+      "sha256": "ecbb7a9a9e66b38a54da76e7455391a2322132793d411f8b179ddcbd3285eee2",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/docs/rate-matrix.md"
+    },
+    {
+      "path": "gradle.properties",
+      "bytes": 1120,
+      "sha256": "cf774135f23cd1e6c054168ce772e24140800347f95b29819744c96f97e4ef26",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/gradle.properties"
+    },
+    {
+      "path": "gradle/gradle-daemon-jvm.properties",
+      "bytes": 1138,
+      "sha256": "6c13aa5ba36690ccfbbb25a8807d01d98c15833e446d7ae82ddc726472cb8ef7",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/gradle/gradle-daemon-jvm.properties"
+    },
+    {
+      "path": "gradle/libs.versions.toml",
+      "bytes": 4935,
+      "sha256": "d71ac1c3226d3b43c1e507a0b4a96e6cfb73c4886d500ee8f1810cfd68f1ae2a",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/gradle/libs.versions.toml"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 369,
+      "sha256": "85b526c8aefc823505e68577350c86c36bd50e6cdfc0922199cc1a7378bf3ad1",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/gradle/wrapper/gradle-wrapper.properties"
+    },
+    {
+      "path": "keys.properties.example",
+      "bytes": 152,
+      "sha256": "06bf99c5780295e31525c55ac43f4237a9d3980463114d3d82e1e46469c932c6",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/keys.properties.example"
+    },
+    {
+      "path": "scripts/README.md",
+      "bytes": 318,
+      "sha256": "b313c6f2c24caba029f61934aec405f233389d8192bcaa32c0bb4cb53e701056",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/scripts/README.md"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "bytes": 620,
+      "sha256": "93edc4abad05e805e75011b9e3075abcbf4e74eb3e4487b9779e1c06c862b58c",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/settings.gradle.kts"
+    },
+    {
+      "path": "specs/FT-00-base-build/checklists/checklist.md",
+      "bytes": 276,
+      "sha256": "de3dcdaf21dd500a21027f8cd7db83b6b6dee11afd180ef6a15e1c51d97a9a19",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-00-base-build/checklists/checklist.md"
+    },
+    {
+      "path": "specs/FT-00-base-build/plan.md",
+      "bytes": 734,
+      "sha256": "42db82a9138885be32cf41562bb068b2f2793230b43012d92d072351d909c8ab",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-00-base-build/plan.md"
+    },
+    {
+      "path": "specs/FT-00-base-build/spec.md",
+      "bytes": 2076,
+      "sha256": "0969d2793a3e0bb557a2b5f0474bb1cf2eb8137bc1668e80952501d3b020f5f8",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-00-base-build/spec.md"
+    },
+    {
+      "path": "specs/FT-00-base-build/tasks.md",
+      "bytes": 431,
+      "sha256": "6a54f6ff9f6ac9969ed362924bd2829e5c17c33f415b3203163a531f02c5a567",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-00-base-build/tasks.md"
+    },
+    {
+      "path": "specs/FT-01-nucleo/checklists/checklist.md",
+      "bytes": 270,
+      "sha256": "5696129744d0a25838646a97d33e2fed5966169951b405d1f51c5befd265f413",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-01-nucleo/checklists/checklist.md"
+    },
+    {
+      "path": "specs/FT-01-nucleo/plan.md",
+      "bytes": 1262,
+      "sha256": "9cc8edb0356916bb25e824b803d565a2d792f04a56375d74c71c677cd931fa94",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-01-nucleo/plan.md"
+    },
+    {
+      "path": "specs/FT-01-nucleo/spec.md",
+      "bytes": 2451,
+      "sha256": "96b4c91ba6e33c4c2ad1317bca3930699de698ed46fe699205b9588cac5bba04",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-01-nucleo/spec.md"
+    },
+    {
+      "path": "specs/FT-01-nucleo/tasks.md",
+      "bytes": 471,
+      "sha256": "2fbe6d0d7beeb0a5370d109463b34896bb76f569b9bd1e2830b00b59db9745d7",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-01-nucleo/tasks.md"
+    },
+    {
+      "path": "specs/FT-02-store-skeleton/checklists/checklist.md",
+      "bytes": 222,
+      "sha256": "423e84e021e0fbf0c2615b8375e4cd8eee6bc1868c1fd236096a7698332a6795",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-02-store-skeleton/checklists/checklist.md"
+    },
+    {
+      "path": "specs/FT-02-store-skeleton/plan.md",
+      "bytes": 805,
+      "sha256": "2ad048da51f2c2641846553ef5fa76f7517d9b358182f244d4e842ba5e8fbad5",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-02-store-skeleton/plan.md"
+    },
+    {
+      "path": "specs/FT-02-store-skeleton/spec.md",
+      "bytes": 1793,
+      "sha256": "7500d0d6006e02a835a04bfb0b26631ead0e2503eb69081d7bd1cf89ecce038e",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-02-store-skeleton/spec.md"
+    },
+    {
+      "path": "specs/FT-02-store-skeleton/tasks.md",
+      "bytes": 303,
+      "sha256": "bb56b9743aeeab5c592a3593f55566a141e40791bfd3e17402155533ea51fdf9",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-02-store-skeleton/tasks.md"
+    },
+    {
+      "path": "specs/FT-03-gates-cierre/checklists/checklist.md",
+      "bytes": 232,
+      "sha256": "1513e277ac413682ec65ade0c10b6fe8e7817d9f8b1b9304431d7b7950869a24",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-03-gates-cierre/checklists/checklist.md"
+    },
+    {
+      "path": "specs/FT-03-gates-cierre/plan.md",
+      "bytes": 663,
+      "sha256": "579a4a1fe2b51f2f72671a4cb5671a2e3a48933c2d3bda06d359e24b0225647a",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-03-gates-cierre/plan.md"
+    },
+    {
+      "path": "specs/FT-03-gates-cierre/spec.md",
+      "bytes": 1684,
+      "sha256": "fbc44b67be7a34b2db2378e798f2e8a0231c95e97e4193dc20bc83d39782dc57",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-03-gates-cierre/spec.md"
+    },
+    {
+      "path": "specs/FT-03-gates-cierre/tasks.md",
+      "bytes": 281,
+      "sha256": "c13604024c97ed8311c28cb16b206538c7132cae2405338402752cae7622247a",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-03-gates-cierre/tasks.md"
+    },
+    {
+      "path": "specs/FT-04-login/plan.md",
+      "bytes": 5386,
+      "sha256": "b8efe5ca47e5ce0adfb84c482659c680e7c38b5dbc19a746cda5c56034d5b4dd",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-04-login/plan.md"
+    },
+    {
+      "path": "specs/FT-04-login/spec.md",
+      "bytes": 13239,
+      "sha256": "e3cb689bbf4181c02897dfeb995e6cd9e0097089093943fb5d92b2f994f970da",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-04-login/spec.md"
+    },
+    {
+      "path": "specs/FT-04-login/tasks.md",
+      "bytes": 4035,
+      "sha256": "60abc36241bf8ae03c8db737522a1642875e8de91966ccb779728bb6f72c0c96",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/FT-04-login/tasks.md"
+    },
+    {
+      "path": "specs/README.md",
+      "bytes": 316,
+      "sha256": "faa1a12313a3b12a42d7c92188031f7e1c8fddfda7ae9066a9fc0654cf40a0ae",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/README.md"
+    },
+    {
+      "path": "specs/_template.md",
+      "bytes": 1245,
+      "sha256": "ab9a7887414f75982ad96f65e997a31e2de8fff796d912ca232e5ee046c21f50",
+      "url": "https://github.com/edelomeza/MovilSDD/blob/763355ac9b8760cde40143b465079d3f7fa789c5/specs/_template.md"
+    }
+  ],
+  "scope": "Corroboración documental por rutas, búsquedas de contenido y lectura dirigida; sin ejecución de código fuente, CI o pruebas del ejemplo. No se afirma auditoría exhaustiva funcional.",
+  "directed_review": [
+    "README.md",
+    "AGENTS.md",
+    "constitution.md",
+    ".specify/memory/constitution.md",
+    ".specify/templates/spec-template.md",
+    "CHECKLIST_PR.md",
+    "scripts/README.md",
+    ".github/workflows/ci.yml",
+    "app/build.gradle.kts",
+    "specs/FT-04-login/spec.md",
+    "specs/FT-04-login/plan.md",
+    "specs/FT-04-login/tasks.md",
+    "app/src/main/AndroidManifest.xml",
+    "app/src/main/res/xml/network_security_config.xml",
+    "app/src/main/java/com/example/movilsdd/di/CoreModule.kt",
+    "app/src/main/java/com/example/movilsdd/data/local/TokenLocalDataSource.kt",
+    "app/src/main/java/com/example/movilsdd/data/local/SessionManagerImpl.kt",
+    "app/src/main/java/com/example/movilsdd/data/remote/AuthRemoteDataSource.kt",
+    "app/src/main/java/com/example/movilsdd/data/repository/AuthRepositoryImpl.kt",
+    "app/src/main/java/com/example/movilsdd/domain/usecase/LogoutUseCase.kt",
+    "app/src/main/java/com/example/movilsdd/ui/feature/login/LoginViewModel.kt",
+    "app/src/main/java/com/example/movilsdd/ui/navigation/NavGraph.kt",
+    "app/src/main/java/com/example/movilsdd/ui/feature/home/HomePlaceholderScreen.kt",
+    "app/src/main/java/com/example/movilsdd/util/Logger.kt",
+    "app/src/test/java/com/example/movilsdd/data/remote/AuthContractTest.kt",
+    "app/src/test/java/com/example/movilsdd/security/AuthSecurityTest.kt",
+    "app/src/test/java/com/example/movilsdd/data/local/TokenLocalDataSourceTest.kt",
+    "app/src/androidTest/java/com/example/movilsdd/ExampleInstrumentedTest.kt",
+    ".opencode/agents/slice-scaffolder.md",
+    ".opencode/agents/traceability-clerk.md",
+    ".opencode/agents/plan-architect.md"
+  ]
+}

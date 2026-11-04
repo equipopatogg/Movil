@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PactoGG</string>
+    <string name="tab_contracts">Retos</string>
+    <string name="tab_tournaments">Torneos</string>
+    <string name="tab_commitments">Cuentas</string>
+    <string name="tab_profile">Perfil</string>
+    <string name="initial_view">VISTA INICIAL</string>
+    <string name="contracts_intro">Tus retos y pactos aparecerán aquí cuando conectemos tu cuenta.</string>
+    <string name="tournaments_intro">El espacio para competir con tu grupo. Las inscripciones serán por equipos.</string>
+    <string name="commitments_intro">Aquí podrás consultar tus compromisos. Los puntos son virtuales y no tienen valor monetario.</string>
+    <string name="profile_intro">Tu apodo, tus grupos y tu Índice de Palabra tendrán su lugar aquí.</string>
+    <string name="my_groups">Mis grupos</string>
+    <string name="groups_intro">Tus grupos privados reunirán a los amigos con quienes compartes retos y torneos.</string>
+    <string name="back_to_profile">Volver al perfil</string>
+    <string name="app_version">Versión %1$s</string>
+    <string name="api_pending">Conexión con el servicio pendiente.</string>
+    <string name="api_ready">Dirección del servicio configurada. Conexión aún no verificada.</string>
+</resources>
