@@ -67,9 +67,9 @@ fun ConnectedApp(model: ConnectedViewModel) {
 
 @Composable
 private fun ConnectedNavigation(route: ConnectedRoute, busy: Boolean, nav: (ConnectedRoute) -> Unit) {
-    val routes = listOf(ConnectedRoute.HOME)
-    val labels = listOf("Inicio")
-    val icons = listOf(R.drawable.ic_pacto_home)
+    val routes = listOf(ConnectedRoute.HOME, ConnectedRoute.GROUPS)
+    val labels = listOf("Inicio", "Grupos")
+    val icons = listOf(R.drawable.ic_pacto_home, R.drawable.ic_pacto_users)
     NavigationBar(containerColor = MaterialTheme.colorScheme.background) {
         routes.forEachIndexed { index, target ->
             NavigationBarItem(selected = route == target, enabled = !busy, onClick = { nav(target) },
@@ -83,6 +83,7 @@ private fun ConnectedContent(state: ConnectedState, model: ConnectedViewModel) {
     when (state.route) {
         ConnectedRoute.HOME -> ConnectedHome(state, model)
         ConnectedRoute.PROFILE -> ConnectedProfile(state, model)
+        ConnectedRoute.GROUPS -> ConnectedGroups(state, model)
         else -> ConnectedHome(state, model)
     }
 }
@@ -94,6 +95,10 @@ private fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
             "Tu cuenta está conectada al servicio.", R.drawable.ic_pacto_bolt)
         PactCard("Sesión activa", "Accede a tu perfil para cerrar sesión.", R.drawable.ic_pacto_shield) {
             Action("Ver mi perfil", enabled = !state.busy) { model.navigate(ConnectedRoute.PROFILE) }
+        }
+        PactCard(state.group?.name ?: "Crea tu grupo", "Grupo creado durante esta sesión.",
+            R.drawable.ic_pacto_users) {
+            Action("Crear o ver grupo", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
         }
     }
 }
