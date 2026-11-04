@@ -1,3 +1,7 @@
+# Estado vigente — copia y commits locales, 2026-11-04
+
+Copia previa verificada y ramas dependientes preparadas bajo identidad equipopatogg. [Registro de ramas/commits](docs/preparacion/entrega-por-ramas.md). Base visual: 9 JVM; acceso/grupos/torneos/integración pendiente: 24 JVM por etapa, debug/Lint/Detekt y compilación androidTest correctos; candidatos sin secretos. Sin push, PR o cambios de main publicado. No se declara aceptación integral de specs: retos/evidencias siguen bloqueados por 503, torneos con datos y otros criterios permanecen abiertos.
+
 # Estado vigente — teléfono y API real, 2026-11-04
 
 Cuenta QA creada por autorización del usuario; APK final instalado y sesión QA iniciada. Registro/login/grupo/torneos vacíos/refresh/logout comprobados; cifrado y renovación al arrancar probados físicamente. Creación de reto falla en proveedor con 503 MODERATION_UNAVAILABLE, lo que bloquea evidencias. No todo funciona ni se aceptan specs completas. [Informe y request_id](docs/integracion/verificacion-telefono-2026-11-04.md).
