@@ -20,3 +20,8 @@ Estado técnico: NO_EJECUTADO. Revisor/fecha pendientes.
 | PG02-AC5 | NO_EJECUTADO | Ninguna nueva | Manifiesto y cierre |
 
 Estados futuros: PASS, FAIL, ERROR, NO_EJECUTADO o NO_APLICA justificado. Preparar este expediente no resuelve la incidencia.
+
+
+## Ejecución autorizada posterior — 2026-11-04
+
+[Resultado vigente](../../../docs/pruebas/cierre-pendientes-2026-11-04.md): build release, ocho ELF/ZIP y arranque 4 KB correctos; diagnóstico RELRO corregido sin cambiar dependencias. Runtime 16 KB y aceptación integral pendientes. Firma local de prueba autorizada, sin producción/Play.

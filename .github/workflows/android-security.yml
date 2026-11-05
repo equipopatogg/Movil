@@ -29,6 +29,9 @@ jobs:
         id: semgrep
         if: ${{ always() && inputs.scanner == 'semgrep' }}
         run: python3 .github/scripts/android-evidence.py scan semgrep
+      - name: Verify positive, negative and scope rule fixtures
+        if: inputs.scanner == 'semgrep'
+        run: python3 .github/scripts/check-semgrep-rules.py
       - name: SCA release SBOM
         id: trivy
         if: ${{ always() && inputs.scanner == 'trivy' }}

@@ -1,6 +1,6 @@
 # PG-02 — Corregir compatibilidad nativa de 16 KB y verificar release local
 
-Tipo: dependencia/configuración/verificación de artefacto. Fecha: 2026-10-30. Estado: borrador; alternativa de corrección pendiente.
+Tipo: dependencia/configuración/verificación de artefacto. Fecha: 2026-10-30. Estado: inspección/build release y arranque 4 KB verificados localmente; runtime 16 KB pendiente.
 Rector: [AGENTS](../../AGENTS.md) y [constitución SDD](../../.specify/memory/constitution.md).
 
 ## 1. Contexto y objetivo
@@ -61,3 +61,8 @@ No se conoce aún una versión de graphics-path ratificada como solución. Retir
 | Implementación no iniciada | Pendiente | Pendiente | Incidencia conservada; ninguna versión nueva validada |
 
 Expediente: [plan](plan.md), [tareas](tasks.md), [checklist](checklists/checklist.md).
+
+
+## Ejecución autorizada posterior — 2026-11-04
+
+[Resultado vigente](../../docs/pruebas/cierre-pendientes-2026-11-04.md): build release, ocho ELF/ZIP y arranque 4 KB correctos; diagnóstico RELRO corregido sin cambiar dependencias. Runtime 16 KB y aceptación integral pendientes. Firma local de prueba autorizada, sin producción/Play.

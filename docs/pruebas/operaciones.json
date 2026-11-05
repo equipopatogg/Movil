@@ -410,7 +410,8 @@
       "com.pactogg.app.feature.connected.presentation.EvidenceConfirmationTest",
       "com.pactogg.app.feature.connected.presentation.NicknameQueriesTest",
       "com.pactogg.app.integration.InputRulesTest",
-      "com.pactogg.app.testing.EndpointUnitTest"
+      "com.pactogg.app.testing.EndpointUnitTest",
+      "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest"
     ],
     "integration": [
       "com.pactogg.app.integration.ApiIntegrationTest",
@@ -421,7 +422,8 @@
       "com.pactogg.app.core.network.ApiClientFactoryTest",
       "com.pactogg.app.core.network.ApiErrorMapperTest",
       "com.pactogg.app.testing.EndpointSecurityTest",
-      "com.pactogg.app.testing.ProtectedEndpointSessionTest"
+      "com.pactogg.app.testing.ProtectedEndpointSessionTest",
+      "com.pactogg.app.testing.EndpointFailureTest"
     ]
   }
 }
