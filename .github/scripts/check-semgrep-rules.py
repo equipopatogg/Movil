@@ -46,18 +46,19 @@ def main():
         expected = expected_cases(fixture.read_text(encoding="utf-8"))
         with tempfile.TemporaryDirectory(prefix="pactogg-rule-check-", dir=os.environ.get("RUNNER_TEMP")) as tmp:
             base = Path(tmp)
-            for scope in ("main/security", "test/security"):
-                target = base / "app/src" / scope / "RuleCases.kt"
+            for scope in ("app/src/main/security", "app/external/security"):
+                target = base / scope / "RuleCases.kt"
                 target.parent.mkdir(parents=True)
                 shutil.copy2(fixture, target)
             shutil.copy2(config, base / ".semgrep.yml")
             command = ["docker", "run", "--rm", "-v", f"{base}:/src", "-w", "/src",
                        scanner.IMAGES["semgrep"], "semgrep", "scan", "--config", "/src/.semgrep.yml",
                        "--error", "--metrics=off", "--disable-version-check", "--no-rewrite-rule-ids",
-                       "--json", "--output", "/src/result.json", "/src/app/src"]
+                       "--project-root", "/src", "--json", "--output", "/src/result.json", "/src/app"]
             result = subprocess.run(command, capture_output=True, timeout=600, check=False)
             data = json.loads((base / "result.json").read_text(encoding="utf-8"))
             report.update(exitCode=result.returncode, engineErrors=len(data.get("errors", [])),
+                          scanned=data.get("paths", {}).get("scanned", []),
                           detections=[dict(rule=r["check_id"], file=r["path"], line=r["start"]["line"])
                                       for r in data.get("results", [])])
             verify(data, result.returncode, expected)
