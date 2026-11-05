@@ -4,7 +4,7 @@ Estado vigente: **Creación real verificada; negativos y recuperación de listad
 
 - [ ] MO-GRP-01-AC1: 201 muestra grupo, rol, puntos y código devueltos, sin valores fabricados.
 - [ ] MO-GRP-01-AC2: Nombre límite, 409 y 422 conservan formulario recuperable y no producen éxito local.
-- [ ] MO-GRP-01-AC3: No existe lista ficticia ni unión activa; sesión/cuenta distinta elimina el contexto del grupo creado.
+- [ ] MO-GRP-01-AC3: No existe lista ficticia; unión se resuelve por MO-MEM-01 y sesión/cuenta distinta elimina el contexto anterior.
 - [ ] MO-GRP-01-ACQ: controles del candidato y evidencia válidos.
 - [ ] Entradas/bloqueantes de sección 7 resueltos para las tareas afectadas.
 - [ ] Revisión humana de spec y aceptación funcional diferenciadas.

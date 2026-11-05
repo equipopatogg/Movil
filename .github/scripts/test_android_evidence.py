@@ -58,6 +58,16 @@ class EvidenceTests(unittest.TestCase):
             with self.subTest(scanner=name), self.assertRaises((ValueError, KeyError, TypeError)):
                 evidence.sanitized(name, {}, 0)
 
+    def test_gitleaks_scans_the_repository_root_after_mobile_split(self):
+        def fake_run(command, **kwargs):
+            self.assertEqual("/src", command[command.index("dir") + 1])
+            self.assertNotIn("/src/Movil", command)
+            mount = next(arg for arg in command if arg.endswith(":/reports"))
+            Path(mount[:-len(":/reports")], "raw.json").write_text("[]")
+            return evidence.subprocess.CompletedProcess(command, 0, b"", b"")
+        with patch.object(evidence.subprocess, "run", side_effect=fake_run):
+            self.assertEqual(0, evidence.scan("gitleaks"))
+
     def test_missing_docker_preserves_error_report(self):
         with patch.object(evidence.subprocess, "run", side_effect=FileNotFoundError):
             self.assertEqual(1, evidence.scan("gitleaks"))

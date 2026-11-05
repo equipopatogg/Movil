@@ -60,3 +60,8 @@ La matriz de versiones se mantiene en docs/versiones.md. Los requisitos del cort
 Fuentes oficiales de referencia: [firma Android](https://developer.android.com/studio/publish/app-signing), [pruebas y canales de Play](https://support.google.com/googleplay/android-developer/answer/14151465?hl=es) y [compatibilidad de páginas](https://developer.android.com/guide/practices/page-sizes). Verificar condiciones aplicables al publicar; no garantizar costos, plazos o disponibilidad.
 
 Una futura spec de CI será concreta: qué workflow/configuración se cambia, qué ejecuta cada job, qué artefactos produce y qué resultado demuestra éxito o fallo. Una checklist administrativa de cuenta no reemplaza esa especificación. La firma/publicación y los controles técnicos permanecen fuera de la fase actual.
+
+
+## Conciliación de calidad móvil — 2026-11-04
+
+La matriz de 19 operaciones y los resultados actuales están en [informe de calidad](../pruebas/verificacion-calidad-2026-11-04.md), [matriz](../pruebas/matriz-operaciones.md) y [pipeline](../pruebas/pipeline-movil.md). Mantener resultados locales separados de CI remoto, SAST/SCA y aceptación humana pendientes. Sin controles backend añadidos por analogía.

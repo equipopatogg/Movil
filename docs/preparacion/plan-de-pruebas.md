@@ -34,3 +34,8 @@ JVM cubre comportamiento aislado; MockWebServer verifica transporte/serializaci�
 El reporte distingue pruebas escritas, compiladas, ejecutadas, omitidas y fallidas, además de variante/API/ABI cuando apliquen. Ausencia de reporte o cero casos esperados ejecutados no permiten declarar éxito. Línea base de cobertura/rendimiento, umbrales y excepciones se acuerdan con evidencia propia.
 
 Estas son pautas mantenidas. Una spec de pruebas solo corresponde cuando delimite qué pruebas, utilidades o configuración concretas se crearán/cambiarán y qué comportamiento verificarán. Los casos del primer flujo siguen pendientes de contrato y maqueta.
+
+
+## Conciliación de calidad móvil — 2026-11-04
+
+La matriz de 19 operaciones y los resultados actuales están en [informe de calidad](../pruebas/verificacion-calidad-2026-11-04.md), [matriz](../pruebas/matriz-operaciones.md) y [pipeline](../pruebas/pipeline-movil.md). Mantener resultados locales separados de CI remoto, SAST/SCA y aceptación humana pendientes. Sin controles backend añadidos por analogía.

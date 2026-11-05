@@ -11,8 +11,8 @@ El cambio configurará una ejecución instrumentada reproducible y una medición
 
 ## 2. Requisitos funcionales
 
-- RF1: ejecutar CacheMetadataDaoTest y ShellNavigationTest en un dispositivo/emulador identificado y compatible; compilar no equivale a ejecutarlas.
-- RF2: añadir al workflow Android una vía explícita de ejecución instrumentada, inicialmente manual y separada del trabajo rápido. Una ejecución omitida no permite cerrar el criterio instrumentado.
+- RF1: ejecutar CacheMetadataDaoTest y AccessNavigationTest en un dispositivo/emulador identificado y compatible; compilar no equivale a ejecutarlas.
+- RF2: añadir al workflow Android una vía explícita de ejecución instrumentada, automática en PR/push y ejecución manual, separada del trabajo JVM rápido. Una ejecución omitida no permite cerrar el criterio instrumentado.
 - RF3: medir cobertura de pruebas JVM con motor compatible con el stack acordado. Registrar código incluido/excluido, líneas/clases medidas, pruebas ejecutadas y versión; cero pruebas o informe ausente no es éxito.
 - RF4: establecer línea base medida y presentar una propuesta de umbral. Este cambio no inventa un porcentaje mínimo ni activa uno sin revisión; bloquea fallos, cero pruebas donde se esperan y ausencia de los informes exigidos.
 - RF5: conservar XML/resultados, cobertura y diagnóstico redactado incluso al fallar; distinguir fallo de test de ERROR del entorno.
@@ -28,7 +28,7 @@ Datos aislados sin PII; elegir imagen/API/ABI y recursos reproducibles, sin asum
 | .github/workflows/android-ci.yml | Job instrumentado manual identificado, resultados/diagnóstico y medición JVM |
 | app/build.gradle.kts y gradle/libs.versions.toml | Configuración mínima de motor de cobertura compatible, solo después de seleccionarlo |
 | app/src/androidTest/java/com/pactogg/app/core/database/CacheMetadataDaoTest.kt | Revisar aislamiento y ajustar solo fallos relevantes demostrados |
-| app/src/androidTest/java/com/pactogg/app/navigation/ShellNavigationTest.kt | Revisar navegación/ciclo de vida del cascarón y ajustar fallos demostrados |
+| app/src/androidTest/java/com/pactogg/app/navigation/AccessNavigationTest.kt | Revisar navegación/ciclo de vida del cascarón y ajustar fallos demostrados |
 | Artefactos temporales de CI y docs/pruebas.md | Resultados, cobertura, entorno, límites y línea base |
 
 No migrar a JUnit5, instalar Ktlint o cambiar Hilt solo por analogía. Si no existe solución de cobertura compatible, registrar ERROR y decisión técnica; no activar una comprobación vacía.
@@ -57,6 +57,21 @@ Recursos del host, virtualización e imagen pueden impedir concluir. Debe elegir
 |---|---|---|---|
 | Preparación autorizada | Usuario | 2026-10-30 | Preparar expediente y tareas, sin ejecución |
 | Diseño en borrador | Responsables por confirmar | Pendiente | Entorno, motor y política de cobertura por revisar |
-| Implementación no iniciada | Pendiente | Pendiente | Sin aceptación de suite final ni medición nueva |
+| Implementación local verificada | Agente, sin aceptación humana | 2026-11-04 | Informe local; CI y política pendientes |
 
 Expediente: [plan](plan.md), [tareas](tasks.md), [checklist](checklists/checklist.md).
+
+
+## Implementación autorizada — calidad por operación, 2026-11-04
+
+Se reutilizan las 44 pruebas previas, categorizadas sin cambiar sus comprobaciones. Nuevas instancias por las 19 operaciones confirmadas cubren fronteras unitarias, wire HTTP y seguridad de consumidor; otras quince comprueban ausencia de tráfico protegido sin sesión. Identidades canónicas en [operaciones.json](../../docs/pruebas/operaciones.json) y explicación en [matriz](../../docs/pruebas/matriz-operaciones.md). No significa tres casos exactos ni aceptación de servidor por fixtures.
+
+- RF6: ejecutar categorías unit/integration/security por separado y rechazar ausencia de sus casos exactos, cero pruebas, duplicados, nombres parciales, fallos y omisiones.
+- RF7: instrumentación offline selecciona CacheMetadataDaoTest, EncryptedSessionStoreTest y AccessNavigationTest (cinco métodos); no ejecuta capturas/live, no carga credenciales QA y usa dispositivo explícito. Se valida resultado real de am instrument, no solo exit code.
+- PG01-AC6: cada una de las 19 operaciones tiene identidad ejecutada positiva en sus tres categorías; resultados sintéticos/reales y alcance de consumidor diferenciados. El validador falla al borrar/omitir o renombrar parcialmente un caso requerido.
+
+Motor de cobertura: JaCoCo 0.8.14 integrado en AGP con enableUnitTestCoverage y createDebugUnitTestCoverageReport. No añade Kover ni cambia dependencias de aplicación. Alcance predeterminado del plugin, incluyendo UI/generado; ningún filtro adicional para subir el porcentaje. Mínimo bloqueante no ratificado; se exige inventario no vacío y se presenta medición/línea base separada del nivel de suficiencia. Imagen CI API35/google_atd/x86_64; ejecución local puede reutilizar otra imagen instalada, registrando API/ABI y sin atribuir esa ejecución a API35.
+
+Los planes originales son antecedentes superados en estas tareas por autorización expresa; criterios y deudas restantes se conservan. No desplegar ni publicar por estas pruebas.
+
+Resultados actuales: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). La aprobación histórica de diseño no acredita aceptación final ni ejecución remota.

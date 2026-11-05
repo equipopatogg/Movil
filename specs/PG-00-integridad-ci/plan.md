@@ -34,3 +34,6 @@ Debe cumplirse PG00-AC1–AC5 con versiones y alcance registrados. Fuente y arte
 ## Ajuste de ubicación resuelto en preparación Git
 
 La reorganización inicial conservó workflows en PactoGG/Movil/.github como antecedente. El encargo posterior los traslada/ajusta a **PactoGG/.github/workflows/** y retira los dos YAML anteriores; filtros, directorios, mounts y rutas de informes revisados. No se crea Git ni se acredita funcionamiento remoto por ese traslado. El negativo de acción Wrapper y fixtures de motores no se sustituyen por revisar fuentes o probar parsers.
+
+
+Actualización autorizada 2026-11-04: reutilizar proyecto/pruebas, verificar matriz de 19 operaciones, separar categorías, medir JaCoCo integrado y ejecutar cinco pruebas Android offline; validar gate con fallos/ausencias/omisiones/artefactos viejos y APK diferente. Conservar informes y preparar único grafo CI sin CD. Ver matriz/pipeline en docs/pruebas y comparación fijada del profesor. No atribuir ejecución remota al YAML local ni copiar umbrales/stack ajenos.

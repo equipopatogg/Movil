@@ -1,5 +1,7 @@
 package com.pactogg.app.integration
 
+import org.junit.experimental.categories.Category
+import com.pactogg.app.testing.IntegrationChecks
 import com.pactogg.app.core.network.ApiClientFactory
 import com.pactogg.app.core.network.ApiFailure
 import com.pactogg.app.core.network.PactoApi
@@ -28,6 +30,7 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
 
+@Category(IntegrationChecks::class)
 class ApiIntegrationTest {
     private val server = MockWebServer()
     private lateinit var api: PactoApi
@@ -94,6 +97,26 @@ class ApiIntegrationTest {
         assertTrue(server.takeRequest().body.readUtf8().contains("\"refresh_token\":\"refresh-one\""))
         assertNull(sessions.current.value)
         assertNull(store.saved)
+    }
+
+    @Test fun challengeRefreshUsesAuthenticatedGetAndRejectsAnotherContract() = runBlocking {
+        login()
+        val challenge = com.pactogg.app.feature.connected.domain.Challenge(ContractId, GroupId,
+            "Halo", "Ganar", "Elegir juego", "2099-11-10T23:59:00Z", 25, "open")
+        val body = """{"data":{"id":"$ContractId","group_id":"$GroupId","game":"Halo","condition":"Ganar","reward":"Elegir juego","deadline":"2099-11-10T23:59:00Z","bond_required":25,"status":"voting"}}"""
+        server.enqueue(json(body))
+        assertEquals("voting", products.challenge(challenge).status)
+        val request = server.takeRequest()
+        assertEquals("GET", request.method)
+        assertEquals("/api/v1/contracts/$ContractId", request.path)
+        assertEquals("Bearer access-one", request.getHeader("Authorization"))
+        server.enqueue(json(body.replace(ContractId, "555555555555555555555555")))
+        assertEquals("INVALID_RESPONSE", (runCatching { products.challenge(challenge) }
+            .exceptionOrNull() as ApiFailure).code)
+        server.takeRequest()
+        server.enqueue(json(body.replace(GroupId, "666666666666666666666666")))
+        assertEquals("INVALID_RESPONSE", (runCatching { products.challenge(challenge) }
+            .exceptionOrNull() as ApiFailure).code)
     }
 
     @Test fun concurrentExpiredRequestsRotateOnlyOnceAndUseFreshBearer() = runBlocking {

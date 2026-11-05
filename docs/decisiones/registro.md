@@ -233,3 +233,23 @@ No reintentar automáticamente POST inciertos; 401 protegido puede renovar pero 
 ## D-SDD-28 — comprobación física y cuenta QA, 2026-11-04
 
 Usuario autoriza crear cuenta de prueba e instalar/comprobar en teléfono conectado. Se usa una cuenta sintética aislada y credenciales fuera del proyecto; se preservan otras cuentas/ajustes. Evidencia por operación en informe de teléfono: acceso, grupos, torneos vacíos, refresh/logout correctos; reto falla con 503 MODERATION_UNAVAILABLE y evidencias bloqueadas. No modificar backend ni omitir moderación para generar PASS. Correcciones móviles acotadas: request_id sanitizado, mensaje del servicio y busy preservado al cambiar identidad. Cifrado y renovación al arrancar verificados físicamente. Las specs siguen abiertas, sin aceptación total, commit o push.
+
+
+## D-SDD-29 — ajuste de bajo impacto dentro de evidencias, 2026-11-04
+
+Usuario autoriza cambios si no afectan mucho a la app y encajan en specs existentes. Se añade consulta GET de detalle solo como dependencia del envío en MO-EVI-02 para mostrar estado real, sin implementar la función completa de consulta/historial ni las once operaciones nuevas. Si GET falla después de POST confirmado, conservar evidencia y marcar estado pendiente, nunca repetir la subida para refrescar. Mantener autorización backend sin inventar aceptación previa y preservar sesión/TLS. Sin dependencias, diseño nuevo, cambios backend o publicación. Specs y evidencia concilian esta extensión sin declarar aceptación integral.
+
+
+## D-SDD-30 — specs nuevas solo por Sistema.docx, 2026-11-04
+
+Fuente expresa: usuario pide revisar specs backend y crear equivalentes móviles de las operaciones del documento enviado, definiendo «confirmado» como presente en ese documento. Se corroboran once adiciones en Sistema.docx y backend 8baa9e6d04038c1d6cf9588c5526ad63b94c3f87: USR-02/03/06, GRP-02/03, MEM-01/02, CON-02/03/06/07. Crear once expedientes MO-* con objetivo, RF, errores, áreas de implementación y AC vinculados a backend, más plan/tareas/checklist según plantilla Android. La confirmación es de alcance, no aprobación de reglas discrepantes, despliegue o aceptación móvil. Total 23 expedientes: 19 consumidor y cuatro base/coordinación. Se reutilizará ayuda GET de MO-EVI-02 en MO-CON-03, reconociendo código previo sin falsear cronología. No se agregan funcionalidades ausentes ni se ejecuta sugerencia externa de simularlas. Solo documentación; sin nuevo código, ejecución técnica, Git o publicación.
+
+
+## D-SDD-31 — implementar once consumidores confirmados, 2026-11-04
+
+Usuario solicita integrar en Android las once specs confirmadas por Sistema.docx. Se autoriza código/pruebas móviles, sin cambios backend ni publicación. Reutilizar sesión/HTTPS y UI existente. Agrupar firmas API por perfil/grupos/acciones y diez métodos sociales en un repositorio compartido, manteniendo creación/evidencias/torneos en el repositorio previo; evitar clases masivas o una pila de capas por cada pantalla. Sin nuevas dependencias. Ampliar modelo de reto con identidad/versión/contador, confirmación de acciones y saldo de servidor; ninguna escritura se reintenta automáticamente. Selección de avatar sigue bloqueada por falta de catálogo; no imponer reglas nuevas de evidencia mientras se concilia proveedor. Cuenta QA auxiliar necesaria para pruebas de autorización/fianza, credenciales fuera de proyecto/Git; reutilizar grupo QA existente y no crear grupos masivamente. Evidencia real y criterios pendientes separados de aceptación humana.
+
+
+## D-SDD-32 — calidad móvil adaptada al profesor, 2026-11-04
+
+Usuario autoriza completar calidad sobre el móvil local sin reiniciar ni añadir herramientas por analogía. Se contrasta MovilSDD congelado, conservando JUnit4/Hilt/Detekt y JaCoCo integrado en AGP. Matriz de 19 operaciones con categorías unitarias, integración y seguridad; no exactamente tres casos. Se reutilizan 44 pruebas y se obtienen 116 JVM y cinco Android offline reales. Grafo único con scanners reutilizables, gate que rechaza fallos/ausencias/omisiones y evidencia ligada a ejecución/candidato. Cobertura 19,48 % como línea base, umbral pendiente. Sin CD, Docker/backend/IaC, nuevos productos, instalación global, commit/push ni aceptación humana inventada. Ver informe de calidad 2026-11-04 y comparación móvil para fuentes, límites y pendientes remotos.

@@ -1,0 +1,427 @@
+{
+  "schema": 1,
+  "source": "Sistema.docx y backend 8baa9e6d04038c1d6cf9588c5526ad63b94c3f87",
+  "endpoints": [
+    {
+      "id": "USR-01",
+      "spec": "specs/MO-USR-01-registro/spec.md",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "protected": false,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[USR-01]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[USR-01]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[USR-01]"
+        }
+      }
+    },
+    {
+      "id": "AUTH-01",
+      "spec": "specs/MO-AUTH-01-login/spec.md",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "protected": false,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[AUTH-01]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[AUTH-01]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[AUTH-01]"
+        }
+      }
+    },
+    {
+      "id": "AUTH-03",
+      "spec": "specs/MO-AUTH-03-sesion/spec.md",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "protected": false,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[AUTH-03]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[AUTH-03]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[AUTH-03]"
+        }
+      }
+    },
+    {
+      "id": "AUTH-04",
+      "spec": "specs/MO-AUTH-04-logout/spec.md",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[AUTH-04]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[AUTH-04]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[AUTH-04]"
+        }
+      }
+    },
+    {
+      "id": "GRP-01",
+      "spec": "specs/MO-GRP-01-crear-grupo/spec.md",
+      "method": "POST",
+      "path": "/api/v1/groups",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[GRP-01]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[GRP-01]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[GRP-01]"
+        }
+      }
+    },
+    {
+      "id": "CON-01",
+      "spec": "specs/MO-CON-01-crear-reto/spec.md",
+      "method": "POST",
+      "path": "/api/v1/contracts",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-01]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[CON-01]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-01]"
+        }
+      }
+    },
+    {
+      "id": "EVI-02",
+      "spec": "specs/MO-EVI-02-evidencias/spec.md",
+      "method": "POST",
+      "path": "/api/v1/contracts/{id}/evidence",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[EVI-02]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[EVI-02]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[EVI-02]"
+        }
+      }
+    },
+    {
+      "id": "TOR-02",
+      "spec": "specs/MO-TOR-02-consultar-torneos/spec.md",
+      "method": "GET",
+      "path": "/api/v1/tournaments",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[TOR-02]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[TOR-02]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[TOR-02]"
+        }
+      }
+    },
+    {
+      "id": "USR-02",
+      "spec": "specs/MO-USR-02-consultar-perfil/spec.md",
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[USR-02]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[USR-02]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[USR-02]"
+        }
+      }
+    },
+    {
+      "id": "USR-03",
+      "spec": "specs/MO-USR-03-editar-perfil/spec.md",
+      "method": "PATCH",
+      "path": "/api/v1/users/me",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[USR-03]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[USR-03]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[USR-03]"
+        }
+      }
+    },
+    {
+      "id": "USR-06",
+      "spec": "specs/MO-USR-06-disponibilidad-apodo/spec.md",
+      "method": "GET",
+      "path": "/api/v1/users/check-nickname",
+      "protected": false,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[USR-06]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[USR-06]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[USR-06]"
+        }
+      }
+    },
+    {
+      "id": "GRP-02",
+      "spec": "specs/MO-GRP-02-listar-grupos/spec.md",
+      "method": "GET",
+      "path": "/api/v1/groups",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[GRP-02]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[GRP-02]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[GRP-02]"
+        }
+      }
+    },
+    {
+      "id": "GRP-03",
+      "spec": "specs/MO-GRP-03-detalle-grupo/spec.md",
+      "method": "GET",
+      "path": "/api/v1/groups/{id}",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[GRP-03]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[GRP-03]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[GRP-03]"
+        }
+      }
+    },
+    {
+      "id": "MEM-01",
+      "spec": "specs/MO-MEM-01-unirse-grupo/spec.md",
+      "method": "POST",
+      "path": "/api/v1/groups/join",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[MEM-01]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[MEM-01]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[MEM-01]"
+        }
+      }
+    },
+    {
+      "id": "MEM-02",
+      "spec": "specs/MO-MEM-02-listar-miembros/spec.md",
+      "method": "GET",
+      "path": "/api/v1/groups/{id}/members",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[MEM-02]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[MEM-02]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[MEM-02]"
+        }
+      }
+    },
+    {
+      "id": "CON-02",
+      "spec": "specs/MO-CON-02-listar-retos/spec.md",
+      "method": "GET",
+      "path": "/api/v1/groups/{gid}/contracts",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-02]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[CON-02]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-02]"
+        }
+      }
+    },
+    {
+      "id": "CON-03",
+      "spec": "specs/MO-CON-03-detalle-reto/spec.md",
+      "method": "GET",
+      "path": "/api/v1/contracts/{id}",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-03]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[CON-03]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-03]"
+        }
+      }
+    },
+    {
+      "id": "CON-06",
+      "spec": "specs/MO-CON-06-aceptar-reto/spec.md",
+      "method": "POST",
+      "path": "/api/v1/contracts/{id}/accept",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-06]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[CON-06]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-06]"
+        }
+      }
+    },
+    {
+      "id": "CON-07",
+      "spec": "specs/MO-CON-07-rechazar-reto/spec.md",
+      "method": "POST",
+      "path": "/api/v1/contracts/{id}/reject",
+      "protected": true,
+      "tests": {
+        "unit": {
+          "class": "com.pactogg.app.testing.EndpointUnitTest",
+          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-07]"
+        },
+        "integration": {
+          "class": "com.pactogg.app.testing.EndpointContractTest",
+          "name": "consumesConfirmedWireContract[CON-07]"
+        },
+        "security": {
+          "class": "com.pactogg.app.testing.EndpointSecurityTest",
+          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-07]"
+        }
+      }
+    }
+  ],
+  "category_classes": {
+    "unit": [
+      "com.pactogg.app.feature.auth.presentation.AccessStateTest",
+      "com.pactogg.app.feature.explore.presentation.ExploreFilterTest",
+      "com.pactogg.app.feature.connected.presentation.ContractPolicyTest",
+      "com.pactogg.app.feature.connected.presentation.EvidenceConfirmationTest",
+      "com.pactogg.app.feature.connected.presentation.NicknameQueriesTest",
+      "com.pactogg.app.integration.InputRulesTest",
+      "com.pactogg.app.testing.EndpointUnitTest"
+    ],
+    "integration": [
+      "com.pactogg.app.integration.ApiIntegrationTest",
+      "com.pactogg.app.integration.SocialApiIntegrationTest",
+      "com.pactogg.app.testing.EndpointContractTest"
+    ],
+    "security": [
+      "com.pactogg.app.core.network.ApiClientFactoryTest",
+      "com.pactogg.app.core.network.ApiErrorMapperTest",
+      "com.pactogg.app.testing.EndpointSecurityTest",
+      "com.pactogg.app.testing.ProtectedEndpointSessionTest"
+    ]
+  }
+}

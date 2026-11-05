@@ -11,3 +11,8 @@ Estado actualizado 2026-11-03: configuración/verificaciones locales acotadas au
 - [x] T00.7 Actualizar docs/seguridad/controles.md, conciliar expediente y memoria — cierre local acotado; criterios completos y pendientes conservados.
 
 T00.2–T00.4 y T00.6 tienen configuración/helpers/rutas/política implementados y pruebas locales; las casillas siguen abiertas por el negativo de acción, reportes de motores/runner y descarga reales. T00.5 no ejecutado. Este encargo expreso permite ajustes y herramientas locales/portables de comprobación, no Git ni instalaciones globales. Cierre en [checklists/checklist.md](checklists/checklist.md).
+
+
+Actualización 2026-11-04: código/configuración de categorías, medición, runner y gate incorporados bajo autorización expresa. Las tareas iniciales que exigían no ejecutar al redactar son antecedentes; el informe de esta fase distinguirá verificación local, motor real, fixtures y CI remoto pendiente.
+
+Verificación 2026-11-04: actionlint y 19 pruebas de helpers/política correctos; Gitleaks sobre 384 fuentes candidatas sin hallazgos. Gate con rechazo de omisión, informe faltante/alterado y APK distinto validado localmente. T00.2–T00.6 siguen abiertas en sus partes de acción/motores/CI remoto. [Informe](../../docs/pruebas/verificacion-calidad-2026-11-04.md).
