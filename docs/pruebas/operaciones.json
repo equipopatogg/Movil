@@ -425,5 +425,315 @@
       "com.pactogg.app.testing.ProtectedEndpointSessionTest",
       "com.pactogg.app.testing.EndpointFailureTest"
     ]
+  },
+  "required_regressions": {
+    "unit": [
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "invalidFormsNeverCallRepositories"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "groupCreationResetsDependentDataOnlyAfterSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "failedWriteRetainsInputAndNeverRetries"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "apiFailureDiagnosticIsSanitizedAndBusyAlwaysClears"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "joinClearsInviteOnlyAfterProviderConfirmation"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "deniedJoinPreservesInviteAndAccount"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "profileReadAndUpdateUseServerIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "paginationAppendsWithoutDuplicatingAndStopsAtEnd"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "membersBoardAndFiltersDoNotMixPages"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "anotherGroupClearsOldContractAndRival"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "rivalMustBeVisibleAndCannotBeSelf"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "challengeCreationRequiresReviewAndResetsDraftAfterConfirmation"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "acceptRefreshesThenRequiresExplicitConfirmationAndServerBalance"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "uncertainAcceptDisablesReplayUntilFreshDetail"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "rejectDoesNotInventPointChangesAndCancelDoesNotWrite"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "refreshDetailOpensCorrectGroupAndClearsEvidence"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "tournamentsAreDeduplicatedAndNoMoreMeansNoRequest"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "photoBytesAreErasedEvenWhenUploadFails"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "busyStateBlocksNavigationAndEditing"
+      }
+    ],
+    "security": [
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[USR-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[USR-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[USR-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[AUTH-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[AUTH-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[AUTH-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[AUTH-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[AUTH-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[AUTH-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[AUTH-04]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[AUTH-04]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[AUTH-04]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[GRP-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[GRP-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[GRP-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[EVI-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[EVI-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[EVI-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[TOR-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[TOR-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[TOR-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[USR-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[USR-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[USR-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[USR-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[USR-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[USR-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[USR-06]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[USR-06]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[USR-06]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[GRP-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[GRP-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[GRP-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[GRP-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[GRP-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[GRP-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[MEM-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[MEM-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[MEM-01]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[MEM-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[MEM-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[MEM-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-02]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-03]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-06]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-06]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-06]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-07]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-07]"
+      },
+      {
+        "class": "com.pactogg.app.testing.EndpointFailureTest",
+        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-07]"
+      }
+    ]
   }
 }

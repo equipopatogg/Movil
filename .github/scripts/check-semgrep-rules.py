@@ -53,9 +53,13 @@ def main():
             shutil.copy2(config, base / ".semgrep.yml")
             command = ["docker", "run", "--rm", "-v", f"{base}:/src", "-w", "/src",
                        scanner.IMAGES["semgrep"], "semgrep", "scan", "--config", "/src/.semgrep.yml",
-                       "--error", "--metrics=off", "--disable-version-check", "--json", "--output", "/src/result.json", "/src/app/src"]
+                       "--error", "--metrics=off", "--disable-version-check", "--no-rewrite-rule-ids",
+                       "--json", "--output", "/src/result.json", "/src/app/src"]
             result = subprocess.run(command, capture_output=True, timeout=600, check=False)
             data = json.loads((base / "result.json").read_text(encoding="utf-8"))
+            report.update(exitCode=result.returncode, engineErrors=len(data.get("errors", [])),
+                          detections=[dict(rule=r["check_id"], file=r["path"], line=r["start"]["line"])
+                                      for r in data.get("results", [])])
             verify(data, result.returncode, expected)
             report.update(state="PASS", positive=3, negative=3, outsideProductionPath=3)
     except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError):

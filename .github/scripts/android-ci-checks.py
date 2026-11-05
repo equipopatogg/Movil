@@ -70,6 +70,9 @@ def expected(kind):
     if kind == "instrumented":
         return EXPECTED_DEVICE
     result = set()
+    for current in KINDS if kind == "all" else (kind,):
+        for case in json.loads(MATRIX.read_text(encoding="utf-8")).get("required_regressions", {}).get(current, []):
+            result.add((case["class"], case["name"]))
     for row in matrix():
         for current in KINDS if kind == "all" else (kind,):
             case = row["tests"][current]
