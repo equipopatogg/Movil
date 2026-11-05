@@ -53,3 +53,8 @@ Compatibilidad por completar antes de integrar la primera funcionalidad:
 | Próximo candidato, versión por acordar | Pendiente de recibir | Según alcance ratificado | Pendiente del equipo | Pendiente | NO_EJECUTADO |
 
 Por despliegue futuro registrar fecha, responsables, fuente/commit si existe, versiones, hash/artefacto, reportes, canal, aceptación y recuperación. Git, etiquetas automáticas y publicación solo cuando se soliciten. No reutilizar el roadmap antiguo 0.1/0.2/0.3 como compromiso funcional aprobado.
+
+
+## Verificación release — 2026-11-05
+
+Sin cambiar versiones: graphics-path y DataStore cumplen la inspección actual LOAD/RELRO/ZIP en las ocho bibliotecas del release. Se corrigió el diagnóstico histórico de fin RELRO por el LOAD contenedor. Mismo APK con firma local de prueba comprobado en 4 KB y acceso en 16 KB. [Manifiesto y límites](pruebas/cierre-pendientes-2026-11-04.md). No acredita AAB ni distribución Play.

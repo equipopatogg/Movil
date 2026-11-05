@@ -63,6 +63,14 @@ def matrix():
             if key in used or case["class"] not in classes[kind] or not case["name"].endswith("[" + row["id"] + "]"):
                 raise ValueError("Duplicate or non-exact test mapping")
             used.add(key)
+    for kind, cases in document.get("required_regressions", {}).items():
+        if kind not in KINDS:
+            raise ValueError("Unknown regression category")
+        for case in cases:
+            key = (kind, case["class"], case["name"])
+            if key in used or case["class"] not in classes[kind] or not case["name"]:
+                raise ValueError("Duplicate or misplaced required regression")
+            used.add(key)
     return rows
 
 
@@ -70,6 +78,9 @@ def expected(kind):
     if kind == "instrumented":
         return EXPECTED_DEVICE
     result = set()
+    for current in KINDS if kind == "all" else (kind,):
+        for case in json.loads(MATRIX.read_text(encoding="utf-8")).get("required_regressions", {}).get(current, []):
+            result.add((case["class"], case["name"]))
     for row in matrix():
         for current in KINDS if kind == "all" else (kind,):
             case = row["tests"][current]

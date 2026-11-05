@@ -1,3 +1,7 @@
+# Cierre de pendientes autorizado — 2026-11-04
+
+Usuario autoriza resolver lo posible: pruebas consumidor/estado, regresiones reales Wrapper/Semgrep y verificación release/16 KB de PG-00/01/02. Firma local de pruebas para instalación; sin firma de producción ni Play. Conservar datos/cuentas del teléfono. Las adiciones del backend no amplían automáticamente las 19 operaciones confirmadas. Evidencia en docs/pruebas/cierre-pendientes-2026-11-04.md. La entrega por PR con compuerta sigue autorizada. No cerrar criterios por mera existencia de código o fixtures.
+
 # Entrega por PR autorizada — 2026-11-04
 
 El usuario autoriza subir el trabajo local por ramas/PR, comprobar y corregir CI remoto, configurar la compuerta obligatoria y fusionar solo con controles correctos. Cuenta/repositorio: equipopatogg/Movil; no publicar en otras cuentas ni incluir backend, credenciales o artefactos privados. Esta instrucción posterior sustituye las restricciones de Git de la fase local conservadas debajo. Sin despliegue, firma de producción, instalaciones globales o aceptación humana inventada. No cerrar criterios funcionales solo por un pipeline verde.

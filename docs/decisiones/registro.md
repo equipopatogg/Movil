@@ -258,3 +258,8 @@ Usuario autoriza completar calidad sobre el móvil local sin reiniciar ni añadi
 ## D-SDD-33 — entrega por ramas y CI remoto, 2026-11-04
 
 Usuario autoriza ejecutar entrega propuesta: ramas/PR, verificación y corrección remota, protección y fusión con controles correctos. Identidad equipopatogg y repositorio móvil únicamente. PR6 funcionalidades, PR7 pruebas, PR8 CI, dependientes. PR8/run41969860447 acredita 116 JVM, cinco Android, scanners/SBOM y gate real; APK descargado coincide con el probado. Proteger main con check Android PR quality gate de Actions app15368 y rama actualizada, sin force push/borrado. Fusionar por dependencias y verificar el candidato final, conservando pendientes de cobertura, negativos específicos y aceptación humana. Sin despliegue ni aceptación simulada.
+
+
+## D-SDD-34 — cerrar pendientes verificables sin ampliar producto, 2026-11-04
+
+Usuario autoriza resolver lo posible. Agregar pruebas de estado y errores por operación, regresiones reales Wrapper/Semgrep y verificación release/16 KB. Corregir diagnóstico RELRO por segmento contenedor, sin cambiar dependencia si cumple. Firma local de pruebas autorizada; sin identidad/entrega de producción. Mantener visibles privacidad, catálogo, aceptación y runtime sin evidencia. Fuente backend nueva 451c8ae queda como siguiente alcance para revisar. Evidencia en cierre-pendientes-2026-11-04.md y matriz de criterios. Entrega por PR con compuerta, sin pasar fixtures como aceptación de servidor.

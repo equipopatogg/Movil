@@ -28,3 +28,10 @@ Ante regresión, revertir el cambio de dependencia/configuración acotado y cons
 ## 4. Gates y cierre
 
 PG02-AC1–AC5 con evidencia pertinente. No cerrar por compilar o por inspeccionar un solo AAR. Conciliar [tareas](tasks.md), [checklist](checklists/checklist.md), decisión de versión y memoria. La preparación actual deja implementación y verificaciones sin ejecutar.
+
+
+## Ejecución autorizada posterior — 2026-11-04
+
+[Resultado vigente](../../docs/pruebas/cierre-pendientes-2026-11-04.md): build release, ocho ELF/ZIP y arranque 4 KB correctos; diagnóstico RELRO corregido sin cambiar dependencias. Runtime 16 KB de instalación/arranque/acceso comprobado; aceptación funcional integral pendiente. Firma local de prueba autorizada, sin producción/Play.
+
+Runtime posterior: mismo candidato con firma local de prueba, PAGE_SIZE=16384 y recorrido login/registro/aviso correctos; contraste de instalación/arranque 4096 correcto. Manifiesto local con hashes y límites en el informe. No acredita Play ni aceptación integral de las operaciones autenticadas.

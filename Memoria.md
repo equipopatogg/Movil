@@ -1,3 +1,11 @@
+# Cierre verificable de pendientes — 2026-11-05
+
+192 JVM correctas y cobertura 27,14 % local (748/2756), 26,96 % CI (743/2756), sin cambiar denominador. Release local y ocho ELF/ZIP correctos; instalación/arranque 4 KB y recorrido de acceso 16 KB correctos. Regresiones reales Wrapper/Semgrep PASS en run41977160594. Rechazo live sin sesión: quince operaciones con 401. Cierre por PR9 con su comprobación final. [Informe](docs/pruebas/cierre-pendientes-2026-11-04.md) y [84 criterios](docs/pruebas/estado-criterios-2026-11-04.md).
+
+Conservar como pendientes recorridos autenticados adicionales, privacidad definitiva, catálogo de avatar, producción/Play, porcentaje mínimo y aceptación funcional/humana restante. Backend nuevo no amplía automáticamente las 19 operaciones. No cambiar funciones ni dependencias por el diagnóstico RELRO ya corregido.
+
+## Historial conservado
+
 # Entrega remota autorizada — 2026-11-04
 
 Estado: ramas y PR 6/7/8 creados en equipopatogg/Movil. Candidato PR8 con todos los controles remotos correctos; 116 JVM y cinco Android, scanners reales y SBOM de 192 componentes. Gate PASS y APK descargado coincidente con el probado. Main protegida con check de GitHub Actions obligatorio, rama actualizada y sin push forzado/borrado. [Entrega y evidencia](docs/pruebas/entrega-github-2026-11-04.md).

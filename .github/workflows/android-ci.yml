@@ -29,6 +29,58 @@ jobs:
           cache-provider: basic
           cache-read-only: true
           dependency-graph: disabled
+      - name: Create isolated altered Wrapper fixture (never executed)
+        run: |
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          original = Path('gradle/wrapper/gradle-wrapper.jar').read_bytes()
+          changed = bytearray(original)
+          changed[-1] ^= 1
+          fixture = Path('artifacts/wrapper-negative/gradle/wrapper/gradle-wrapper.jar')
+          fixture.parent.mkdir(parents=True)
+          fixture.write_bytes(changed)
+          Path('artifacts/wrapper-negative/context.json').write_text(json.dumps({
+              'originalSha256': hashlib.sha256(original).hexdigest(),
+              'alteredSha256': hashlib.sha256(changed).hexdigest()}))
+          PY
+      - name: Official validator must reject altered fixture
+        id: wrapper-negative
+        continue-on-error: true
+        uses: gradle/actions/wrapper-validation@8da46b539cd8fe6ab27ca75128919a18d757604c
+        with:
+          min-wrapper-count: 2
+          allow-snapshots: false
+      - name: Verify exact rejection and unchanged production Wrapper
+        if: always()
+        env:
+          NEGATIVE_OUTCOME: ${{ steps.wrapper-negative.outcome }}
+          FAILED_WRAPPER: ${{ steps.wrapper-negative.outputs.failed-wrapper }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root = Path('artifacts/wrapper-negative')
+          fixture = root / 'gradle/wrapper/gradle-wrapper.jar'
+          report = json.loads((root / 'context.json').read_text())
+          expected = fixture.as_posix()
+          valid = (os.environ['NEGATIVE_OUTCOME'] == 'failure'
+              and os.environ['FAILED_WRAPPER'] == expected
+              and hashlib.sha256(Path('gradle/wrapper/gradle-wrapper.jar').read_bytes()).hexdigest() == report['originalSha256']
+              and report['originalSha256'] != report['alteredSha256'])
+          report.update(state='PASS' if valid else 'ERROR', expectedRejectedPath=expected,
+              reportedRejectedPath=os.environ['FAILED_WRAPPER'], run=os.environ['GITHUB_RUN_ID'], source=os.environ['GITHUB_SHA'])
+          (root / 'result.json').write_text(json.dumps(report, indent=2))
+          fixture.unlink(missing_ok=True)
+          assert valid, 'Expected exact corrupted Wrapper rejection; infrastructure failure is not PASS'
+          PY
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: android-wrapper-negative
+          path: artifacts/wrapper-negative/*.json
+          if-no-files-found: error
+          retention-days: 7
       - name: Evidence policy negative cases
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
       - name: Confirm operation and spec matrix
