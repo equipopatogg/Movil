@@ -39,9 +39,9 @@ flowchart LR
 - Gate valida resultados de todos los trabajos, run/attempt/source, helper/matriz, huellas de informes/APKs, inventario SBOM y casos exactos. Estados skipped/cancelled/missing no equivalen a PASS. Artefactos se conservan siete días aun cuando un trabajo falla.
 - Solo después del gate se reexpone el mismo APK como pactogg-debug-validated, sin recompilar otro candidato. Antes existe android-build, explícitamente candidato sin aprobación de calidad.
 
-## Entrega pendiente
+## Entrega y protección
 
-El grafo verde real aparecerá en GitHub cuando se autoricen los commits/ramas/PR y se ejecute el workflow. Hasta entonces solo se acredita configuración y verificación local. Recomendar el check estable **Android PR quality gate** y revisión humana en reglas de main; no afirmar protección efectiva sin inspección/configuración autorizadas. Ningún job local sustituye aceptación del profesor.
+El usuario autorizó la entrega por PR. El candidato del PR8 terminó con grafo verde real, gate PASS y APK descargado. La regla de main exige **Android PR quality gate** de GitHub Actions, rama actualizada y conversaciones resueltas, también para administradores, sin push forzado/borrado. [Ejecución y límites](entrega-github-2026-11-04.md). La revisión humana independiente sigue pendiente; ningún job sustituye aceptación del profesor.
 
 No se agregan Pact-real, mutación, carga/chaos, ZAP, SQL Server, Terraform o publicación automática: no son controles móviles obligatorios corroborados para este corte. No se migran Hilt/JUnit4/stack por copiar el ejemplo.
 

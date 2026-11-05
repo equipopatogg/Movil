@@ -1,3 +1,11 @@
+# Entrega remota autorizada — 2026-11-04
+
+Estado: ramas y PR 6/7/8 creados en equipopatogg/Movil. Candidato PR8 con todos los controles remotos correctos; 116 JVM y cinco Android, scanners reales y SBOM de 192 componentes. Gate PASS y APK descargado coincidente con el probado. Main protegida con check de GitHub Actions obligatorio, rama actualizada y sin push forzado/borrado. [Entrega y evidencia](docs/pruebas/entrega-github-2026-11-04.md).
+
+Decisión: integrar PR dependientes preservando orden y volver a verificar el candidato final antes de main. No inventar aprobación humana ni cerrar todos los AC. Deuda: cobertura 19,48 %, política por ratificar; negativos específicos Wrapper/Semgrep y criterios funcionales pendientes. No desplegar, firmar producción ni modificar backend.
+
+## Historial local conservado
+
 # Estado vigente — calidad móvil, 2026-11-04
 
 Estado: 116 JVM y cinco instrumentadas Android correctas; 19 verificaciones Python y actionlint correctos. [Evidencia y límites](docs/pruebas/verificacion-calidad-2026-11-04.md).

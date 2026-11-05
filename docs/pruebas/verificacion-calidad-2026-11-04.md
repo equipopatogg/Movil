@@ -32,3 +32,6 @@ CI remoto, validación positiva/negativa real de la acción Wrapper, Semgrep/Tri
 La tarea TQ de cada operación acredita sus tres categorías locales; no cierra todos sus AC, T4/T5 integrales ni aceptación humana. PG-00 conserva pendientes de scanners/runner; PG-01 conserva ejecución remota y ratificación de política. Sin backend Docker/IaC/DAST, despliegue, herramientas duplicadas ni nuevas funciones.
 
 El escaneo inicial de todo el directorio también recorrió artefactos locales ignorados y señaló 16 hashes públicos en los informes de pruebas. Se conservó su salida redactada, se comprobó el origen y se repitió sobre la instantánea exacta de fuentes candidatas (384 archivos), sin cambiar reglas ni añadir exclusiones. CI escanea un checkout nuevo, sin esos artefactos locales. No se ocultaron secretos de fuentes.
+
+
+Actualización posterior autorizada: [entrega y evidencia remota](entrega-github-2026-11-04.md). Los pendientes remotos descritos arriba corresponden al cierre local anterior; el candidato PR8 ya ejecutó motores, Android y gate. Se conservan pendientes específicos y aceptación humana.

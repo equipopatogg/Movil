@@ -253,3 +253,8 @@ Usuario solicita integrar en Android las once specs confirmadas por Sistema.docx
 ## D-SDD-32 — calidad móvil adaptada al profesor, 2026-11-04
 
 Usuario autoriza completar calidad sobre el móvil local sin reiniciar ni añadir herramientas por analogía. Se contrasta MovilSDD congelado, conservando JUnit4/Hilt/Detekt y JaCoCo integrado en AGP. Matriz de 19 operaciones con categorías unitarias, integración y seguridad; no exactamente tres casos. Se reutilizan 44 pruebas y se obtienen 116 JVM y cinco Android offline reales. Grafo único con scanners reutilizables, gate que rechaza fallos/ausencias/omisiones y evidencia ligada a ejecución/candidato. Cobertura 19,48 % como línea base, umbral pendiente. Sin CD, Docker/backend/IaC, nuevos productos, instalación global, commit/push ni aceptación humana inventada. Ver informe de calidad 2026-11-04 y comparación móvil para fuentes, límites y pendientes remotos.
+
+
+## D-SDD-33 — entrega por ramas y CI remoto, 2026-11-04
+
+Usuario autoriza ejecutar entrega propuesta: ramas/PR, verificación y corrección remota, protección y fusión con controles correctos. Identidad equipopatogg y repositorio móvil únicamente. PR6 funcionalidades, PR7 pruebas, PR8 CI, dependientes. PR8/run41969860447 acredita 116 JVM, cinco Android, scanners/SBOM y gate real; APK descargado coincide con el probado. Proteger main con check Android PR quality gate de Actions app15368 y rama actualizada, sin force push/borrado. Fusionar por dependencias y verificar el candidato final, conservando pendientes de cobertura, negativos específicos y aceptación humana. Sin despliegue ni aceptación simulada.

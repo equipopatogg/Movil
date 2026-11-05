@@ -1,3 +1,7 @@
+# Entrega por PR autorizada — 2026-11-04
+
+El usuario autoriza subir el trabajo local por ramas/PR, comprobar y corregir CI remoto, configurar la compuerta obligatoria y fusionar solo con controles correctos. Cuenta/repositorio: equipopatogg/Movil; no publicar en otras cuentas ni incluir backend, credenciales o artefactos privados. Esta instrucción posterior sustituye las restricciones de Git de la fase local conservadas debajo. Sin despliegue, firma de producción, instalaciones globales o aceptación humana inventada. No cerrar criterios funcionales solo por un pipeline verde.
+
 # Instrucción operativa vigente — calidad Android, 2026-11-04
 
 Usuario autoriza completar/verificar pruebas y CI sobre el móvil local ya implementado, contrastando MovilSDD y la transcripción. Se conservan funciones/diseño y 19 operaciones confirmadas. Sin cambios backend, funciones futuras, migraciones de stack, instalaciones globales, commits/push o publicación por este encargo.
