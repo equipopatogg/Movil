@@ -1,4 +1,4 @@
-package com.pactogg.app.testing
+package com.pactogg.app.testing.shared
 
 import com.pactogg.app.core.network.ApiClientFactory
 import com.pactogg.app.core.network.PactoApi
@@ -7,7 +7,7 @@ import com.pactogg.app.feature.auth.data.*
 import com.pactogg.app.feature.auth.domain.*
 import com.pactogg.app.feature.connected.data.*
 import com.pactogg.app.feature.connected.domain.*
-import kotlinx.coroutines.runBlocking
+import java.lang.reflect.Proxy
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -55,7 +55,7 @@ class FixtureStore : SessionStore {
     override fun write(session: Session) { saved = session }
     override fun clear() { saved = null }
 }
-class EndpointFixture : AutoCloseable {
+class ApiTestFixture : AutoCloseable {
     val server = MockWebServer()
     val store = FixtureStore()
     var now = 1000L
@@ -82,30 +82,7 @@ class EndpointFixture : AutoCloseable {
         if (signedIn) store.saved = Session(Account(UserId, "qa@example.com", "Player"), Access, Refresh, 100000)
         sessions.restore()
     }
-    suspend fun call(endpoint: Endpoint): Any = when (endpoint) {
-        Endpoint.REGISTER -> sessions.register(RegisterRequest("qa@example.com", "synthetic password", "Player",
-            true, "2026-10-01"))
-        Endpoint.LOGIN -> sessions.login(LoginRequest("qa@example.com", "synthetic password"))
-        Endpoint.REFRESH -> { now = 200000; sessions.restore() }
-        Endpoint.LOGOUT -> sessions.logout()
-        Endpoint.CREATE_GROUP -> products.createGroup("Equipo")
-        Endpoint.CREATE_CONTRACT -> products.createChallenge(GroupFixture, ChallengeDraft("Halo", "Win a game",
-            "Choose next game", "2099-11-10T23:59:00Z", 25, OtherId))
-        Endpoint.EVIDENCE -> products.sendLink(ContractFixture, "https://youtu.be/example")
-        Endpoint.TOURNAMENTS -> products.tournaments("open", "Halo", null)
-        Endpoint.PROFILE -> social.profile()
-        Endpoint.PATCH_PROFILE -> social.updateProfile("NewPlayer")
-        Endpoint.NICKNAME -> social.nickname("AvailableName")
-        Endpoint.GROUPS -> social.groups("Equipo", null)
-        Endpoint.GROUP -> social.group(GroupId)
-        Endpoint.JOIN -> social.join("abcdef")
-        Endpoint.MEMBERS -> social.members(GroupId, "Ri", null)
-        Endpoint.CONTRACTS -> social.contracts(GroupId, BoardFilter("open", true, "Halo", "Win"), null)
-        Endpoint.CONTRACT -> products.challenge(ContractFixture)
-        Endpoint.ACCEPT -> social.accept(ContractFixture)
-        Endpoint.REJECT -> social.reject(ContractFixture)
-    }
-    fun success(endpoint: Endpoint) {
+    fun enqueueSuccess(endpoint: Endpoint) {
         val body = when (endpoint) {
             Endpoint.REGISTER, Endpoint.LOGIN, Endpoint.REFRESH -> sessionJson
             Endpoint.LOGOUT -> ""
@@ -134,4 +111,14 @@ class EndpointFixture : AutoCloseable {
         val profileJson = """{"id":"$UserId","email":"qa@example.com","nickname":"NewPlayer","avatar_id":"default","email_verified":false,"groups_count":1,"stats":{"completed":0,"cheated":0,"streak":0,"trophies":0,"word_index":50}}"""
         val sessionJson = """{"data":{"user":{"id":"$UserId","email":"qa@example.com","nickname":"Player"},"access_token":"new-synthetic-access","refresh_token":"new-synthetic-refresh","token_type":"Bearer","expires_in":900}}"""
     }
+}
+
+/** Unit-test boundary: invalid input must fail before a transport method is invoked. */
+class ConsumerBoundaryFixture {
+    private val api = Proxy.newProxyInstance(PactoApi::class.java.classLoader, arrayOf(PactoApi::class.java)) { _, _, _ ->
+        throw AssertionError("Unexpected network boundary access in a unit test")
+    } as PactoApi
+    private val sessions = SessionManager(api, FixtureStore())
+    val social = ApiSocialRepository(api, sessions)
+    val products = ApiProductRepository(api, sessions)
 }

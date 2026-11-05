@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "source": "Sistema.docx y backend 8baa9e6d04038c1d6cf9588c5526ad63b94c3f87",
   "endpoints": [
     {
@@ -10,16 +10,16 @@
       "protected": false,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[USR-01]"
+          "class": "com.pactogg.app.feature.auth.register.RegisterValidationTest",
+          "name": "USR_01_rejectsWeakPasswordMissingConsentAndOversizedNickname"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[USR-01]"
+          "class": "com.pactogg.app.feature.auth.register.RegisterApiTest",
+          "name": "USR_01_sendsRegistrationAndAcceptsInitialSession"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[USR-01]"
+          "class": "com.pactogg.app.feature.auth.register.RegisterSecurityTest",
+          "name": "USR_01_rejectedRegistrationNeverCreatesSession"
         }
       }
     },
@@ -31,16 +31,16 @@
       "protected": false,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[AUTH-01]"
+          "class": "com.pactogg.app.feature.auth.login.LoginValidationTest",
+          "name": "AUTH_01_rejectsInvalidEmailAndOversizedPassword"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[AUTH-01]"
+          "class": "com.pactogg.app.feature.auth.login.LoginApiTest",
+          "name": "AUTH_01_sendsCredentialsAndConsumesLoginResponse"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[AUTH-01]"
+          "class": "com.pactogg.app.feature.auth.login.LoginSecurityTest",
+          "name": "AUTH_01_invalidCredentialsNeverCreateSession"
         }
       }
     },
@@ -52,16 +52,16 @@
       "protected": false,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[AUTH-03]"
+          "class": "com.pactogg.app.feature.auth.session.RefreshSessionValidationTest",
+          "name": "AUTH_03_rejectsInvalidSessionLifetime"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[AUTH-03]"
+          "class": "com.pactogg.app.feature.auth.session.RefreshSessionApiTest",
+          "name": "AUTH_03_sendsRefreshTokenAndPersistsRotatedToken"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[AUTH-03]"
+          "class": "com.pactogg.app.feature.auth.session.RefreshSessionSecurityTest",
+          "name": "AUTH_03_rejectedRotationClearsPreviousSession"
         }
       }
     },
@@ -73,17 +73,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[AUTH-04]"
+          "class": "com.pactogg.app.feature.auth.logout.LogoutValidationTest",
+          "name": "AUTH_04_serializesRefreshTokenWithoutPassword"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[AUTH-04]"
+          "class": "com.pactogg.app.feature.auth.logout.LogoutApiTest",
+          "name": "AUTH_04_revokesSessionAndClearsLocalCustody"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[AUTH-04]"
+          "class": "com.pactogg.app.feature.auth.logout.LogoutSecurityTest",
+          "name": "AUTH_04_rejectedLogoutStillClearsLocalSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.auth.logout.LogoutSecurityTest",
+        "name": "AUTH_04_logoutWithoutSessionClosesLocallyWithoutRequest"
       }
     },
     {
@@ -94,17 +98,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[GRP-01]"
+          "class": "com.pactogg.app.feature.groups.create.CreateGroupValidationTest",
+          "name": "GRP_01_rejectsOversizedGroupNameBeforeRequest"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[GRP-01]"
+          "class": "com.pactogg.app.feature.groups.create.CreateGroupApiTest",
+          "name": "GRP_01_sendsGroupNameAndConsumesCreatedGroup"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[GRP-01]"
+          "class": "com.pactogg.app.feature.groups.create.CreateGroupSecurityTest",
+          "name": "GRP_01_forbiddenCreationPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.groups.create.CreateGroupSecurityTest",
+        "name": "GRP_01_missingSessionPreventsCreateGroupRequest"
       }
     },
     {
@@ -115,17 +123,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-01]"
+          "class": "com.pactogg.app.feature.contracts.create.CreateChallengeValidationTest",
+          "name": "CON_01_rejectsPastDeadlineAndMonetaryReward"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[CON-01]"
+          "class": "com.pactogg.app.feature.contracts.create.CreateChallengeApiTest",
+          "name": "CON_01_sendsGroupAndTargetForChallengeCreation"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-01]"
+          "class": "com.pactogg.app.feature.contracts.create.CreateChallengeSecurityTest",
+          "name": "CON_01_forbiddenCreationPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.contracts.create.CreateChallengeSecurityTest",
+        "name": "CON_01_missingSessionPreventsCreateChallengeRequest"
       }
     },
     {
@@ -136,17 +148,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[EVI-02]"
+          "class": "com.pactogg.app.feature.evidence.send.SendEvidenceValidationTest",
+          "name": "EVI_02_rejectsLookalikeDomainAndEmptyPhoto"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[EVI-02]"
+          "class": "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
+          "name": "EVI_02_sendsAllowedEvidenceLink"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[EVI-02]"
+          "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+          "name": "EVI_02_forbiddenEvidencePreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_missingSessionPreventsSendEvidenceRequest"
       }
     },
     {
@@ -157,17 +173,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[TOR-02]"
+          "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsValidationTest",
+          "name": "TOR_02_rejectsUnknownTournamentStatus"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[TOR-02]"
+          "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest",
+          "name": "TOR_02_sendsGameFilterForTournamentListing"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[TOR-02]"
+          "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest",
+          "name": "TOR_02_forbiddenListingPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest",
+        "name": "TOR_02_missingSessionPreventsListTournamentsRequest"
       }
     },
     {
@@ -178,17 +198,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[USR-02]"
+          "class": "com.pactogg.app.feature.profile.detail.ProfileDetailsValidationTest",
+          "name": "USR_02_rejectsOutOfRangeProfileStatistics"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[USR-02]"
+          "class": "com.pactogg.app.feature.profile.detail.ProfileDetailsApiTest",
+          "name": "USR_02_mapsOwnProfileIdentity"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[USR-02]"
+          "class": "com.pactogg.app.feature.profile.detail.ProfileDetailsSecurityTest",
+          "name": "USR_02_forbiddenProfileReadPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.profile.detail.ProfileDetailsSecurityTest",
+        "name": "USR_02_missingSessionPreventsProfileDetailsRequest"
       }
     },
     {
@@ -199,17 +223,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[USR-03]"
+          "class": "com.pactogg.app.feature.profile.edit.EditProfileValidationTest",
+          "name": "USR_03_rejectsOversizedNicknameBeforeUpdate"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[USR-03]"
+          "class": "com.pactogg.app.feature.profile.edit.EditProfileApiTest",
+          "name": "USR_03_sendsOnlyNicknameAndUpdatesVisibleIdentity"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[USR-03]"
+          "class": "com.pactogg.app.feature.profile.edit.EditProfileSecurityTest",
+          "name": "USR_03_forbiddenUpdatePreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.profile.edit.EditProfileSecurityTest",
+        "name": "USR_03_missingSessionPreventsEditProfileRequest"
       }
     },
     {
@@ -220,16 +248,16 @@
       "protected": false,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[USR-06]"
+          "class": "com.pactogg.app.feature.profile.nickname.CheckNicknameValidationTest",
+          "name": "USR_06_rejectsNicknameWithSpacesBeforeRequest"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[USR-06]"
+          "class": "com.pactogg.app.feature.profile.nickname.CheckNicknameApiTest",
+          "name": "USR_06_sendsNicknameAvailabilityQuery"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[USR-06]"
+          "class": "com.pactogg.app.feature.profile.nickname.CheckNicknameSecurityTest",
+          "name": "USR_06_publicRateLimitDoesNotEraseExistingSession"
         }
       }
     },
@@ -241,17 +269,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[GRP-02]"
+          "class": "com.pactogg.app.feature.groups.list.ListGroupsValidationTest",
+          "name": "GRP_02_rejectsOversizedGroupSearch"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[GRP-02]"
+          "class": "com.pactogg.app.feature.groups.list.ListGroupsApiTest",
+          "name": "GRP_02_sendsGroupSearchQuery"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[GRP-02]"
+          "class": "com.pactogg.app.feature.groups.list.ListGroupsSecurityTest",
+          "name": "GRP_02_forbiddenListingPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.groups.list.ListGroupsSecurityTest",
+        "name": "GRP_02_missingSessionPreventsListGroupsRequest"
       }
     },
     {
@@ -262,17 +294,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[GRP-03]"
+          "class": "com.pactogg.app.feature.groups.detail.GroupDetailsValidationTest",
+          "name": "GRP_03_rejectsMalformedGroupIdentity"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[GRP-03]"
+          "class": "com.pactogg.app.feature.groups.detail.GroupDetailsApiTest",
+          "name": "GRP_03_mapsRequestedGroupIdentity"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[GRP-03]"
+          "class": "com.pactogg.app.feature.groups.detail.GroupDetailsSecurityTest",
+          "name": "GRP_03_forbiddenGroupReadPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.groups.detail.GroupDetailsSecurityTest",
+        "name": "GRP_03_missingSessionPreventsGroupDetailsRequest"
       }
     },
     {
@@ -283,17 +319,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[MEM-01]"
+          "class": "com.pactogg.app.feature.groups.join.JoinGroupValidationTest",
+          "name": "MEM_01_rejectsIncompleteInviteCode"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[MEM-01]"
+          "class": "com.pactogg.app.feature.groups.join.JoinGroupApiTest",
+          "name": "MEM_01_normalizesInviteCodeBeforeJoining"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[MEM-01]"
+          "class": "com.pactogg.app.feature.groups.join.JoinGroupSecurityTest",
+          "name": "MEM_01_forbiddenJoinPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.groups.join.JoinGroupSecurityTest",
+        "name": "MEM_01_missingSessionPreventsJoinGroupRequest"
       }
     },
     {
@@ -304,17 +344,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[MEM-02]"
+          "class": "com.pactogg.app.feature.groups.members.ListMembersValidationTest",
+          "name": "MEM_02_rejectsOversizedMemberSearch"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[MEM-02]"
+          "class": "com.pactogg.app.feature.groups.members.ListMembersApiTest",
+          "name": "MEM_02_sendsMemberSearchWithinSelectedGroup"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[MEM-02]"
+          "class": "com.pactogg.app.feature.groups.members.ListMembersSecurityTest",
+          "name": "MEM_02_forbiddenMemberReadPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.groups.members.ListMembersSecurityTest",
+        "name": "MEM_02_missingSessionPreventsListMembersRequest"
       }
     },
     {
@@ -325,17 +369,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-02]"
+          "class": "com.pactogg.app.feature.contracts.list.ListChallengesValidationTest",
+          "name": "CON_02_rejectsUnknownBoardStatus"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[CON-02]"
+          "class": "com.pactogg.app.feature.contracts.list.ListChallengesApiTest",
+          "name": "CON_02_sendsOwnChallengesAndStatusFilters"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-02]"
+          "class": "com.pactogg.app.feature.contracts.list.ListChallengesSecurityTest",
+          "name": "CON_02_forbiddenBoardReadPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.contracts.list.ListChallengesSecurityTest",
+        "name": "CON_02_missingSessionPreventsListChallengesRequest"
       }
     },
     {
@@ -346,17 +394,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-03]"
+          "class": "com.pactogg.app.feature.contracts.detail.ChallengeDetailsValidationTest",
+          "name": "CON_03_rejectsMalformedChallengeIdentity"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[CON-03]"
+          "class": "com.pactogg.app.feature.contracts.detail.ChallengeDetailsApiTest",
+          "name": "CON_03_mapsChallengeVersion"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-03]"
+          "class": "com.pactogg.app.feature.contracts.detail.ChallengeDetailsSecurityTest",
+          "name": "CON_03_forbiddenDetailReadPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.contracts.detail.ChallengeDetailsSecurityTest",
+        "name": "CON_03_missingSessionPreventsChallengeDetailsRequest"
       }
     },
     {
@@ -367,17 +419,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-06]"
+          "class": "com.pactogg.app.feature.contracts.accept.AcceptChallengeValidationTest",
+          "name": "CON_06_rejectsOwnChallengeAndInsufficientBalance"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[CON-06]"
+          "class": "com.pactogg.app.feature.contracts.accept.AcceptChallengeApiTest",
+          "name": "CON_06_sendsVersionWhenAcceptingChallenge"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-06]"
+          "class": "com.pactogg.app.feature.contracts.accept.AcceptChallengeSecurityTest",
+          "name": "CON_06_forbiddenAcceptPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.contracts.accept.AcceptChallengeSecurityTest",
+        "name": "CON_06_missingSessionPreventsAcceptChallengeRequest"
       }
     },
     {
@@ -388,17 +444,21 @@
       "protected": true,
       "tests": {
         "unit": {
-          "class": "com.pactogg.app.testing.EndpointUnitTest",
-          "name": "enforcesConsumerBoundaryWithoutNetwork[CON-07]"
+          "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeValidationTest",
+          "name": "CON_07_rejectsGroupTargetAndAnotherTargetUser"
         },
         "integration": {
-          "class": "com.pactogg.app.testing.EndpointContractTest",
-          "name": "consumesConfirmedWireContract[CON-07]"
+          "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeApiTest",
+          "name": "CON_07_sendsVersionWhenRejectingChallenge"
         },
         "security": {
-          "class": "com.pactogg.app.testing.EndpointSecurityTest",
-          "name": "deniedResponseIsSanitizedAndNeverReplayed[CON-07]"
+          "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeSecurityTest",
+          "name": "CON_07_forbiddenRejectPreservesExistingSession"
         }
+      },
+      "session_test": {
+        "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeSecurityTest",
+        "name": "CON_07_missingSessionPreventsRejectChallengeRequest"
       }
     }
   ],
@@ -410,20 +470,72 @@
       "com.pactogg.app.feature.connected.presentation.EvidenceConfirmationTest",
       "com.pactogg.app.feature.connected.presentation.NicknameQueriesTest",
       "com.pactogg.app.integration.InputRulesTest",
-      "com.pactogg.app.testing.EndpointUnitTest",
-      "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest"
+      "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+      "com.pactogg.app.feature.auth.login.LoginValidationTest",
+      "com.pactogg.app.feature.auth.logout.LogoutValidationTest",
+      "com.pactogg.app.feature.auth.register.RegisterValidationTest",
+      "com.pactogg.app.feature.auth.session.RefreshSessionValidationTest",
+      "com.pactogg.app.feature.contracts.accept.AcceptChallengeValidationTest",
+      "com.pactogg.app.feature.contracts.create.CreateChallengeValidationTest",
+      "com.pactogg.app.feature.contracts.detail.ChallengeDetailsValidationTest",
+      "com.pactogg.app.feature.contracts.list.ListChallengesValidationTest",
+      "com.pactogg.app.feature.contracts.reject.RejectChallengeValidationTest",
+      "com.pactogg.app.feature.evidence.send.SendEvidenceValidationTest",
+      "com.pactogg.app.feature.groups.create.CreateGroupValidationTest",
+      "com.pactogg.app.feature.groups.detail.GroupDetailsValidationTest",
+      "com.pactogg.app.feature.groups.join.JoinGroupValidationTest",
+      "com.pactogg.app.feature.groups.list.ListGroupsValidationTest",
+      "com.pactogg.app.feature.groups.members.ListMembersValidationTest",
+      "com.pactogg.app.feature.profile.detail.ProfileDetailsValidationTest",
+      "com.pactogg.app.feature.profile.edit.EditProfileValidationTest",
+      "com.pactogg.app.feature.profile.nickname.CheckNicknameValidationTest",
+      "com.pactogg.app.feature.tournaments.list.ListTournamentsValidationTest"
     ],
     "integration": [
       "com.pactogg.app.integration.ApiIntegrationTest",
       "com.pactogg.app.integration.SocialApiIntegrationTest",
-      "com.pactogg.app.testing.EndpointContractTest"
+      "com.pactogg.app.feature.auth.login.LoginApiTest",
+      "com.pactogg.app.feature.auth.logout.LogoutApiTest",
+      "com.pactogg.app.feature.auth.register.RegisterApiTest",
+      "com.pactogg.app.feature.auth.session.RefreshSessionApiTest",
+      "com.pactogg.app.feature.contracts.accept.AcceptChallengeApiTest",
+      "com.pactogg.app.feature.contracts.create.CreateChallengeApiTest",
+      "com.pactogg.app.feature.contracts.detail.ChallengeDetailsApiTest",
+      "com.pactogg.app.feature.contracts.list.ListChallengesApiTest",
+      "com.pactogg.app.feature.contracts.reject.RejectChallengeApiTest",
+      "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
+      "com.pactogg.app.feature.groups.create.CreateGroupApiTest",
+      "com.pactogg.app.feature.groups.detail.GroupDetailsApiTest",
+      "com.pactogg.app.feature.groups.join.JoinGroupApiTest",
+      "com.pactogg.app.feature.groups.list.ListGroupsApiTest",
+      "com.pactogg.app.feature.groups.members.ListMembersApiTest",
+      "com.pactogg.app.feature.profile.detail.ProfileDetailsApiTest",
+      "com.pactogg.app.feature.profile.edit.EditProfileApiTest",
+      "com.pactogg.app.feature.profile.nickname.CheckNicknameApiTest",
+      "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest"
     ],
     "security": [
       "com.pactogg.app.core.network.ApiClientFactoryTest",
       "com.pactogg.app.core.network.ApiErrorMapperTest",
-      "com.pactogg.app.testing.EndpointSecurityTest",
-      "com.pactogg.app.testing.ProtectedEndpointSessionTest",
-      "com.pactogg.app.testing.EndpointFailureTest"
+      "com.pactogg.app.feature.auth.login.LoginSecurityTest",
+      "com.pactogg.app.feature.auth.logout.LogoutSecurityTest",
+      "com.pactogg.app.feature.auth.register.RegisterSecurityTest",
+      "com.pactogg.app.feature.auth.session.RefreshSessionSecurityTest",
+      "com.pactogg.app.feature.contracts.accept.AcceptChallengeSecurityTest",
+      "com.pactogg.app.feature.contracts.create.CreateChallengeSecurityTest",
+      "com.pactogg.app.feature.contracts.detail.ChallengeDetailsSecurityTest",
+      "com.pactogg.app.feature.contracts.list.ListChallengesSecurityTest",
+      "com.pactogg.app.feature.contracts.reject.RejectChallengeSecurityTest",
+      "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+      "com.pactogg.app.feature.groups.create.CreateGroupSecurityTest",
+      "com.pactogg.app.feature.groups.detail.GroupDetailsSecurityTest",
+      "com.pactogg.app.feature.groups.join.JoinGroupSecurityTest",
+      "com.pactogg.app.feature.groups.list.ListGroupsSecurityTest",
+      "com.pactogg.app.feature.groups.members.ListMembersSecurityTest",
+      "com.pactogg.app.feature.profile.detail.ProfileDetailsSecurityTest",
+      "com.pactogg.app.feature.profile.edit.EditProfileSecurityTest",
+      "com.pactogg.app.feature.profile.nickname.CheckNicknameSecurityTest",
+      "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest"
     ]
   },
   "required_regressions": {
@@ -567,236 +679,292 @@
       {
         "class": "com.pactogg.app.integration.InputRulesTest",
         "name": "challengeRejectsUnreturnedBondsPastDatesAndCurrency"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "changingAccountClearsGroupDraftFiltersMessagesAndCredentials"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "delayedErrorFromPreviousAccountCannotAppearInNextAccount"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "existingMembershipConflictKeepsGroupBalanceAndAllowsCorrection"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "occupiedNicknameKeepsFormAndIdentityUntilCorrectedSuccessfully"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "rejectedChallengeCannotBeConfirmedAsAcceptedAndKeepsBalance"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "memberPagesAppendDeduplicateAndStopAfterLastPage"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "nonemptyBracketSelectionIsReadOnlyAndCanReturnToList"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "validAccessDoubleSubmitWaitsForCustodyAndNavigatesOnlyAfterSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "validationAndModerationErrorsKeepDraftsEditableWithoutSuccessOrBalanceChanges"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "insufficientPointsOrForbiddenActionNeverDeductsBalanceOrConfirmsSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "evidenceModerationAndLimitErrorsKeepLinkWithoutInventingApprovedEvidence"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.NicknameQueriesTest",
+        "name": "elapsedCooldownAllowsNewQueryAndEditingWithoutAutomaticPolling"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "dismissingOldFeedbackCannotClearNewFeedbackOrFormData"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "fieldErrorsStayWithTheirScreenAndDoNotHideOtherErrors"
       }
     ],
     "security": [
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[USR-01]"
+        "class": "com.pactogg.app.feature.auth.register.RegisterSecurityTest",
+        "name": "USR_01_serviceFailureDoesNotRetryRegister"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[USR-01]"
+        "class": "com.pactogg.app.feature.auth.register.RegisterSecurityTest",
+        "name": "USR_01_rateLimitDoesNotRetryRegister"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[USR-01]"
+        "class": "com.pactogg.app.feature.auth.register.RegisterSecurityTest",
+        "name": "USR_01_malformedRegisterSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[AUTH-01]"
+        "class": "com.pactogg.app.feature.auth.login.LoginSecurityTest",
+        "name": "AUTH_01_serviceFailureDoesNotRetryLogin"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[AUTH-01]"
+        "class": "com.pactogg.app.feature.auth.login.LoginSecurityTest",
+        "name": "AUTH_01_rateLimitDoesNotRetryLogin"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[AUTH-01]"
+        "class": "com.pactogg.app.feature.auth.login.LoginSecurityTest",
+        "name": "AUTH_01_malformedLoginSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[AUTH-03]"
+        "class": "com.pactogg.app.feature.auth.session.RefreshSessionSecurityTest",
+        "name": "AUTH_03_serviceFailureDoesNotRetryRefreshSession"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[AUTH-03]"
+        "class": "com.pactogg.app.feature.auth.session.RefreshSessionSecurityTest",
+        "name": "AUTH_03_rateLimitDoesNotRetryRefreshSession"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[AUTH-03]"
+        "class": "com.pactogg.app.feature.auth.session.RefreshSessionSecurityTest",
+        "name": "AUTH_03_malformedRefreshSessionSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[AUTH-04]"
+        "class": "com.pactogg.app.feature.auth.logout.LogoutSecurityTest",
+        "name": "AUTH_04_serviceFailureDoesNotRetryLogout"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[AUTH-04]"
+        "class": "com.pactogg.app.feature.auth.logout.LogoutSecurityTest",
+        "name": "AUTH_04_rateLimitDoesNotRetryLogout"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[AUTH-04]"
+        "class": "com.pactogg.app.feature.auth.logout.LogoutSecurityTest",
+        "name": "AUTH_04_malformedLogoutSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[GRP-01]"
+        "class": "com.pactogg.app.feature.groups.create.CreateGroupSecurityTest",
+        "name": "GRP_01_serviceFailureDoesNotRetryCreateGroup"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[GRP-01]"
+        "class": "com.pactogg.app.feature.groups.create.CreateGroupSecurityTest",
+        "name": "GRP_01_rateLimitDoesNotRetryCreateGroup"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[GRP-01]"
+        "class": "com.pactogg.app.feature.groups.create.CreateGroupSecurityTest",
+        "name": "GRP_01_malformedCreateGroupSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-01]"
+        "class": "com.pactogg.app.feature.contracts.create.CreateChallengeSecurityTest",
+        "name": "CON_01_serviceFailureDoesNotRetryCreateChallenge"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-01]"
+        "class": "com.pactogg.app.feature.contracts.create.CreateChallengeSecurityTest",
+        "name": "CON_01_rateLimitDoesNotRetryCreateChallenge"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-01]"
+        "class": "com.pactogg.app.feature.contracts.create.CreateChallengeSecurityTest",
+        "name": "CON_01_malformedCreateChallengeSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[EVI-02]"
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_serviceFailureDoesNotRetrySendEvidence"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[EVI-02]"
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_rateLimitDoesNotRetrySendEvidence"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[EVI-02]"
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_malformedSendEvidenceSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[TOR-02]"
+        "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest",
+        "name": "TOR_02_serviceFailureDoesNotRetryListTournaments"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[TOR-02]"
+        "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest",
+        "name": "TOR_02_rateLimitDoesNotRetryListTournaments"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[TOR-02]"
+        "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest",
+        "name": "TOR_02_malformedListTournamentsSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[USR-02]"
+        "class": "com.pactogg.app.feature.profile.detail.ProfileDetailsSecurityTest",
+        "name": "USR_02_serviceFailureDoesNotRetryProfileDetails"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[USR-02]"
+        "class": "com.pactogg.app.feature.profile.detail.ProfileDetailsSecurityTest",
+        "name": "USR_02_rateLimitDoesNotRetryProfileDetails"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[USR-02]"
+        "class": "com.pactogg.app.feature.profile.detail.ProfileDetailsSecurityTest",
+        "name": "USR_02_malformedProfileDetailsSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[USR-03]"
+        "class": "com.pactogg.app.feature.profile.edit.EditProfileSecurityTest",
+        "name": "USR_03_serviceFailureDoesNotRetryEditProfile"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[USR-03]"
+        "class": "com.pactogg.app.feature.profile.edit.EditProfileSecurityTest",
+        "name": "USR_03_rateLimitDoesNotRetryEditProfile"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[USR-03]"
+        "class": "com.pactogg.app.feature.profile.edit.EditProfileSecurityTest",
+        "name": "USR_03_malformedEditProfileSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[USR-06]"
+        "class": "com.pactogg.app.feature.profile.nickname.CheckNicknameSecurityTest",
+        "name": "USR_06_serviceFailureDoesNotRetryCheckNickname"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[USR-06]"
+        "class": "com.pactogg.app.feature.profile.nickname.CheckNicknameSecurityTest",
+        "name": "USR_06_rateLimitDoesNotRetryCheckNickname"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[USR-06]"
+        "class": "com.pactogg.app.feature.profile.nickname.CheckNicknameSecurityTest",
+        "name": "USR_06_malformedCheckNicknameSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[GRP-02]"
+        "class": "com.pactogg.app.feature.groups.list.ListGroupsSecurityTest",
+        "name": "GRP_02_serviceFailureDoesNotRetryListGroups"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[GRP-02]"
+        "class": "com.pactogg.app.feature.groups.list.ListGroupsSecurityTest",
+        "name": "GRP_02_rateLimitDoesNotRetryListGroups"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[GRP-02]"
+        "class": "com.pactogg.app.feature.groups.list.ListGroupsSecurityTest",
+        "name": "GRP_02_malformedListGroupsSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[GRP-03]"
+        "class": "com.pactogg.app.feature.groups.detail.GroupDetailsSecurityTest",
+        "name": "GRP_03_serviceFailureDoesNotRetryGroupDetails"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[GRP-03]"
+        "class": "com.pactogg.app.feature.groups.detail.GroupDetailsSecurityTest",
+        "name": "GRP_03_rateLimitDoesNotRetryGroupDetails"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[GRP-03]"
+        "class": "com.pactogg.app.feature.groups.detail.GroupDetailsSecurityTest",
+        "name": "GRP_03_malformedGroupDetailsSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[MEM-01]"
+        "class": "com.pactogg.app.feature.groups.join.JoinGroupSecurityTest",
+        "name": "MEM_01_serviceFailureDoesNotRetryJoinGroup"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[MEM-01]"
+        "class": "com.pactogg.app.feature.groups.join.JoinGroupSecurityTest",
+        "name": "MEM_01_rateLimitDoesNotRetryJoinGroup"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[MEM-01]"
+        "class": "com.pactogg.app.feature.groups.join.JoinGroupSecurityTest",
+        "name": "MEM_01_malformedJoinGroupSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[MEM-02]"
+        "class": "com.pactogg.app.feature.groups.members.ListMembersSecurityTest",
+        "name": "MEM_02_serviceFailureDoesNotRetryListMembers"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[MEM-02]"
+        "class": "com.pactogg.app.feature.groups.members.ListMembersSecurityTest",
+        "name": "MEM_02_rateLimitDoesNotRetryListMembers"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[MEM-02]"
+        "class": "com.pactogg.app.feature.groups.members.ListMembersSecurityTest",
+        "name": "MEM_02_malformedListMembersSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-02]"
+        "class": "com.pactogg.app.feature.contracts.list.ListChallengesSecurityTest",
+        "name": "CON_02_serviceFailureDoesNotRetryListChallenges"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-02]"
+        "class": "com.pactogg.app.feature.contracts.list.ListChallengesSecurityTest",
+        "name": "CON_02_rateLimitDoesNotRetryListChallenges"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-02]"
+        "class": "com.pactogg.app.feature.contracts.list.ListChallengesSecurityTest",
+        "name": "CON_02_malformedListChallengesSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-03]"
+        "class": "com.pactogg.app.feature.contracts.detail.ChallengeDetailsSecurityTest",
+        "name": "CON_03_serviceFailureDoesNotRetryChallengeDetails"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-03]"
+        "class": "com.pactogg.app.feature.contracts.detail.ChallengeDetailsSecurityTest",
+        "name": "CON_03_rateLimitDoesNotRetryChallengeDetails"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-03]"
+        "class": "com.pactogg.app.feature.contracts.detail.ChallengeDetailsSecurityTest",
+        "name": "CON_03_malformedChallengeDetailsSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-06]"
+        "class": "com.pactogg.app.feature.contracts.accept.AcceptChallengeSecurityTest",
+        "name": "CON_06_serviceFailureDoesNotRetryAcceptChallenge"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-06]"
+        "class": "com.pactogg.app.feature.contracts.accept.AcceptChallengeSecurityTest",
+        "name": "CON_06_rateLimitDoesNotRetryAcceptChallenge"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-06]"
+        "class": "com.pactogg.app.feature.contracts.accept.AcceptChallengeSecurityTest",
+        "name": "CON_06_malformedAcceptChallengeSuccessIsRejected"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "temporaryFailureRetainsSessionAndDoesNotRetry[CON-07]"
+        "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeSecurityTest",
+        "name": "CON_07_serviceFailureDoesNotRetryRejectChallenge"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "rateLimitNeverPollsOrRetriesAutomatically[CON-07]"
+        "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeSecurityTest",
+        "name": "CON_07_rateLimitDoesNotRetryRejectChallenge"
       },
       {
-        "class": "com.pactogg.app.testing.EndpointFailureTest",
-        "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-07]"
+        "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeSecurityTest",
+        "name": "CON_07_malformedRejectChallengeSuccessIsRejected"
       },
       {
         "class": "com.pactogg.app.core.network.ApiClientFactoryTest",
@@ -911,6 +1079,138 @@
       {
         "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
         "name": "acceptErrorsNeverRetryOrEraseSession"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "lateResponseFromAccountACannotReplaceAccountB"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "pendingLoginCannotUndoLogoutOrOverwriteNextAccount"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "rotatingTokenPersistenceFailureClearsOldAndFreshIdentityAtomically"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.login.LoginApiTest",
+        "name": "AUTH_01_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.login.LoginApiTest",
+        "name": "AUTH_01_lostResponseIsNotReplayedOrReportedAsSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.logout.LogoutApiTest",
+        "name": "AUTH_04_transportDisconnectStillErasesLocalTokensWithoutRetry"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.logout.LogoutApiTest",
+        "name": "AUTH_04_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.register.RegisterApiTest",
+        "name": "USR_01_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.register.RegisterApiTest",
+        "name": "USR_01_lostResponseIsNotReplayedOrReportedAsSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.register.RegisterApiTest",
+        "name": "USR_01_failedCustodyCannotPublishRegisteredIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.session.RefreshSessionApiTest",
+        "name": "AUTH_03_twoConcurrent401ResponsesShareOneRotationAndRetryReadsOnce"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.session.RefreshSessionApiTest",
+        "name": "AUTH_03_logoutDuringPendingRefreshEndsWithNoRestoredSession"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.session.RefreshSessionApiTest",
+        "name": "AUTH_03_lostResponseIsNotReplayedOrReportedAsSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.contracts.accept.AcceptChallengeApiTest",
+        "name": "CON_06_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.contracts.create.CreateChallengeApiTest",
+        "name": "CON_01_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.contracts.create.CreateChallengeApiTest",
+        "name": "CON_01_lostResponseIsNotReplayedOrReportedAsSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.contracts.detail.ChallengeDetailsApiTest",
+        "name": "CON_03_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.contracts.list.ListChallengesApiTest",
+        "name": "CON_02_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeApiTest",
+        "name": "CON_07_rejectReadThenAcceptConflictNeverProducesSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.contracts.reject.RejectChallengeApiTest",
+        "name": "CON_07_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
+        "name": "EVI_02_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
+        "name": "EVI_02_lostResponseIsNotReplayedOrReportedAsSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.groups.create.CreateGroupApiTest",
+        "name": "GRP_01_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.groups.detail.GroupDetailsApiTest",
+        "name": "GRP_03_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.groups.join.JoinGroupApiTest",
+        "name": "MEM_01_existingMembershipConflictDoesNotRetryOrChangeSession"
+      },
+      {
+        "class": "com.pactogg.app.feature.groups.join.JoinGroupApiTest",
+        "name": "MEM_01_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.groups.members.ListMembersApiTest",
+        "name": "MEM_02_followsNextCursorAndSupportsLimitOneAtWireBoundary"
+      },
+      {
+        "class": "com.pactogg.app.feature.profile.edit.EditProfileApiTest",
+        "name": "USR_03_occupiedNicknamePreservesIdentityAndCanBeCorrected"
+      },
+      {
+        "class": "com.pactogg.app.feature.profile.edit.EditProfileApiTest",
+        "name": "USR_03_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.profile.nickname.CheckNicknameApiTest",
+        "name": "USR_06_existingNameWithDifferentCaseIsShownOccupiedWithoutAuthentication"
+      },
+      {
+        "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest",
+        "name": "TOR_02_nonemptyBracketPreservesRoundsParticipantsAndScoresWithoutWrites"
+      },
+      {
+        "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest",
+        "name": "TOR_02_specificProviderErrorsNeverSucceedRetryOrReplaceIdentity"
+      },
+      {
+        "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest",
+        "name": "TOR_02_lostResponseIsNotReplayedOrReportedAsSuccess"
       }
     ]
   }

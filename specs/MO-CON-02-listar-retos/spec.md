@@ -40,10 +40,10 @@ Dependencias: [MO-GRP-02-listar-grupos](../MO-GRP-02-listar-grupos/spec.md) · [
 
 | ID móvil | Correspondencia backend | Resultado esperado | Evidencia actual |
 |---|---|---|---|
-| MO-CON-02-AC1 | CON02-AC1 | status/game/q/mine se serializan y muestran resultados reales correctos. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-CON-02-AC2 | CON02-AC2 | Tras aceptar, refresco refleja in_progress; las acciones locales invalidan estado anterior. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-CON-02-AC3 | CON02-AC3 | Filtro inválido/usuario ajeno presenta 422/403; cambios de filtro reinician cursor. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-CON-02-ACQ | Control móvil | Build/Lint/Detekt y pruebas del candidato afectado correctos; evidencia sin secretos; accesibilidad/privacidad aplicables verificadas | Pendiente del candidato |
+| MO-CON-02-AC1 | CON02-AC1 | status/game/q/mine se serializan y muestran resultados reales correctos. | [PARCIAL](checklists/checklist.md#mo-con-02-ac1) · ejecución local 2026-11-05 |
+| MO-CON-02-AC2 | CON02-AC2 | Tras aceptar, refresco refleja in_progress; las acciones locales invalidan estado anterior. | [PARCIAL](checklists/checklist.md#mo-con-02-ac2) · ejecución local 2026-11-05 |
+| MO-CON-02-AC3 | CON02-AC3 | Filtro inválido/usuario ajeno presenta 422/403; cambios de filtro reinician cursor. | [PARCIAL](checklists/checklist.md#mo-con-02-ac3) · ejecución local 2026-11-05 |
+| MO-CON-02-ACQ | Control móvil | Build/Lint/Detekt y pruebas del candidato afectado correctos; evidencia sin secretos; accesibilidad/privacidad aplicables verificadas | [CONTROLES_LOCALES_PARCIALES](checklists/checklist.md#mo-con-02-acq) · ejecución local 2026-11-05 |
 
 Los IDs de backend sirven para trazabilidad, no para heredar PASS de sus pruebas. Casos de base de datos y auditoría del backend se verifican allí; Android comprueba peticiones, respuestas y resultado visible.
 
@@ -80,12 +80,24 @@ Disponibilidad del apodo espera al escribir, cancela/descarta consultas previas 
 [Informe del candidato y límites](../../docs/integracion/integracion-social-2026-11-04.md): 44 JVM, build/Lint/Detekt, dos métodos instrumentados y recorrido positivo real correctos. Operación integrada; no aceptación integral. Avatar sigue pendiente en USR-03; los AC negativos/completos y revisión humana conservan estado abierto. No atribuir el estado inicial NO_EJECUTADO a ausencia de código actual ni reemplazar evidencia esperada por PASS global.
 
 
-## Pruebas consumidor por tipo — actualización 2026-11-04
+## Pruebas específicas por operación — actualización 2026-11-05
 
-[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Cada archivo muestra sus escenarios y llama directamente al consumidor correspondiente. El ID de operación se conserva como prefijo del método (por ejemplo, AUTH_01_); la matriz valida la identidad completa:
 
-- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[CON-02]`.
-- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[CON-02]`.
-- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[CON-02]`.
+- unit: `com.pactogg.app.feature.contracts.list.ListChallengesValidationTest.CON_02_rejectsUnknownBoardStatus`.
+- integration: `com.pactogg.app.feature.contracts.list.ListChallengesApiTest.CON_02_sendsOwnChallengesAndStatusFilters`.
+- security: `com.pactogg.app.feature.contracts.list.ListChallengesSecurityTest.CON_02_forbiddenBoardReadPreservesExistingSession`.
 
 Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.
+
+### Archivos de prueba de esta operación
+
+- Validación: [ListChallengesValidationTest.kt](../../app/src/test/java/com/pactogg/app/feature/contracts/list/ListChallengesValidationTest.kt).
+- Comunicación con API: [ListChallengesApiTest.kt](../../app/src/test/java/com/pactogg/app/feature/contracts/list/ListChallengesApiTest.kt).
+- Seguridad y errores: [ListChallengesSecurityTest.kt](../../app/src/test/java/com/pactogg/app/feature/contracts/list/ListChallengesSecurityTest.kt).
+
+Reorganización local 2026-11-05: se conservan los escenarios y las pruebas compartidas de sesión/recorridos. Sin aceptación funcional nueva ni publicación por mover pruebas.
+
+## Relación criterio → tareas → pruebas → resultado — 2026-11-05
+
+La tabla de aceptación enlaza la revisión detallada en el checklist. Se identifican casos ejecutados, alcance y escenarios faltantes sin cerrar criterios compuestos por un PASS parcial. [Resumen de las 19 specs](../../docs/pruebas/revision-specs-2026-11-05.md). Cambios exclusivamente locales; privacidad/avatares esperan al backend y Google Play queda fuera.

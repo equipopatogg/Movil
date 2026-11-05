@@ -18,3 +18,8 @@ Ajuste autorizado 2026-11-04: lectura de detalle como apoyo al envío de evidenc
 
 
 Actualización de calidad solicitada: reutilizar pruebas existentes y ejecutar las tres categorías de la matriz antes de entregar esta operación; corregir errores, vincular informes al candidato y mantener pendientes no demostrados. La CI local preparada no acredita ejecución remota.
+
+
+## Verificación por criterio — revisión 2026-11-05
+
+El [checklist](checklists/checklist.md) vincula cada condición con tareas, métodos de prueba y resultados existentes, y distingue escenarios aún no ejercitados. Los pendientes concretos están en [tasks.md](tasks.md). No inferir errores del producto de la mera ausencia de una prueba; no transferir una prueba de otro endpoint/secuencia sin documentar su alcance. Sin implementación ni ejecución nueva por esta revisión.

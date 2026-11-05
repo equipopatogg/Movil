@@ -20,3 +20,13 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-GRP-02-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-GRP-02-T4-AC1: Falta un caso encadenado de unirse→refrescar lista→ver nueva fila→seleccionarla; los pasos aislados no prueban todo el recorrido. [Criterio y pruebas](checklists/checklist.md#mo-grp-02-ac1).
+- [ ] MO-GRP-02-T4-AC2: Falta assert explícito de cursor reiniciado y filtrado real con varias páginas/nombres; no se transfiere el filtro del prototipo Explorar. [Criterio y pruebas](checklists/checklist.md#mo-grp-02-ac2).
+- [ ] MO-GRP-02-T4-AC3: Falta fixture 422 por limit y fronteras del límite admitido; cliente fija limit=20 y los tests no envían limit inválido. [Criterio y pruebas](checklists/checklist.md#mo-grp-02-ac3).
+- [ ] MO-GRP-02-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-grp-02-acq).

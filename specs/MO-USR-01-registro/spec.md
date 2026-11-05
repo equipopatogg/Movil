@@ -36,10 +36,10 @@ Operación: `POST /api/v1/auth/register`. JSON UTF-8 snake_case; IDs opacos de 2
 
 | ID | Resultado observable | Evidencia esperada / estado actual |
 |---|---|---|
-| MO-USR-01-AC1 | Registro válido produce una sola petición con campos exactos y lleva al inicio solo después de custodiar sesión. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-USR-01-AC2 | Límites de email/apodo/contraseña, consentimiento ausente y versión incorrecta muestran validación; duplicados 409 y 429 no navegan. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-USR-01-AC3 | 201 incompleto, timeout y fallo de custodia no crean sesión ni repiten automáticamente el registro. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-USR-01-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | Informes identificados; NO_EJECUTADO |
+| MO-USR-01-AC1 | Registro válido produce una sola petición con campos exactos y lleva al inicio solo después de custodiar sesión. | [PARCIAL](checklists/checklist.md#mo-usr-01-ac1) · ejecución local 2026-11-05 |
+| MO-USR-01-AC2 | Límites de email/apodo/contraseña, consentimiento ausente y versión incorrecta muestran validación; duplicados 409 y 429 no navegan. | [PARCIAL](checklists/checklist.md#mo-usr-01-ac2) · ejecución local 2026-11-05 |
+| MO-USR-01-AC3 | 201 incompleto, timeout y fallo de custodia no crean sesión ni repiten automáticamente el registro. | [PARCIAL](checklists/checklist.md#mo-usr-01-ac3) · ejecución local 2026-11-05 |
+| MO-USR-01-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | [CONTROLES_LOCALES_PARCIALES](checklists/checklist.md#mo-usr-01-acq) · ejecución local 2026-11-05 |
 
 ## 6. Plan de pruebas
 
@@ -71,12 +71,24 @@ Aviso básico local autorizado posteriormente por el usuario: disponible en regi
 Ver [evidencia y límites del consumidor](../../docs/integracion/verificacion-consumidor-2026-11-04.md). Criterios con proveedor, dispositivo y aceptación se mantienen abiertos; NO_EJECUTADO de tablas originales se refiere a esa verificación integral, no a ausencia actual de código. No convertir fixtures HTTP en PASS del servidor ni UI anterior en aceptación de este candidato. Sin commit/push.
 
 
-## Pruebas consumidor por tipo — actualización 2026-11-04
+## Pruebas específicas por operación — actualización 2026-11-05
 
-[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Cada archivo muestra sus escenarios y llama directamente al consumidor correspondiente. El ID de operación se conserva como prefijo del método (por ejemplo, AUTH_01_); la matriz valida la identidad completa:
 
-- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[USR-01]`.
-- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[USR-01]`.
-- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[USR-01]`.
+- unit: `com.pactogg.app.feature.auth.register.RegisterValidationTest.USR_01_rejectsWeakPasswordMissingConsentAndOversizedNickname`.
+- integration: `com.pactogg.app.feature.auth.register.RegisterApiTest.USR_01_sendsRegistrationAndAcceptsInitialSession`.
+- security: `com.pactogg.app.feature.auth.register.RegisterSecurityTest.USR_01_rejectedRegistrationNeverCreatesSession`.
 
 Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.
+
+### Archivos de prueba de esta operación
+
+- Validación: [RegisterValidationTest.kt](../../app/src/test/java/com/pactogg/app/feature/auth/register/RegisterValidationTest.kt).
+- Comunicación con API: [RegisterApiTest.kt](../../app/src/test/java/com/pactogg/app/feature/auth/register/RegisterApiTest.kt).
+- Seguridad y errores: [RegisterSecurityTest.kt](../../app/src/test/java/com/pactogg/app/feature/auth/register/RegisterSecurityTest.kt).
+
+Reorganización local 2026-11-05: se conservan los escenarios y las pruebas compartidas de sesión/recorridos. Sin aceptación funcional nueva ni publicación por mover pruebas.
+
+## Relación criterio → tareas → pruebas → resultado — 2026-11-05
+
+La tabla de aceptación enlaza la revisión detallada en el checklist. Se identifican casos ejecutados, alcance y escenarios faltantes sin cerrar criterios compuestos por un PASS parcial. [Resumen de las 19 specs](../../docs/pruebas/revision-specs-2026-11-05.md). Cambios exclusivamente locales; privacidad/avatares esperan al backend y Google Play queda fuera.

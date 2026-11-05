@@ -70,7 +70,13 @@ fun Action(label: String, enabled: Boolean = true, onClick: () -> Unit) {
 
 @Composable
 fun Field(label: String, value: String, onChange: (String) -> Unit) {
+    Field(label, value, error = null, onChange = onChange)
+}
+
+@Composable
+fun Field(label: String, value: String, error: String?, onChange: (String) -> Unit) {
     OutlinedTextField(value, onChange, label = { Text(label) }, modifier = Modifier.fillMaxWidth(),
+        isError = error != null, supportingText = error?.let { message -> { Text(message) } },
         shape = RoundedCornerShape(8.dp), colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = PactoInput, unfocusedContainerColor = PactoInput,
             focusedBorderColor = MaterialTheme.colorScheme.secondary,

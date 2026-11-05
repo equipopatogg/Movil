@@ -20,3 +20,13 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-CON-02-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-CON-02-T4-AC1: Falta comprobar representación UI y filtrado con datos reales suficientes; fixture valida consumidor, no filtrado del proveedor. [Criterio y pruebas](checklists/checklist.md#mo-con-02-ac1).
+- [ ] MO-CON-02-T4-AC2: Falta assert explícito de invalidación/recarga del tablero y su fila in_progress después de aceptar; no deducirlo del saldo. [Criterio y pruebas](checklists/checklist.md#mo-con-02-ac2).
+- [ ] MO-CON-02-T4-AC3: 422 de tablero comprobado; falta filtros rápidos, cursor y filas en Compose; evidencia live anterior solo acredita lectura sin pertenencia. [Criterio y pruebas](checklists/checklist.md#mo-con-02-ac3).
+- [ ] MO-CON-02-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-con-02-acq).

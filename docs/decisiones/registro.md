@@ -263,3 +263,23 @@ Usuario autoriza ejecutar entrega propuesta: ramas/PR, verificación y correcci�
 ## D-SDD-34 — cerrar pendientes verificables sin ampliar producto, 2026-11-04
 
 Usuario autoriza resolver lo posible. Agregar pruebas de estado y errores por operación, regresiones reales Wrapper/Semgrep y verificación release/16 KB. Corregir diagnóstico RELRO por segmento contenedor, sin cambiar dependencia si cumple. Firma local de pruebas autorizada; sin identidad/entrega de producción. Mantener visibles privacidad, catálogo, aceptación y runtime sin evidencia. Fuente backend nueva 451c8ae queda como siguiente alcance para revisar. Evidencia en cierre-pendientes-2026-11-04.md y matriz de criterios. Entrega por PR con compuerta, sin pasar fixtures como aceptación de servidor.
+
+
+## D-SDD-35 — pruebas específicas por operación, solo local, 2026-11-05
+
+Usuario autoriza la reorganización propuesta y pide no subir hasta corroborar requisitos del profesor. Separar las 19 operaciones en ValidationTest/ApiTest/SecurityTest, con llamadas explícitas y datos/infraestructura compartidos. Conservar los recorridos y comprobaciones comunes existentes. Matriz schema 2 y referencias de las 19 specs actualizadas. Se trasladan 129 identidades una a una y se mantienen 67: total 196, categorías 56/44/96, sin fallos/omisiones; selección login seis casos y 27 validadores correctos. Código app/src/main idéntico por hash. Evidencia en docs/pruebas/reorganizacion-especifica-2026-11-05.md. Sin commits, PR, push, pruebas live nuevas o aceptación escolar inferida.
+
+
+## D-SDD-36 — trazabilidad por criterio sin cierre ficticio, 2026-11-05
+
+Usuario autoriza revisar condición → tarea → pruebas → resultados sobre las 19 specs existentes. Conservar los 84 criterios originales: 60 parciales, cinco sin caso específico y 19 controles de calidad locales parciales. Vincular casos concretos con registros previos (196 JVM y ocho Android), separando apoyo indirecto, límites de proveedor y aceptación humana. Añadir tareas pendientes por criterio sin cerrar T4/T5. Reforzar constituciones y plantillas: código y pruebas pertinentes pertenecen a la misma tarea autorizada; ejecutar y registrar antes de cerrar. No se implementaron huecos, ejecutaron nuevas pruebas ni subió nada. Privacidad y avatares esperan al backend; Play diferido. Ver [revisión](../pruebas/revision-specs-2026-11-05.md).
+
+
+## D-SDD-37 — completar pruebas locales antes de cambios visuales, 2026-11-05
+
+Usuario autoriza completar pruebas pendientes sin subir. Añadir 41 casos JVM específicos (237 total) y un caso Compose de bracket (nueve Android offline). No ampliar producto ni cambiar diseño. Visibilidad interna del componente de bracket para probar el mismo render utilizado por la app. Corregir simulación suspend de errores del fixture ViewModel, sin envolver excepciones en proxy Java. Matriz/gate incluyen los casos nuevos; criterio/tarea/resultado actualizados sin inventar aprobación de proveedor o humana. Sin escrituras live, Git ni publicación. [Evidencia](../pruebas/pruebas-pendientes-2026-11-05.md).
+
+
+## D-SDD-38 — mensajes contextuales y zona segura, 2026-11-05
+
+Petición expresa del usuario: espacio seguro frente a barras/cámara y mensajes claros según contexto. UX-01 implementa insets dinámicos comunes, modal general/confirmaciones, avisos breves y errores de acceso/apodo junto al campo. Cancelación no dispara escrituras; sin reintentos nuevos ni cambios de contrato. 239 JVM y 14 Android comprobados localmente, con alcance y límites en [informe](../pruebas/ajustes-ux-2026-11-05.md). Sin Git, nuevas funciones backend o aceptación humana simulada.

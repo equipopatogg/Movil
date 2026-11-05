@@ -58,7 +58,8 @@ class ConnectedViewModel @Inject constructor(
     fun access(event: AccessEvent) {
         if (mutable.value.busy) return
         if (event != AccessEvent.Submit) {
-            mutable.update { it.copy(access = it.access.reduce(event), error = null) }
+            mutable.update { it.copy(access = it.access.reduce(event), error = null,
+                diagnostic = null, notice = null) }
             if (event is AccessEvent.Nickname) checkNickname(mutable.value.access.nickname)
             if (event == AccessEvent.SwitchMode) cancelNicknameCheck()
         } else submitAccess()
@@ -68,7 +69,8 @@ class ConnectedViewModel @Inject constructor(
         val input = mutable.value.access
         val nickname = input.nickname.takeIf { input.registering }
         if (!InputRules.access(input.email, input.password, nickname, input.acceptedPrivacy)) {
-            mutable.update { it.copy(error = "Revisa correo, contraseña, apodo y consentimiento de privacidad.") }
+            mutable.update { it.copy(access = it.access.copy(submitted = true),
+                error = "Revisa los campos señalados y acepta el aviso de privacidad si estás creando una cuenta.") }
             return
         }
         perform {
@@ -102,7 +104,7 @@ class ConnectedViewModel @Inject constructor(
         perform {
             val group = products.createGroup(name)
             applyGroup(group)
-            mutable.update { it.copy(groupName = "", notice = "Grupo creado en el servidor.") }
+            mutable.update { it.copy(groupName = "", notice = "Grupo creado. Ya puedes invitar a tu equipo.") }
         }
     }
 
@@ -165,7 +167,7 @@ class ConnectedViewModel @Inject constructor(
             val failed = runCatching { sessions.logout() }.exceptionOrNull()
             if (failed is CancellationException) throw failed
             if (failed != null) mutable.update { it.copy(
-                notice = "Sesión cerrada aquí. No se pudo confirmar el cierre en el servidor.") }
+                notice = "Cerraste sesión en este dispositivo. No pudimos confirmar el cierre remoto.") }
 
         }
     }

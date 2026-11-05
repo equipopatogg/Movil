@@ -31,6 +31,8 @@ flowchart LR
 
 ## Comprobaciones obligatorias
 
+Actualización 2026-11-05: selector offline ampliado a ocho métodos, incluyendo giro/recreación, limpieza del formulario y reemplazo de identidad en custodia. La matriz JVM exige 196 casos. Las cifras de cinco/192 de fases anteriores describen sus candidatos históricos; ver [pruebas de giro/cuentas/permisos](rotacion-cuentas-permisos-2026-11-05.md). La prueba manual contra proveedor permanece fuera del workflow offline.
+
 - Wrapper integrado en setup-gradle antes de cualquier Gradle. Acciones fijadas a SHA y permisos contents:read. No hay secretos para pruebas consumidor.
 - Tres categorías con resultados JUnit, IDs por operación y fallo ante pruebas ausentes/duplicadas/omitidas. Se conservan pruebas anteriores y casos compartidos.
 - Cobertura JaCoCo 0.8.14 integrada en AGP, sobre suite completa y alcance predeterminado del plugin, incluyendo UI/código generado. Gate exige medición/inventario no vacíos e informes íntegros; **no certifica un mínimo porcentual**. No se copia el 45 % de la referencia ni se excluye código para elevar el número.

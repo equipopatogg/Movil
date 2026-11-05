@@ -5,25 +5,26 @@ import java.io.IOException
 
 fun Exception.userMessage(): String = when (this) {
     is ApiFailure -> ApiMessages[code] ?: statusMessage(status)
-    is IOException -> "No se pudo confirmar la operación. Revisa tu conexión; no la repetimos automáticamente."
+    is IOException -> "Se perdió la conexión. No sabemos si la acción se completó. " +
+        "Revisa su estado antes de enviarla otra vez."
     is IllegalArgumentException -> "Revisa los datos: están incompletos o no cumplen el formato permitido."
-    else -> "No se pudo completar la operación de forma segura. Vuelve a intentarlo cuando hayas revisado el estado."
+    else -> "No pudimos completar la acción. Revisa si se guardó antes de volver a intentarlo."
 }
 
 private fun statusMessage(status: Int): String = when (status) {
     401 -> "La sesión no es válida. Inicia sesión de nuevo."
     403 -> "No tienes permiso para esta operación."
-    404 -> "El recurso no está disponible."
-    409 -> "La operación entra en conflicto con el estado actual."
-    400, 422 -> "El servidor rechazó los datos. Revisa los campos."
-    429 -> "Hay demasiadas solicitudes. Espera antes de volver a intentarlo."
+    404 -> "No encontramos lo que buscas. Puede que ya no esté disponible."
+    409 -> "La información cambió. Actualiza la pantalla antes de continuar."
+    400, 422 -> "Hay datos que debemos corregir. Revisa lo que escribiste."
+    429 -> "Espera un momento antes de volver a intentarlo."
     in 500..599 -> "El servicio no está disponible por ahora."
-    else -> "La respuesta no pudo validarse. No confirmamos la operación."
+    else -> "No pudimos comprobar el resultado. Actualiza la pantalla para revisar si se guardó."
 }
 
 private val ApiMessages = mapOf(
-    "MODERATION_UNAVAILABLE" to "La moderación del servidor no está disponible. No se confirmó el envío.",
-    "STORAGE_UNAVAILABLE" to "El almacenamiento del servidor no está disponible. No se confirmó el envío.",
+    "MODERATION_UNAVAILABLE" to "No pudimos revisar el contenido en este momento. El envío no se confirmó.",
+    "STORAGE_UNAVAILABLE" to "No pudimos guardar el archivo en este momento. El envío no se confirmó.",
     "INVALID_CREDENTIALS" to "Correo o contraseña incorrectos.",
     "EMAIL_ALREADY_EXISTS" to "El correo ya está registrado.",
     "NICKNAME_ALREADY_EXISTS" to "El apodo ya está en uso.",

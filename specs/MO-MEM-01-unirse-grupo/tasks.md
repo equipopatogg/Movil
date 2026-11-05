@@ -20,3 +20,14 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-MEM-01-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-MEM-01-T4-AC1: Los fixtures de unión usan 100 puntos: falta otro saldo/rol y su visualización para demostrar ausencia de constante local. [Criterio y pruebas](checklists/checklist.md#mo-mem-01-ac1).
+- [x] MO-MEM-01-T4-AC2: Comprobado localmente; aceptación humana/proveedor separadas. [Criterio y pruebas](checklists/checklist.md#mo-mem-01-ac2).
+- [ ] MO-MEM-01-T4-AC3: 404/422 no repiten ni modifican sesión. Corrección probada tras ALREADY_MEMBER; falta interacción específica tras estos dos errores. [Criterio y pruebas](checklists/checklist.md#mo-mem-01-ac3).
+- [ ] MO-MEM-01-T4-AC4: GROUP_FULL/GROUP_LIMIT_REACHED preservan sesión sin éxito/reintento; falta distinguir mensajes de ambos en Compose. [Criterio y pruebas](checklists/checklist.md#mo-mem-01-ac4).
+- [ ] MO-MEM-01-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-mem-01-acq).

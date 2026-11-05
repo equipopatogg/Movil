@@ -92,3 +92,8 @@ Cada fila conserva el criterio original. Las pruebas de consumidor no sustituyen
 [Evidencia y entradas pendientes](cierre-pendientes-2026-11-04.md). No acredita aceptación humana integral.
 
 Actualización 2026-11-05: rechazo real sin sesión comprobado en las quince operaciones protegidas. Los AC con múltiples condiciones conservan estado parcial si falta UI/proveedor o aceptación. El PR9 conserva la compuerta obligatoria por cada cambio.
+
+
+## Revisión documental actual — 2026-11-05
+
+[Revisión de las 19 specs y sus 84 criterios](revision-specs-2026-11-05.md): 60 criterios parcialmente comprobados, cinco sin caso específico y 19 criterios de calidad con controles locales parciales. Se vinculan tareas, casos y resultados existentes; no se ejecutaron nuevas pruebas por esta edición. Los estados anteriores se conservan como historial. No hay aceptación completa ni publicación.

@@ -20,3 +20,13 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-CON-07-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-CON-07-T4-AC1: 403 NOT_CONTRACT_TARGET conserva identidad en repositorio; falta proveedor real con ambos roles y sus estados de pantalla. [Criterio y pruebas](checklists/checklist.md#mo-con-07-ac1).
+- [ ] MO-CON-07-T4-AC2: 409 INVALID_CONTRACT_STATE específico de reject comprobado sin repetición; falta recuperación Compose con detalle actualizado. [Criterio y pruebas](checklists/checklist.md#mo-con-07-ac2).
+- [x] MO-CON-07-T4-AC3: Comprobado localmente; aceptación humana/proveedor separadas. [Criterio y pruebas](checklists/checklist.md#mo-con-07-ac3).
+- [ ] MO-CON-07-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-con-07-acq).

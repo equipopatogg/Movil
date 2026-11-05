@@ -16,3 +16,16 @@ T2/T3 acreditan creación de código local, no aceptación integral. T1 conserva
 - [x] MO-AUTH-01-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+Actualización 2026-11-05: giro/recreación, reemplazo de cuenta y permisos comprobados localmente en su alcance; [evidencia](../../docs/pruebas/rotacion-cuentas-permisos-2026-11-05.md). No cierra criterios compuestos de proveedor/roles/aceptación humana sin el resto de sus pruebas.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-AUTH-01-T4-AC1: Completar interacción UI de login 200 y 401 del candidato actual, incluyendo destino de éxito; el recorrido real anterior queda como histórico. [Criterio y pruebas](checklists/checklist.md#mo-auth-01-ac1).
+- [ ] MO-AUTH-01-T4-AC2: 422 y desconexión de login no autentican ni repiten. Falta timeout con plazo agotado y recuperación mediante Compose. [Criterio y pruebas](checklists/checklist.md#mo-auth-01-ac2).
+- [ ] MO-AUTH-01-T4-AC3: Doble Submit válido en vuelo comprobado en ViewModel. Falta recreación de Activity durante envío válido; no atribuirlo al giro del formulario sin envío. [Criterio y pruebas](checklists/checklist.md#mo-auth-01-ac3).
+- [ ] MO-AUTH-01-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-auth-01-acq).

@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.material3.Surface
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -19,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -32,13 +35,21 @@ import com.pactogg.app.prototype.Action
 @Composable
 fun ConnectedApp(model: ConnectedViewModel) {
     val state by model.state.collectAsStateWithLifecycle()
+    SafeAppContent {
+        ConnectedBody(state, model)
+        AppFeedback(state, model::dismissError, model::dismissNotice)
+    }
+}
+
+@Composable
+private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
     if (state.restoring) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
         return
     }
     if (state.account == null) {
-        AccessScreen(state.access.copy(loading = state.busy), model::access) {
-            Feedback(state.error, state.notice)
+        AccessScreen(state.access.copy(loading = state.busy), model::access,
+            fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code) {
             if (state.access.registering) state.social.nicknameNotice?.let { Text(it) }
         }
         return
@@ -59,7 +70,6 @@ fun ConnectedApp(model: ConnectedViewModel) {
         }
     }, bottomBar = { ConnectedNavigation(state.route, state.busy, model::navigate) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
-            Feedback(state.error, state.notice)
             if (state.busy) CircularProgressIndicator(Modifier.padding(12.dp))
             Box(Modifier.weight(1f)) { ConnectedContent(state, model) }
         }
@@ -119,8 +129,10 @@ private fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
 }
 
 @Composable
-fun Feedback(error: String?, notice: String?) {
-    val text = error ?: notice ?: return
-    Text(text, Modifier.padding(horizontal = 18.dp, vertical = 8.dp),
-        color = if (error != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary)
+fun SafeAppContent(content: @Composable androidx.compose.foundation.layout.BoxScope.() -> Unit) {
+    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+        Box(Modifier.fillMaxSize().safeDrawingPadding()) {
+            Box(Modifier.fillMaxSize().testTag("safe-app-content"), content = content)
+        }
+    }
 }

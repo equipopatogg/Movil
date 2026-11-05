@@ -22,3 +22,14 @@ Ajuste acotado autorizado: estado del reto después de evidencia en MO-EVI-02; c
 - [x] MO-CON-01-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-CON-01-T4-AC1: Falta recorrido UI del formulario completo con settings reales y asserts completos del resumen open del candidato actual. [Criterio y pruebas](checklists/checklist.md#mo-con-01-ac1).
+- [ ] MO-CON-01-T4-AC2: CONTENT_REJECTED/MODERATION_UNAVAILABLE conservan borrador sin éxito. Faltan conversión local→UTC/DST y fronteras completas. [Criterio y pruebas](checklists/checklist.md#mo-con-01-ac2).
+- [ ] MO-CON-01-T4-AC3: Faltan casos sin grupo y sin settings, bloqueo de voz y separación de aceptar frente a crear en UI; inspección de código no sustituye esos casos. [Criterio y pruebas](checklists/checklist.md#mo-con-01-ac3).
+- [ ] MO-CON-01-T4-AC4: Desconexión tras recepción de POST no repite creación ni confirma éxito; falta recorrido de recuperación en Compose. [Criterio y pruebas](checklists/checklist.md#mo-con-01-ac4).
+- [ ] MO-CON-01-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-con-01-acq).

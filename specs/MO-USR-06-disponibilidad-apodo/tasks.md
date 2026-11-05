@@ -20,3 +20,13 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-USR-06-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-USR-06-T4-AC1: Fixture de nombre con distinta capitalización informa ocupado sin autenticación ni datos del dueño; política case-insensitive del proveedor real no se acredita. [Criterio y pruebas](checklists/checklist.md#mo-usr-06-ac1).
+- [ ] MO-USR-06-T4-AC2: Falta assert de representación real en Compose para esos estados y disponibilidad libre contra proveedor en el candidato actual. [Criterio y pruebas](checklists/checklist.md#mo-usr-06-ac2).
+- [ ] MO-USR-06-T4-AC3: Se comprueban bloqueo con deadline futuro, edición y nueva consulta con deadline pasado, sin polling. Se simula deadline vencido; no se esperaron 60 segundos reales ni se ensayó Compose. [Criterio y pruebas](checklists/checklist.md#mo-usr-06-ac3).
+- [ ] MO-USR-06-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-usr-06-acq).

@@ -20,3 +20,15 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-CON-06-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-CON-06-T4-AC1: El recorrido positivo histórico fue un reto dirigido; falta aceptación real de reto de grupo y refresco visual completo del contexto. [Criterio y pruebas](checklists/checklist.md#mo-con-06-ac1).
+- [ ] MO-CON-06-T4-AC2: CANNOT_ACCEPT_OWN_CONTRACT 409 y error de estado conservan saldo sin éxito en consumidor; falta intento real del retador y Compose. [Criterio y pruebas](checklists/checklist.md#mo-con-06-ac2).
+- [ ] MO-CON-06-T4-AC3: 409 de estado conserva saldo y exige detalle fresco; no se ejecutaron dos aceptaciones reales concurrentes contra proveedor. [Criterio y pruebas](checklists/checklist.md#mo-con-06-ac3).
+- [ ] MO-CON-06-T4-AC4: 402 conserva saldo de grupo y contrato, sin éxito y con acción invalidada en ViewModel; falta recorrido Compose. [Criterio y pruebas](checklists/checklist.md#mo-con-06-ac4).
+- [ ] MO-CON-06-T4-AC5: 403 NOT_CONTRACT_TARGET conserva contexto/saldo en consumidor; falta intento real de tercero y su pantalla. [Criterio y pruebas](checklists/checklist.md#mo-con-06-ac5).
+- [ ] MO-CON-06-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-con-06-acq).

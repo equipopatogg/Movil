@@ -20,3 +20,13 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-USR-02-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-USR-02-T4-AC1: Faltan varios perfiles HTTP con estadísticas/groups_count distintos y asserts Compose de esos valores; caso de recién registrado con datos reales sigue histórico. [Criterio y pruebas](checklists/checklist.md#mo-usr-02-ac1).
+- [ ] MO-USR-02-T4-AC2: Secuencia PATCH→GET comprobada en consumidor; falta respuesta tardía de perfil anterior en la misma cuenta. [Criterio y pruebas](checklists/checklist.md#mo-usr-02-ac2).
+- [ ] MO-USR-02-T4-AC3: Falta 401 del endpoint perfil a través de su UI y prueba que datos anteriores no se muestren al entrar sin sesión. [Criterio y pruebas](checklists/checklist.md#mo-usr-02-ac3).
+- [ ] MO-USR-02-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-usr-02-acq).

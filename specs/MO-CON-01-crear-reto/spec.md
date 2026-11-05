@@ -37,11 +37,11 @@ Operación: `POST /api/v1/contracts; POST /api/v1/groups/{gid}/contracts`. JSON 
 
 | ID | Resultado observable | Evidencia esperada / estado actual |
 |---|---|---|
-| MO-CON-01-AC1 | Contexto de grupo válido, fianza recibida y formulario válido producen un POST y resumen del contrato real open. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-CON-01-AC2 | UTC, fecha vencida, límites, fianza inválida y moderación rechazada se muestran sin éxito ficticio. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-CON-01-AC3 | Sin grupo/settings no se envía; member exige selección real y excluye usuario propio; voz sigue oculta y aceptar corresponde a MO-CON-06. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-CON-01-AC4 | Respuesta perdida no provoca reintento automático ni duplicación deliberada. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-CON-01-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | Informes identificados; NO_EJECUTADO |
+| MO-CON-01-AC1 | Contexto de grupo válido, fianza recibida y formulario válido producen un POST y resumen del contrato real open. | [PARCIAL](checklists/checklist.md#mo-con-01-ac1) · ejecución local 2026-11-05 |
+| MO-CON-01-AC2 | UTC, fecha vencida, límites, fianza inválida y moderación rechazada se muestran sin éxito ficticio. | [PARCIAL](checklists/checklist.md#mo-con-01-ac2) · ejecución local 2026-11-05 |
+| MO-CON-01-AC3 | Sin grupo/settings no se envía; member exige selección real y excluye usuario propio; voz sigue oculta y aceptar corresponde a MO-CON-06. | [PARCIAL](checklists/checklist.md#mo-con-01-ac3) · ejecución local 2026-11-05 |
+| MO-CON-01-AC4 | Respuesta perdida no provoca reintento automático ni duplicación deliberada. | [PARCIAL](checklists/checklist.md#mo-con-01-ac4) · ejecución local 2026-11-05 |
+| MO-CON-01-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | [CONTROLES_LOCALES_PARCIALES](checklists/checklist.md#mo-con-01-acq) · ejecución local 2026-11-05 |
 
 ## 6. Plan de pruebas
 
@@ -85,12 +85,24 @@ El detalle `GET /api/v1/contracts/{id}` se incorpora exclusivamente como lectura
 Usuario solicita equivalentes móviles de las once operaciones nuevas incluidas en Sistema.docx; ver [matriz documental](../../docs/integracion/specs-confirmadas-sistema-2026-11-04.md). Sus recorridos no se agregan silenciosamente a esta operación: lista/detalle de grupo, unión/miembros y tablero/detalle/aceptar/rechazar tienen expedientes propios. La lectura auxiliar ya implementada por MO-EVI-02 se reutiliza en MO-CON-03 sin duplicación ni atribuir implementación general. Restricciones previas de navegación describen el corte anterior; nuevas entradas solo se activarán al implementar y verificar la spec correspondiente. Fuera de este encargo documental no se cambió código.
 
 
-## Pruebas consumidor por tipo — actualización 2026-11-04
+## Pruebas específicas por operación — actualización 2026-11-05
 
-[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Cada archivo muestra sus escenarios y llama directamente al consumidor correspondiente. El ID de operación se conserva como prefijo del método (por ejemplo, AUTH_01_); la matriz valida la identidad completa:
 
-- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[CON-01]`.
-- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[CON-01]`.
-- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[CON-01]`.
+- unit: `com.pactogg.app.feature.contracts.create.CreateChallengeValidationTest.CON_01_rejectsPastDeadlineAndMonetaryReward`.
+- integration: `com.pactogg.app.feature.contracts.create.CreateChallengeApiTest.CON_01_sendsGroupAndTargetForChallengeCreation`.
+- security: `com.pactogg.app.feature.contracts.create.CreateChallengeSecurityTest.CON_01_forbiddenCreationPreservesExistingSession`.
 
 Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.
+
+### Archivos de prueba de esta operación
+
+- Validación: [CreateChallengeValidationTest.kt](../../app/src/test/java/com/pactogg/app/feature/contracts/create/CreateChallengeValidationTest.kt).
+- Comunicación con API: [CreateChallengeApiTest.kt](../../app/src/test/java/com/pactogg/app/feature/contracts/create/CreateChallengeApiTest.kt).
+- Seguridad y errores: [CreateChallengeSecurityTest.kt](../../app/src/test/java/com/pactogg/app/feature/contracts/create/CreateChallengeSecurityTest.kt).
+
+Reorganización local 2026-11-05: se conservan los escenarios y las pruebas compartidas de sesión/recorridos. Sin aceptación funcional nueva ni publicación por mover pruebas.
+
+## Relación criterio → tareas → pruebas → resultado — 2026-11-05
+
+La tabla de aceptación enlaza la revisión detallada en el checklist. Se identifican casos ejecutados, alcance y escenarios faltantes sin cerrar criterios compuestos por un PASS parcial. [Resumen de las 19 specs](../../docs/pruebas/revision-specs-2026-11-05.md). Cambios exclusivamente locales; privacidad/avatares esperan al backend y Google Play queda fuera.

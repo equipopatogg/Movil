@@ -36,10 +36,10 @@ Operación: `POST /api/v1/groups`. JSON UTF-8 snake_case; IDs opacos de 24 hex c
 
 | ID | Resultado observable | Evidencia esperada / estado actual |
 |---|---|---|
-| MO-GRP-01-AC1 | 201 muestra grupo, rol, puntos y código devueltos, sin valores fabricados. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-GRP-01-AC2 | Nombre límite, 409 y 422 conservan formulario recuperable y no producen éxito local. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-GRP-01-AC3 | No existe lista ficticia; unión se resuelve por MO-MEM-01 y sesión/cuenta distinta elimina el contexto anterior. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-GRP-01-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | Informes identificados; NO_EJECUTADO |
+| MO-GRP-01-AC1 | 201 muestra grupo, rol, puntos y código devueltos, sin valores fabricados. | [PARCIAL](checklists/checklist.md#mo-grp-01-ac1) · ejecución local 2026-11-05 |
+| MO-GRP-01-AC2 | Nombre límite, 409 y 422 conservan formulario recuperable y no producen éxito local. | [PARCIAL](checklists/checklist.md#mo-grp-01-ac2) · ejecución local 2026-11-05 |
+| MO-GRP-01-AC3 | No existe lista ficticia; unión se resuelve por MO-MEM-01 y sesión/cuenta distinta elimina el contexto anterior. | [PARCIAL](checklists/checklist.md#mo-grp-01-ac3) · ejecución local 2026-11-05 |
+| MO-GRP-01-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | [CONTROLES_LOCALES_PARCIALES](checklists/checklist.md#mo-grp-01-acq) · ejecución local 2026-11-05 |
 
 ## 6. Plan de pruebas
 
@@ -76,12 +76,24 @@ Ver [evidencia y límites del consumidor](../../docs/integracion/verificacion-co
 Usuario solicita equivalentes móviles de las once operaciones nuevas incluidas en Sistema.docx; ver [matriz documental](../../docs/integracion/specs-confirmadas-sistema-2026-11-04.md). Sus recorridos no se agregan silenciosamente a esta operación: lista/detalle de grupo, unión/miembros y tablero/detalle/aceptar/rechazar tienen expedientes propios. La lectura auxiliar ya implementada por MO-EVI-02 se reutiliza en MO-CON-03 sin duplicación ni atribuir implementación general. Restricciones previas de navegación describen el corte anterior; nuevas entradas solo se activarán al implementar y verificar la spec correspondiente. Fuera de este encargo documental no se cambió código.
 
 
-## Pruebas consumidor por tipo — actualización 2026-11-04
+## Pruebas específicas por operación — actualización 2026-11-05
 
-[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Cada archivo muestra sus escenarios y llama directamente al consumidor correspondiente. El ID de operación se conserva como prefijo del método (por ejemplo, AUTH_01_); la matriz valida la identidad completa:
 
-- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[GRP-01]`.
-- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[GRP-01]`.
-- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[GRP-01]`.
+- unit: `com.pactogg.app.feature.groups.create.CreateGroupValidationTest.GRP_01_rejectsOversizedGroupNameBeforeRequest`.
+- integration: `com.pactogg.app.feature.groups.create.CreateGroupApiTest.GRP_01_sendsGroupNameAndConsumesCreatedGroup`.
+- security: `com.pactogg.app.feature.groups.create.CreateGroupSecurityTest.GRP_01_forbiddenCreationPreservesExistingSession`.
 
 Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.
+
+### Archivos de prueba de esta operación
+
+- Validación: [CreateGroupValidationTest.kt](../../app/src/test/java/com/pactogg/app/feature/groups/create/CreateGroupValidationTest.kt).
+- Comunicación con API: [CreateGroupApiTest.kt](../../app/src/test/java/com/pactogg/app/feature/groups/create/CreateGroupApiTest.kt).
+- Seguridad y errores: [CreateGroupSecurityTest.kt](../../app/src/test/java/com/pactogg/app/feature/groups/create/CreateGroupSecurityTest.kt).
+
+Reorganización local 2026-11-05: se conservan los escenarios y las pruebas compartidas de sesión/recorridos. Sin aceptación funcional nueva ni publicación por mover pruebas.
+
+## Relación criterio → tareas → pruebas → resultado — 2026-11-05
+
+La tabla de aceptación enlaza la revisión detallada en el checklist. Se identifican casos ejecutados, alcance y escenarios faltantes sin cerrar criterios compuestos por un PASS parcial. [Resumen de las 19 specs](../../docs/pruebas/revision-specs-2026-11-05.md). Cambios exclusivamente locales; privacidad/avatares esperan al backend y Google Play queda fuera.

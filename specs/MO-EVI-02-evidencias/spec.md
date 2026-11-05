@@ -37,11 +37,11 @@ Operación: `POST /api/v1/contracts/{id}/evidence`. JSON UTF-8 snake_case; IDs o
 
 | ID | Resultado observable | Evidencia esperada / estado actual |
 |---|---|---|
-| MO-EVI-02-AC1 | Enlace y foto válidos usan serialización/content-type correctos y muestran solo evidencia confirmada por 201. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-EVI-02-AC2 | Selector cancelado, archivo vacío/grande/tipo inválido no envían; no existen cámara ni carga de video. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-EVI-02-AC3 | Moderación rechazada, límite 409, autorización 403 y servicio 503 presentan acciones correctas sin falsos aprobados. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-EVI-02-AC4 | Sin contrato autorizado no se abre envío; pérdida de respuesta no repite la subida. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-EVI-02-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | Informes identificados; NO_EJECUTADO |
+| MO-EVI-02-AC1 | Enlace y foto válidos usan serialización/content-type correctos y muestran solo evidencia confirmada por 201. | [PARCIAL](checklists/checklist.md#mo-evi-02-ac1) · ejecución local 2026-11-05 |
+| MO-EVI-02-AC2 | Selector cancelado, archivo vacío/grande/tipo inválido no envían; no existen cámara ni carga de video. | [PARCIAL](checklists/checklist.md#mo-evi-02-ac2) · ejecución local 2026-11-05 |
+| MO-EVI-02-AC3 | Moderación rechazada, límite 409, autorización 403 y servicio 503 presentan acciones correctas sin falsos aprobados. | [PARCIAL](checklists/checklist.md#mo-evi-02-ac3) · ejecución local 2026-11-05 |
+| MO-EVI-02-AC4 | Sin contrato autorizado no se abre envío; pérdida de respuesta no repite la subida. | [PARCIAL](checklists/checklist.md#mo-evi-02-ac4) · ejecución local 2026-11-05 |
+| MO-EVI-02-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | [CONTROLES_LOCALES_PARCIALES](checklists/checklist.md#mo-evi-02-acq) · ejecución local 2026-11-05 |
 
 ## 6. Plan de pruebas
 
@@ -89,12 +89,24 @@ El detalle `GET /api/v1/contracts/{id}` se incorpora exclusivamente como lectura
 Usuario solicita equivalentes móviles de las once operaciones nuevas incluidas en Sistema.docx; ver [matriz documental](../../docs/integracion/specs-confirmadas-sistema-2026-11-04.md). Sus recorridos no se agregan silenciosamente a esta operación: lista/detalle de grupo, unión/miembros y tablero/detalle/aceptar/rechazar tienen expedientes propios. La lectura auxiliar ya implementada por MO-EVI-02 se reutiliza en MO-CON-03 sin duplicación ni atribuir implementación general. Restricciones previas de navegación describen el corte anterior; nuevas entradas solo se activarán al implementar y verificar la spec correspondiente. Fuera de este encargo documental no se cambió código.
 
 
-## Pruebas consumidor por tipo — actualización 2026-11-04
+## Pruebas específicas por operación — actualización 2026-11-05
 
-[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Cada archivo muestra sus escenarios y llama directamente al consumidor correspondiente. El ID de operación se conserva como prefijo del método (por ejemplo, AUTH_01_); la matriz valida la identidad completa:
 
-- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[EVI-02]`.
-- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[EVI-02]`.
-- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[EVI-02]`.
+- unit: `com.pactogg.app.feature.evidence.send.SendEvidenceValidationTest.EVI_02_rejectsLookalikeDomainAndEmptyPhoto`.
+- integration: `com.pactogg.app.feature.evidence.send.SendEvidenceApiTest.EVI_02_sendsAllowedEvidenceLink`.
+- security: `com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest.EVI_02_forbiddenEvidencePreservesExistingSession`.
 
 Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.
+
+### Archivos de prueba de esta operación
+
+- Validación: [SendEvidenceValidationTest.kt](../../app/src/test/java/com/pactogg/app/feature/evidence/send/SendEvidenceValidationTest.kt).
+- Comunicación con API: [SendEvidenceApiTest.kt](../../app/src/test/java/com/pactogg/app/feature/evidence/send/SendEvidenceApiTest.kt).
+- Seguridad y errores: [SendEvidenceSecurityTest.kt](../../app/src/test/java/com/pactogg/app/feature/evidence/send/SendEvidenceSecurityTest.kt).
+
+Reorganización local 2026-11-05: se conservan los escenarios y las pruebas compartidas de sesión/recorridos. Sin aceptación funcional nueva ni publicación por mover pruebas.
+
+## Relación criterio → tareas → pruebas → resultado — 2026-11-05
+
+La tabla de aceptación enlaza la revisión detallada en el checklist. Se identifican casos ejecutados, alcance y escenarios faltantes sin cerrar criterios compuestos por un PASS parcial. [Resumen de las 19 specs](../../docs/pruebas/revision-specs-2026-11-05.md). Cambios exclusivamente locales; privacidad/avatares esperan al backend y Google Play queda fuera.

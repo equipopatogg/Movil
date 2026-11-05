@@ -85,3 +85,10 @@ Usuario solicita empezar implementación de las specs MO-* conforme al backend. 
 Cada operación debe definir y ejecutar pruebas unitarias, integración consumidor y seguridad pertinentes dentro de su spec/tareas; usar matriz por IDs y casos concretos, no carpetas o totales como prueba de cobertura. Generar/completar esas pruebas junto al cambio y corregir fallos antes de enviar a CI. La incorporación de pruebas al código previo registra su cronología real.
 
 Reportes vinculados al candidato, categorías exactas, pruebas Android ejecutadas y no solo compiladas. El gate falla con evidencia ausente, fallida, omitida o de otra ejecución. Cobertura se mide con alcance y límites; mínimos requieren decisión propia posterior, nunca importación silenciosa. Estado de pipeline configurado, ejecución local, CI remoto y aceptación humana se registran por separado. Sin herramientas ajenas al móvil por semejanza visual. Fuente/decisión D-SDD-32.
+
+
+## Trazabilidad y cierre por criterio — 2026-11-05
+
+Cada tarea de implementación autorizada incluye crear o actualizar sus pruebas pertinentes y ejecutarlas antes de marcarla terminada. Registrar condición → tarea → clase/método concreto → entorno e informe con resultado real → parte pendiente. Una prueba compartida acredita únicamente sus aserciones; el nombre, la cantidad de casos o la existencia del archivo no demuestran el criterio completo. Distinguir esperado, no ejecutado, parcial, fallido y comprobado; aceptación humana y CI remoto se registran por separado. No trasladar resultados entre operaciones ni confundir expiración con dos HTTP 401, respuesta 503 con desconexión o recreación de Activity con muerte del proceso.
+
+Esta revisión documental no autoriza implementar pendientes, ejecutar nuevas pruebas reales ni publicar. Fuente: decisión D-SDD-36 y revisión de criterios del 2026-11-05.

@@ -37,11 +37,11 @@ Operación: `GET /api/v1/tournaments; GET /api/v1/groups/{gid}/tournaments`. JSO
 
 | ID | Resultado observable | Evidencia esperada / estado actual |
 |---|---|---|
-| MO-TOR-02-AC1 | Lista vacía/llena, filtros y páginas respetan meta y no inventan torneos ni nombres. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-TOR-02-AC2 | Cambio rápido de filtro y cuenta no mezcla páginas ni datos previos; cursor final detiene carga. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-TOR-02-AC3 | Bracket y partido muestran datos reales solo lectura; no hay acceso a crear/inscribir/reportar. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-TOR-02-AC4 | 401, 403, 422 y red caída muestran estados diferenciados; 403 no borra sesión. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-TOR-02-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | Informes identificados; NO_EJECUTADO |
+| MO-TOR-02-AC1 | Lista vacía/llena, filtros y páginas respetan meta y no inventan torneos ni nombres. | [PARCIAL](checklists/checklist.md#mo-tor-02-ac1) · ejecución local 2026-11-05 |
+| MO-TOR-02-AC2 | Cambio rápido de filtro y cuenta no mezcla páginas ni datos previos; cursor final detiene carga. | [PARCIAL](checklists/checklist.md#mo-tor-02-ac2) · ejecución local 2026-11-05 |
+| MO-TOR-02-AC3 | Bracket y partido muestran datos reales solo lectura; no hay acceso a crear/inscribir/reportar. | [COMPROBADO_LOCAL_CONSUMIDOR](checklists/checklist.md#mo-tor-02-ac3) · ejecución local 2026-11-05 |
+| MO-TOR-02-AC4 | 401, 403, 422 y red caída muestran estados diferenciados; 403 no borra sesión. | [PARCIAL](checklists/checklist.md#mo-tor-02-ac4) · ejecución local 2026-11-05 |
+| MO-TOR-02-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | [CONTROLES_LOCALES_PARCIALES](checklists/checklist.md#mo-tor-02-acq) · ejecución local 2026-11-05 |
 
 ## 6. Plan de pruebas
 
@@ -73,12 +73,24 @@ Aviso básico local autorizado posteriormente por el usuario: disponible en regi
 Ver [evidencia y límites del consumidor](../../docs/integracion/verificacion-consumidor-2026-11-04.md). Criterios con proveedor, dispositivo y aceptación se mantienen abiertos; NO_EJECUTADO de tablas originales se refiere a esa verificación integral, no a ausencia actual de código. No convertir fixtures HTTP en PASS del servidor ni UI anterior en aceptación de este candidato. Sin commit/push.
 
 
-## Pruebas consumidor por tipo — actualización 2026-11-04
+## Pruebas específicas por operación — actualización 2026-11-05
 
-[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Cada archivo muestra sus escenarios y llama directamente al consumidor correspondiente. El ID de operación se conserva como prefijo del método (por ejemplo, AUTH_01_); la matriz valida la identidad completa:
 
-- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[TOR-02]`.
-- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[TOR-02]`.
-- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[TOR-02]`.
+- unit: `com.pactogg.app.feature.tournaments.list.ListTournamentsValidationTest.TOR_02_rejectsUnknownTournamentStatus`.
+- integration: `com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest.TOR_02_sendsGameFilterForTournamentListing`.
+- security: `com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest.TOR_02_forbiddenListingPreservesExistingSession`.
 
 Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.
+
+### Archivos de prueba de esta operación
+
+- Validación: [ListTournamentsValidationTest.kt](../../app/src/test/java/com/pactogg/app/feature/tournaments/list/ListTournamentsValidationTest.kt).
+- Comunicación con API: [ListTournamentsApiTest.kt](../../app/src/test/java/com/pactogg/app/feature/tournaments/list/ListTournamentsApiTest.kt).
+- Seguridad y errores: [ListTournamentsSecurityTest.kt](../../app/src/test/java/com/pactogg/app/feature/tournaments/list/ListTournamentsSecurityTest.kt).
+
+Reorganización local 2026-11-05: se conservan los escenarios y las pruebas compartidas de sesión/recorridos. Sin aceptación funcional nueva ni publicación por mover pruebas.
+
+## Relación criterio → tareas → pruebas → resultado — 2026-11-05
+
+La tabla de aceptación enlaza la revisión detallada en el checklist. Se identifican casos ejecutados, alcance y escenarios faltantes sin cerrar criterios compuestos por un PASS parcial. [Resumen de las 19 specs](../../docs/pruebas/revision-specs-2026-11-05.md). Cambios exclusivamente locales; privacidad/avatares esperan al backend y Google Play queda fuera.

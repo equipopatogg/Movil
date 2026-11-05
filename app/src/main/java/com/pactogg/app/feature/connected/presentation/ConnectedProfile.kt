@@ -2,6 +2,10 @@ package com.pactogg.app.feature.connected.presentation
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.mutableStateOf
 import com.pactogg.app.R
 import com.pactogg.app.prototype.Action
 import com.pactogg.app.prototype.AppPage
@@ -10,6 +14,11 @@ import com.pactogg.app.prototype.PactCard
 
 @Composable
 fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
+    var confirmLogout by rememberSaveable { mutableStateOf(false) }
+    if (confirmLogout) ActionConfirmation("¿Cerrar sesión?",
+        "Tendrás que iniciar sesión de nuevo para entrar a tu cuenta. Tu cuenta no se eliminará.",
+        "Cerrar sesión", !state.busy,
+        onConfirm = { confirmLogout = false; model.logout() }, onDismiss = { confirmLogout = false })
     AppPage("Tu perfil.", "Tu palabra también cuenta") {
         val profile = state.social.profile
         PactCard(state.account?.nickname.orEmpty(), state.account?.email.orEmpty(), R.drawable.ic_pacto_user) {
@@ -23,7 +32,8 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
                 Text("Grupos: ${profile.groupsCount}")
             }
             PactCard("Editar apodo", "De 3 a 24 caracteres: letras, números, punto, guion o guion bajo.") {
-                Field("Nuevo apodo", state.social.editedNickname, model::editNickname)
+                Field("Nuevo apodo", state.social.editedNickname,
+                    error = state.inlineFeedback(), onChange = model::editNickname)
                 state.social.nicknameNotice?.let { Text(it) }
                 Action("Guardar apodo", enabled = !state.busy &&
                     state.social.editedNickname.trim() != profile.account.nickname) { model.saveProfile() }
@@ -31,6 +41,6 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
             }
         }
         Text("El cierre de sesión borra la sesión local; no elimina tu cuenta.")
-        Action("Cerrar sesión", enabled = !state.busy) { model.logout() }
+        Action("Cerrar sesión", enabled = !state.busy) { confirmLogout = true }
     }
 }

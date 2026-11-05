@@ -19,10 +19,11 @@ class EncryptedSessionStoreTest {
     private val folder = File(context.noBackupFilesDir, "session-instrumented-test")
     private val alias = "pactogg.session.test-only"
     private lateinit var store: EncryptedSessionStore
+    private lateinit var isolated: ContextWrapper
 
     @Before fun setup() {
         folder.mkdirs()
-        val isolated = object : ContextWrapper(context) {
+        isolated = object : ContextWrapper(context) {
             override fun getNoBackupFilesDir(): File = folder
         }
         store = EncryptedSessionStore(isolated, alias)
@@ -59,6 +60,21 @@ class EncryptedSessionStoreTest {
         assertNull(store.read())
         store.write(session)
         KeyStore.getInstance("AndroidKeyStore").apply { load(null); deleteEntry(alias) }
+        assertNull(store.read())
+    }
+
+    @Test fun replacingAccountPersistsOnlyTheNewIdentity() {
+        val first = Session(Account("111111111111111111111111", "first@example.com", "First"),
+            "first-synthetic-access", "first-synthetic-refresh", System.currentTimeMillis() + 900000)
+        val second = Session(Account("555555555555555555555555", "second@example.com", "Second"),
+            "second-synthetic-access", "second-synthetic-refresh", System.currentTimeMillis() + 900000)
+        store.write(first)
+        store.write(second)
+        val reopened = EncryptedSessionStore(isolated, alias)
+        assertEquals(second.account, reopened.read()?.account)
+        assertEquals(second.refreshToken, reopened.read()?.refreshToken)
+        assertFalse(File(folder, "session.enc.bak").exists())
+        reopened.clear()
         assertNull(store.read())
     }
 }

@@ -13,11 +13,20 @@ MATRIX = ROOT / "docs/pruebas/operaciones.json"
 OUT = ROOT / "artifacts/android-ci"
 KINDS = ("unit", "integration", "security")
 EXPECTED_DEVICE = {
+    ("com.pactogg.app.feature.connected.presentation.FeedbackDialogsTest", "successNoticeCanBeDismissedWithoutChangingScreen"),
+    ("com.pactogg.app.feature.connected.presentation.FeedbackDialogsTest", "generalErrorIsDismissibleWithoutRetryingOperation"),
+    ("com.pactogg.app.feature.connected.presentation.FeedbackDialogsTest", "invalidConfirmationCanStillBeCancelledWithoutExecutingAction"),
+    ("com.pactogg.app.feature.connected.presentation.FeedbackDialogsTest", "occupiedNicknameIsShownAtFieldWithoutGeneralDialog"),
+    ("com.pactogg.app.navigation.SafeAreaTest", "contentAvoidsSystemBarsAndCutoutInPortraitAndLandscape"),
+    ("com.pactogg.app.feature.connected.presentation.TournamentBracketTest", "nonemptyBracketShowsRoundParticipantsScoresAndNoWriteActions"),
     ("com.pactogg.app.core.database.CacheMetadataDaoTest", "upsertReplacesTimestampAndClearRemovesData"),
     ("com.pactogg.app.security.EncryptedSessionStoreTest", "roundTripIsEncryptedAndClearRemovesTheFile"),
     ("com.pactogg.app.security.EncryptedSessionStoreTest", "corruptedOrMissingKeyDoesNotRestoreAnAccount"),
+    ("com.pactogg.app.security.EncryptedSessionStoreTest", "replacingAccountPersistsOnlyTheNewIdentity"),
     ("com.pactogg.app.navigation.AccessNavigationTest", "emptyLoginCannotBypassAuthentication"),
     ("com.pactogg.app.navigation.AccessNavigationTest", "registerDisplaysProvisionalPrivacyBeforeAnySubmission"),
+    ("com.pactogg.app.navigation.AccessNavigationTest", "rotationAndRecreationKeepDraftWithoutSavingPasswordOrAuthenticating"),
+    ("com.pactogg.app.navigation.AccessNavigationTest", "switchingRegistrationAndLoginClearsCredentialsAndConsent"),
 }
 REQUIRED_JOBS = ("integrity", "static-analysis", "tests", "coverage", "build", "instrumented",
                  "secrets", "sast", "dependencies")
@@ -60,9 +69,17 @@ def matrix():
         for kind in KINDS:
             case = row["tests"][kind]
             key = (kind, case["class"], case["name"])
-            if key in used or case["class"] not in classes[kind] or not case["name"].endswith("[" + row["id"] + "]"):
+            if key in used or case["class"] not in classes[kind] or not case["name"].startswith(row["id"].replace("-", "_") + "_"):
                 raise ValueError("Duplicate or non-exact test mapping")
             used.add(key)
+        if row["protected"]:
+            case = row["session_test"]
+            key = ("security", case["class"], case["name"])
+            if key in used or case["class"] not in classes["security"] or not case["name"].startswith(row["id"].replace("-", "_") + "_"):
+                raise ValueError("Missing or misplaced protected-session case")
+            used.add(key)
+        elif "session_test" in row:
+            raise ValueError("Unexpected protected-session mapping on public operation")
     for kind, cases in document.get("required_regressions", {}).items():
         if kind not in KINDS:
             raise ValueError("Unknown regression category")
@@ -86,8 +103,8 @@ def expected(kind):
             case = row["tests"][current]
             result.add((case["class"], case["name"]))
         if row["protected"] and kind in ("all", "security"):
-            result.add(("com.pactogg.app.testing.ProtectedEndpointSessionTest",
-                        "noProtectedRequestLeavesDeviceWithoutSession[" + row["id"] + "]"))
+            case = row["session_test"]
+            result.add((case["class"], case["name"]))
     return result
 
 

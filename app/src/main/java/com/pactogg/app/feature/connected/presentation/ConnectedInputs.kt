@@ -29,7 +29,9 @@ fun ConnectedViewModel.filter(status: String?, game: String) {
         tournamentsLoaded = false, nextCursor = null, hasMore = false, selectedTournament = null) }
 }
 
-fun ConnectedViewModel.tournament(value: Tournament?) { mutable.update { it.copy(selectedTournament = value) } }
+fun ConnectedViewModel.tournament(value: Tournament?) {
+    mutable.update { it.copy(selectedTournament = value, error = null, diagnostic = null, notice = null) }
+}
 
 
 fun ConnectedViewModel.review() {
