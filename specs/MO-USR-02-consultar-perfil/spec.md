@@ -37,10 +37,10 @@ Dependencias: [MO-AUTH-03-sesion](../MO-AUTH-03-sesion/spec.md). Estas áreas so
 
 | ID móvil | Correspondencia backend | Resultado esperado | Evidencia actual |
 |---|---|---|---|
-| MO-USR-02-AC1 | USR02-AC1 | Perfil recién registrado muestra estadísticas y cantidad de grupos recibidas; no fijar word_index=50 ni groups_count=0 para todas las cuentas. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-USR-02-AC2 | USR02-AC2 | Después de PATCH, la consulta refleja el perfil confirmado sin restaurar datos de sesión antiguos. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-USR-02-AC3 | USR02-AC3 | Sin sesión no se muestran datos; un 401 sigue el flujo compartido de sesión. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-USR-02-ACQ | Control móvil | Build/Lint/Detekt y pruebas del candidato afectado correctos; evidencia sin secretos; accesibilidad/privacidad aplicables verificadas | Pendiente del candidato |
+| MO-USR-02-AC1 | USR02-AC1 | Perfil recién registrado muestra estadísticas y cantidad de grupos recibidas; no fijar word_index=50 ni groups_count=0 para todas las cuentas. | [PARCIAL](checklists/checklist.md#mo-usr-02-ac1) · ejecución local 2026-11-05 |
+| MO-USR-02-AC2 | USR02-AC2 | Después de PATCH, la consulta refleja el perfil confirmado sin restaurar datos de sesión antiguos. | [PARCIAL](checklists/checklist.md#mo-usr-02-ac2) · ejecución local 2026-11-05 |
+| MO-USR-02-AC3 | USR02-AC3 | Sin sesión no se muestran datos; un 401 sigue el flujo compartido de sesión. | [PARCIAL](checklists/checklist.md#mo-usr-02-ac3) · ejecución local 2026-11-05 |
+| MO-USR-02-ACQ | Control móvil | Build/Lint/Detekt y pruebas del candidato afectado correctos; evidencia sin secretos; accesibilidad/privacidad aplicables verificadas | [CONTROLES_LOCALES_PARCIALES](checklists/checklist.md#mo-usr-02-acq) · ejecución local 2026-11-05 |
 
 Los IDs de backend sirven para trazabilidad, no para heredar PASS de sus pruebas. Casos de base de datos y auditoría del backend se verifican allí; Android comprueba peticiones, respuestas y resultado visible.
 
@@ -77,12 +77,24 @@ Disponibilidad del apodo espera al escribir, cancela/descarta consultas previas 
 [Informe del candidato y límites](../../docs/integracion/integracion-social-2026-11-04.md): 44 JVM, build/Lint/Detekt, dos métodos instrumentados y recorrido positivo real correctos. Operación integrada; no aceptación integral. Avatar sigue pendiente en USR-03; los AC negativos/completos y revisión humana conservan estado abierto. No atribuir el estado inicial NO_EJECUTADO a ausencia de código actual ni reemplazar evidencia esperada por PASS global.
 
 
-## Pruebas consumidor por tipo — actualización 2026-11-04
+## Pruebas específicas por operación — actualización 2026-11-05
 
-[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Cada archivo muestra sus escenarios y llama directamente al consumidor correspondiente. El ID de operación se conserva como prefijo del método (por ejemplo, AUTH_01_); la matriz valida la identidad completa:
 
-- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[USR-02]`.
-- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[USR-02]`.
-- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[USR-02]`.
+- unit: `com.pactogg.app.feature.profile.detail.ProfileDetailsValidationTest.USR_02_rejectsOutOfRangeProfileStatistics`.
+- integration: `com.pactogg.app.feature.profile.detail.ProfileDetailsApiTest.USR_02_mapsOwnProfileIdentity`.
+- security: `com.pactogg.app.feature.profile.detail.ProfileDetailsSecurityTest.USR_02_forbiddenProfileReadPreservesExistingSession`.
 
 Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.
+
+### Archivos de prueba de esta operación
+
+- Validación: [ProfileDetailsValidationTest.kt](../../app/src/test/java/com/pactogg/app/feature/profile/detail/ProfileDetailsValidationTest.kt).
+- Comunicación con API: [ProfileDetailsApiTest.kt](../../app/src/test/java/com/pactogg/app/feature/profile/detail/ProfileDetailsApiTest.kt).
+- Seguridad y errores: [ProfileDetailsSecurityTest.kt](../../app/src/test/java/com/pactogg/app/feature/profile/detail/ProfileDetailsSecurityTest.kt).
+
+Reorganización local 2026-11-05: se conservan los escenarios y las pruebas compartidas de sesión/recorridos. Sin aceptación funcional nueva ni publicación por mover pruebas.
+
+## Relación criterio → tareas → pruebas → resultado — 2026-11-05
+
+La tabla de aceptación enlaza la revisión detallada en el checklist. Se identifican casos ejecutados, alcance y escenarios faltantes sin cerrar criterios compuestos por un PASS parcial. [Resumen de las 19 specs](../../docs/pruebas/revision-specs-2026-11-05.md). Cambios exclusivamente locales; privacidad/avatares esperan al backend y Google Play queda fuera.

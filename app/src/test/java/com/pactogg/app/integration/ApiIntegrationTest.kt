@@ -1,5 +1,6 @@
 package com.pactogg.app.integration
 
+
 import org.junit.experimental.categories.Category
 import com.pactogg.app.testing.IntegrationChecks
 import com.pactogg.app.core.network.ApiClientFactory
@@ -243,6 +244,56 @@ class ApiIntegrationTest {
         server.takeRequest()
     }
 
+    @Test fun lateResponseFromAccountACannotReplaceAccountB() = runBlocking {
+        login()
+        val started = CompletableDeferred<Unit>()
+        val finish = CompletableDeferred<Unit>()
+        val oldRead = async {
+            runCatching { sessions.authorized(readOnly = true) {
+                assertEquals("Bearer access-one", it)
+                started.complete(Unit)
+                finish.await()
+                Response.success(Unit)
+            } }
+        }
+        started.await()
+        val secondId = "555555555555555555555555"
+        server.enqueue(json(sessionJson("access-two", "refresh-two").replace(UserId, secondId)))
+        sessions.login(LoginRequest("second@example.com", "synthetic"))
+        finish.complete(Unit)
+        assertEquals("SESSION_CHANGED", (oldRead.await().exceptionOrNull() as ApiFailure).code)
+        assertEquals(secondId, sessions.current.value?.account?.id)
+        assertEquals("access-two", store.saved?.accessToken)
+    }
+
+    @Test fun pendingLoginCannotUndoLogoutOrOverwriteNextAccount() = runBlocking {
+        val arrived = java.util.concurrent.CountDownLatch(1)
+        val release = java.util.concurrent.CountDownLatch(1)
+        val secondId = "555555555555555555555555"
+        server.dispatcher = object : okhttp3.mockwebserver.Dispatcher() {
+            override fun dispatch(request: okhttp3.mockwebserver.RecordedRequest): MockResponse {
+                return if (request.body.readUtf8().contains("first@example.com")) {
+                    arrived.countDown()
+                    check(release.await(10, java.util.concurrent.TimeUnit.SECONDS))
+                    json(sessionJson())
+                } else json(sessionJson("access-two", "refresh-two").replace(UserId, secondId))
+            }
+        }
+        val pending = async(start = kotlinx.coroutines.CoroutineStart.UNDISPATCHED) {
+            runCatching { sessions.login(LoginRequest("first@example.com", "synthetic")) }
+        }
+        try {
+            assertTrue(kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                arrived.await(5, java.util.concurrent.TimeUnit.SECONDS)
+            })
+            sessions.logout()
+            sessions.login(LoginRequest("second@example.com", "synthetic"))
+        } finally { release.countDown() }
+        assertEquals("SESSION_CHANGED", (pending.await().exceptionOrNull() as ApiFailure).code)
+        assertEquals(secondId, sessions.current.value?.account?.id)
+        assertEquals("refresh-two", store.saved?.refreshToken)
+    }
+
     private fun json(body: String, status: Int = 200) = MockResponse().setResponseCode(status)
         .setHeader("Content-Type", "application/json").setBody(body)
 
@@ -269,4 +320,13 @@ class ApiIntegrationTest {
         private const val ContractId = "333333333333333333333333"
         private const val EvidenceId = "444444444444444444444444"
     }
+
+    @Test fun rotatingTokenPersistenceFailureClearsOldAndFreshIdentityAtomically() = runBlocking {
+        login(); nowMillis = 2000000L; store.failWrite = true
+        server.enqueue(json(sessionJson("new-access", "new-refresh")))
+        assertTrue(runCatching { sessions.restore() }.isFailure)
+        assertNull(sessions.current.value); assertNull(store.saved)
+        assertEquals(2, server.requestCount)
+    }
+
 }

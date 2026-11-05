@@ -20,3 +20,14 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-USR-03-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-USR-03-T4-AC1: PATCH→GET y tokens conservados comprobados; falta recorrido Compose completo. Avatar sigue diferido. [Criterio y pruebas](checklists/checklist.md#mo-usr-03-ac1).
+- [x] MO-USR-03-T4-AC2: Comprobado localmente; aceptación humana/proveedor separadas. [Criterio y pruebas](checklists/checklist.md#mo-usr-03-ac2).
+- [ ] MO-USR-03-T4-AC3: Fixtures 400/422 no generan éxito ni sustituyen identidad; no prueban validación del servidor con cuerpos vacío/desconocido. [Criterio y pruebas](checklists/checklist.md#mo-usr-03-ac3).
+- [ ] MO-USR-03-T4-AC4: CONTENT_REJECTED/MODERATION_UNAVAILABLE de PATCH conservan identidad en repositorio; falta formulario Compose para ambos errores. [Criterio y pruebas](checklists/checklist.md#mo-usr-03-ac4).
+- [ ] MO-USR-03-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-usr-03-acq).

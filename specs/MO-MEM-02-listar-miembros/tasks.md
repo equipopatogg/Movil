@@ -20,3 +20,14 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-MEM-02-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-MEM-02-T4-AC1: Faltan varios miembros/roles/saldos para comprobar orden real y representación UI sin constantes. [Criterio y pruebas](checklists/checklist.md#mo-mem-02-ac1).
+- [ ] MO-MEM-02-T4-AC2: Faltan respuesta de miembros retenida durante cambio de grupo y resultado real de búsqueda por prefijo; reset previo no prueba carrera en vuelo. [Criterio y pruebas](checklists/checklist.md#mo-mem-02-ac2).
+- [x] MO-MEM-02-T4-AC3: Comprobado localmente; aceptación humana/proveedor separadas. [Criterio y pruebas](checklists/checklist.md#mo-mem-02-ac3).
+- [ ] MO-MEM-02-T4-AC4: Falta escenario UI autenticado con cuenta ajena que compruebe lista vacía y selección de rival bloqueada después del 403. [Criterio y pruebas](checklists/checklist.md#mo-mem-02-ac4).
+- [ ] MO-MEM-02-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-mem-02-acq).

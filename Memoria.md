@@ -1,3 +1,17 @@
+# Pruebas separadas por operación — 2026-11-05
+
+Reorganización local solicitada, sin subir. Las 19 operaciones tienen archivos de validación, API y seguridad; los casos comunes de conexión/sesión/recorridos se conservan. La matriz y las referencias de specs se actualizan a nombres completos, con ID como prefijo AUTH_01_. Se contrastaron los 196 casos previos uno a uno: 129 renombrados y 67 compartidos intactos. Conjunto y categorías 56/44/96 correctos, sin fallos/omisiones; selección login de seis casos correcta; 27 validadores correctos. [Organización y evidencia](docs/pruebas/reorganizacion-especifica-2026-11-05.md). No crear commits/PR/push hasta nuevo encargo.
+
+## Historial conservado
+
+# Pruebas solicitadas — 2026-11-05
+
+Giro/recreación, cambio de cuenta y permisos comprobados en el alcance del [informe](docs/pruebas/rotacion-cuentas-permisos-2026-11-05.md). 196 JVM y ocho Android offline correctos; 26 verificaciones Python correctas. Proveedor: miembro 200/no miembro 403 para grupo, miembros y tablero; sesiones nuevas de prueba cerradas con 204. Se conserva la sesión del teléfono y no se modifica producción Kotlin.
+
+Resultados nuevos locales: no atribuir CI remoto nuevo. Main con PR9 ya pasó su ejecución remota anterior. Privacidad/avatares esperan al backend y Play queda diferido expresamente. No confundir estas comprobaciones con aceptación de todas las escrituras/roles o de todos los AC.
+
+## Historial conservado
+
 # Cierre verificable de pendientes — 2026-11-05
 
 192 JVM correctas y cobertura 27,14 % local (748/2756), 26,96 % CI (743/2756), sin cambiar denominador. Release local y ocho ELF/ZIP correctos; instalación/arranque 4 KB y recorrido de acceso 16 KB correctos. Regresiones reales Wrapper/Semgrep PASS en run41977160594. Rechazo live sin sesión: quince operaciones con 401. Cierre por PR9 con su comprobación final. [Informe](docs/pruebas/cierre-pendientes-2026-11-04.md) y [84 criterios](docs/pruebas/estado-criterios-2026-11-04.md).
@@ -179,3 +193,18 @@ Inicio de sesión revisado y apariencia conforme según el usuario («se ve igua
 ## Último avance: PG-06 interactiva local
 
 Usuario autoriza botones navegables. En catálogo: acceso → tablero; Explorar/detalle → usar idea → borrador → condiciones → rival/acuerdo → resumen/edición → confirmación local. Botón Crear inicia sin plantilla. Datos efímeros y aviso de simulación, no invitación remota ni cuenta creada. PG-05/06 siguen abiertas. Contrato/integración y pruebas de interacción en dispositivo pendientes; sin push.
+
+
+## Revisión documental actual — 2026-11-05
+
+[Revisión de las 19 specs y sus 84 criterios](docs/pruebas/revision-specs-2026-11-05.md): 60 criterios parcialmente comprobados, cinco sin caso específico y 19 criterios de calidad con controles locales parciales. Se vinculan tareas, casos y resultados existentes; no se ejecutaron nuevas pruebas por esta edición. Los estados anteriores se conservan como historial. No hay aceptación completa ni publicación.
+
+
+## Pruebas pendientes ejecutadas localmente — 2026-11-05
+
+[Resultado actual](docs/pruebas/pruebas-pendientes-2026-11-05.md): 237 JVM y nueve Android correctos; 41 casos JVM nuevos. Los cinco criterios sin caso específico tienen comprobación local de consumidor. No equivale a cerrar íntegramente las 19 specs; se conservan límites por criterio y aceptación humana/proveedor pendiente. Sin cambios visuales ni entrega a GitHub. Los recuentos de revisiones anteriores son históricos.
+
+
+## Ajustes visuales locales — 2026-11-05
+
+Zona segura dinámica, mensajes contextuales y confirmaciones modales implementados. [Resultado UX-01](docs/pruebas/ajustes-ux-2026-11-05.md): 239 JVM, 14 Android y controles locales correctos. Revisión visual del usuario pendiente. Sin Git/publicación; recuentos anteriores conservados como históricos.

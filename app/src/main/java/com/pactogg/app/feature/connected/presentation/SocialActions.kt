@@ -16,12 +16,13 @@ fun ConnectedViewModel.joinGroup() {
         val group = socials.join(code)
         applyGroup(group)
         mutable.update { it.copy(social = it.social.copy(joinCode = "", groups = ListState()),
-            notice = "Te uniste al grupo confirmado por el servidor.") }
+            notice = "Ya formas parte del grupo.") }
     }
 }
 fun ConnectedViewModel.editNickname(value: String) {
     if (mutable.value.busy) return
-    mutable.update { it.copy(social = it.social.copy(editedNickname = value.take(24))) }
+    mutable.update { it.copy(error = null, diagnostic = null,
+        social = it.social.copy(editedNickname = value.take(24))) }
     checkNickname(value.take(24))
 }
 fun ConnectedViewModel.saveProfile() {
@@ -77,7 +78,7 @@ fun ConnectedViewModel.confirmContractAction() {
             group = it.group?.let { group -> result.myPoints?.let { points -> group.copy(points = points) } ?: group },
             social = it.social.copy(contracts = ListState(), groups = ListState(),
                 members = ListState(), profile = null),
-            notice = if (action == "accept") "Reto aceptado; saldo confirmado por el servidor."
+            notice = if (action == "accept") "Reto aceptado. Tu saldo se actualizó."
             else "Reto rechazado.") }
     }
 }

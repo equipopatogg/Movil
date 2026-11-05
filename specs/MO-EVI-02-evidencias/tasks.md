@@ -22,3 +22,14 @@ Ajuste acotado autorizado: estado del reto después de evidencia en MO-EVI-02; c
 - [x] MO-EVI-02-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-EVI-02-T4-AC1: Faltan asserts de Content-Type interno de foto y UI completa de ambos tipos sobre el candidato; evidencia real anterior se conserva como histórica. [Criterio y pruebas](checklists/checklist.md#mo-evi-02-ac1).
+- [ ] MO-EVI-02-T4-AC2: Faltan cancelación del selector, archivo grande, MIME inválido y ausencia de cámara/video en la UI instalada. [Criterio y pruebas](checklists/checklist.md#mo-evi-02-ac2).
+- [ ] MO-EVI-02-T4-AC3: CONTENT_REJECTED/EVIDENCE_LIMIT_REACHED preservan enlace y no inventan evidencia; falta recorrido Compose y moderación de foto. [Criterio y pruebas](checklists/checklist.md#mo-evi-02-ac3).
+- [ ] MO-EVI-02-T4-AC4: POST con respuesta perdida no se repite ni confirma evidencia; falta apertura bloqueada por contrato no autorizado en Compose. [Criterio y pruebas](checklists/checklist.md#mo-evi-02-ac4).
+- [ ] MO-EVI-02-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-evi-02-acq).

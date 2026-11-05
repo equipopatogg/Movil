@@ -69,3 +69,10 @@ Usuario solicita empezar implementación de las specs MO-* conforme al backend. 
 La instrucción expresa posterior del usuario supera límites documentales históricos C01/C10 solo para completar pruebas, medir cobertura y configurar/verificar CI móvil. Cada operación confirmada requiere casos pertinentes unitarios, de integración y seguridad, trazables por spec/ID y ejecutados; no se impone cantidad fija de tres. Ver [matriz](../../docs/pruebas/matriz-operaciones.md). Mantener pruebas compartidas y completar faltantes, sin reescribir cronología ni simular aceptación.
 
 PG-00/PG-01 contienen cambios implementables actuales; no nuevos expedientes de funcionalidades futuras. Instrumentación offline en emulador limpio, sin cuentas/secretos QA en CI. Informes ausentes/cero casos/omisiones no pasan el gate. Cobertura medida sin umbral importado; no cambiar stack o reducir controles para obtener verde. No cambios backend, commits/push, despliegue o publicación por esta instrucción. La evidencia local no se presenta como ejecución GitHub.
+
+
+## Trazabilidad y cierre por criterio — 2026-11-05
+
+Cada tarea de implementación autorizada incluye crear o actualizar sus pruebas pertinentes y ejecutarlas antes de marcarla terminada. Registrar condición → tarea → clase/método concreto → entorno e informe con resultado real → parte pendiente. Una prueba compartida acredita únicamente sus aserciones; el nombre, la cantidad de casos o la existencia del archivo no demuestran el criterio completo. Distinguir esperado, no ejecutado, parcial, fallido y comprobado; aceptación humana y CI remoto se registran por separado. No trasladar resultados entre operaciones ni confundir expiración con dos HTTP 401, respuesta 503 con desconexión o recreación de Activity con muerte del proceso.
+
+Esta revisión documental no autoriza implementar pendientes, ejecutar nuevas pruebas reales ni publicar. Fuente: decisión D-SDD-36 y revisión de criterios del 2026-11-05.

@@ -21,3 +21,13 @@ T2/T3 describen incorporación de código/recorrido, no aceptación instituciona
 - [x] MO-CON-03-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-CON-03-T4-AC1: Faltan asserts de campos completos en UI y ausencia de galería inventada; el recorrido positivo real anterior no cierra todos esos puntos. [Criterio y pruebas](checklists/checklist.md#mo-con-03-ac1).
+- [ ] MO-CON-03-T4-AC2: 404 de contrato comprobado; falta group_id discordante con id correcto y estado Compose. [Criterio y pruebas](checklists/checklist.md#mo-con-03-ac2).
+- [ ] MO-CON-03-T4-AC3: Falta recorrido de refresco de detalle tras aceptar/rechazar y logout desde esa pantalla; el caso de evidencia tiene alcance propio. [Criterio y pruebas](checklists/checklist.md#mo-con-03-ac3).
+- [ ] MO-CON-03-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-con-03-acq).

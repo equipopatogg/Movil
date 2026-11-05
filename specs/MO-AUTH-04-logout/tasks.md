@@ -16,3 +16,16 @@ T2/T3 acreditan creación de código local, no aceptación integral. T1 conserva
 - [x] MO-AUTH-04-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+Actualización 2026-11-05: giro/recreación, reemplazo de cuenta y permisos comprobados localmente en su alcance; [evidencia](../../docs/pruebas/rotacion-cuentas-permisos-2026-11-05.md). No cierra criterios compuestos de proveedor/roles/aceptación humana sin el resto de sus pruebas.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-AUTH-04-T4-AC1: Falta recorrido Android de logout seguido de Atrás y reinicio/muerte del proceso para comprobar pantallas protegidas. [Criterio y pruebas](checklists/checklist.md#mo-auth-04-ac1).
+- [ ] MO-AUTH-04-T4-AC2: 401 y desconexión real cierran localmente sin repetir. Falta timeout y aviso de revocación pendiente comprobado en Compose. [Criterio y pruebas](checklists/checklist.md#mo-auth-04-ac2).
+- [ ] MO-AUTH-04-T4-AC3: Refresh pendiente y logout sin resurrección comprobados; falta combinación con login B y navegación Android de ambas cuentas. [Criterio y pruebas](checklists/checklist.md#mo-auth-04-ac3).
+- [ ] MO-AUTH-04-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-auth-04-acq).

@@ -55,3 +55,13 @@ Todo este expediente está en PactoGG/Movil, junto al proyecto Android, sin carp
 ## Instrucción posterior — evaluación, 2026-11-03
 
 El usuario solicita preparar specs y lo esencial de evaluación. Se permite editar documentación móvil y checklists, conservando límites de producto; no inicia funcionalidades/dependencias/firma/publicación. Git móvil y CI remoto ya existen: ver docs/preparacion/ci-remoto-android.md. PG-03/PG-04 y checklist-evaluacion-movil.md definen la preparación siguiente, con contrato y decisiones pendientes explícitos.
+
+
+## Revisión documental actual — 2026-11-05
+
+[Revisión de las 19 specs y sus 84 criterios](docs/pruebas/revision-specs-2026-11-05.md): 60 criterios parcialmente comprobados, cinco sin caso específico y 19 criterios de calidad con controles locales parciales. Se vinculan tareas, casos y resultados existentes; no se ejecutaron nuevas pruebas por esta edición. Los estados anteriores se conservan como historial. No hay aceptación completa ni publicación.
+
+
+## Pruebas pendientes ejecutadas localmente — 2026-11-05
+
+[Resultado actual](docs/pruebas/pruebas-pendientes-2026-11-05.md): 237 JVM y nueve Android correctos; 41 casos JVM nuevos. Los cinco criterios sin caso específico tienen comprobación local de consumidor. No equivale a cerrar íntegramente las 19 specs; se conservan límites por criterio y aceptación humana/proveedor pendiente. Sin cambios visuales ni entrega a GitHub. Los recuentos de revisiones anteriores son históricos.

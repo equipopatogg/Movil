@@ -1,3 +1,27 @@
+# Entrega a revisión autorizada — 2026-11-05
+
+El usuario autoriza subir los cambios locales acumulados del móvil y dejar las pruebas de GitHub ejecutándose para revisarlas él después. Cuenta/repositorio equipopatogg/Movil. Crear commit en rama y PR hacia main; no esperar a terminar CI, no fusionar ni habilitar fusión automática. Excluir artefactos, APK, credenciales y referencias privadas. Las prohibiciones de Git de las fases inferiores son históricas para este encargo; no se amplía alcance de producto, backend o Play.
+
+# Ajustes visuales y mensajes — 2026-11-05
+
+Usuario autoriza mejorar mensajes (confirmaciones modales, avisos breves y errores junto al campo) y respetar zona segura de barras/cámara y navegación. Conservar colores, funciones y contratos; sin Git/publicación. Ejecutar comprobaciones pertinentes y emulador aislado; no alterar cuenta/datos del teléfono. Los resultados anteriores son historia cuando cambien sus fuentes; registrar evidencia nueva del candidato actual sin atribuirle CI remoto.
+
+# Completar pruebas pendientes, solo local — 2026-11-05
+
+El usuario autoriza implementar y ejecutar las pruebas pendientes de las 19 operaciones, corregir fallos comprobados y actualizar trazabilidad. Conserva diseño y funciones existentes; cambios visuales serán una etapa posterior. Sin commits, push, PR ni publicación. Usar servidor HTTPS de pruebas y emulador aislado; no modificar datos/cuenta del teléfono ni ejecutar escrituras de negocio contra backend real. Registrar resultados actuales sin cerrar aceptación de proveedor o humana por fixtures. Privacidad y avatares esperan al backend; Google Play diferido.
+
+# Revisión documental de criterios — 2026-11-05
+
+Revisar las 19 specs: condición → tarea → prueba específica → resultado y límites. No implementar huecos ni ejecutar nuevas pruebas live por este encargo. Sin commits, push, PR o cambios remotos. Conservar trabajo local previo. Usar docs/pruebas/revision-specs-2026-11-05.md y docs/pruebas/trazabilidad-criterios.json; no cerrar criterios parciales ni inventar aceptación. Para futuras tareas de código autorizadas, crear/actualizar y ejecutar sus pruebas como parte de la misma tarea antes del cierre.
+
+# Reorganización local de pruebas — 2026-11-05
+
+Usuario autoriza separar pruebas por función como el ejemplo revisado; todavía no subir ni publicar. Solo edición y verificación local: sin commits, push, PR o cambios remotos por esta fase. Conservar trabajo local anterior. Las 19 operaciones tienen archivos específicos ValidationTest/ApiTest/SecurityTest y métodos con ID codificado como AUTH_01_. La matriz schema 2 conserva identidad completa y caso protegido explícito; no exigir los antiguos sufijos parametrizados. Infraestructura/datos en testing/shared, sin dispatcher que esconda qué función se prueba. No cambia código de aplicación, contratos ni aceptación. Resultados y organización en docs/pruebas/reorganizacion-especifica-2026-11-05.md.
+
+# Pruebas de giro, cuentas y permisos — 2026-11-05
+
+Usuario pide ejecutar estas comprobaciones sobre las funciones actuales. Suite offline vigente: ocho métodos explícitos de Room, custodia cifrada y acceso/giro/recreación. Los cinco métodos de fases anteriores son evidencia histórica. Mantener cuenta del teléfono; usar emulador aislado. Prueba manual QA contra proveedor solo por encargo expreso, sin registrar credenciales ni escrituras de grupos/retos/puntos. Privacidad definitiva y avatares esperan al backend; Play queda diferido. Evidencia en docs/pruebas/rotacion-cuentas-permisos-2026-11-05.md.
+
 # Cierre de pendientes autorizado — 2026-11-04
 
 Usuario autoriza resolver lo posible: pruebas consumidor/estado, regresiones reales Wrapper/Semgrep y verificación release/16 KB de PG-00/01/02. Firma local de pruebas para instalación; sin firma de producción ni Play. Conservar datos/cuentas del teléfono. Las adiciones del backend no amplían automáticamente las 19 operaciones confirmadas. Evidencia en docs/pruebas/cierre-pendientes-2026-11-04.md. La entrega por PR con compuerta sigue autorizada. No cerrar criterios por mera existencia de código o fixtures.

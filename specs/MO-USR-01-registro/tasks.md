@@ -16,3 +16,13 @@ T2/T3 acreditan creación de código local, no aceptación integral. T1 conserva
 - [x] MO-USR-01-TQ: Comprobar instancias unit/integration/security exactas de esta operación en informes JUnit y registrar alcance/pedientes; no sustituye T4/T5 integrales.
 
 TQ verificada localmente: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). No equivale a aceptación integral.
+
+
+## Seguimiento por criterio — revisión 2026-11-05
+
+T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar una prueba parcial no cierra toda la tarea. Cada tarea de implementación autorizada debe incluir sus pruebas y evidencia del mismo cambio antes de marcarse terminada.
+
+- [ ] MO-USR-01-T4-AC1: Doble Submit y publicación de identidad tras custodia comprobados en ViewModel; falta recorrido Compose exitoso de registro instalado. [Criterio y pruebas](checklists/checklist.md#mo-usr-01-ac1).
+- [ ] MO-USR-01-T4-AC2: 409/422 de registro comprobados sin sesión/reintentos. Faltan fronteras completas y versión de privacidad rechazada; aviso definitivo diferido. [Criterio y pruebas](checklists/checklist.md#mo-usr-01-ac2).
+- [ ] MO-USR-01-T4-AC3: Fallo inducido de custodia y desconexión después de recibir POST comprobados específicamente para registro. Falta timeout con plazo agotado y su recorrido Compose. [Criterio y pruebas](checklists/checklist.md#mo-usr-01-ac3).
+- [ ] MO-USR-01-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-usr-01-acq).

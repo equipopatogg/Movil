@@ -28,7 +28,6 @@
     <string name="ui_hide">Ocultar</string>
     <string name="ui_have_account">Ya tengo cuenta</string>
     <string name="ui_new_account">¿Nuevo por aquí? Crea tu cuenta</string>
-    <string name="ui_connection_pending">La conexión todavía no está disponible. No se ha enviado información ni creado una sesión.</string>
     <string name="ui_virtual_only">Entre amigos. Puntos virtuales, sin dinero real.</string>
     <string name="ui_home_hero">Juega con ganas.
 Cumple tu palabra.</string>

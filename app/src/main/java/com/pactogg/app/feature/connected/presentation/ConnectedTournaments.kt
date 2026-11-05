@@ -48,7 +48,7 @@ fun ConnectedTournaments(state: ConnectedState, model: ConnectedViewModel) {
 }
 
 @Composable
-private fun TournamentDetails(tournament: Tournament) {
+internal fun TournamentDetails(tournament: Tournament) {
     Text(tournament.game, style = MaterialTheme.typography.titleLarge)
     Text("${tournament.format} · ${tournament.status}")
     TournamentArtwork(R.drawable.ic_pacto_trophy)

@@ -36,7 +36,8 @@ import com.pactogg.app.core.designsystem.AccentHeading
 import com.pactogg.app.ui.theme.PactoInput
 
 @Composable
-fun AccessScreen(state: AccessState, onEvent: (AccessEvent) -> Unit, tools: @Composable () -> Unit = {}) {
+fun AccessScreen(state: AccessState, onEvent: (AccessEvent) -> Unit,
+    fieldError: String? = null, fieldErrorCode: String? = null, tools: @Composable () -> Unit = {}) {
     PageLayout {
         Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.primary)
@@ -60,12 +61,12 @@ fun AccessScreen(state: AccessState, onEvent: (AccessEvent) -> Unit, tools: @Com
                 Text(stringResource(if (state.registering) R.string.ui_register else R.string.ui_login),
                     style = MaterialTheme.typography.titleLarge)
             }
-            AccessFields(state, onEvent)
+            AccessFields(state, onEvent, fieldError, fieldErrorCode)
             if (state.registering) PrivacyConsent(state.acceptedPrivacy, !state.loading) {
                 onEvent(AccessEvent.AcceptPrivacy(it))
             }
-            if (state.submitted) {
-                Text(stringResource(R.string.ui_connection_pending),
+            if (state.submitted && state.registering && !state.acceptedPrivacy) {
+                Text("Acepta el aviso de privacidad para crear tu cuenta.",
                     modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
                     color = MaterialTheme.colorScheme.primary)
             }
@@ -91,7 +92,11 @@ fun AccessScreen(state: AccessState, onEvent: (AccessEvent) -> Unit, tools: @Com
 }
 
 @Composable
-private fun AccessFields(state: AccessState, onEvent: (AccessEvent) -> Unit) {
+private fun AccessFields(state: AccessState, onEvent: (AccessEvent) -> Unit,
+    fieldError: String?, fieldErrorCode: String?) {
+    val emailError = accessEmailError(state, fieldErrorCode, fieldError)
+    val passwordError = accessPasswordError(state, fieldErrorCode, fieldError)
+    val nicknameError = accessNicknameError(state, fieldErrorCode, fieldError)
     val colors = OutlinedTextFieldDefaults.colors(
         focusedContainerColor = PactoInput,
         unfocusedContainerColor = PactoInput,
@@ -102,15 +107,18 @@ private fun AccessFields(state: AccessState, onEvent: (AccessEvent) -> Unit) {
     )
     if (state.registering) {
         OutlinedTextField(colors = colors, value = state.nickname,
+            isError = nicknameError != null, supportingText = nicknameError?.let { text -> { Text(text) } },
             onValueChange = { onEvent(AccessEvent.Nickname(it)) },
             label = { Text(stringResource(R.string.ui_nickname)) }, singleLine = true,
             enabled = !state.loading, modifier = Modifier.fillMaxWidth())
     }
     OutlinedTextField(colors = colors, value = state.email, onValueChange = { onEvent(AccessEvent.Email(it)) },
+        isError = emailError != null, supportingText = emailError?.let { text -> { Text(text) } },
         label = { Text(stringResource(R.string.ui_email)) }, singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         enabled = !state.loading, modifier = Modifier.fillMaxWidth())
     OutlinedTextField(colors = colors, value = state.password, onValueChange = { onEvent(AccessEvent.Password(it)) },
+        isError = passwordError != null, supportingText = passwordError?.let { text -> { Text(text) } },
         label = { Text(stringResource(R.string.ui_password)) }, singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = if (state.passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),

@@ -71,10 +71,21 @@ class CiChecksTests(unittest.TestCase):
         for mutation in mutations:
             self.assertNotEqual("PASS", checks.tests("unit", self.xml("unit", mutation))["state"])
     def test_wrong_category_is_not_counted_as_unit_success(self):
+        case = checks.matrix()[0]["tests"]["integration"]
         directory = self.xml("unit", lambda root: ET.SubElement(root, "testcase",
-            classname="com.pactogg.app.testing.EndpointContractTest",
-            name="consumesConfirmedWireContract[USR-01]"))
+            classname=case["class"], name=case["name"]))
         self.assertEqual("FAIL", checks.tests("unit", directory)["state"])
+
+    def test_operation_prefix_and_session_mapping_cannot_be_lost(self):
+        original = json.loads(self.matrix.read_text())
+        wrong_id = copy.deepcopy(original)
+        wrong_id["endpoints"][0]["tests"]["unit"]["name"] = "USR_010_differentOperation"
+        missing_session = copy.deepcopy(original)
+        next(row for row in missing_session["endpoints"] if row["protected"]).pop("session_test")
+        for changed in (wrong_id, missing_session):
+            with self.subTest(), self.assertRaises((ValueError, KeyError)):
+                self.matrix.write_text(json.dumps(changed))
+                checks.matrix()
 
     def test_duplicate_stale_changed_and_escaping_artifacts_fail(self):
         directory = self.xml("unit")

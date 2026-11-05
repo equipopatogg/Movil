@@ -39,11 +39,11 @@ Dependencias: [MO-GRP-03-detalle-grupo](../MO-GRP-03-detalle-grupo/spec.md). Est
 
 | ID móvil | Correspondencia backend | Resultado esperado | Evidencia actual |
 |---|---|---|---|
-| MO-MEM-02-AC1 | MEM02-AC1 | Lista muestra miembros/rol/saldo reales en orden del servidor. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-MEM-02-AC2 | MEM02-AC2 | Prefijo encuentra el miembro esperado y respuesta tardía no contamina otro grupo. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-MEM-02-AC3 | MEM02-AC3 | limit=1 y cursor cargan siguiente página sin duplicados. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-MEM-02-AC4 | MEM02-AC4 | Cuenta ajena recibe 403 sin exponer miembros ni permitir elegir rival. | Pendiente: JVM/HTTP, UI y proveedor según corresponda |
-| MO-MEM-02-ACQ | Control móvil | Build/Lint/Detekt y pruebas del candidato afectado correctos; evidencia sin secretos; accesibilidad/privacidad aplicables verificadas | Pendiente del candidato |
+| MO-MEM-02-AC1 | MEM02-AC1 | Lista muestra miembros/rol/saldo reales en orden del servidor. | [PARCIAL](checklists/checklist.md#mo-mem-02-ac1) · ejecución local 2026-11-05 |
+| MO-MEM-02-AC2 | MEM02-AC2 | Prefijo encuentra el miembro esperado y respuesta tardía no contamina otro grupo. | [PARCIAL](checklists/checklist.md#mo-mem-02-ac2) · ejecución local 2026-11-05 |
+| MO-MEM-02-AC3 | MEM02-AC3 | limit=1 y cursor cargan siguiente página sin duplicados. | [COMPROBADO_LOCAL_CONSUMIDOR](checklists/checklist.md#mo-mem-02-ac3) · ejecución local 2026-11-05 |
+| MO-MEM-02-AC4 | MEM02-AC4 | Cuenta ajena recibe 403 sin exponer miembros ni permitir elegir rival. | [PARCIAL](checklists/checklist.md#mo-mem-02-ac4) · ejecución local 2026-11-05 |
+| MO-MEM-02-ACQ | Control móvil | Build/Lint/Detekt y pruebas del candidato afectado correctos; evidencia sin secretos; accesibilidad/privacidad aplicables verificadas | [CONTROLES_LOCALES_PARCIALES](checklists/checklist.md#mo-mem-02-acq) · ejecución local 2026-11-05 |
 
 Los IDs de backend sirven para trazabilidad, no para heredar PASS de sus pruebas. Casos de base de datos y auditoría del backend se verifican allí; Android comprueba peticiones, respuestas y resultado visible.
 
@@ -80,12 +80,24 @@ Disponibilidad del apodo espera al escribir, cancela/descarta consultas previas 
 [Informe del candidato y límites](../../docs/integracion/integracion-social-2026-11-04.md): 44 JVM, build/Lint/Detekt, dos métodos instrumentados y recorrido positivo real correctos. Operación integrada; no aceptación integral. Avatar sigue pendiente en USR-03; los AC negativos/completos y revisión humana conservan estado abierto. No atribuir el estado inicial NO_EJECUTADO a ausencia de código actual ni reemplazar evidencia esperada por PASS global.
 
 
-## Pruebas consumidor por tipo — actualización 2026-11-04
+## Pruebas específicas por operación — actualización 2026-11-05
 
-[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Cada archivo muestra sus escenarios y llama directamente al consumidor correspondiente. El ID de operación se conserva como prefijo del método (por ejemplo, AUTH_01_); la matriz valida la identidad completa:
 
-- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[MEM-02]`.
-- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[MEM-02]`.
-- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[MEM-02]`.
+- unit: `com.pactogg.app.feature.groups.members.ListMembersValidationTest.MEM_02_rejectsOversizedMemberSearch`.
+- integration: `com.pactogg.app.feature.groups.members.ListMembersApiTest.MEM_02_sendsMemberSearchWithinSelectedGroup`.
+- security: `com.pactogg.app.feature.groups.members.ListMembersSecurityTest.MEM_02_forbiddenMemberReadPreservesExistingSession`.
 
 Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.
+
+### Archivos de prueba de esta operación
+
+- Validación: [ListMembersValidationTest.kt](../../app/src/test/java/com/pactogg/app/feature/groups/members/ListMembersValidationTest.kt).
+- Comunicación con API: [ListMembersApiTest.kt](../../app/src/test/java/com/pactogg/app/feature/groups/members/ListMembersApiTest.kt).
+- Seguridad y errores: [ListMembersSecurityTest.kt](../../app/src/test/java/com/pactogg/app/feature/groups/members/ListMembersSecurityTest.kt).
+
+Reorganización local 2026-11-05: se conservan los escenarios y las pruebas compartidas de sesión/recorridos. Sin aceptación funcional nueva ni publicación por mover pruebas.
+
+## Relación criterio → tareas → pruebas → resultado — 2026-11-05
+
+La tabla de aceptación enlaza la revisión detallada en el checklist. Se identifican casos ejecutados, alcance y escenarios faltantes sin cerrar criterios compuestos por un PASS parcial. [Resumen de las 19 specs](../../docs/pruebas/revision-specs-2026-11-05.md). Cambios exclusivamente locales; privacidad/avatares esperan al backend y Google Play queda fuera.

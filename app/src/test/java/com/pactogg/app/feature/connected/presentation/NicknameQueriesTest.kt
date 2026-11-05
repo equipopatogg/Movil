@@ -1,5 +1,6 @@
 package com.pactogg.app.feature.connected.presentation
 
+
 import org.junit.experimental.categories.Category
 import com.pactogg.app.testing.UnitChecks
 import com.pactogg.app.core.network.ApiClientFactory
@@ -86,4 +87,21 @@ class NicknameQueriesTest {
         override suspend fun accept(contract: Challenge): Challenge = error("unexpected")
         override suspend fun reject(contract: Challenge): Challenge = error("unexpected")
     }
+
+    @Test fun elapsedCooldownAllowsNewQueryAndEditingWithoutAutomaticPolling() = runTest(dispatcher) {
+        runCurrent(); social.check = { throw ApiFailure(429, "RATE_LIMITED") }
+        model.checkNickname("FirstName"); advanceTimeBy(701); runCurrent()
+        val retryAt = model.nicknameRetryAt
+        assertTrue(retryAt > System.currentTimeMillis())
+        model.editNickname("SecondName"); advanceTimeBy(701); runCurrent()
+        assertEquals("SecondName", model.state.value.social.editedNickname); assertEquals(1, social.calls)
+        // Arrange the real-clock deadline in the past; virtual coroutine time alone cannot expire it.
+        model.nicknameRetryAt = System.currentTimeMillis() - 1
+        social.check = { NicknameAvailability(it, true) }
+        model.editNickname("ThirdName"); advanceTimeBy(701); runCurrent()
+        assertEquals(2, social.calls)
+        assertTrue(model.state.value.social.nicknameNotice.orEmpty().contains("disponible"))
+        advanceTimeBy(120000); runCurrent(); assertEquals(2, social.calls)
+    }
+
 }
