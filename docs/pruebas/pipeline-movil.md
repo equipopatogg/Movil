@@ -46,3 +46,5 @@ El usuario autorizó la entrega por PR. El candidato del PR8 terminó con grafo 
 No se agregan Pact-real, mutación, carga/chaos, ZAP, SQL Server, Terraform o publicación automática: no son controles móviles obligatorios corroborados para este corte. No se migran Hilt/JUnit4/stack por copiar el ejemplo.
 
 [Comparación de fuente](../preparacion/comparacion-profesor-calidad-2026-11-04.md) · [Matriz de operaciones](matriz-operaciones.md).
+
+Los PR ejecutan el grafo antes del merge y push a main lo repite sobre la revisión integrada. Los pushes de ramas con PR no duplican otro grafo idéntico; workflow_dispatch conserva la comprobación manual.
