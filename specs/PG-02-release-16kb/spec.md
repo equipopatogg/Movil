@@ -1,6 +1,6 @@
 # PG-02 — Corregir compatibilidad nativa de 16 KB y verificar release local
 
-Tipo: dependencia/configuración/verificación de artefacto. Fecha: 2026-10-30. Estado: inspección/build release y arranque 4 KB verificados localmente; runtime 16 KB pendiente.
+Tipo: dependencia/configuración/verificación de artefacto. Fecha: 2026-10-30. Estado: inspección/build release y arranque 4 KB verificados localmente; runtime 16 KB comprobado para instalación/arranque/acceso.
 Rector: [AGENTS](../../AGENTS.md) y [constitución SDD](../../.specify/memory/constitution.md).
 
 ## 1. Contexto y objetivo
@@ -65,4 +65,6 @@ Expediente: [plan](plan.md), [tareas](tasks.md), [checklist](checklists/checklis
 
 ## Ejecución autorizada posterior — 2026-11-04
 
-[Resultado vigente](../../docs/pruebas/cierre-pendientes-2026-11-04.md): build release, ocho ELF/ZIP y arranque 4 KB correctos; diagnóstico RELRO corregido sin cambiar dependencias. Runtime 16 KB y aceptación integral pendientes. Firma local de prueba autorizada, sin producción/Play.
+[Resultado vigente](../../docs/pruebas/cierre-pendientes-2026-11-04.md): build release, ocho ELF/ZIP y arranque 4 KB correctos; diagnóstico RELRO corregido sin cambiar dependencias. Runtime 16 KB de instalación/arranque/acceso comprobado; aceptación funcional integral pendiente. Firma local de prueba autorizada, sin producción/Play.
+
+Runtime posterior: mismo candidato con firma local de prueba, PAGE_SIZE=16384 y recorrido login/registro/aviso correctos; contraste de instalación/arranque 4096 correcto. Manifiesto local con hashes y límites en el informe. No acredita Play ni aceptación integral de las operaciones autenticadas.

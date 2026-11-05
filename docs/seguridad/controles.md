@@ -63,3 +63,8 @@ Precisión de PG-02: ese registro histórico requiere contrastar segmentos LOAD,
 ## Conciliación de calidad móvil — 2026-11-04
 
 La matriz de 19 operaciones y los resultados actuales están en [informe de calidad](../pruebas/verificacion-calidad-2026-11-04.md), [matriz](../pruebas/matriz-operaciones.md) y [pipeline](../pruebas/pipeline-movil.md). Mantener resultados locales separados de CI remoto, SAST/SCA y aceptación humana pendientes. Sin controles backend añadidos por analogía.
+
+
+## Cierre posterior — 2026-11-05
+
+Wrapper alterado y reglas Semgrep comprobados realmente en run41977160594. Quince operaciones protegidas rechazan peticiones live sin sesión con 401. Release: ocho ELF/ZIP y prueba 4/16 KB según [alcance e identidad](../pruebas/cierre-pendientes-2026-11-04.md). No transferir esos resultados a aceptación humana, autorización entre usuarios o producción.

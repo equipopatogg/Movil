@@ -18,3 +18,5 @@ Actualización 2026-11-04: código/configuración de categorías, medición, run
 Cierre local: 116 JVM y cinco Android API35, medición real y validadores negativos correctos. [Evidencia](../../docs/pruebas/verificacion-calidad-2026-11-04.md). T01.4 conserva pendiente la ejecución remota aunque su configuración ya existe. T01.6 documenta propuesta, no ratificación de porcentaje.
 
 T01.4 ejecutada en GitHub bajo autorización posterior: PR8/run41969860447, cinco métodos Android API35 y recogida real de artefactos. [Entrega](../../docs/pruebas/entrega-github-2026-11-04.md).
+
+Actualización 2026-11-05: 192 JVM y 26 validadores; cobertura 27,14 % local/26,96 % CI. Cinco Android offline y gate correctos en run41977160594. Mínimo de cobertura sigue sin ratificar. [Cierre](../../docs/pruebas/cierre-pendientes-2026-11-04.md).

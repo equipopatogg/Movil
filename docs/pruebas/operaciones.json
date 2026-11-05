@@ -503,6 +503,70 @@
       {
         "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
         "name": "busyStateBlocksNavigationAndEditing"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.presentation.AccessStateTest",
+        "name": "switchingFormsDiscardsSensitiveInputs"
+      },
+      {
+        "class": "com.pactogg.app.feature.auth.presentation.AccessStateTest",
+        "name": "submissionDoesNotCreateSessionOrNavigate"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ContractPolicyTest",
+        "name": "pagesMergeByRealIdentityAndResetForNewFilter"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ContractPolicyTest",
+        "name": "onlyEligibleMemberWithKnownBalanceAndVersionCanAccept"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ContractPolicyTest",
+        "name": "directedActionsAreExclusiveAndRejectionDoesNotNeedFunds"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.EvidenceConfirmationTest",
+        "name": "failedReadKeepsConfirmedEvidenceAndMarksStatusStaleWithoutAnotherUpload"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.EvidenceConfirmationTest",
+        "name": "confirmedUploadRefreshesActualStatusWithoutInventingIt"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.EvidenceConfirmationTest",
+        "name": "lateReadCannotRestoreDataAfterSessionWasCleared"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.NicknameQueriesTest",
+        "name": "rateLimitAddsCooldownWithoutPolling"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.NicknameQueriesTest",
+        "name": "typingWaitsAndInvalidNameNeverQueries"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.NicknameQueriesTest",
+        "name": "cancelledSlowResponseCannotOverwriteNewNameResult"
+      },
+      {
+        "class": "com.pactogg.app.feature.explore.presentation.ExploreFilterTest",
+        "name": "emptyQueryPreservesOrderAndSourceAndMissingQueryReturnsEmpty"
+      },
+      {
+        "class": "com.pactogg.app.feature.explore.presentation.ExploreFilterTest",
+        "name": "combinesCategoryAndTrimmedCaseInsensitiveSearch"
+      },
+      {
+        "class": "com.pactogg.app.integration.InputRulesTest",
+        "name": "evidenceRejectsSpoofedHostsCredentialsAndInsecureUrls"
+      },
+      {
+        "class": "com.pactogg.app.integration.InputRulesTest",
+        "name": "loginDoesNotApplyRegistrationMinimumAndConsentStartsFalse"
+      },
+      {
+        "class": "com.pactogg.app.integration.InputRulesTest",
+        "name": "challengeRejectsUnreturnedBondsPastDatesAndCurrency"
       }
     ],
     "security": [
@@ -733,6 +797,120 @@
       {
         "class": "com.pactogg.app.testing.EndpointFailureTest",
         "name": "malformedSuccessCannotBeReportedAsConfirmed[CON-07]"
+      },
+      {
+        "class": "com.pactogg.app.core.network.ApiClientFactoryTest",
+        "name": "parsesJsonOverTrustedTlsWithoutFollowingRedirects"
+      },
+      {
+        "class": "com.pactogg.app.core.network.ApiClientFactoryTest",
+        "name": "rejectsUnconfiguredOrUnsafeUrls"
+      },
+      {
+        "class": "com.pactogg.app.core.network.ApiClientFactoryTest",
+        "name": "cannotCreateCleartextClient"
+      },
+      {
+        "class": "com.pactogg.app.core.network.ApiErrorMapperTest",
+        "name": "mapsSecurityAndRetryStatesWithoutUsingServerText"
+      },
+      {
+        "class": "com.pactogg.app.core.network.ApiErrorMapperTest",
+        "name": "rejectsUnsafeCorrelationIds"
+      }
+    ],
+    "integration": [
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "unauthorizedWriteRenewsButNeverReplaysPost"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "concurrentExpiredRequestsRotateOnlyOnceAndUseFreshBearer"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "challengeRefreshUsesAuthenticatedGetAndRejectsAnotherContract"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "protectedRequestDoesNotFollowRedirectsOrForwardBearer"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "malformedPaginationIsNotReportedAsEmptySuccess"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "restoredExpiredSessionRenewsBeforeReturningToTheUi"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "unauthorizedReadRefreshesAndRetriesOnlyOnce"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "logoutNetworkFailureStillClearsLocalSession"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "incompleteSessionAndStorageFailureNeverAuthenticate"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "forbiddenDoesNotRefreshOrEraseSessionAndHandlesArrayDetails"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "lateBusinessResponseAfterLogoutCannotBeAccepted"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "failedRotationClearsTokensAndDoesNotLoop"
+      },
+      {
+        "class": "com.pactogg.app.integration.ApiIntegrationTest",
+        "name": "registrationGroupContractEvidenceTournamentsAndLogoutUseRealWireContract"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "acceptSendsObservedVersionAndUsesConfirmedBalance"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "membersPrefixAndBoardFiltersFollowCursorContract"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "directedChallengeSerializesRealTarget"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "groupListDetailAndJoinUseServerRoleBalanceAndNormalizedCode"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "availabilityIsPublicAndRateLimitDoesNotLoop"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "rejectionUsesCancelledReasonAndVersionWithoutInventingPoints"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "ownProfileAndPatchPreserveCredentialsAndPersistIdentity"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "anotherProfileCannotOverwriteSession"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "malformedPageAndWrongGroupAreRejected"
+      },
+      {
+        "class": "com.pactogg.app.integration.SocialApiIntegrationTest",
+        "name": "acceptErrorsNeverRetryOrEraseSession"
       }
     ]
   }

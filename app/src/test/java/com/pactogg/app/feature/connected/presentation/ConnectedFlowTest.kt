@@ -10,6 +10,7 @@ import com.pactogg.app.feature.connected.domain.*
 import com.pactogg.app.testing.UnitChecks
 import java.lang.reflect.Proxy
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.*
 import org.junit.*
 import org.junit.Assert.*
@@ -33,7 +34,7 @@ class ConnectedFlowTest {
         handlers[method.name]?.invoke(arguments ?: emptyArray()) ?: error("Unexpected ${method.name}")
     } as T
 
-    @Before fun setup() {
+    @Before fun setup() = runTest(dispatcher) {
         Dispatchers.setMain(dispatcher)
         val session = Session(account, "synthetic-access", "synthetic-refresh", Long.MAX_VALUE)
         val store = object : SessionStore {
@@ -43,9 +44,10 @@ class ConnectedFlowTest {
         }
         val api = ApiClientFactory().create("https://localhost/").create(PactoApi::class.java)
         val sessions = SessionManager(api, store)
-        runBlocking { sessions.restore() }
+        sessions.restore()
         model = ConnectedViewModel(sessions, repository<ProductRepository>(), repository<SocialRepository>())
         lifecycle.put("test", model)
+        model.state.first { !it.restoring && it.account != null }
         model.mutable.value = ConnectedState(restoring = false, account = account, group = group, contract = contract)
     }
     @After fun cleanup() { lifecycle.clear(); Dispatchers.resetMain() }
