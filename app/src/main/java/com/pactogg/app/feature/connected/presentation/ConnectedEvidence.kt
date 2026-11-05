@@ -39,6 +39,8 @@ fun ConnectedEvidence(state: ConnectedState, model: ConnectedViewModel) {
             state.evidence?.let {
                 Text("Evidencia confirmada: ${it.type} · Moderación: ${it.moderation}")
             }
+            if (state.contractStateStale) Text("Evidencia enviada; estado actual del reto pendiente de consulta. " +
+                "No repitas el envío para actualizarlo.")
             Text("La validación y autorización definitivas corresponden al servidor. No se cargan videos.")
         }
     }

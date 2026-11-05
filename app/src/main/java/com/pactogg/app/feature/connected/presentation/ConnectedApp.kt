@@ -39,6 +39,7 @@ fun ConnectedApp(model: ConnectedViewModel) {
     if (state.account == null) {
         AccessScreen(state.access.copy(loading = state.busy), model::access) {
             Feedback(state.error, state.notice)
+            if (state.access.registering) state.social.nicknameNotice?.let { Text(it) }
         }
         return
     }
@@ -85,6 +86,8 @@ private fun ConnectedContent(state: ConnectedState, model: ConnectedViewModel) {
     when (state.route) {
         ConnectedRoute.HOME -> ConnectedHome(state, model)
         ConnectedRoute.GROUPS -> ConnectedGroups(state, model)
+        ConnectedRoute.MEMBERS -> ConnectedMembers(state, model)
+        ConnectedRoute.BOARD -> ConnectedBoard(state, model)
         ConnectedRoute.CREATE -> ConnectedCreate(state, model)
         ConnectedRoute.CONTRACT -> ConnectedContract(state, model)
         ConnectedRoute.EVIDENCE -> ConnectedEvidence(state, model)
@@ -98,26 +101,20 @@ private fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
     AppPage("Tu palabra.\nTu juego.", "Bienvenido, ${state.account?.nickname.orEmpty()}") {
         HeroPanel("JUEGA CON TU GRUPO", "Crea tu próximo reto.",
             "Grupos, retos manuales y torneos disponibles en el servicio.", R.drawable.ic_pacto_bolt)
-        PactCard(state.group?.name ?: "Crea tu grupo", "Elige un grupo creado durante esta sesión.",
+        PactCard(state.group?.name ?: "Tus grupos", "Recupera tus grupos o únete a tu equipo.",
             R.drawable.ic_pacto_users) {
             Action("Grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+        }
+        if (state.group != null) Action("Tablero de retos", enabled = !state.busy) {
+            model.navigate(ConnectedRoute.BOARD)
         }
         if (state.group != null) Action("Crear reto manual", enabled = !state.busy) {
             model.navigate(ConnectedRoute.CREATE)
         }
         Action("Consultar torneos", enabled = !state.busy) { model.navigate(ConnectedRoute.TOURNAMENTS) }
-        if (state.contract != null) Action("Ver último reto creado", enabled = !state.busy) {
+        if (state.contract != null) Action("Ver reto seleccionado", enabled = !state.busy) {
             model.navigate(ConnectedRoute.CONTRACT)
         }
-    }
-}
-
-@Composable
-private fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
-    AppPage("Tu perfil.", "Datos de tu sesión") {
-        PactCard(state.account?.nickname.orEmpty(), state.account?.email.orEmpty(), R.drawable.ic_pacto_user)
-        Text("El cierre de sesión borra la sesión local; no elimina tu cuenta.")
-        Action("Cerrar sesión", enabled = !state.busy) { model.logout() }
     }
 }
 

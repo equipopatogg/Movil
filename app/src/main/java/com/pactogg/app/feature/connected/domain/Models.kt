@@ -4,10 +4,14 @@ data class Group(val id: String, val name: String, val inviteCode: String,
     val role: String, val points: Int, val bonds: List<Int>)
 
 data class Challenge(val id: String, val groupId: String, val game: String,
-    val condition: String, val reward: String, val deadline: String, val bond: Int, val status: String)
+    val condition: String, val reward: String, val deadline: String, val bond: Int, val status: String,
+    val challengerId: String? = null, val targetType: String? = null, val targetId: String? = null,
+    val acceptedBy: String? = null, val evidenceCount: Int? = null, val version: Int? = null,
+    val closedReason: String? = null, val myPoints: Int? = null,
+    val acceptedAt: String? = null, val updatedAt: String? = null, val createdAt: String? = null)
 
 data class ChallengeDraft(val game: String = "", val condition: String = "", val reward: String = "",
-    val deadline: String = "", val bond: Int? = null)
+    val deadline: String = "", val bond: Int? = null, val targetId: String? = null)
 
 data class Evidence(val id: String, val contractId: String, val type: String, val moderation: String)
 
@@ -22,6 +26,7 @@ data class TournamentPage(val items: List<Tournament>, val hasMore: Boolean, val
 interface ProductRepository {
     suspend fun createGroup(name: String): Group
     suspend fun createChallenge(group: Group, draft: ChallengeDraft): Challenge
+    suspend fun challenge(contract: Challenge): Challenge
     suspend fun sendLink(contract: Challenge, url: String): Evidence
     suspend fun sendPhoto(contract: Challenge, bytes: ByteArray, mimeType: String): Evidence
     suspend fun tournaments(status: String?, game: String?, cursor: String?): TournamentPage

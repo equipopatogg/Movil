@@ -115,6 +115,19 @@ class SessionManager(private val api: PactoApi, private val store: SessionStore,
         true
     }
 
+    suspend fun updateAccount(account: com.pactogg.app.feature.auth.domain.Account) =
+        withContext(Dispatchers.IO) {
+            mutex.withLock {
+                val session = mutable.value ?: throw ApiFailure(401, "UNAUTHORIZED")
+                if (session.account.id != account.id) throw ApiFailure(0, "INVALID_RESPONSE")
+                if (session.account != account) {
+                    val updated = Session(account, session.accessToken, session.refreshToken, session.expiresAtMillis)
+                    store.write(updated)
+                    mutable.value = updated
+                }
+            }
+        }
+
     private fun clearLocked() {
         generation++
         mutable.value = null

@@ -36,5 +36,11 @@ object ConnectedModule {
 
     @Provides
     @Singleton
+    fun socials(api: PactoApi, sessions: SessionManager):
+        com.pactogg.app.feature.connected.domain.SocialRepository =
+        com.pactogg.app.feature.connected.data.ApiSocialRepository(api, sessions)
+
+    @Provides
+    @Singleton
     fun products(api: PactoApi, sessions: SessionManager): ProductRepository = ApiProductRepository(api, sessions)
 }
