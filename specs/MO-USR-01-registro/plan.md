@@ -12,3 +12,6 @@ Reversión: si no existe contrato/servicio compatible, acción queda no disponib
 
 
 Implementación autorizada 2026-11-04: transporte/sesión compartidos y feature/connected agrupan el pequeño corte de producto; auth separado. No crear un repositorio/custodio por pantalla. Plan iniciado, ver reporte del consumidor para comprobaciones reales.
+
+
+Actualización de calidad solicitada: reutilizar pruebas existentes y ejecutar las tres categorías de la matriz antes de entregar esta operación; corregir errores, vincular informes al candidato y mantener pendientes no demostrados. La CI local preparada no acredita ejecución remota.

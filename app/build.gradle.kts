@@ -37,7 +37,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    testCoverage { jacocoVersion = "0.8.14" }
     buildTypes {
+        debug { enableUnitTestCoverage = true }
         release {
             optimization {
                 enable = true
@@ -111,11 +113,25 @@ tasks.register<JavaExec>("detekt") {
     description = "Checks Kotlin sources using the pinned standalone Detekt CLI."
     classpath = detektTool
     mainClass.set("io.gitlab.arturbosch.detekt.cli.Main")
-    args("--input", "src/main/java", "--config", "../config/detekt.yml", "--build-upon-default-config")
+    args("--input", "src/main/java", "--config", "../config/detekt.yml", "--build-upon-default-config",
+        "--report", "xml:build/reports/detekt/detekt.xml")
 }
 
 group = "com.pactogg"
 version = "0.1.0"
 tasks.named<org.cyclonedx.gradle.CyclonedxDirectTask>("cyclonedxDirectBom") {
     includeConfigs = listOf("releaseRuntimeClasspath")
+}
+
+// Separate CI categories reuse the same JUnit4 tests. No test-engine migration.
+val testSuite = providers.gradleProperty("pactogg.testSuite").orElse("all").get()
+require(testSuite in listOf("all", "unit", "integration", "security")) { "Unknown pactogg.testSuite" }
+tasks.withType<Test>().configureEach {
+    useJUnit {
+        if (testSuite != "all") includeCategories("com.pactogg.app.testing." + when (testSuite) {
+            "unit" -> "UnitChecks"
+            "integration" -> "IntegrationChecks"
+            else -> "SecurityChecks"
+        })
+    }
 }

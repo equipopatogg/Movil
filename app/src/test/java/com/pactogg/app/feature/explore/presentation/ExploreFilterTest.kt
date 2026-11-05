@@ -1,9 +1,12 @@
 package com.pactogg.app.feature.explore.presentation
 
+import org.junit.experimental.categories.Category
+import com.pactogg.app.testing.UnitChecks
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
+@Category(UnitChecks::class)
 class ExploreFilterTest {
     private val ideas = listOf(
         IdeaPresentation("one", "Game A", "Precision", "Train control", IdeaCategory.SKILL),

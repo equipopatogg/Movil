@@ -10,7 +10,7 @@ Conectar la UI Android existente con `POST /api/v1/groups`. Fuentes fijadas al c
 
 - RF1: Mostrar crear grupo con name 2–40. Omitir settings inicialmente y mostrar en la respuesta los valores reales del servidor; no inventar jurados, consenso, puntos o fianzas en el cliente. La ratificación de reglas de producto sigue pendiente.
 - RF2: Enviar una solicitud autenticada y procesar 201 con id, name, invite_code, settings, my_role y my_points. Conservar el grupo recién creado como contexto de la sesión, no como lista completa de membresías.
-- RF3: Mostrar código de invitación informativamente; unirse por código queda oculto porque no hay endpoint. No ofrecer envío automático de invitaciones ni membresías ficticias.
+- RF3: Mostrar código de invitación real; la unión ahora disponible se implementa por separado en MO-MEM-01. No ofrecer envío automático de invitaciones ni membresías ficticias.
 - RF4: Tratar 409 GROUP_LIMIT_REACHED, 422 VALIDATION_ERROR, 401/403 y fallo de red. Sin GET de grupos, no prometer reconstrucción tras proceso muerto o cambio de dispositivo ni repetir POST automáticamente.
 
 ## 3. Requisitos no funcionales
@@ -38,7 +38,7 @@ Operación: `POST /api/v1/groups`. JSON UTF-8 snake_case; IDs opacos de 24 hex c
 |---|---|---|
 | MO-GRP-01-AC1 | 201 muestra grupo, rol, puntos y código devueltos, sin valores fabricados. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
 | MO-GRP-01-AC2 | Nombre límite, 409 y 422 conservan formulario recuperable y no producen éxito local. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
-| MO-GRP-01-AC3 | No existe lista ficticia ni unión activa; sesión/cuenta distinta elimina el contexto del grupo creado. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
+| MO-GRP-01-AC3 | No existe lista ficticia; unión se resuelve por MO-MEM-01 y sesión/cuenta distinta elimina el contexto anterior. | Prueba consumidor + evidencia de proveedor aplicable; NO_EJECUTADO |
 | MO-GRP-01-ACQ | Build, análisis y pruebas aplicables del mismo candidato correctos, sin secretos ni informe ausente | Informes identificados; NO_EJECUTADO |
 
 ## 6. Plan de pruebas
@@ -69,3 +69,19 @@ Usuario solicita empezar estas specs. Se implementa consumidor con componentes e
 Aviso básico local autorizado posteriormente por el usuario: disponible en registro con consentimiento explícito; revisión de producto/publicación pendiente. El contenido se identifica como provisional y la versión de protocolo se configura sin atribuir aprobación legal.
 
 Ver [evidencia y límites del consumidor](../../docs/integracion/verificacion-consumidor-2026-11-04.md). Criterios con proveedor, dispositivo y aceptación se mantienen abiertos; NO_EJECUTADO de tablas originales se refiere a esa verificación integral, no a ausencia actual de código. No convertir fixtures HTTP en PASS del servidor ni UI anterior en aceptación de este candidato. Sin commit/push.
+
+
+## Especificaciones confirmadas posteriores — 2026-11-04
+
+Usuario solicita equivalentes móviles de las once operaciones nuevas incluidas en Sistema.docx; ver [matriz documental](../../docs/integracion/specs-confirmadas-sistema-2026-11-04.md). Sus recorridos no se agregan silenciosamente a esta operación: lista/detalle de grupo, unión/miembros y tablero/detalle/aceptar/rechazar tienen expedientes propios. La lectura auxiliar ya implementada por MO-EVI-02 se reutiliza en MO-CON-03 sin duplicación ni atribuir implementación general. Restricciones previas de navegación describen el corte anterior; nuevas entradas solo se activarán al implementar y verificar la spec correspondiente. Fuera de este encargo documental no se cambió código.
+
+
+## Pruebas consumidor por tipo — actualización 2026-11-04
+
+[Escenarios y límites](../../docs/pruebas/matriz-operaciones.md) · [Manifestación canónica](../../docs/pruebas/operaciones.json). Las instancias parametrizadas conservan el ID exacto en JUnit:
+
+- unit: `com.pactogg.app.testing.EndpointUnitTest.enforcesConsumerBoundaryWithoutNetwork[GRP-01]`.
+- integration: `com.pactogg.app.testing.EndpointContractTest.consumesConfirmedWireContract[GRP-01]`.
+- security: `com.pactogg.app.testing.EndpointSecurityTest.deniedResponseIsSanitizedAndNeverReplayed[GRP-01]`.
+
+Se reutilizan además casos compartidos de TLS, sesión, estados, reglas y contrato. Android real prueba cifrado/Room/acceso por separado. Este apartado no convierte un caso de consumidor o fixture en aceptación de todos los AC ni prueba de autorización del servidor; controles y limitaciones finales se registran en el informe de esta fase.

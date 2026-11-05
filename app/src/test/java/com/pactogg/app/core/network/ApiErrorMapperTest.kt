@@ -1,5 +1,7 @@
 package com.pactogg.app.core.network
 
+import org.junit.experimental.categories.Category
+import com.pactogg.app.testing.SecurityChecks
 import com.pactogg.app.core.network.dto.ApiErrorDto
 import com.pactogg.app.core.network.mapper.toFailure
 import com.pactogg.app.core.result.FailureKind
@@ -7,6 +9,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
+@Category(SecurityChecks::class)
 class ApiErrorMapperTest {
     @Test
     fun mapsSecurityAndRetryStatesWithoutUsingServerText() {
