@@ -1,9 +1,8 @@
-name: Android base quality
+name: Android CI
 on:
-  push:
-    paths: ['**', '.github/workflows/android-ci.yml', '.github/scripts/**', 'AGENTS.md', '.gitignore']
   pull_request:
-    paths: ['**', '.github/workflows/android-ci.yml', '.github/scripts/**', 'AGENTS.md', '.gitignore']
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -11,61 +10,233 @@ concurrency:
   group: android-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  android:
+  integrity:
+    name: Wrapper and SDD test policy
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: .
-        shell: bash
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        id: checkout
         with:
           persist-credentials: false
-      - name: Evidence helper policy tests
-        run: python3 -m unittest discover -s .github/scripts -p test_android_evidence.py
-      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
-        id: java
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad
         with:
           distribution: temurin
           java-version: '21'
-      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
-        id: gradle
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c
         with:
           validate-wrappers: true
           allow-snapshot-wrappers: false
           cache-provider: basic
           cache-read-only: true
           dependency-graph: disabled
-      - name: Android SDK
-        id: sdk
-        uses: android-actions/setup-android@035682743ab223ec9c6169af09811dff8247e520
+      - name: Evidence policy negative cases
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+      - name: Confirm operation and spec matrix
+        run: python3 .github/scripts/android-ci-checks.py matrix
+  static-analysis:
+    name: Android Lint and Detekt
+    needs: integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          packages: platforms;android-36.1 build-tools;36.0.0
-          log-accepted-android-sdk-licenses: false
-      - name: Build, unit tests, lint, Detekt and instrumented test compilation
-        id: build
-        run: bash ./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:detekt :app:assembleDebugAndroidTest --console=plain
-      - name: Release runtime SBOM
-        id: sbom
-        if: ${{ always() && steps.sdk.outcome == 'success' }}
-        run: bash ./gradlew :app:cyclonedxDirectBom --no-configuration-cache --console=plain
-      - name: Validate current execution evidence
-        id: evidence
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
-        working-directory: .
-        env:
-          STEPS_JSON: ${{ toJSON(steps) }}
-        run: python3 .github/scripts/android-evidence.py quality
-      - name: Reports
+          persist-credentials: false
+      - uses: ./.github/actions/android-setup
+      - run: bash ./gradlew :app:lintDebug :app:detekt --console=plain
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: android-quality-reports
+          name: android-static
+          path: app/build/reports/
+          if-no-files-found: error
+          retention-days: 7
+  tests:
+    name: ${{ matrix.suite }} tests
+    needs: static-analysis
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [unit, integration, security]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/android-setup
+      - name: Execute selected category
+        run: bash ./gradlew :app:testDebugUnitTest -Ppactogg.testSuite=${{ matrix.suite }} --console=plain
+      - name: Verify exact cases, failures and omissions
+        if: always()
+        run: python3 .github/scripts/android-ci-checks.py ${{ matrix.suite }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: android-${{ matrix.suite }}
           path: |
-            app/build/reports/
-            app/build/test-results/
-            artifacts/android-quality/
+            app/build/test-results/testDebugUnitTest/
+            app/build/reports/tests/testDebugUnitTest/
+            artifacts/android-ci/${{ matrix.suite }}.json
+          if-no-files-found: error
+          retention-days: 7
+  coverage:
+    name: Measured JVM coverage
+    needs: static-analysis
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/android-setup
+      - name: Execute all categories and measure
+        run: bash ./gradlew :app:createDebugUnitTestCoverageReport --console=plain
+      - name: Verify complete JVM run
+        if: always()
+        run: python3 .github/scripts/android-ci-checks.py all
+      - name: Verify nonempty coverage
+        if: always()
+        run: python3 .github/scripts/android-ci-checks.py coverage
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: android-coverage
+          path: |
+            app/build/reports/coverage/
+            app/build/test-results/testDebugUnitTest/
+            artifacts/android-ci/all.json
+            artifacts/android-ci/coverage.json
+          if-no-files-found: error
+          retention-days: 7
+  secrets:
+    name: Secret detection
+    needs: integrity
+    uses: ./.github/workflows/android-security.yml
+    with:
+      scanner: gitleaks
+  sast:
+    name: Semgrep SAST
+    needs: integrity
+    uses: ./.github/workflows/android-security.yml
+    with:
+      scanner: semgrep
+  dependencies:
+    name: SCA and SBOM
+    needs: integrity
+    uses: ./.github/workflows/android-security.yml
+    with:
+      scanner: trivy
+  build:
+    name: Build Android candidate
+    needs: [tests, coverage]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/android-setup
+      - run: bash ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest --console=plain
+      - name: Bind both APKs to current execution
+        run: python3 .github/scripts/android-ci-checks.py build
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: android-build
+          path: |
+            app/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+            artifacts/android-ci/build.json
+          if-no-files-found: error
+          retention-days: 7
+  instrumented:
+    name: Android device tests (Room, Keystore, access)
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: android-build
+      - name: Verify candidate hashes before install
+        run: python3 .github/scripts/android-ci-checks.py candidate
+      - name: Enable KVM on isolated runner
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Execute offline instrumentation on fresh emulator
+        uses: reactivecircus/android-emulator-runner@e89f39f1abbbd05b1113a29cf4db69e7540cae5a # v2.37.0, Node24
+        with:
+          api-level: 35
+          target: google_atd
+          arch: x86_64
+          avd-name: pactogg-ci
+          emulator-port: 5554
+          ram-size: 2048M
+          force-avd-creation: true
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back none
+          script: python3 scripts/run-instrumented.py --device emulator-5554
+      - name: Verify actual device cases (no skipped success)
+        if: always()
+        run: python3 .github/scripts/android-ci-checks.py instrumented
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: android-instrumented
+          path: |
+            app/build/outputs/instrumented-offline/
+            artifacts/android-ci/instrumented.json
+          if-no-files-found: error
+          retention-days: 7
+  quality-gate:
+    name: Android PR quality gate
+    if: always()
+    needs: [integrity, static-analysis, tests, coverage, secrets, sast, dependencies, build, instrumented]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          pattern: android-*
+          path: artifacts/ci-input
+      - name: Fail closed on missing, failed or skipped controls
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+        run: python3 .github/scripts/android-ci-checks.py gate
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: android-gate
+          path: artifacts/android-ci/gate.json
+          if-no-files-found: error
+          retention-days: 7
+  package:
+    name: Validated debug APK (no deployment)
+    needs: [quality-gate, build]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: android-build
+      - name: Preserve the tested candidate
+        run: python3 .github/scripts/android-ci-checks.py candidate
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: pactogg-debug-validated
+          path: |
+            app/build/outputs/apk/debug/app-debug.apk
+            artifacts/android-ci/build.json
           if-no-files-found: error
           retention-days: 7

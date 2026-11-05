@@ -58,3 +58,8 @@ La compilación por sí sola no demuestra compatibilidad nativa. Resolver con ve
 controlada del proveedor y validar ELF/paquetes/dispositivo antes de Google Play. DataStore 1.2.1 sí pasó esa inspección de sus AAR.
 
 Precisión de PG-02: ese registro histórico requiere contrastar segmentos LOAD, relación RELRO/LOAD, empaquetado y ejecución con los criterios oficiales vigentes antes de decidir un cambio. El final de RELRO aislado no prueba todos los casos de incompatibilidad. No se reprodujo el diagnóstico ni se ratificó una versión de reemplazo en esta preparación.
+
+
+## Conciliación de calidad móvil — 2026-11-04
+
+La matriz de 19 operaciones y los resultados actuales están en [informe de calidad](../pruebas/verificacion-calidad-2026-11-04.md), [matriz](../pruebas/matriz-operaciones.md) y [pipeline](../pruebas/pipeline-movil.md). Mantener resultados locales separados de CI remoto, SAST/SCA y aceptación humana pendientes. Sin controles backend añadidos por analogía.

@@ -68,3 +68,18 @@ La referencia oficial compatible de setup-gradle y el alcance de validación deb
 | Aceptación completa | Pendiente | Pendiente | Mantener AC1–AC5, negativo de acción Wrapper, motores y CI real |
 
 Expediente: [plan](plan.md), [tareas](tasks.md), [checklist](checklists/checklist.md).
+
+
+## Alcance autorizado de calidad — 2026-11-04
+
+Usuario pide completar calidad del móvil local sin reiniciarlo ni copiar controles backend. [Comparación fijada](../../docs/preparacion/comparacion-profesor-calidad-2026-11-04.md). Se reutiliza android-security.yml como workflow_call y se centraliza grafo/disparadores en android-ci.yml; setup compartido en .github/actions/android-setup. No se crean jobs vacíos ni éxitos por herramientas no ejecutadas.
+
+- RF5: gate final consume informes de trabajos obligatorios y comprueba run/attempt/source, matriz/helper, hashes de XML/APKs/SBOM y casos exactos; failure/skipped/cancelled/missing falla.
+- RF6: conservar candidato debug y test APK antes de emulador; solo después de gate se publica como artefacto validado el mismo binario, sin recompilar ni desplegar.
+- PG00-AC6: con upstream verde pero evidencia ausente, vieja, modificada, prueba omitida o APK diferente, el gate falla; con evidencia completa del mismo candidato pasa. Evidencia local sintética del helper y futura ejecución real se distinguen.
+
+La ruta Gitleaks se corrige a /src después de separar el repositorio móvil, conservando reglas/exclusiones y prueba de alcance del comando. Permisos contents:read; no nuevas credenciales. Acciones referenciadas por SHA oficial y herramientas en imágenes existentes. La captura de pantalla contiene controles omitidos: no se copian ni se cuentan verdes.
+
+Las frases iniciales de ausencia de CI describen antecedentes. Ya hubo CI remoto de candidatos antiguos; la configuración actual no se acredita ejecutada remotamente hasta subir por autorización. No cerrar AC1/AC4 integrales por revisión local de YAML o pruebas de sanitización.
+
+Resultados actuales: [informe de calidad](../../docs/pruebas/verificacion-calidad-2026-11-04.md). La aprobación histórica de diseño no acredita aceptación final ni ejecución remota.

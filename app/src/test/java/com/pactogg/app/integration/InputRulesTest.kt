@@ -1,5 +1,7 @@
 package com.pactogg.app.integration
 
+import org.junit.experimental.categories.Category
+import com.pactogg.app.testing.UnitChecks
 import com.pactogg.app.feature.connected.domain.ChallengeDraft
 import com.pactogg.app.feature.connected.domain.Group
 import com.pactogg.app.feature.connected.domain.InputRules
@@ -7,6 +9,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
+@Category(UnitChecks::class)
 class InputRulesTest {
     @Test fun loginDoesNotApplyRegistrationMinimumAndConsentStartsFalse() {
         assertTrue(InputRules.access("a@example.com", "x", null, false))

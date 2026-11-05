@@ -24,10 +24,20 @@ class ApiProductRepository(private val api: PactoApi, private val sessions: Sess
     override suspend fun createChallenge(group: Group, draft: ChallengeDraft): Challenge {
         require(InputRules.challenge(group, draft, System.currentTimeMillis()))
         val body = ContractRequest(group.id, draft.game.trim(), draft.condition.trim(), draft.reward.trim(),
-            draft.deadline, requireNotNull(draft.bond))
+            draft.deadline, requireNotNull(draft.bond),
+            targetType = if (draft.targetId == null) "group" else "member", targetId = draft.targetId)
         return sessions.authorized { api.contract(it, body) }.checked(201).data.toDomain().also {
             if (it.groupId != group.id) throw ApiFailure(0, "INVALID_RESPONSE")
         }
+    }
+
+    override suspend fun challenge(contract: Challenge): Challenge {
+        val result = sessions.authorized(readOnly = true) { api.challenge(it, contract.id) }
+            .checked(200).data.toDomain()
+        if (result.id != contract.id || result.groupId != contract.groupId) {
+            throw ApiFailure(0, "INVALID_RESPONSE")
+        }
+        return result
     }
 
     override suspend fun sendLink(contract: Challenge, url: String): Evidence {

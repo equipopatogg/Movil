@@ -1,83 +1,48 @@
-name: Android base security
+name: Android security control
 on:
-  push:
-    paths: ['**', '.github/workflows/android-security.yml', '.github/scripts/**', 'AGENTS.md', '.gitignore']
-  pull_request:
-    paths: ['**', '.github/workflows/android-security.yml', '.github/scripts/**', 'AGENTS.md', '.gitignore']
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      scanner:
+        required: true
+        type: string
 permissions:
   contents: read
 jobs:
-  source:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        id: checkout
-        with:
-          persist-credentials: false
-      - name: Secrets in working tree
-        id: gitleaks
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
-        run: python3 .github/scripts/android-evidence.py scan gitleaks
-      - name: Semgrep local rules
-        id: semgrep
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
-        run: python3 .github/scripts/android-evidence.py scan semgrep
-      - name: Summarize source controls
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
-        env:
-          STEPS_JSON: ${{ toJSON(steps) }}
-        run: python3 .github/scripts/android-evidence.py summary gitleaks semgrep
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        if: always()
-        with:
-          name: android-source-security
-          path: artifacts/android-security/
-          if-no-files-found: error
-          retention-days: 7
-  dependencies:
+  scan:
+    name: ${{ inputs.scanner }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        id: checkout
         with:
           persist-credentials: false
-      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
-        id: java
-        with:
-          distribution: temurin
-          java-version: '21'
-      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
-        id: gradle
-        with:
-          validate-wrappers: true
-          allow-snapshot-wrappers: false
-          cache-provider: basic
-          cache-read-only: true
-          dependency-graph: disabled
-      - id: sdk
-        uses: android-actions/setup-android@035682743ab223ec9c6169af09811dff8247e520
-        with:
-          packages: platforms;android-36.1 build-tools;36.0.0
-          log-accepted-android-sdk-licenses: false
-      - name: Generate SBOM
-        id: sbom
-        working-directory: .
+      - uses: ./.github/actions/android-setup
+        if: inputs.scanner == 'trivy'
+      - name: Release runtime SBOM
+        if: inputs.scanner == 'trivy'
         run: bash ./gradlew :app:cyclonedxDirectBom --no-configuration-cache --console=plain
-      - name: Scan release SBOM
+      - name: Gitleaks
+        id: gitleaks
+        if: ${{ always() && inputs.scanner == 'gitleaks' }}
+        run: python3 .github/scripts/android-evidence.py scan gitleaks
+      - name: Semgrep
+        id: semgrep
+        if: ${{ always() && inputs.scanner == 'semgrep' }}
+        run: python3 .github/scripts/android-evidence.py scan semgrep
+      - name: SCA release SBOM
         id: trivy
+        if: ${{ always() && inputs.scanner == 'trivy' }}
         run: python3 .github/scripts/android-evidence.py scan trivy
-      - name: Summarize dependency control
-        if: ${{ always() && steps.checkout.outcome == 'success' }}
+      - name: Validate scanner evidence
+        if: always()
         env:
           STEPS_JSON: ${{ toJSON(steps) }}
-        run: python3 .github/scripts/android-evidence.py summary trivy
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+          SCANNER: ${{ inputs.scanner }}
+        run: python3 .github/scripts/android-evidence.py summary "$SCANNER"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
-          name: android-dependency-security
+          name: android-${{ inputs.scanner == 'trivy' && 'dependencies' || inputs.scanner == 'gitleaks' && 'secrets' || 'sast' }}
           path: |
             artifacts/android-security/
             app/build/reports/cyclonedx-direct/

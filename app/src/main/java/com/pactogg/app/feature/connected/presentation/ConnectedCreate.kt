@@ -14,12 +14,18 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
     AppPage("Crea tu\npróximo reto.", "Reto manual para el grupo") {
         val group = state.group
         if (group == null) {
-            PactCard("Necesitas un grupo", "Crea un grupo para disponer de su configuración real.") {
+            PactCard("Necesitas un grupo", "Selecciona o crea un grupo para usar su configuración real.") {
                 Action("Crear grupo", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
             }
         } else {
             Text(group.name, color = androidx.compose.material3.MaterialTheme.colorScheme.secondary)
             val draft = state.draft
+            val rival = state.social.selectedRival
+            Text(if (draft.targetId == null) "Destinatario: todo el grupo" else "Rival: ${rival?.nickname.orEmpty()}")
+            Action("Elegir rival del grupo", enabled = !state.busy) { model.navigate(ConnectedRoute.MEMBERS) }
+            if (draft.targetId != null) Action("Retar a todo el grupo", enabled = !state.busy) {
+                model.targetMember(null)
+            }
             Field("Juego", draft.game) { model.draft(draft.copy(game = it)) }
             Field("Condición del reto", draft.condition) { model.draft(draft.copy(condition = it)) }
             Field("Recompensa sin dinero", draft.reward) { model.draft(draft.copy(reward = it)) }
@@ -34,7 +40,8 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
                     Text("Recompensa: ${draft.reward}")
                     Text("Fecha UTC: ${draft.deadline}")
                     Text("Fianza: ${draft.bond} puntos virtuales")
-                    Text("Destinatario: grupo")
+                    Text(if (draft.targetId == null) "Destinatario: grupo"
+                        else "Destinatario: ${rival?.nickname.orEmpty()}")
                     Action("Confirmar y crear reto", enabled = !state.busy) { model.createChallenge() }
                 }
             } else Action("Revisar reto", enabled = !state.busy) { model.review() }
@@ -44,16 +51,26 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
 
 @Composable
 fun ConnectedContract(state: ConnectedState, model: ConnectedViewModel) {
-    AppPage("Tu reto.\nTu palabra.", "Resultado de la creación") {
+    AppPage("Tu reto.\nTu palabra.", "Detalle confirmado por el servidor") {
         state.contract?.let { contract ->
             PactCard(contract.game, contract.condition, R.drawable.ic_pacto_shield) {
                 Text("Recompensa: ${contract.reward}")
-                Text("Estado del servidor: ${contract.status}")
+                Text(if (state.contractStateStale) "Estado actual pendiente de consulta."
+                    else "Estado del servidor: ${contract.status}")
                 Text("Fecha UTC: ${contract.deadline}")
                 Text("Fianza: ${contract.bond} puntos virtuales")
-                Action("Agregar evidencia", enabled = !state.busy) { model.navigate(ConnectedRoute.EVIDENCE) }
+                contract.evidenceCount?.let { Text("Evidencias registradas: $it") }
+                contract.closedReason?.let { Text("Motivo de cierre: $it") }
+                ConnectedContractMetadata(contract)
+                Action("Actualizar reto", enabled = !state.busy) { model.openChallenge(contract) }
+                ConnectedContractActions(state, model, contract)
+                val evidenceTarget = contract.targetType != "member" || contract.targetId == state.account?.id
+                if (contract.status in listOf("open", "in_progress", "accepted", "evidence_pending", "voting") &&
+                    (contract.evidenceCount ?: 0) < 3 && evidenceTarget) {
+                    Action("Agregar evidencia", enabled = !state.busy) { model.navigate(ConnectedRoute.EVIDENCE) }
+                }
             }
         } ?: Text("No hay un reto confirmado en esta sesión.")
-        Text("El servidor aún no ofrece consulta del historial ni aceptación o votación del reto.")
+        Text("Los puntos son virtuales. La votación y resolución del reto siguen pendientes en backend.")
     }
 }

@@ -1,8 +1,24 @@
 # Verificación física y API real — 2026-11-04
 
-Estado: **PARCIAL; bloqueo del proveedor confirmado**. Usuario autorizó instalar en su teléfono, crear cuenta QA y comprobar las funciones. Se creó una sola cuenta sintética, se usó el mismo usuario en los reintentos y se conservaron sus datos de prueba. Credenciales guardadas fuera del proyecto/Git en el directorio local de QA del equipo, sin contraseñas o tokens en este informe.
+Estado vigente: **reprueba positiva completa; specs aún parciales**. El bloqueo del proveedor de la primera corrida fue superado en la reprueba descrita abajo. Antecedente: Usuario autorizó instalar en su teléfono, crear cuenta QA y comprobar las funciones. Se creó una sola cuenta sintética, se usó el mismo usuario en los reintentos y se conservaron sus datos de prueba. Credenciales guardadas fuera del proyecto/Git en el directorio local de QA del equipo, sin contraseñas o tokens en este informe.
 
-## Resultado por operación
+## Reprueba posterior a corrección AWS — 2026-11-04
+
+**Resultado vigente: recorrido positivo completo PASS en el teléfono conectado.** Backend informó que corrigió una política de AWS; no inspeccionamos la política ni modificamos infraestructura. El anterior 503 no se reprodujo en esta ejecución. Los resultados inferiores conservan la primera corrida y su bloqueo histórico.
+
+- Misma cuenta QA: login, nuevo grupo QA y creación de reto por formulario Compose correctos.
+- Enlace aceptado por API real y respuesta de tipo `link` verificada.
+- Foto PNG sintética aceptada por API real y respuesta de tipo `photo` verificada. Se invocó el envío del ViewModel; el selector nativo no fue automatizado y no se accedió a fotos personales.
+- Torneos: consulta correcta, cero resultados; no verifica bracket poblado.
+- Refresh: rotación correcta y rechazo 401 del token anterior; logout y nuevo login correctos.
+- Prueba independiente: contraseña incorrecta rechazada con 401, seguida de acceso válido.
+- Se forzó solo la expiración local QA, se terminó el proceso y la sesión se renovó correctamente al arrancar. Teléfono queda con cuenta QA iniciada.
+
+Cuatro métodos instrumentados: **4 correctos, 0 fallidos** (uno es preparación controlada de expiración). Evidencia local ignorada en `PactoGG/artifacts/`: `reprueba-aws-20261104.txt`, `reprueba-acceso-20261104.txt`, `reprueba-expiracion-20261104.txt` y `reprueba-restauracion-20261104.txt`. Se utilizó el APK y las pruebas ya instalados; sin cambios de código, dependencias o AWS, sin nueva cuenta, commit o push.
+
+No acredita todos los criterios de las specs: quedan selector de imagen, rechazos de contenido/límites, autorización entre cuentas, torneos con datos y aceptación. Los endpoints nuevos anunciados en Sistema.docx requieren contrastar contratos e integración antes de darlos por disponibles en Android. No se declara validada la precisión de moderación por aceptar contenido benigno.
+
+## Resultado histórico por operación
 
 | Operación / control | Resultado observado |
 |---|---|

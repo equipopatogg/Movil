@@ -29,16 +29,30 @@ data class GroupDto(val id: String, val name: String, @SerialName("invite_code")
 data class ContractRequest(@SerialName("group_id") val groupId: String, val game: String,
     val condition: String, val reward: String, val deadline: String,
     @SerialName("bond_required") val bond: Int,
-    @SerialName("target_type") val targetType: String = "group", val source: String = "manual")
+    @SerialName("target_type") val targetType: String = "group", val source: String = "manual",
+    @SerialName("target_id") val targetId: String? = null)
 
 @Serializable
 data class ContractDto(val id: String, @SerialName("group_id") val groupId: String, val game: String,
     val condition: String, val reward: String, val deadline: String,
-    @SerialName("bond_required") val bond: Int, val status: String) {
+    @SerialName("bond_required") val bond: Int, val status: String,
+    @SerialName("challenger_id") val challengerId: String? = null,
+    @SerialName("target_type") val targetType: String? = null,
+    @SerialName("target_id") val targetId: String? = null,
+    @SerialName("accepted_by") val acceptedBy: String? = null,
+    @SerialName("evidence_count") val evidenceCount: Int? = null, val version: Int? = null,
+    @SerialName("closed_reason") val closedReason: String? = null,
+    @SerialName("my_points") val myPoints: Int? = null,
+    @SerialName("accepted_at") val acceptedAt: String? = null,
+    @SerialName("updated_at") val updatedAt: String? = null,
+    @SerialName("created_at") val createdAt: String? = null) {
     fun toDomain(): Challenge {
         require(id.matches(IdPattern) && groupId.matches(IdPattern) && status.isNotBlank())
         require(game.isNotBlank() && condition.isNotBlank() && reward.isNotBlank())
-        return Challenge(id, groupId, game, condition, reward, deadline, bond, status)
+        require(bond >= 0 && (version == null || version >= 1) && (evidenceCount == null || evidenceCount >= 0))
+        return Challenge(id, groupId, game, condition, reward, deadline, bond, status,
+            challengerId, targetType, targetId, acceptedBy, evidenceCount, version, closedReason, myPoints,
+            acceptedAt, updatedAt, createdAt)
     }
 }
 

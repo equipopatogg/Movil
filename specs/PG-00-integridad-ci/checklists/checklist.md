@@ -24,3 +24,8 @@ Estados futuros: PASS, FAIL, ERROR, NO_EJECUTADO o NO_APLICA justificado. Prepar
 ## Evidencia posterior — 2026-11-03
 
 [CI remoto verificado](../../../docs/preparacion/ci-remoto-android.md): calidad/seguridad PASS para 2a9fb5e, artefactos descargados y resúmenes vinculados. Se acreditan ejecución ordinaria, informes y permisos operativos de esas ejecuciones. No marcar PG-00 entero PASS: siguen pendientes fixtures de reglas Semgrep y negativo de Wrapper alterado en runner, revisión completa de criterios y aceptación independiente.
+
+
+## Actualización de calidad — 2026-11-04
+
+Comparación móvil y grafo propios implementados localmente. Se conserva aceptación integral abierta hasta comprobar todos los criterios pertinentes, ejecución remota y revisión humana. No usar omisiones ni número total de pruebas para cerrar AC de funcionalidad. Ver docs/pruebas/pipeline-movil.md y matriz-operaciones.md.

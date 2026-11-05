@@ -56,6 +56,7 @@ class LiveBackendTest {
         compose.waitUntil(60000) { !model.state.value.restoring }
         check(model.state.value.account?.email == email)
         compose.runOnIdle { model.navigate(ConnectedRoute.PROFILE) }
+        awaitOperation()
         click("Cerrar sesión")
         awaitOperation()
         assertNull(model.state.value.account)
@@ -139,6 +140,7 @@ class LiveBackendTest {
         report("QA_STEP ${if (existing) "existing_login" else "register"} PASS")
 
         click("Grupos")
+        awaitOperation()
         fill("Nombre del grupo", "QA pruebas Android")
         click("Crear grupo")
         awaitOperation()
@@ -191,6 +193,7 @@ class LiveBackendTest {
 
         verifyRotatingRefresh()
         compose.runOnIdle { model.navigate(ConnectedRoute.PROFILE) }
+        awaitOperation()
         click("Cerrar sesión")
         awaitOperation()
         assertNull(model.state.value.account)

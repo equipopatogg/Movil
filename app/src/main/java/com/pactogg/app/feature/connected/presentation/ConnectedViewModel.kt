@@ -24,11 +24,15 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class ConnectedViewModel @Inject constructor(
     private val sessions: SessionManager,
-    private val products: ProductRepository,
+    internal val products: ProductRepository,
+    internal val socials: com.pactogg.app.feature.connected.domain.SocialRepository,
 ) : ViewModel() {
     internal val mutable = MutableStateFlow(ConnectedState())
     val state = mutable.asStateFlow()
     internal var queryVersion = 0L
+    internal var nicknameJob: kotlinx.coroutines.Job? = null
+    internal var nicknameVersion = 0L
+    internal var nicknameRetryAt = 0L
 
     init {
         viewModelScope.launch {
@@ -40,8 +44,12 @@ class ConnectedViewModel @Inject constructor(
             sessions.current.collect { session ->
                 if (session?.account?.id != mutable.value.account?.id) {
                     queryVersion++
+                    nicknameVersion++
+                    nicknameJob?.cancel()
                     mutable.value = ConnectedState(restoring = false, account = session?.account,
                         busy = mutable.value.busy)
+                } else if (session?.account != mutable.value.account) {
+                    mutable.update { it.copy(account = session?.account) }
                 }
             }
         }
@@ -51,6 +59,8 @@ class ConnectedViewModel @Inject constructor(
         if (mutable.value.busy) return
         if (event != AccessEvent.Submit) {
             mutable.update { it.copy(access = it.access.reduce(event), error = null) }
+            if (event is AccessEvent.Nickname) checkNickname(mutable.value.access.nickname)
+            if (event == AccessEvent.SwitchMode) cancelNicknameCheck()
         } else submitAccess()
     }
 
@@ -73,7 +83,14 @@ class ConnectedViewModel @Inject constructor(
     fun navigate(route: ConnectedRoute) {
         if (mutable.value.busy || mutable.value.account == null) return
         mutable.update { it.copy(route = route, error = null, notice = null, selectedTournament = null) }
-        if (route == ConnectedRoute.TOURNAMENTS && !mutable.value.tournamentsLoaded) loadTournaments()
+        when (route) {
+            ConnectedRoute.TOURNAMENTS -> if (!mutable.value.tournamentsLoaded) loadTournaments()
+            ConnectedRoute.PROFILE -> loadProfile()
+            ConnectedRoute.GROUPS -> loadGroups()
+            ConnectedRoute.MEMBERS -> loadMembers()
+            ConnectedRoute.BOARD -> loadBoard()
+            else -> Unit
+        }
     }
 
     fun createGroup() {
@@ -84,19 +101,24 @@ class ConnectedViewModel @Inject constructor(
         }
         perform {
             val group = products.createGroup(name)
-            mutable.update { it.copy(group = group, groupName = "", contract = null, evidence = null,
-                draft = ChallengeDraft(), notice = "Grupo creado en el servidor.") }
+            applyGroup(group)
+            mutable.update { it.copy(groupName = "", notice = "Grupo creado en el servidor.") }
         }
     }
 
     fun createChallenge() {
         val current = mutable.value
         val group = current.group ?: return
-        if (!current.reviewing) return
+        val targetAllowed = current.draft.targetId == null ||
+            (current.draft.targetId != current.account?.id &&
+                current.social.selectedRival?.id == current.draft.targetId)
+        if (!current.reviewing || !targetAllowed) return
         perform {
             val contract = products.createChallenge(group, current.draft)
-            mutable.update { it.copy(contract = contract, route = ConnectedRoute.CONTRACT, reviewing = false,
-                draft = ChallengeDraft(), deadlineLocal = "", evidence = null, link = "") }
+            mutable.update { it.copy(contract = contract, contractStateStale = false,
+                route = ConnectedRoute.CONTRACT, reviewing = false,
+                draft = ChallengeDraft(), deadlineLocal = "", evidence = null, link = "",
+                social = it.social.copy(contracts = ListState(), pendingAction = null, selectedRival = null)) }
         }
     }
 
@@ -109,7 +131,7 @@ class ConnectedViewModel @Inject constructor(
         }
         perform {
             val evidence = products.sendLink(contract, current.link)
-            mutable.update { it.copy(evidence = evidence, link = "", notice = "Evidencia confirmada por el servidor.") }
+            confirmEvidence(products, contract, evidence, "Evidencia confirmada por el servidor.")
         }
     }
 
@@ -119,7 +141,7 @@ class ConnectedViewModel @Inject constructor(
             val (bytes, mime) = read()
             try {
                 val evidence = products.sendPhoto(contract, bytes, mime)
-                mutable.update { it.copy(evidence = evidence, notice = "Foto confirmada por el servidor.") }
+                confirmEvidence(products, contract, evidence, "Foto confirmada por el servidor.")
             } finally { bytes.fill(0) }
         }
     }
@@ -148,13 +170,15 @@ class ConnectedViewModel @Inject constructor(
         }
     }
 
-    private fun perform(block: suspend () -> Unit) {
+    internal fun perform(block: suspend () -> Unit) {
         if (mutable.value.busy) return
+        val accountId = mutable.value.account?.id
         mutable.update { it.copy(busy = true, error = null, notice = null, diagnostic = null) }
         viewModelScope.launch {
             try {
                 runCatching { block() }.onFailure { error ->
                     if (error is CancellationException) throw error
+                    if (accountId != null && mutable.value.account?.id != accountId) return@onFailure
                     val diagnostic = (error as? ApiFailure)?.let {
                         FailureDiagnostic(it.status, it.code, it.requestId)
                     }

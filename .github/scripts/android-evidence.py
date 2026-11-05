@@ -66,7 +66,7 @@ def scan(name):
             base = ["docker", "run", "--rm", "-v", f"{ROOT}:/src:ro", "-v", f"{temporary}:/reports", "-w", "/src", IMAGES[name]]
             if name == "gitleaks":
                 config = ROOT / ".gitleaks.toml"
-                command = ["dir", "/src/Movil", "--config", "/src/.gitleaks.toml", "--redact=100", "--no-banner",
+                command = ["dir", "/src", "--config", "/src/.gitleaks.toml", "--redact=100", "--no-banner",
                            "--log-level", "error", "--report-format", "json", "--report-path", "/reports/raw.json", "--exit-code", "10"]
             elif name == "semgrep":
                 config = ROOT / ".semgrep.yml"

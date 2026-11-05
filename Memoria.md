@@ -1,3 +1,57 @@
+# Entrega remota autorizada — 2026-11-04
+
+Estado: ramas y PR 6/7/8 creados en equipopatogg/Movil. Candidato PR8 con todos los controles remotos correctos; 116 JVM y cinco Android, scanners reales y SBOM de 192 componentes. Gate PASS y APK descargado coincidente con el probado. Main protegida con check de GitHub Actions obligatorio, rama actualizada y sin push forzado/borrado. [Entrega y evidencia](docs/pruebas/entrega-github-2026-11-04.md).
+
+Decisión: integrar PR dependientes preservando orden y volver a verificar el candidato final antes de main. No inventar aprobación humana ni cerrar todos los AC. Deuda: cobertura 19,48 %, política por ratificar; negativos específicos Wrapper/Semgrep y criterios funcionales pendientes. No desplegar, firmar producción ni modificar backend.
+
+## Historial local conservado
+
+# Estado vigente — calidad móvil, 2026-11-04
+
+Estado: 116 JVM y cinco instrumentadas Android correctas; 19 verificaciones Python y actionlint correctos. [Evidencia y límites](docs/pruebas/verificacion-calidad-2026-11-04.md).
+
+Decisión: adaptar MovilSDD conservando stack y funciones. Tres categorías por las 19 operaciones, matriz canónica, grafo CI con compuerta obligatoria y APK probado por hash. Sin herramientas/backend extra ni umbral heredado.
+
+Deuda: cobertura JVM 19,48 %, mejorar y ratificar política; scanners/Wrapper y CI remoto nuevo pendientes. Specs funcionales no aceptadas integralmente. Evitar declarar PASS por omisiones o fixtures de proveedor. Siguiente: revisión del cambio local; ramas/commits/push requieren el encargo correspondiente.
+
+## Memoria anterior conservada
+
+# Estado vigente — once operaciones integradas y probadas, 2026-11-04
+
+- **Estado:** 19 operaciones consumidor locales, 23 expedientes (19 MO + cuatro de base/coordinación). Once nuevas conectadas; perfil/apodo/disponibilidad, grupos/lista/detalle/unión/miembros y tablero/detalle/aceptar/rechazar con caso positivo real PASS. [Informe y candidato](docs/integracion/integracion-social-2026-11-04.md).
+- **Decisión/motivo:** implementación expresa del usuario sobre specs confirmadas en Sistema.docx; D-SDD-31. Sin nuevas dependencias/versiones, cambios backend o funciones futuras. Avatar permanece bloqueado por catálogo.
+- **Verificación:** 44 JVM, debug/Lint/Detekt/androidTest compilado, Gitleaks y dos métodos físicos correctos; aceptación retiene fianza real y rechazo no cambia saldo. QA original recuperada con apodo original y sesión iniciada; nueva cuenta auxiliar solo para pruebas, credenciales fuera de Git. Cinco grupos QA existentes: no repetir creación indiscriminada.
+- **Deuda:** negativos completos por AC, UI manual/accesibilidad/ciclo de vida/paginación real, aviso definitivo/Play, avatar y reglas discrepantes de evidencia. Fotos/enlaces no se repitieron en nuevo candidato. Aceptación humana y CI remoto nuevo pendientes.
+- **A evitar:** heredar PASS backend, marcar specs completas por un caso positivo, repetir escrituras inciertas o restaurar puntos/borrar datos con operaciones inexistentes. Se conservan dos retos QA (aceptado y rechazado).
+- **Siguiente paso:** revisión del usuario y completar criterios pendientes; sin commit/push de esta integración. Estados inferiores son antecedentes.
+
+# Estado vigente — once specs confirmadas por documento backend, 2026-11-04
+
+- **Estado:** 23 expedientes activos: 19 consumidores (8 anteriores + 11 nuevos) y 4 de base/coordinación. Once nuevos con spec/plan/tasks/checklists, mismo ID base que backend y estructura equivalente. [Matriz de recepción](docs/integracion/specs-confirmadas-sistema-2026-11-04.md).
+- **Decisión/motivo:** usuario define confirmado como operación presente en Sistema.docx. Todas las once se corroboraron también con specs/OpenAPI al commit 8baa9e6d04038c1d6cf9588c5526ad63b94c3f87. No se añaden funciones ausentes.
+- **Deuda:** implementación/aceptación y comprobación del despliegue de las nuevas operaciones, catálogo de avatar y discrepancias registradas. MO-CON-03 reconoce GET auxiliar anterior como avance parcial; no declara pantalla/modelo completos.
+- **A evitar:** heredar PASS backend, marcar listas por crear Markdown, falsear secuencia previa o seguir la sugerencia externa de datos falsos en funciones ausentes.
+- **Siguiente paso:** implementar por dependencias solo cuando se solicite. Este encargo únicamente agrega/concilia documentos; sin nuevo código, build/tests, instalaciones, cuentas, AWS, commit o push. D-SDD-30.
+
+# Estado vigente — ajuste acotado de evidencias, 2026-11-04
+
+- **Estado:** MO-EVI-02 consulta detalle tras confirmar subida; si falla consulta mantiene confirmación y oculta estado obsoleto. Misma estructura/diseño, sin expedientes nuevos. [Resultado y límites](docs/integracion/ajuste-estado-evidencia-2026-11-04.md).
+- **Decisión/motivo:** usuario autoriza cambios pequeños que encajen en specs existentes; D-SDD-29. El GET es apoyo interno al envío, no implementación completa de consulta de retos.
+- **Verificación:** 28 JVM correctos, debug/Lint/Detekt/androidTest compilados; APK actualizado instalado y prueba real de acceso/logout/rechazo 401 correcta. Sin repetir grupos/subidas ni acreditar en proveedor el nuevo refresco posterior. Scanner portable de secretos no disponible; no se atribuye PASS nuevo.
+- **Deuda:** criterios pendientes, recorrido real de refresco tras evidencia y once operaciones con specs propias. Sin commit/push.
+
+# Estado vigente — revisión de once contratos nuevos, 2026-11-04
+
+Backend al commit 8baa9e6d04038c1d6cf9588c5526ad63b94c3f87 incorpora las once operaciones anunciadas en Sistema.docx (19 totales, ocho consumidas por Android). [Comparación y pendientes](docs/integracion/revision-contratos-nuevos-2026-11-04.md). Solo revisión documental: no specs nuevas ni implementación. Prioridad propuesta: recuperar perfil/grupos/miembros y retos, después escrituras con versión/saldo. Conciliar evidencia permitida en open vs aceptación previa, catálogo de avatares, schemas/versión y recuperación de fotos. Las operaciones nuevas no se acreditan desplegadas ni verificadas por la prueba previa. Sin commit/push.
+
+# Estado vigente — reprueba AWS en teléfono, 2026-11-04
+
+- **Estado:** recorrido real PASS: login, grupo, reto, enlace, foto sintética, torneos vacíos, refresh y logout. Rechazo de contraseña incorrecta y renovación al arrancar también correctos. Cuatro métodos instrumentados correctos; uno prepara expiración QA.
+- **Decisión/motivo:** usuario reconectó teléfono y solicitó repetir pruebas tras informar backend una corrección de política AWS. No se cambió AWS ni código. [Evidencia y límites](docs/integracion/verificacion-telefono-2026-11-04.md).
+- **Deuda:** selector nativo, casos negativos/límites, autorización entre cuentas, torneos poblados y aceptación; contrastar nuevos contratos de Sistema.docx antes de integrarlos.
+- **A evitar:** repetir creación de grupos sin revisar cupos, declarar todas las specs terminadas o inferir la política exacta modificada. Credenciales fuera de Git.
+- **Siguiente paso:** revisar contratos nuevos y completar verificaciones pendientes cuando se solicite. Main ya recibió los cinco PR y sus checks finales pasaron; esta reprueba solo modifica documentación local, sin commit/push. Los estados inferiores son antecedentes cronológicos.
+
 # Estado vigente — copia y commits locales, 2026-11-04
 
 Copia previa verificada y ramas dependientes preparadas bajo identidad equipopatogg. [Registro de ramas/commits](docs/preparacion/entrega-por-ramas.md). Base visual: 9 JVM; acceso/grupos/torneos/integración pendiente: 24 JVM por etapa, debug/Lint/Detekt y compilación androidTest correctos; candidatos sin secretos. Sin push, PR o cambios de main publicado. No se declara aceptación integral de specs: retos/evidencias siguen bloqueados por 503, torneos con datos y otros criterios permanecen abiertos.

@@ -24,7 +24,7 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface PactoApi {
+interface PactoApi : ProfileApi, GroupReadApi, ContractActionsApi {
     @POST("api/v1/auth/register")
     suspend fun register(@Body body: RegisterRequest): Response<Envelope<SessionDto>>
 
@@ -44,6 +44,10 @@ interface PactoApi {
     @POST("api/v1/contracts")
     suspend fun contract(@Header("Authorization") bearer: String,
         @Body body: ContractRequest): Response<Envelope<ContractDto>>
+
+    @GET("api/v1/contracts/{id}")
+    suspend fun challenge(@Header("Authorization") bearer: String,
+        @Path("id") id: String): Response<Envelope<ContractDto>>
 
     @POST("api/v1/contracts/{id}/evidence")
     suspend fun link(@Header("Authorization") bearer: String, @Path("id") id: String,

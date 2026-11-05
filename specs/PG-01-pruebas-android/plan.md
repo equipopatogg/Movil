@@ -28,3 +28,6 @@ Si falla el entorno, registrar ERROR y conservar evidencia; no eliminar tests ni
 ## 4. Gates y cierre
 
 PG01-AC1–AC5 demostrados. Umbral nuevo solo con decisión registrada; mientras tanto, la línea base no permite afirmar un porcentaje mínimo aprobado. Conciliar [tareas](tasks.md), [checklist](checklists/checklist.md) y memoria. La fase documental conserva todos los criterios como NO_EJECUTADO.
+
+
+Actualización autorizada 2026-11-04: reutilizar proyecto/pruebas, verificar matriz de 19 operaciones, separar categorías, medir JaCoCo integrado y ejecutar cinco pruebas Android offline; validar gate con fallos/ausencias/omisiones/artefactos viejos y APK diferente. Conservar informes y preparar único grafo CI sin CD. Ver matriz/pipeline en docs/pruebas y comparación fijada del profesor. No atribuir ejecución remota al YAML local ni copiar umbrales/stack ajenos.

@@ -1,5 +1,7 @@
 package com.pactogg.app.core.network
 
+import org.junit.experimental.categories.Category
+import com.pactogg.app.testing.SecurityChecks
 import kotlinx.serialization.Serializable
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -12,6 +14,7 @@ import org.junit.Test
 import retrofit2.Call
 import retrofit2.http.GET
 
+@Category(SecurityChecks::class)
 class ApiClientFactoryTest {
     @Test
     fun rejectsUnconfiguredOrUnsafeUrls() {

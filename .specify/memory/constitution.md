@@ -1,6 +1,6 @@
 # Constitución SDD de PactoGG
 
-Versión documental 5 — 2026-10-30. Fase vigente: preparación del proyecto, conforme a la corrección expresa del usuario.
+Versión documental 6 — 2026-11-04. Fase vigente: calidad local del consumidor Android implementado. Usuario autoriza pruebas, evidencias y workflows pertinentes sin rehacer app ni publicar. Los alcances inferiores anteriores se conservan como antecedentes.
 
 Actualización acotada 2026-11-03: el usuario autoriza ajustes finales pre-Git, centralización/configuración de workflows Android, referencia oficial setup-gradle, exclusiones/escaneo y comprobaciones afectadas. Las prohibiciones históricas de automatización/ejecución de C01/C10 se exceptúan solo para ese alcance. Sin funcionalidades, cambios de stack de app, Git/remotos/commits/push, despliegue/publicación o instalación global. Backend técnico ya implementado/verificado localmente; aceptación remota/producto pendientes. Estado y evidencia (referencia histórica externa).
 
@@ -62,3 +62,10 @@ Registrar aprobación con Estado/Revisores/Fecha/Detalle, separada de aceptació
 ## Autorización vigente — implementar consumidor, 2026-11-04
 
 Usuario solicita empezar implementación de las specs MO-* conforme al backend. Autoriza código Android y comprobaciones locales pertinentes, con dependencias existentes y sin publicación/push o cambios backend. Conservar pantallas adelantadas fuera del recorrido conectado y recordatorios privados ignorados; no reintroducir PG-08. Privacidad real pendiente mantiene registro bloqueado mediante configuración explícita. Las restricciones documentales anteriores son antecedentes superados solo para este alcance.
+
+
+## C13. Calidad autorizada actual — 2026-11-04
+
+La instrucción expresa posterior del usuario supera límites documentales históricos C01/C10 solo para completar pruebas, medir cobertura y configurar/verificar CI móvil. Cada operación confirmada requiere casos pertinentes unitarios, de integración y seguridad, trazables por spec/ID y ejecutados; no se impone cantidad fija de tres. Ver [matriz](../../docs/pruebas/matriz-operaciones.md). Mantener pruebas compartidas y completar faltantes, sin reescribir cronología ni simular aceptación.
+
+PG-00/PG-01 contienen cambios implementables actuales; no nuevos expedientes de funcionalidades futuras. Instrumentación offline en emulador limpio, sin cuentas/secretos QA en CI. Informes ausentes/cero casos/omisiones no pasan el gate. Cobertura medida sin umbral importado; no cambiar stack o reducir controles para obtener verde. No cambios backend, commits/push, despliegue o publicación por esta instrucción. La evidencia local no se presenta como ejecución GitHub.

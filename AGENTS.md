@@ -1,3 +1,21 @@
+# Entrega por PR autorizada — 2026-11-04
+
+El usuario autoriza subir el trabajo local por ramas/PR, comprobar y corregir CI remoto, configurar la compuerta obligatoria y fusionar solo con controles correctos. Cuenta/repositorio: equipopatogg/Movil; no publicar en otras cuentas ni incluir backend, credenciales o artefactos privados. Esta instrucción posterior sustituye las restricciones de Git de la fase local conservadas debajo. Sin despliegue, firma de producción, instalaciones globales o aceptación humana inventada. No cerrar criterios funcionales solo por un pipeline verde.
+
+# Instrucción operativa vigente — calidad Android, 2026-11-04
+
+Usuario autoriza completar/verificar pruebas y CI sobre el móvil local ya implementado, contrastando MovilSDD y la transcripción. Se conservan funciones/diseño y 19 operaciones confirmadas. Sin cambios backend, funciones futuras, migraciones de stack, instalaciones globales, commits/push o publicación por este encargo.
+
+Por cada funcionalidad: spec/plan/tasks → implementación autorizada + unitarias, integración y seguridad pertinentes → ejecución local → evidencia por IDs → PR/CI y revisión antes de merge cuando se autorice entregar. No exigir exactamente tres casos ni heredar PASS backend. Mantener [matriz canónica](docs/pruebas/operaciones.json); nombres completos y parámetros exactos deben aparecer en JUnit. Cero casos, informes ausentes, errores o pruebas omitidas no cierran tareas.
+
+Los cambios en reglas/contratos deben actualizar sus casos y límites. Tests de proveedor usan fixtures HTTPS sin bypass; cifrado/Room/navegación necesitan Android real. CI offline usa emulador limpio y cinco métodos explícitos; no lee credenciales QA ni ejecuta pruebas live por defecto. No borrar sesión real para hacer pasar navegación.
+
+PG-00 gobierna integridad, artefactos y gate; PG-01 categorías, instrumentación y cobertura medida; PG-02 conserva release/16 KB, sin publicación. Métricas antes de umbrales: no importar 45 % ni herramientas del ejemplo como obligación automática. [Comparación](docs/preparacion/comparacion-profesor-calidad-2026-11-04.md) y [pipeline](docs/pruebas/pipeline-movil.md).
+
+## Antecedentes de fase conservados
+
+Las restricciones cronológicas inferiores de «solo preparación» y los bloqueos ya resueltos son historia; la instrucción actual y los resultados de Memoria.md prevalecen para este trabajo.
+
 # Fase vigente: preparación SDD
 
 Excepción vigente autorizada, 2026-11-03: preparación final para Git, documentación/traslado y ajuste de workflows raíz, referencia oficial setup-gradle, exclusiones/escaneo de secretos y verificaciones locales afectadas. No funcionalidades, versiones de aplicación, Git/remotos/commits, publicación/despliegue o instalaciones globales. El cierre documental inferior es antecedente y no impide estas comprobaciones expresas. Backend BE-00–BE-03 ya existe/verificado localmente; contrato funcional/aceptación remota pendientes.

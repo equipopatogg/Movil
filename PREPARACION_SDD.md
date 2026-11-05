@@ -1,3 +1,15 @@
+# Entrega por PR autorizada — 2026-11-04
+
+El usuario autoriza subir el trabajo local por ramas/PR, comprobar y corregir CI remoto, configurar la compuerta obligatoria y fusionar solo con controles correctos. Cuenta/repositorio: equipopatogg/Movil; no publicar en otras cuentas ni incluir backend, credenciales o artefactos privados. Esta instrucción posterior sustituye las restricciones de Git de la fase local conservadas debajo. Sin despliegue, firma de producción, instalaciones globales o aceptación humana inventada. No cerrar criterios funcionales solo por un pipeline verde.
+
+# Fase vigente — calidad local del móvil, 2026-11-04
+
+El consumidor de 19 operaciones existe y el usuario autoriza completar pruebas/CI antes de entregar. Se conservan las 23 specs y el diseño, se reutilizan pruebas y se completan unitarias/integración/seguridad por operación. [Matriz](docs/pruebas/matriz-operaciones.md), [pipeline](docs/pruebas/pipeline-movil.md), [comparación del profesor](docs/preparacion/comparacion-profesor-calidad-2026-11-04.md).
+
+PG-00 y PG-01 se actualizan con cambios concretos y evidencia. PG-02 mantiene su fase release/16 KB separada. No modificar backend, publicar, crear commits/push ni copiar versiones/umbrales/herramientas externas por esta preparación. El estado actual está al principio de Memoria.md; lo que sigue registra la preparación previa y no sustituye esa fase vigente.
+
+---
+
 ## Prueba física posterior — 2026-11-04
 
 Cuenta QA y API real comprobadas en teléfono. Acceso, grupos, consulta vacía de torneos, refresh y logout correctos; **crear reto devuelve 503 MODERATION_UNAVAILABLE**, evidencias bloqueadas. APK final instalado; specs abiertas. [Evidencia y pendientes](docs/integracion/verificacion-telefono-2026-11-04.md). Sin push.

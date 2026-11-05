@@ -1,6 +1,6 @@
 # Constitución global de PactoGG
 
-Versión documental 2 — 2026-11-03. Integración solicitada por el usuario. Ámbito: este proyecto; no es configuración global del equipo ni de otros proyectos. La aceptación institucional y las decisiones de producto pendientes no se dan por resueltas al crear este documento.
+Versión documental 3 — 2026-11-04. Integración solicitada por el usuario. Ámbito: este proyecto; no es configuración global del equipo ni de otros proyectos. La aceptación institucional y las decisiones de producto pendientes no se dan por resueltas al crear este documento.
 
 ## G01. Propósito y responsabilidad
 
@@ -14,7 +14,7 @@ La instrucción vigente del usuario delimita cada trabajo. Las propuestas de la 
 
 La [constitución SDD](.specify/memory/constitution.md) conserva las reglas canónicas de la fase vigente. Esta constitución global reúne principios comunes del proyecto y remite a los registros específicos. No es una copia alternativa de aquel archivo. Ante una discrepancia entre documentos propios, registrar el conflicto y resolverlo con la instrucción y decisión aplicables; no escoger la versión que amplíe el alcance.
 
-Fase actual: [preparación SDD](PREPARACION_SDD.md). Solo documentación, fuentes, planes, tareas y ayudas locales. La base técnica anterior se conserva como antecedente. Terminar estos documentos no habilita implementación, instalaciones o publicaciones.
+Fase actual: implementación móvil existente y mejora de pruebas/CI local autorizada; [estado y alcance](PREPARACION_SDD.md). Las fases documentales inferiores son antecedentes. La autorización actual no incluye cambios backend, publicación, nuevos productos o migraciones de stack.
 
 Excepción expresa 2026-11-03: preparación final pre-Git con workflows Android raíz, configuración/referencias oficiales, exclusiones/secretos y comprobaciones afectadas. Sin cambios de funciones/stack de app ni crear Git, publicar o desplegar. El historial documental anterior se conserva, sujeto a esta instrucción acotada.
 
@@ -78,3 +78,10 @@ Un cambio constitucional registra motivo, fuente, fecha, impacto y documentos af
 ## Autorización vigente — implementar consumidor, 2026-11-04
 
 Usuario solicita empezar implementación de las specs MO-* conforme al backend. Autoriza código Android y comprobaciones locales pertinentes, con dependencias existentes y sin publicación/push o cambios backend. Conservar pantallas adelantadas fuera del recorrido conectado y recordatorios privados ignorados; no reintroducir PG-08. Privacidad real pendiente mantiene registro bloqueado mediante configuración explícita. Las restricciones documentales anteriores son antecedentes superados solo para este alcance.
+
+
+## G13. Pruebas por funcionalidad y compuertas — 2026-11-04
+
+Cada operación debe definir y ejecutar pruebas unitarias, integración consumidor y seguridad pertinentes dentro de su spec/tareas; usar matriz por IDs y casos concretos, no carpetas o totales como prueba de cobertura. Generar/completar esas pruebas junto al cambio y corregir fallos antes de enviar a CI. La incorporación de pruebas al código previo registra su cronología real.
+
+Reportes vinculados al candidato, categorías exactas, pruebas Android ejecutadas y no solo compiladas. El gate falla con evidencia ausente, fallida, omitida o de otra ejecución. Cobertura se mide con alcance y límites; mínimos requieren decisión propia posterior, nunca importación silenciosa. Estado de pipeline configurado, ejecución local, CI remoto y aceptación humana se registran por separado. Sin herramientas ajenas al móvil por semejanza visual. Fuente/decisión D-SDD-32.

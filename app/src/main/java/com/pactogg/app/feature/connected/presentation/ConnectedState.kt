@@ -8,11 +8,12 @@ import com.pactogg.app.feature.connected.domain.Evidence
 import com.pactogg.app.feature.connected.domain.Group
 import com.pactogg.app.feature.connected.domain.Tournament
 
-enum class ConnectedRoute { HOME, GROUPS, CREATE, CONTRACT, EVIDENCE, TOURNAMENTS, PROFILE }
+enum class ConnectedRoute { HOME, GROUPS, MEMBERS, BOARD, CREATE, CONTRACT, EVIDENCE, TOURNAMENTS, PROFILE }
 
 data class FailureDiagnostic(val status: Int, val code: String, val requestId: String?)
 
 data class ConnectedState(
+    val social: SocialState = SocialState(),
     val restoring: Boolean = true,
     val account: Account? = null,
     val access: AccessState = AccessState(),
@@ -27,6 +28,7 @@ data class ConnectedState(
     val deadlineLocal: String = "",
     val reviewing: Boolean = false,
     val contract: Challenge? = null,
+    val contractStateStale: Boolean = false,
     val link: String = "",
     val evidence: Evidence? = null,
     val tournaments: List<Tournament> = emptyList(),

@@ -1,6 +1,6 @@
 # Checklist — MO-EVI-02
 
-Estado vigente: **Bloqueada: sin contrato real confirmado para verificar envío**. [Spec](../spec.md) · [Plan](../plan.md) · [Tareas](../tasks.md).
+Estado vigente: **Parcial: envío real de enlace/foto probado; criterios restantes y ajuste de estado pendientes de verificación**. [Spec](../spec.md) · [Plan](../plan.md) · [Tareas](../tasks.md).
 
 - [ ] MO-EVI-02-AC1: Enlace y foto válidos usan serialización/content-type correctos y muestran solo evidencia confirmada por 201.
 - [ ] MO-EVI-02-AC2: Selector cancelado, archivo vacío/grande/tipo inválido no envían; no existen cámara ni carga de video.
@@ -28,3 +28,11 @@ No ejecutado contra proveedor: creación del contrato bloqueada por moderación;
 ## Preparación para commits — 2026-11-04
 
 Se conserva el resultado real del candidato físico y se prepara incorporación por ramas dependientes. Commit y compilación no sustituyen aceptación de todos los AC; las casillas sin evidencia completa siguen abiertas. El historial inferior no significa que la implementación actual sea solo documental. Registro de ramas y comprobaciones en docs/preparacion/entrega-por-ramas.md.
+
+
+Actualización posterior: la reprueba física de reto/enlace/foto fue positiva tras corrección AWS; el bloqueo 503 inferior es histórico. [Informe](../../../docs/integracion/verificacion-telefono-2026-11-04.md). Ajuste actual: lectura auxiliar de estado posterior a evidencia; no implica aceptación del expediente completo.
+
+- [ ] MO-EVI-02-AC5: actualización real posterior al envío, fallo de lectura sin duplicar subida y sin restaurar datos tras logout; verificar candidato afectado.
+
+
+AC5: verificación local positiva (HTTP/estado) y controles del candidato correctos; recorrido real posterior a subida/aceptación pendiente. [Informe](../../../docs/integracion/ajuste-estado-evidencia-2026-11-04.md). Se conserva casilla integral abierta.
