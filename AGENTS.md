@@ -1,3 +1,11 @@
+# Entrega por PR de imágenes autorizada — 2026-11-05
+
+Usuario autoriza subir el candidato de fotos/evidencias y navegación aprobado a equipopatogg/Movil mediante rama y PR hacia main. Dejar las pruebas GitHub iniciadas y esperar su aviso antes de revisar resultados. No fusionar ni activar fusión automática. Excluir APK, artefactos, cuentas y referencias privadas. Esta autorización sustituye el límite local de la fase inmediatamente inferior; conservar el bloqueo real de GET evidencias 405 y la aceptación pendiente.
+
+# Integración de imágenes y navegación autorizada — 2026-11-05
+
+Usuario autoriza actualizar los consumidores existentes, integrar selección/preparación/subida/consulta de fotos y enlaces conforme al mensaje backend, mejorar navegación según Make y ejecutar pruebas/correcciones. Revisión general independiente, sin nueva spec de revisión ni expediente de relevo: solo imágenes amplían MO-EVI-02. Conservar las 19 operaciones principales, con GET de evidencias auxiliar confirmado por backend; no activar nuevas funciones por su mera presencia en el repositorio. S3 directo/ID156 espera confirmación. Privacidad y catálogo esperan backend; Play diferido. Comprobaciones locales y emulador aislado sin alterar cuentas del teléfono; sin entrega Git nueva por esta tarea. Registrar evidencia actual y límites del proveedor sin aceptación inventada.
+
 # Entrega a revisión autorizada — 2026-11-05
 
 El usuario autoriza subir los cambios locales acumulados del móvil y dejar las pruebas de GitHub ejecutándose para revisarlas él después. Cuenta/repositorio equipopatogg/Movil. Crear commit en rama y PR hacia main; no esperar a terminar CI, no fusionar ni habilitar fusión automática. Excluir artefactos, APK, credenciales y referencias privadas. Las prohibiciones de Git de las fases inferiores son históricas para este encargo; no se amplía alcance de producto, backend o Play.

@@ -1,6 +1,6 @@
 # Plan — MO-EVI-02
 
-Estado: propuesta, sin ejecución. [Spec](spec.md).
+Estado actual: integración de imágenes autorizada y en verificación local; etapas anteriores conservadas como historia. [Spec](spec.md).
 
 1. Revisar fuentes fijadas y resolver bloqueantes específicos de la sección 7 y matriz de integración; no copiar la aceptación backend.
 2. Revisar UI y contratos internos existentes; concretar DTO/mappers/repositorio en feature/evidence, con core/network y core/session compartidos. Elegir adaptaciones pequeñas, sin nuevos módulos por plantilla.
@@ -23,3 +23,8 @@ Actualización de calidad solicitada: reutilizar pruebas existentes y ejecutar l
 ## Verificación por criterio — revisión 2026-11-05
 
 El [checklist](checklists/checklist.md) vincula cada condición con tareas, métodos de prueba y resultados existentes, y distingue escenarios aún no ejercitados. Los pendientes concretos están en [tasks.md](tasks.md). No inferir errores del producto de la mera ausencia de una prueba; no transferir una prueba de otro endpoint/secuencia sin documentar su alcance. Sin implementación ni ejecución nueva por esta revisión.
+
+
+## Integración de imágenes vigente
+
+Reutilizar PactoApi/SessionManager/ProductRepository; añadir GET auxiliar sin nueva spec ni funciones de jurado. PhotoPreparer procesa en IO con límites y orientación; PreparedPhoto vive solo en ViewModel. EvidenceContent separa elegir, previsualizar y enviar; EvidenceGallery muestra resultados reales con Coil y cliente sin sesión. Probar codecs/orientación en Android, payloads/listados/errores mediante MockWebServer HTTPS y estados de autorización/cambio de cuenta con pruebas JVM. No atribuir fixtures a proveedor ni implementar S3 directo.

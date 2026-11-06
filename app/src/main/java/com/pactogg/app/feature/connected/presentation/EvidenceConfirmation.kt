@@ -16,7 +16,8 @@ internal suspend fun ConnectedViewModel.confirmEvidence(
     val accountId = mutable.value.account?.id ?: return
     mutable.update { current ->
         if (current.contract?.id == contract.id && current.account?.id == accountId) {
-            current.copy(evidence = evidence, link = "", contractStateStale = true, notice = confirmation,
+            current.copy(evidence = evidence, evidenceItems = (current.evidenceItems + evidence).distinctBy { it.id },
+                link = "", contractStateStale = true, notice = confirmation,
                 social = current.social.copy(contracts = ListState()))
         } else current
     }
@@ -29,5 +30,8 @@ internal suspend fun ConnectedViewModel.confirmEvidence(
         else if (refreshed != null) current.copy(contract = refreshed, contractStateStale = false)
         else current.copy(notice = "$confirmation No se pudo consultar el estado actualizado del reto. " +
             "No repitas el envío.")
+    }
+    if (mutable.value.contract?.id == contract.id && mutable.value.account?.id == accountId) {
+        refreshEvidenceAfterUpload(contract)
     }
 }

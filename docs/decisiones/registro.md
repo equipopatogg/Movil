@@ -283,3 +283,12 @@ Usuario autoriza completar pruebas pendientes sin subir. Añadir 41 casos JVM es
 ## D-SDD-38 — mensajes contextuales y zona segura, 2026-11-05
 
 Petición expresa del usuario: espacio seguro frente a barras/cámara y mensajes claros según contexto. UX-01 implementa insets dinámicos comunes, modal general/confirmaciones, avisos breves y errores de acceso/apodo junto al campo. Cancelación no dispara escrituras; sin reintentos nuevos ni cambios de contrato. 239 JVM y 14 Android comprobados localmente, con alcance y límites en [informe](../pruebas/ajustes-ux-2026-11-05.md). Sin Git, nuevas funciones backend o aceptación humana simulada.
+
+
+## D-SDD-39 — imágenes y navegación sobre el consumidor existente, 2026-11-05
+
+Usuario autoriza completar integración de imágenes y mejorar UX, sin expediente de relevo ni spec de revisión general. Solo las imágenes amplían MO-EVI-02; GET de evidencias es lectura auxiliar confirmada por su mensaje y backend 451c8ae, sin inventar otra función. Se conservan 19 operaciones principales. Make local confirma cinco opciones (Inicio, Explorar, Crear, Torneos, Grupos); Explorar da aviso y no reabre muestras.
+
+Fotos: selector sin permisos generales/cámara, lectura original acotada a 32 MiB, máximo 8000 px por lado, muestreo hasta 2048 px, JPEG 90 con orientación aplicada y metadatos retirados, archivo final <=5 MiB. Son decisiones defensivas de cliente, no reglas nuevas del servidor. ExifInterface AndroidX 1.4.1 se declara explícitamente porque ya estaba transitiva y el analizador señala problemas del lector de plataforma en Android antiguos. No cambia versión de aplicación. URL y fechas se conservan; Coil usa cliente HTTPS sin sesión, cookies, redirects ni caché compartida. Se desactiva reintento implícito de transporte; escrituras inciertas requieren lectura y nueva decisión.
+
+Sondeo autorizado con cuenta QA existente y sin escrituras de negocio: nueve comprobaciones positivas y GET de evidencias 405; cierre de esa sesión 204. Repositorio y despliegue no se equiparan. La app maneja indisponibilidad y conserva evidencias confirmadas; no atribuir listado real verificado ni reglas de primer voto al cliente. Código backend permite respuesta POST con url=null, así que se consulta GET posteriormente sin repetir POST. ID156/subida directa S3, privacidad definitiva y catálogo permanecen diferidos. Resultados locales y límites se registran en checklist de MO-EVI-02 y memoria; no aceptación humana, subida Git ni publicación inferidas.

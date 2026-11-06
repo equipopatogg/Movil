@@ -33,3 +33,13 @@ T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar 
 - [ ] MO-EVI-02-T4-AC3: CONTENT_REJECTED/EVIDENCE_LIMIT_REACHED preservan enlace y no inventan evidencia; falta recorrido Compose y moderación de foto. [Criterio y pruebas](checklists/checklist.md#mo-evi-02-ac3).
 - [ ] MO-EVI-02-T4-AC4: POST con respuesta perdida no se repite ni confirma evidencia; falta apertura bloqueada por contrato no autorizado en Compose. [Criterio y pruebas](checklists/checklist.md#mo-evi-02-ac4).
 - [ ] MO-EVI-02-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-evi-02-acq).
+
+
+## Imágenes — alcance autorizado 2026-11-05
+
+- [x] IMG-T1: Contrastar mensaje, contrato y código backend 451c8ae; fijar discrepancias y diferir ID156.
+- [x] IMG-T2: Preparar imágenes acotadas/orientadas sin metadatos, vista previa, descarte y envío explícito.
+- [x] IMG-T3: Mapear URL/fechas, listar evidencia con sesión y mostrar fotos sin token ni caché compartida.
+- [x] IMG-T4: Aplicar elegibilidad de envío, errores del proveedor y protección ante resultado incierto/cambio de cuenta.
+- [x] IMG-T5: Ejecutar pruebas JVM/Android, controles locales y registrar resultados del candidato.
+- [ ] IMG-T6: Verificación del proveedor de las reglas comunicadas (votos/plazo/permisos), revisión visual y aceptación humana. No se marca por fixtures.

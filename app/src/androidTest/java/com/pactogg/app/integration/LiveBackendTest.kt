@@ -1,4 +1,7 @@
 package com.pactogg.app.integration
+import com.pactogg.app.feature.connected.presentation.sendPhoto
+import com.pactogg.app.feature.connected.presentation.canUploadEvidence
+import com.pactogg.app.feature.connected.presentation.openChallenge
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -58,6 +61,8 @@ class LiveBackendTest {
         compose.runOnIdle { model.navigate(ConnectedRoute.PROFILE) }
         awaitOperation()
         click("Cerrar sesión")
+        compose.onNode(hasText("Cerrar sesión") and androidx.compose.ui.test.hasAnyAncestor(androidx.compose.ui.test.isDialog()))
+            .performClick()
         awaitOperation()
         assertNull(model.state.value.account)
         assertNull(model.state.value.notice)
@@ -168,20 +173,7 @@ class LiveBackendTest {
         } else {
             report("QA_STEP contract PASS")
 
-            click("Agregar evidencia")
-            fill("Enlace HTTPS", "https://youtu.be/pactogg-qa-test")
-            click("Enviar enlace")
-            awaitOperation()
-            assertNull(model.state.value.error)
-            assertEquals("link", model.state.value.evidence?.type)
-            report("QA_STEP link PASS")
-
-            val photo = harmlessImage()
-            compose.runOnIdle { model.sendPhoto { photo to "image/png" } }
-            awaitOperation()
-            assertNull(model.state.value.error)
-            assertEquals("photo", model.state.value.evidence?.type)
-            report("QA_STEP photo_upload PASS (picker not automated)")
+            report("QA_STEP evidence NOT_EXECUTED: needs a separately accepted QA contract; use verifyEvidenceForAcceptedQaContract")
 
         }
 
@@ -195,6 +187,8 @@ class LiveBackendTest {
         compose.runOnIdle { model.navigate(ConnectedRoute.PROFILE) }
         awaitOperation()
         click("Cerrar sesión")
+        compose.onNode(hasText("Cerrar sesión") and androidx.compose.ui.test.hasAnyAncestor(androidx.compose.ui.test.isDialog()))
+            .performClick()
         awaitOperation()
         assertNull(model.state.value.account)
         report("QA_STEP logout PASS")
@@ -207,6 +201,44 @@ class LiveBackendTest {
         assertEquals(email, model.state.value.account?.email)
         report("QA_STEP login PASS")
         check(!contractFailed) { "Contract creation failed on provider; see QA_STEP diagnostic. Other independent checks completed." }
+    }
+
+    /** Opt-in writes only to a separately prepared, accepted QA contract; never a new open invitation. */
+    @Test fun verifyEvidenceForAcceptedQaContract() {
+        val args = InstrumentationRegistry.getArguments()
+        assumeTrue(args.getString("pactogg.live") == "true" && args.getString("qa.evidence") == "true")
+        compose.runOnIdle { model = ViewModelProvider(compose.activity)[ConnectedViewModel::class.java] }
+        compose.waitUntil(60000) { !model.state.value.restoring }
+        check(model.state.value.account?.email == args.getString("qa.email"))
+        val contractId = requireNotNull(args.getString("qa.contract_id"))
+        val groupId = requireNotNull(args.getString("qa.group_id"))
+        check(contractId.matches(Regex("[a-fA-F0-9]{24}")) && groupId.matches(Regex("[a-fA-F0-9]{24}")))
+        compose.runOnIdle {
+            model.openChallenge(com.pactogg.app.feature.connected.domain.Challenge(contractId, groupId,
+                "QA", "QA", "QA", "2099-01-01T00:00:00Z", 0, "in_progress"))
+        }
+        awaitOperation()
+        check((model.state.value.contract?.evidenceCount ?: 3) <= 1) { "Needs two free evidence slots" }
+        check(model.state.value.canUploadEvidence()) {
+                "Photo/link provider test requires an accepted active contract assigned to this QA account. " +
+                    "A newly created open contract is not evidence-eligible under the current contract."
+            }
+            click("Ver evidencias")
+            fill("Enlace HTTPS", "https://youtu.be/pactogg-qa-test")
+            click("Revisar enlace")
+            click("Enviar enlace")
+            awaitOperation()
+            assertNull(model.state.value.error)
+            assertEquals("link", model.state.value.evidence?.type)
+            report("QA_STEP link PASS")
+
+            val photo = harmlessImage()
+            compose.runOnIdle { model.sendPhoto { photo to "image/png" } }
+            awaitOperation()
+            assertNull(model.state.value.error)
+            assertEquals("photo", model.state.value.evidence?.type)
+            report("QA_STEP photo_upload PASS (picker not automated)")
+
     }
 
     private fun verifyRotatingRefresh() = runBlocking {

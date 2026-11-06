@@ -24,7 +24,7 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface PactoApi : ProfileApi, GroupReadApi, ContractActionsApi {
+interface PactoApi : ProfileApi, GroupReadApi, ContractActionsApi, EvidenceReadApi {
     @POST("api/v1/auth/register")
     suspend fun register(@Body body: RegisterRequest): Response<Envelope<SessionDto>>
 
@@ -62,4 +62,11 @@ interface PactoApi : ProfileApi, GroupReadApi, ContractActionsApi {
     suspend fun tournaments(@Header("Authorization") bearer: String, @Query("status") status: String?,
         @Query("game") game: String?, @Query("cursor") cursor: String?,
         @Query("limit") limit: Int = 20): Response<Envelope<List<TournamentDto>>>
+}
+
+interface EvidenceReadApi {
+    @GET("api/v1/contracts/{id}/evidence")
+    suspend fun evidence(@Header("Authorization") bearer: String,
+        @Path("id") id: String): Response<Envelope<List<EvidenceDto>>>
+
 }

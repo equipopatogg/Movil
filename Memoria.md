@@ -1,3 +1,13 @@
+# Estado actual — imágenes y navegación, 2026-11-05
+
+- Estado: integración local implementada y verificada; 256 JVM y 22 Android correctos, sin fallos/omisiones. Lint/Detekt, 27 validadores, secretos y generación SBOM correctos; cobertura JVM 907/3105 líneas (29,21 %). No hay CI remoto de este candidato.
+- Decisión/motivo: petición expresa del usuario. Solo las imágenes amplían MO-EVI-02; revisión general independiente, sin expediente de relevo. Conservar 19 operaciones principales; GET de evidencias es auxiliar. Barra Make de cinco opciones, Explorar con aviso, perfil en cabecera, mensajes/zona segura conservados.
+- Deuda: GET real de evidencias devuelve 405 aunque aparece en contrato/repositorio 451c8ae. Nueve sondeos previos positivos y logout del sondeo 204, sin escrituras de negocio; no afirmar listado/CDN real ni reglas de primer voto verificados. Revisión manual del selector real y visual del usuario pendiente. Privacidad, catálogo de avatares, S3 directo ID156 y Play mantienen sus diferimientos.
+- A evitar: no resubir una foto por fallo de consulta, no abrir muestras como funciones conectadas, no atribuir aceptación ni CI viejo al candidato nuevo. No hay modificaciones backend ni nueva entrega Git.
+- Slice actual/siguiente paso: resultado trazado en MO-EVI-02/checklist y docs/pruebas/trazabilidad-criterios.json; pendiente que backend habilite/corrija GET de evidencias para repetir compatibilidad real. Cambios disponibles localmente para revisión normal.
+
+Los apartados inferiores son historia por fecha, no sustituyen este estado.
+
 # Pruebas separadas por operación — 2026-11-05
 
 Reorganización local solicitada, sin subir. Las 19 operaciones tienen archivos de validación, API y seguridad; los casos comunes de conexión/sesión/recorridos se conservan. La matriz y las referencias de specs se actualizan a nombres completos, con ID como prefijo AUTH_01_. Se contrastaron los 196 casos previos uno a uno: 129 renombrados y 67 compartidos intactos. Conjunto y categorías 56/44/96 correctos, sin fallos/omisiones; selección login de seis casos correcta; 27 validadores correctos. [Organización y evidencia](docs/pruebas/reorganizacion-especifica-2026-11-05.md). No crear commits/PR/push hasta nuevo encargo.

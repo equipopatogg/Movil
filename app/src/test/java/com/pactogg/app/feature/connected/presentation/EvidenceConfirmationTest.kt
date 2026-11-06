@@ -94,6 +94,7 @@ class EvidenceConfirmationTest {
     }
 
     private class FakeProducts : ProductRepository {
+        override suspend fun evidence(contract: Challenge): List<Evidence> = emptyList()
         var reads = 0
         var read: suspend () -> Challenge = { error("not configured") }
         override suspend fun challenge(contract: Challenge): Challenge { reads++; return read() }

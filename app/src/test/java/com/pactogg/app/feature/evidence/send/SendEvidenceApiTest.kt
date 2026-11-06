@@ -58,4 +58,57 @@ class SendEvidenceApiTest {
         }
     }
 
+
+    @Test fun EVI_02_photoHasExplicitMultipartTypeMimeFilenameAndResponseMetadata() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare(true)
+            val data = """{"id":"$OtherId","contract_id":"$ContractId","type":"photo","url":"https://cdn.example/photo.jpg","created_at":"2026-11-05T00:00:00Z","expires_at":"2026-12-05T00:00:00Z","moderation":{"status":"approved"}}"""
+            f.server.enqueue(ApiTestFixture.json(ApiTestFixture.envelope(data), 201))
+            val evidence = f.products.sendPhoto(ContractFixture, byteArrayOf(1, 2, 3), "image/jpeg")
+            val request = f.server.takeRequest()
+            assertEquals("POST", request.method)
+            assertEquals("/api/v1/contracts/$ContractId/evidence", request.path)
+            assertEquals("Bearer $Access", request.getHeader("Authorization"))
+            assertTrue(request.getHeader("Content-Type")!!.startsWith("multipart/form-data; boundary="))
+            val body = request.body.readUtf8()
+            assertTrue(body.contains("name=\"type\"")); assertTrue(body.contains("text/plain"))
+            assertTrue(body.contains("photo")); assertTrue(body.contains("name=\"file\"; filename=\"evidencia.jpg\""))
+            assertTrue(body.contains("Content-Type: image/jpeg"))
+            assertEquals("https://cdn.example/photo.jpg", evidence.url)
+            assertEquals("2026-12-05T00:00:00Z", evidence.expiresAt)
+            assertEquals("2026-11-05T00:00:00Z", evidence.createdAt)
+        }
+    }
+
+    @Test fun EVI_02_listsSavedEvidenceWithSessionAndRejectsOtherContract() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare(true)
+            val data = """{"id":"$OtherId","contract_id":"$ContractId","type":"photo","url":"https://cdn.example/photo.jpg","moderation":{"status":"approved"}}"""
+            f.server.enqueue(ApiTestFixture.json(ApiTestFixture.envelope("[$data]")))
+            assertEquals("https://cdn.example/photo.jpg", f.products.evidence(ContractFixture).single().url)
+            val request = f.server.takeRequest()
+            assertEquals("GET", request.method); assertEquals("/api/v1/contracts/$ContractId/evidence", request.path)
+            assertEquals("Bearer $Access", request.getHeader("Authorization"))
+            f.server.enqueue(ApiTestFixture.json(ApiTestFixture.envelope("[" + data.replace(ContractId, UserId) + "]")))
+            assertNotNull(runCatching { f.products.evidence(ContractFixture) }.exceptionOrNull())
+        }
+    }
+
+    @Test fun EVI_02_acknowledgedPhotoWithNoUrlRemainsSuccessfulForFollowupGet() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare(true)
+            f.server.enqueue(ApiTestFixture.json(ApiTestFixture.envelope("""{"id":"$OtherId","contract_id":"$ContractId","type":"photo","url":null,"moderation":{"status":"approved"}}"""), 201))
+            assertNull(f.products.sendPhoto(ContractFixture, byteArrayOf(1), "image/png").url)
+            assertEquals(1, f.server.requestCount)
+        }
+    }
+
+    @Test fun EVI_02_photoCannotBeConfirmedByALinkResponse() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare(true); f.enqueueSuccess(Endpoint.EVIDENCE)
+            assertEquals("INVALID_RESPONSE", (runCatching { f.products.sendPhoto(ContractFixture, byteArrayOf(1), "image/jpeg") }
+                .exceptionOrNull() as ApiFailure).code)
+            assertEquals(1, f.server.requestCount)
+        }
+    }
 }

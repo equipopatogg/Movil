@@ -229,6 +229,7 @@ class ConnectedFlowTest {
     }
     @Test fun photoBytesAreErasedEvenWhenUploadFails() = runTest(dispatcher) {
         runCurrent(); val bytes = byteArrayOf(1, 2, 3)
+        model.mutable.value = model.state.value.copy(contract = contract.copy(status = "in_progress", acceptedBy = account.id))
         handlers["sendPhoto"] = { throw ApiFailure(503, "STORAGE_UNAVAILABLE") }
         model.sendPhoto { bytes to "image/png" }; runCurrent()
         assertTrue(bytes.all { it == 0.toByte() }); assertNotNull(model.state.value.error)
@@ -379,7 +380,8 @@ class ConnectedFlowTest {
     @Test fun evidenceModerationAndLimitErrorsKeepLinkWithoutInventingApprovedEvidence() = runTest(dispatcher) {
         runCurrent()
         for ((status, code) in listOf(422 to "CONTENT_REJECTED", 409 to "EVIDENCE_LIMIT_REACHED")) {
-            model.mutable.value = model.state.value.copy(link = "https://youtu.be/synthetic")
+            model.mutable.value = model.state.value.copy(link = "https://youtu.be/synthetic",
+                contract = contract.copy(status = "in_progress", acceptedBy = account.id), evidenceBlockedId = null)
             handlers["sendLink"] = { throw ApiFailure(status, code) }
             model.sendLink(); runCurrent()
             assertNull(model.state.value.evidence); assertNull(model.state.value.notice)
@@ -388,4 +390,56 @@ class ConnectedFlowTest {
         }
     }
 
+
+    @Test fun preparedPhotoIsNotUploadedUntilConfirmedAndIsErasedWhenLeaving() = runTest(dispatcher) {
+        runCurrent()
+        model.mutable.value = model.state.value.copy(route = ConnectedRoute.EVIDENCE,
+            contract = contract.copy(status = "in_progress", acceptedBy = account.id))
+        val bytes = byteArrayOf(1, 2, 3)
+        model.preparePhoto { com.pactogg.app.feature.connected.data.PreparedPhoto(bytes, 10, 20) }
+        runCurrent()
+        assertNotNull(model.state.value.selectedPhoto); assertTrue(calls.isEmpty())
+        model.navigate(ConnectedRoute.HOME)
+        assertNull(model.state.value.selectedPhoto); assertTrue(bytes.all { it == 0.toByte() })
+    }
+
+    @Test fun forbiddenEvidenceHidesFurtherUploadsAndDoesNotReadAnotherPhoto() = runTest(dispatcher) {
+        runCurrent()
+        model.mutable.value = model.state.value.copy(link = "https://youtu.be/synthetic",
+            contract = contract.copy(status = "in_progress", acceptedBy = account.id))
+        handlers["sendLink"] = { throw ApiFailure(403, "NOT_CONTRACT_TARGET") }
+        model.sendLink(); runCurrent()
+        assertEquals(contract.id, model.state.value.evidenceBlockedId)
+        assertFalse(model.state.value.canUploadEvidence())
+        model.sendPhoto { error("Must not read") }; runCurrent()
+        assertEquals(1, calls.size)
+    }
+
+    @Test fun delayedPhotoPreparationCannotPopulateNextAccount() = runTest(dispatcher) {
+        runCurrent()
+        model.mutable.value = model.state.value.copy(contract = contract.copy(status = "in_progress", acceptedBy = account.id))
+        val finish = CompletableDeferred<Unit>(); val bytes = byteArrayOf(1, 2, 3)
+        model.preparePhoto { finish.await(); com.pactogg.app.feature.connected.data.PreparedPhoto(bytes, 10, 20) }
+        runCurrent(); switchAccount(); finish.complete(Unit); runCurrent()
+        assertNull(model.state.value.selectedPhoto); assertTrue(bytes.all { it == 0.toByte() })
+    }
+
+    @Test fun lostPhotoResponseBlocksAnotherWriteUntilContractRefresh() = runTest(dispatcher) {
+        runCurrent()
+        model.mutable.value = model.state.value.copy(contract = contract.copy(status = "in_progress", acceptedBy = account.id))
+        handlers["sendPhoto"] = { throw java.io.IOException("connection lost") }
+        val bytes = byteArrayOf(1, 2, 3)
+        model.sendPhoto { bytes to "image/jpeg" }; runCurrent()
+        assertTrue(model.state.value.contractStateStale); assertNull(model.state.value.evidence)
+        model.sendPhoto { error("Must not resend") }; runCurrent()
+        assertEquals(1, calls.size); assertTrue(bytes.all { it == 0.toByte() })
+    }
+
+    @Test fun unavailableEvidenceListDoesNotInventAnEmptyHistoryOrResend() = runTest(dispatcher) {
+        runCurrent(); handlers["evidence"] = { throw ApiFailure(405, "HTTP_ERROR") }
+        model.loadEvidence(); runCurrent()
+        assertTrue(model.state.value.evidenceUnavailable)
+        assertFalse(model.state.value.evidenceLoaded); assertNull(model.state.value.error)
+        assertEquals(listOf("evidence"), calls)
+    }
 }

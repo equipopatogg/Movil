@@ -10,10 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -55,38 +54,26 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
         return
     }
     BackHandler(state.route != ConnectedRoute.HOME || state.selectedTournament != null) {
-        if (state.selectedTournament != null) model.tournament(null) else model.navigate(ConnectedRoute.HOME)
+        if (state.selectedTournament != null) model.tournament(null) else model.back()
     }
     Scaffold(topBar = {
         Row(verticalAlignment = Alignment.CenterVertically) {
+            if (state.route != ConnectedRoute.HOME) TextButton(onClick = model::back, enabled = !state.busy) {
+                Text("Volver")
+            }
             TextButton(onClick = { model.navigate(ConnectedRoute.HOME) }, enabled = !state.busy) {
                 Text("PACTOGG", color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.titleLarge)
             }
             Spacer(Modifier.weight(1f))
-            TextButton(onClick = { model.navigate(ConnectedRoute.PROFILE) }, enabled = !state.busy) {
-                Text(requireNotNull(state.account).nickname)
+            IconButton(onClick = { model.navigate(ConnectedRoute.PROFILE) }, enabled = !state.busy) {
+                Icon(painterResource(R.drawable.ic_pacto_user), "Perfil de ${state.account?.nickname.orEmpty()}")
             }
         }
     }, bottomBar = { ConnectedNavigation(state.route, state.busy, model::navigate) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
             if (state.busy) CircularProgressIndicator(Modifier.padding(12.dp))
             Box(Modifier.weight(1f)) { ConnectedContent(state, model) }
-        }
-    }
-}
-
-@Composable
-private fun ConnectedNavigation(route: ConnectedRoute, busy: Boolean, nav: (ConnectedRoute) -> Unit) {
-    val routes = listOf(ConnectedRoute.HOME, ConnectedRoute.CREATE,
-        ConnectedRoute.TOURNAMENTS, ConnectedRoute.GROUPS)
-    val labels = listOf("Inicio", "Crear", "Torneos", "Grupos")
-    val icons = listOf(R.drawable.ic_pacto_home, R.drawable.ic_pacto_plus,
-        R.drawable.ic_pacto_trophy, R.drawable.ic_pacto_users)
-    NavigationBar(containerColor = MaterialTheme.colorScheme.background) {
-        routes.forEachIndexed { index, target ->
-            NavigationBarItem(selected = route == target, enabled = !busy, onClick = { nav(target) },
-                icon = { Icon(painterResource(icons[index]), null) }, label = { Text(labels[index]) })
         }
     }
 }

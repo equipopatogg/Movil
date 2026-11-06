@@ -45,14 +45,15 @@ data class ContractDto(val id: String, @SerialName("group_id") val groupId: Stri
     @SerialName("my_points") val myPoints: Int? = null,
     @SerialName("accepted_at") val acceptedAt: String? = null,
     @SerialName("updated_at") val updatedAt: String? = null,
-    @SerialName("created_at") val createdAt: String? = null) {
+    @SerialName("created_at") val createdAt: String? = null,
+    @SerialName("executor_id") val executorId: String? = null) {
     fun toDomain(): Challenge {
         require(id.matches(IdPattern) && groupId.matches(IdPattern) && status.isNotBlank())
         require(game.isNotBlank() && condition.isNotBlank() && reward.isNotBlank())
         require(bond >= 0 && (version == null || version >= 1) && (evidenceCount == null || evidenceCount >= 0))
         return Challenge(id, groupId, game, condition, reward, deadline, bond, status,
             challengerId, targetType, targetId, acceptedBy, evidenceCount, version, closedReason, myPoints,
-            acceptedAt, updatedAt, createdAt)
+            acceptedAt, updatedAt, createdAt, executorId)
     }
 }
 
@@ -64,11 +65,13 @@ data class ModerationDto(val status: String)
 
 @Serializable
 data class EvidenceDto(val id: String, @SerialName("contract_id") val contractId: String,
-    val type: String, val moderation: ModerationDto) {
+    val type: String, val moderation: ModerationDto, val url: String? = null,
+    @SerialName("created_at") val createdAt: String? = null,
+    @SerialName("expires_at") val expiresAt: String? = null) {
     fun toDomain(): Evidence {
         require(id.matches(IdPattern) && contractId.matches(IdPattern))
         require(type in listOf("link", "photo") && moderation.status == "approved")
-        return Evidence(id, contractId, type, moderation.status)
+        return Evidence(id, contractId, type, moderation.status, url, createdAt, expiresAt)
     }
 }
 

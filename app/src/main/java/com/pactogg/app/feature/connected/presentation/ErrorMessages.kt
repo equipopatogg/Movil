@@ -4,7 +4,7 @@ import com.pactogg.app.core.network.ApiFailure
 import java.io.IOException
 
 fun Exception.userMessage(): String = when (this) {
-    is ApiFailure -> ApiMessages[code] ?: statusMessage(status)
+    is ApiFailure -> displayMessage ?: ApiMessages[code] ?: statusMessage(status)
     is IOException -> "Se perdió la conexión. No sabemos si la acción se completó. " +
         "Revisa su estado antes de enviarla otra vez."
     is IllegalArgumentException -> "Revisa los datos: están incompletos o no cumplen el formato permitido."
@@ -42,6 +42,7 @@ private val ApiMessages = mapOf(
     "NOT_GROUP_MEMBER" to "No perteneces a este grupo.",
     "ALREADY_MEMBER" to "Ya perteneces a este grupo. Puedes abrirlo desde Mis grupos.",
     "GROUP_FULL" to "El grupo alcanzó su límite de miembros.",
-    "IMAGE_TOO_LARGE" to "La imagen supera el tamaño permitido.",
-    "UNSUPPORTED_MEDIA_TYPE" to "Selecciona una imagen JPEG, PNG o WebP.",
+    "IMAGE_TOO_LARGE" to "La imagen es muy pesada o demasiado grande; elige otra o recórtala.",
+    "UNSUPPORTED_MEDIA_TYPE" to "Formato no válido. Elige una imagen JPEG, PNG o WebP.",
+    "IMAGE_UNAVAILABLE" to "No pudimos abrir esa foto. Vuelve a elegirla desde la galería.",
 )

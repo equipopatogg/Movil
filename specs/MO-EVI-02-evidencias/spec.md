@@ -1,5 +1,24 @@
 # MO-EVI-02 — Envío de evidencias
 
+## Alcance vigente — imágenes, 2026-11-05
+
+Usuario autoriza completar la integración a partir del mensaje enviado por backend. Esta ampliación pertenece únicamente a evidencias; la revisión general y los ajustes de navegación no generan otra spec. Las afirmaciones inferiores sobre ausencia de GET/galería son historia superada.
+
+- IMG-RF1: selector nativo sin cámara/permisos generales; cancelar no lee ni envía. JPEG/PNG/WebP válidos se decodifican y normalizan a JPEG sin metadatos, respetando orientación; rechazar originales mayores de 8000 px por lado. Límite defensivo local de lectura: 32 MiB; reducir hasta 2048 px por lado para acotar memoria y tráfico. Archivo final <= 5 MiB (5 242 880 bytes, conforme a opciones backend), sin cambiar versiones de aplicación. ExifInterface 1.4.1 se declara explícitamente; ya estaba presente de forma transitiva por Coil.
+- IMG-RF2: vista previa y envío explícito; cambiar/quitar/salir borra el búfer pendiente. Nunca persistir fotos en SavedState/Room ni registrar bytes/URI/tokens. Multipart `type=photo` text/plain, `file` image/jpeg con nombre .jpg. Enlaces conservan JSON y hosts permitidos.
+- IMG-RF3: recuperar `url`, `created_at`, `expires_at`; consultar `GET /api/v1/contracts/{id}/evidence` con sesión como lectura auxiliar al envío/visualización dentro de esta spec. Validar IDs de cada resultado. La imagen HTTPS se carga con Coil mediante cliente sin Authorization/cookies/redirects; sin caché persistente ni memoria compartida entre cuentas. Enlaces se abren solo si corresponden a los hosts permitidos. Vencimiento se muestra, no se atribuye borrado S3 a Android.
+- IMG-RF4: solo ejecutor/aceptante/destinatario confirmado en in_progress o voting, plazo vigente y contador inferior a tres puede subir; el resto consulta. Tras 403 NOT_CONTRACT_TARGET o 409, ocultar envío hasta refrescar detalle. El primer voto no figura en ContractResponse: no inventar un contador ni consultar endpoints nuevos; manejar rechazo del proveedor. La autorización final siempre es servidor.
+- IMG-RF5: 422 de tamaño/formato/moderación, 403, 409, 401, 429 y fallos de red/servicio no inventan aprobación ni repiten POST. Para 409 de evidencia mostrar mensaje acotado/sanitizado del servidor y decidir por code/status. No mostrar details.labels. Fallo del GET posterior conserva el éxito confirmado y permite actualizar imágenes sin resubir. Una escritura incierta exige actualizar detalle antes de otro envío.
+
+Fuentes: mensaje backend aportado en este chat; [backend fijado 451c8ae](https://github.com/equipopatogg/backend/tree/451c8ae1bfae3df64cf95f5a26ace7b1eacb3b1e/Pactogg.Api/Modules/Evidence), guía/OpenAPI del mismo commit; Sprint_Planning_PactoGG.xlsx consultado, fila ID156 «No se ha iniciado». S3 directo con URL firmada permanece diferido.
+
+Discrepancias comprobadas en código fuente backend (no prueba de despliegue): POST de foto puede responder url=null; GET genera URL de lectura. EvidenceService aún admite estados anteriores y conserva TODO para primer voto. Android sigue la regla más reciente comunicada, consulta GET para obtener URL y no certifica cumplimiento de reglas servidor. No editar backend ni omitir moderación.
+
+**Prueba contra despliegue 2026-11-05:** nueve comprobaciones previas correctas (sesión QA y consultas); GET de evidencias devuelve 405. Se registra bloqueo del proveedor, sin inventar historial vacío. El móvil mantiene éxito confirmado y muestra indisponibilidad; verificar de nuevo cuando backend despliegue esta ruta. No se hicieron escrituras de negocio y se cerró únicamente la sesión del sondeo.
+
+Criterios añadidos: IMG-AC1 preparación/preview/envío explícito; IMG-AC2 listado seguro y expiración; IMG-AC3 controles de autorización/errores/no duplicación. Tareas y evidencia en los archivos de este expediente. Las casillas integrales anteriores permanecen abiertas donde falta proveedor o aceptación humana.
+
+
 Fecha: 2026-11-04. Estado: **IMPLEMENTACIÓN LOCAL / aceptación funcional pendiente**. Correspondencia backend: `EVI-02-evidence`. No equivale a aceptación de sus reglas o a implementación móvil.
 
 ## 1. Contexto y objetivo

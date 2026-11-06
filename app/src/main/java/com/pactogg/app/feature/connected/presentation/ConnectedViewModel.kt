@@ -34,6 +34,11 @@ class ConnectedViewModel @Inject constructor(
     internal var nicknameVersion = 0L
     internal var nicknameRetryAt = 0L
 
+    override fun onCleared() {
+        mutable.value.selectedPhoto?.clear()
+        super.onCleared()
+    }
+
     init {
         viewModelScope.launch {
             runCatching { sessions.restore() }.onFailure { error ->
@@ -46,6 +51,7 @@ class ConnectedViewModel @Inject constructor(
                     queryVersion++
                     nicknameVersion++
                     nicknameJob?.cancel()
+                    mutable.value.selectedPhoto?.clear()
                     mutable.value = ConnectedState(restoring = false, account = session?.account,
                         busy = mutable.value.busy)
                 } else if (session?.account != mutable.value.account) {
@@ -84,13 +90,17 @@ class ConnectedViewModel @Inject constructor(
 
     fun navigate(route: ConnectedRoute) {
         if (mutable.value.busy || mutable.value.account == null) return
-        mutable.update { it.copy(route = route, error = null, notice = null, selectedTournament = null) }
+        if (route != ConnectedRoute.EVIDENCE) mutable.value.selectedPhoto?.clear()
+        mutable.update { it.copy(route = route, error = null, diagnostic = null, notice = null,
+            selectedPhoto = if (route == ConnectedRoute.EVIDENCE) it.selectedPhoto else null,
+            selectedTournament = null) }
         when (route) {
             ConnectedRoute.TOURNAMENTS -> if (!mutable.value.tournamentsLoaded) loadTournaments()
             ConnectedRoute.PROFILE -> loadProfile()
             ConnectedRoute.GROUPS -> loadGroups()
             ConnectedRoute.MEMBERS -> loadMembers()
             ConnectedRoute.BOARD -> loadBoard()
+            ConnectedRoute.EVIDENCE -> loadEvidence()
             else -> Unit
         }
     }
@@ -117,36 +127,17 @@ class ConnectedViewModel @Inject constructor(
         if (!current.reviewing || !targetAllowed) return
         perform {
             val contract = products.createChallenge(group, current.draft)
+            mutable.value.selectedPhoto?.clear()
             mutable.update { it.copy(contract = contract, contractStateStale = false,
                 route = ConnectedRoute.CONTRACT, reviewing = false,
                 draft = ChallengeDraft(), deadlineLocal = "", evidence = null, link = "",
+                evidenceItems = emptyList(), evidenceLoaded = false, evidenceUnavailable = false,
+                evidenceBlockedId = null, selectedPhoto = null,
                 social = it.social.copy(contracts = ListState(), pendingAction = null, selectedRival = null)) }
         }
     }
 
-    fun sendLink() {
-        val current = mutable.value
-        val contract = current.contract ?: return
-        if (!InputRules.evidenceLink(current.link)) {
-            mutable.update { it.copy(error = "Usa un enlace HTTPS de los servicios permitidos.") }
-            return
-        }
-        perform {
-            val evidence = products.sendLink(contract, current.link)
-            confirmEvidence(products, contract, evidence, "Evidencia confirmada por el servidor.")
-        }
-    }
-
-    fun sendPhoto(read: suspend () -> Pair<ByteArray, String>) {
-        val contract = mutable.value.contract ?: return
-        perform {
-            val (bytes, mime) = read()
-            try {
-                val evidence = products.sendPhoto(contract, bytes, mime)
-                confirmEvidence(products, contract, evidence, "Foto confirmada por el servidor.")
-            } finally { bytes.fill(0) }
-        }
-    }
+    fun sendLink() = sendEvidenceLink()
 
     fun loadTournaments(more: Boolean = false) {
         val current = mutable.value

@@ -8,12 +8,14 @@ data class Challenge(val id: String, val groupId: String, val game: String,
     val challengerId: String? = null, val targetType: String? = null, val targetId: String? = null,
     val acceptedBy: String? = null, val evidenceCount: Int? = null, val version: Int? = null,
     val closedReason: String? = null, val myPoints: Int? = null,
-    val acceptedAt: String? = null, val updatedAt: String? = null, val createdAt: String? = null)
+    val acceptedAt: String? = null, val updatedAt: String? = null, val createdAt: String? = null,
+    val executorId: String? = null)
 
 data class ChallengeDraft(val game: String = "", val condition: String = "", val reward: String = "",
     val deadline: String = "", val bond: Int? = null, val targetId: String? = null)
 
-data class Evidence(val id: String, val contractId: String, val type: String, val moderation: String)
+data class Evidence(val id: String, val contractId: String, val type: String, val moderation: String,
+    val url: String? = null, val createdAt: String? = null, val expiresAt: String? = null)
 
 data class Match(val id: String, val round: Int, val position: Int, val first: String?, val second: String?,
     val firstScore: Int?, val secondScore: Int?, val status: String)
@@ -29,5 +31,6 @@ interface ProductRepository {
     suspend fun challenge(contract: Challenge): Challenge
     suspend fun sendLink(contract: Challenge, url: String): Evidence
     suspend fun sendPhoto(contract: Challenge, bytes: ByteArray, mimeType: String): Evidence
+    suspend fun evidence(contract: Challenge): List<Evidence>
     suspend fun tournaments(status: String?, game: String?, cursor: String?): TournamentPage
 }
