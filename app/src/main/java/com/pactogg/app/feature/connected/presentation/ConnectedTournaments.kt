@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pactogg.app.R
@@ -27,6 +28,13 @@ fun ConnectedTournaments(state: ConnectedState, model: ConnectedViewModel) {
             TournamentDetails(state.selectedTournament)
             Action("Volver a torneos", enabled = !state.busy) { model.tournament(null) }
         } else {
+            if (state.group != null) {
+                val scopes = listOf(stringResource(R.string.tournaments_all_groups), stringResource(
+                    R.string.tournaments_selected_group))
+                Choices(scopes, scopes[if (state.groupTournamentsOnly) 1 else 0]) {
+                    model.tournamentScope(it == scopes[1])
+                }
+            }
             val labels = listOf("Todos", "Abiertos", "En curso", "Finalizados", "Cancelados")
             val statuses = listOf(null, "open", "in_progress", "finished", "cancelled")
             Choices(labels, labels[statuses.indexOf(state.status).coerceAtLeast(0)]) {

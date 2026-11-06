@@ -95,4 +95,6 @@ Acuerdo: %3$s</string>
     <string name="nav_groups">Grupos</string>
     <string name="section_upcoming">Esta sección estará disponible próximamente.</string>
     <string name="understood">Entendido</string>
+    <string name="tournaments_all_groups">Todos mis grupos</string>
+    <string name="tournaments_selected_group">Grupo seleccionado</string>
 </resources>

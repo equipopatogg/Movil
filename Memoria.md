@@ -1,3 +1,45 @@
+# Preparación de entrega en rama - 2026-11-06
+
+Usuario autoriza subir la ampliación local en una rama nueva. Rama: codex/integracion-completa-movil. El usuario informa que la comprobación final ya terminó bien; los informes locales revisados acreditan 329 pruebas sin fallos, cobertura y build PASS. Instrumentación y aceptación del proveedor siguen pendientes. Estado remoto pendiente de push; no atribuir entrega hasta confirmación de GitHub.
+
+# Verificación de informes corregida - 2026-11-06
+
+La ejecución del usuario terminó BUILD SUCCESSFUL con testDebugUnitTest, cobertura, lintDebug y detekt. El rechazo posterior de all se debía a cuatro casos de CommunitySecurityTest fuera de category_classes, no a fallos JVM. Se registró la clase en security, sus cuatro métodos como regresiones obligatorias y la anotación SecurityChecks en Kotlin. No se modificaron ni relajaron las reglas del validador.
+
+Comprobación local posterior sobre los informes generados por el usuario: matrix OK; all PASS (329 pruebas, cero fallos, cero omitidas, sin faltantes ni categorías incorrectas); coverage PASS; build PASS. Los 27 tests Python de los controles pasan. Estos resultados revalidan los informes existentes; la nueva anotación de categoría requiere la siguiente ejecución Gradle. Pendiente repetir scripts/check-android.ps1 -UseWindowsTrust para completar el script incluido SBOM. No acredita instrumentación ni aceptación del proveedor. Sin cambios backend ni GitHub.
+
+# Estado: JVM correctas, corrección de Lint - 2026-11-06
+
+Los XML de la última ejecución del usuario confirman 329 pruebas JVM, cero fallos, cero errores y cero omitidas. La corrección de los fixtures HTTPS permite completar la suite y generar cobertura. Lint detuvo la ejecución con siete errores: una sangría incorrecta en CommunityActions y seis recursos sin referencias en community_strings.xml.
+
+Se corrigieron esas siete causas y se normalizó la misma sangría en CommunityQueries, ConnectedCommunity y ConnectedRouteLoading. Solo cambios de formato y retirada de recursos no utilizados; sin supresiones ni baseline. XML válido y Detekt ejecutado directamente sin incidencias después del cambio. Pendiente repetir Lint/build mediante scripts/check-android.ps1 -UseWindowsTrust; no declarar aún verificación integral ni instrumentación completadas. Los dos hints sobre mutableIntStateOf son recomendaciones no bloqueantes.
+
+## Antecedente: seguimiento de pruebas HTTPS - 2026-11-06
+
+El registro posterior del usuario con UseWindowsTrust llega a assembleDebug, assembleDebugAndroidTest y testDebugUnitTest: 329 pruebas, 191 fallidas, cero omitidas. El XML local confirma SSLPeerUnverifiedException: Hostname gen-webserver.internal not verified, frente a un certificado de fixture con SAN localhost/127.0.0.1/::1. No confundirlo con el PKIX anterior al descargar JaCoCo.
+
+Se corrigieron cinco fixtures JVM: bind explícito a 127.0.0.1 y URL HTTPS con ese host, ya incluido en el certificado. No se alteró hostnameVerifier, confianza del cliente real, backend ni reglas de aceptación. Cambios de pruebas pendientes de nueva ejecución; el resultado 329/191 pertenece al candidato anterior a esta corrección. Repetir scripts/check-android.ps1 -UseWindowsTrust desde la terminal local.
+
+## Estado anterior de la ampliación local, 2026-11-06
+
+- Alcance: petición actual de completar los consumidores de las 36 rutas; backend sin cambios y sin GitHub.
+- Código: se conservaron las pantallas nuevas presentes en la copia; se conectaron los alias por grupo, se corrigieron regreso a votación, selección de navegación, invalidación de permisos/contexto y validación de paginación. Se separaron interfaces, notificaciones y políticas para cumplir el análisis estático sin relajar reglas.
+- Evidencia: auditoría estática 36/36 rutas con consumidores; matriz de 33 operaciones correcta; 27 pruebas Python de controles correctas. Nueve regresiones JVM nuevas escritas. Detekt ejecutado directamente, ver el informe de esta revisión.
+- Bloqueo: Gradle no puede conectar a su daemon local; build, JVM y Lint no llegaron a ejecutarse. No hay resultado nuevo de tests JVM, instrumentación ni API real. El anterior fallo SSL/PKIX no se declara resuelto.
+- Pendientes: ejecutar scripts/check-android.ps1 en la terminal de Android Studio, instrumentación en emulador aislado, revisión visual y aceptación del proveedor; GET evidencias 405 es evidencia histórica pendiente de reprueba.
+- Informe: [ampliación local](docs/pruebas/ampliacion-local-2026-11-06.md). No reutilizar resultados previos como verificación de este candidato.
+
+## Antecedentes conservados
+
+# Ampliación móvil en curso — 2026-11-05
+
+- Autorización: integrar 14 operaciones restantes, con SDD y pruebas; backend solo referencia, sin cambios.
+- Fuente: backend 451c8ae1bfae3df64cf95f5a26ace7b1eacb3b1e. Decisión D-SDD-40.
+- Preparado: 14 expedientes spec/plan/tasks/checklist; CommunityApi, DTO y primer repositorio consumidor; cuatro casos de seguridad nuevos.
+- Incompleto: mapeo a dominio, pantallas/navegación/estado, paginación validada, alias dentro de CON-01/TOR-02, matrices y pruebas completas por operación, instrumentación, Lint/Detekt y controles de seguridad.
+- Ejecución inicial: 256 tests JVM, 158 fallidos, sin acreditar cambios nuevos. Numerosos fallos SSLHandshakeException/PKIX frente a MockWebServer HTTPS; causa raíz todavía no determinada. No desactivar TLS para resolverlos.
+- No hay aceptación, CI remoto ni entrega funcional de esta ampliación. Las tareas permanecen abiertas.
+
 # Estado actual — imágenes y navegación, 2026-11-05
 
 - Estado: integración local implementada y verificada; 256 JVM y 22 Android correctos, sin fallos/omisiones. Lint/Detekt, 27 validadores, secretos y generación SBOM correctos; cobertura JVM 907/3105 líneas (29,21 %). No hay CI remoto de este candidato.

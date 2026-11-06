@@ -1,5 +1,14 @@
 # PactoGG Android
 
+## Estado de la ampliación - 2026-11-06
+
+Las 36 rutas tienen consumidores en el código. Se incluyen pantallas de jurado, puntos/ranking, compromisos, avisos y fama; creación de retos por grupo y filtro de torneos por grupo. La compilación y validación JVM/Android de este candidato siguen pendientes por un fallo de conexión con el daemon de Gradle en la sesión de revisión. Ver [resultado y comandos](docs/pruebas/ampliacion-local-2026-11-06.md).
+
+Ejecutar `scripts/check-android.ps1` desde la terminal de Android Studio para continuar la comprobación. No se subieron cambios a GitHub ni se modificó el backend.
+
+Los apartados siguientes conservan antecedentes del alcance anterior; no sustituyen este estado.
+
+
 Cliente Android Kotlin con Compose, Hilt y Retrofit. El recorrido conectado utiliza datos reales del backend; las pantallas del prototipo se conservan sin introducir muestras en ese recorrido.
 
 ## Alcance actual

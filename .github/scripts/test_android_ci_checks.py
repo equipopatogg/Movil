@@ -50,7 +50,7 @@ class CiChecksTests(unittest.TestCase):
                 "app-debug-androidTest.apkSha256":hashlib.sha256(b"synthetic-apk").hexdigest()}))
         return directory
     def test_exact_matrix_and_no_duplicate_or_escaping_spec(self):
-        self.assertEqual(19, len(checks.matrix()))
+        self.assertEqual(33, len(checks.matrix()))
         data = json.loads(self.matrix.read_text()); original = copy.deepcopy(data)
         data["endpoints"][1]["id"] = data["endpoints"][0]["id"]
         self.matrix.write_text(json.dumps(data))
@@ -62,7 +62,7 @@ class CiChecksTests(unittest.TestCase):
         for kind in checks.KINDS:
             result = checks.tests(kind, self.xml(kind))
             self.assertEqual("PASS", result["state"])
-            self.assertGreaterEqual(result["tests"], 19)
+            self.assertGreaterEqual(result["tests"], 33)
     def test_zero_missing_failure_skip_and_prefix_are_not_pass(self):
         mutations = [lambda root: root.clear(), lambda root: root.remove(list(root)[0]),
                      lambda root: ET.SubElement(list(root)[0], "failure"),

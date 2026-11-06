@@ -7,6 +7,7 @@ import com.pactogg.app.prototype.Action
 
 @Composable
 fun ConnectedContractActions(state: ConnectedState, model: ConnectedViewModel, contract: Challenge) {
+    Action("Jurado y resultado", enabled = !state.busy) { model.navigate(ConnectedRoute.VOTING) }
     val accept = canAccept(contract, state.account?.id, state.group, state.contractStateStale)
     val reject = canReject(contract, state.account?.id, state.contractStateStale)
     if (state.social.pendingAction != null) {
