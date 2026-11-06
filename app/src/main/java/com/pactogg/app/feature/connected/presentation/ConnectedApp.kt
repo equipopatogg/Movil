@@ -90,6 +90,7 @@ private fun ConnectedContent(state: ConnectedState, model: ConnectedViewModel) {
         ConnectedRoute.EVIDENCE -> ConnectedEvidence(state, model)
         ConnectedRoute.TOURNAMENTS -> ConnectedTournaments(state, model)
         ConnectedRoute.PROFILE -> ConnectedProfile(state, model)
+        else -> ConnectedCommunity(state, model)
     }
 }
 
@@ -108,6 +109,7 @@ private fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
         if (state.group != null) Action("Crear reto manual", enabled = !state.busy) {
             model.navigate(ConnectedRoute.CREATE)
         }
+        CommunityHomeActions(state, model)
         Action("Consultar torneos", enabled = !state.busy) { model.navigate(ConnectedRoute.TOURNAMENTS) }
         if (state.contract != null) Action("Ver reto seleccionado", enabled = !state.busy) {
             model.navigate(ConnectedRoute.CONTRACT)

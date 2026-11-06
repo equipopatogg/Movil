@@ -1,3 +1,15 @@
+# Entrega en rama autorizada - 2026-11-06
+
+El usuario autoriza commit y push de la ampliación móvil a equipopatogg/Movil en una rama nueva. Esta autorización sustituye la prohibición previa de subir cambios para este encargo. No modificar backend ni fusionar main. Excluir credenciales, artefactos generados y referencias privadas.
+
+# Encargo vigente - 2026-11-06
+
+Completar integración de las 36 rutas, pantallas y navegación, ejecutar pruebas y corregir errores. Trabajar en esta copia local; no modificar backend ni subir cambios a GitHub. Esta prohibición actual prevalece sobre autorizaciones históricas de entrega. Ver Memoria.md y docs/pruebas/ampliacion-local-2026-11-06.md para estado, comprobaciones y bloqueo de Gradle. No declarar aceptación ni suites verdes sin ejecución del candidato.
+
+# Ampliación móvil autorizada — 2026-11-05
+
+Usuario solicita integrar todas las operaciones pendientes, sus pantallas, specs y pruebas. Backend solo lectura; sin push. Este alcance sustituye el límite anterior de 19 operaciones. Mantener SDD, separación de dominio, HTTPS y evidencia real; no atribuir aceptación externa por fixtures.
+
 # Entrega por PR de imágenes autorizada — 2026-11-05
 
 Usuario autoriza subir el candidato de fotos/evidencias y navegación aprobado a equipopatogg/Movil mediante rama y PR hacia main. Dejar las pruebas GitHub iniciadas y esperar su aviso antes de revisar resultados. No fusionar ni activar fusión automática. Excluir APK, artefactos, cuentas y referencias privadas. Esta autorización sustituye el límite local de la fase inmediatamente inferior; conservar el bloqueo real de GET evidencias 405 y la aceptación pendiente.

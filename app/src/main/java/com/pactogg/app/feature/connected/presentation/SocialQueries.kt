@@ -22,7 +22,9 @@ fun ConnectedViewModel.selectGroup(id: String) = perform { applyGroup(socials.gr
 internal fun ConnectedViewModel.applyGroup(group: Group) {
     queryVersion++
     mutable.value.selectedPhoto?.clear()
-    mutable.update { it.copy(group = group, contract = null, contractStateStale = false,
+    mutable.update { it.copy(community = CommunityState(), group = group, contract = null, contractStateStale = false,
+        tournaments = emptyList(), tournamentsLoaded = false, nextCursor = null, hasMore = false,
+        selectedTournament = null,
         evidence = null, evidenceItems = emptyList(), evidenceLoaded = false, evidenceUnavailable = false,
         evidenceBlockedId = null, selectedPhoto = null, link = "",
         draft = com.pactogg.app.feature.connected.domain.ChallengeDraft(), reviewing = false,
@@ -55,7 +57,7 @@ fun ConnectedViewModel.openChallenge(contract: Challenge) = perform {
     val fresh = products.challenge(contract)
     val group = socials.group(fresh.groupId)
     mutable.value.selectedPhoto?.clear()
-    mutable.update { it.copy(group = group, contract = fresh, contractStateStale = false,
+    mutable.update { it.copy(community = CommunityState(), group = group, contract = fresh, contractStateStale = false,
         route = ConnectedRoute.CONTRACT, evidence = null, evidenceItems = emptyList(),
         evidenceLoaded = false, evidenceUnavailable = false, evidenceBlockedId = null, selectedPhoto = null, link = "",
         social = it.social.copy(pendingAction = null)) }

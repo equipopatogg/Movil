@@ -13,6 +13,11 @@ MATRIX = ROOT / "docs/pruebas/operaciones.json"
 OUT = ROOT / "artifacts/android-ci"
 KINDS = ("unit", "integration", "security")
 EXPECTED_DEVICE = {
+    ("com.pactogg.app.feature.connected.presentation.CommunityUiTest", "VOT_02_nonJurorCannotSeeVoteButtons"),
+    ("com.pactogg.app.feature.connected.presentation.CommunityUiTest", "VOT_02_jurorChoosesVoteWithoutAutomaticSubmission"),
+    ("com.pactogg.app.feature.connected.presentation.CommunityUiTest", "PTS_01_displaysServerBalanceAndMovements"),
+    ("com.pactogg.app.feature.connected.presentation.CommunityUiTest", "PTS_02_emptyRankingIsHonest"),
+    ("com.pactogg.app.feature.connected.presentation.CommunityUiTest", "ACH_01_emptyFameDoesNotShowSampleRewards"),
     ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "navigationKeepsFiveMakeEntriesAndExploreDoesNotNavigate"),
     ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "unauthorizedReaderCanRefreshEvidenceWithoutUploadButtons"),
     ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "photoPreviewCanBeDiscardedWithoutUploading"),
@@ -61,11 +66,11 @@ def matrix():
     rows = document["endpoints"]
     classes = document["category_classes"]
     flat = [name for kind in KINDS for name in classes[kind]]
-    if len(flat) != len(set(flat)) or sum(bool(row["protected"]) for row in rows) != 15:
+    if len(flat) != len(set(flat)) or sum(bool(row["protected"]) for row in rows) != 29:
         raise ValueError("Overlapping categories or changed protection scope")
     ids = [r["id"] for r in rows]
-    if len(ids) != 19 or len(set(ids)) != 19:
-        raise ValueError("Expected 19 unique confirmed operations")
+    if len(ids) != 33 or len(set(ids)) != 33:
+        raise ValueError("Expected 33 unique confirmed operations")
     spec_ids = {p.name.split("-", 3)[1] + "-" + p.name.split("-", 3)[2]
                 for p in (ROOT / "specs").glob("MO-*") if p.is_dir()}
     if set(ids) != spec_ids:
@@ -289,7 +294,7 @@ def main():
     parser.add_argument("--directory", type=Path)
     args = parser.parse_args()
     if args.stage == "matrix":
-        matrix(); print("19 operations, three test categories, exact identities: OK"); return 0
+        matrix(); print("33 operations, three test categories, exact identities: OK"); return 0
     if args.stage in (*KINDS, "all", "instrumented"):
         directory = args.directory or ROOT / ("app/build/outputs/instrumented-offline" if args.stage == "instrumented"
             else "app/build/test-results/testDebugUnitTest" if args.stage == "all"

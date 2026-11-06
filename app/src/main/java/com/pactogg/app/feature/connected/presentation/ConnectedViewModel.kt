@@ -26,6 +26,7 @@ class ConnectedViewModel @Inject constructor(
     private val sessions: SessionManager,
     internal val products: ProductRepository,
     internal val socials: com.pactogg.app.feature.connected.domain.SocialRepository,
+    internal val community: com.pactogg.app.feature.community.data.CommunityRepository? = null,
 ) : ViewModel() {
     internal val mutable = MutableStateFlow(ConnectedState())
     val state = mutable.asStateFlow()
@@ -91,18 +92,12 @@ class ConnectedViewModel @Inject constructor(
     fun navigate(route: ConnectedRoute) {
         if (mutable.value.busy || mutable.value.account == null) return
         if (route != ConnectedRoute.EVIDENCE) mutable.value.selectedPhoto?.clear()
-        mutable.update { it.copy(route = route, error = null, diagnostic = null, notice = null,
+        mutable.update { it.copy(route = route, community = if (
+            it.route == route) it.community else CommunityState(), error = null, diagnostic = null, notice = null,
+            evidenceReturnRoute = evidenceBackRoute(it, route),
             selectedPhoto = if (route == ConnectedRoute.EVIDENCE) it.selectedPhoto else null,
             selectedTournament = null) }
-        when (route) {
-            ConnectedRoute.TOURNAMENTS -> if (!mutable.value.tournamentsLoaded) loadTournaments()
-            ConnectedRoute.PROFILE -> loadProfile()
-            ConnectedRoute.GROUPS -> loadGroups()
-            ConnectedRoute.MEMBERS -> loadMembers()
-            ConnectedRoute.BOARD -> loadBoard()
-            ConnectedRoute.EVIDENCE -> loadEvidence()
-            else -> Unit
-        }
+        loadRoute(route)
     }
 
     fun createGroup() {
@@ -126,7 +121,7 @@ class ConnectedViewModel @Inject constructor(
                 current.social.selectedRival?.id == current.draft.targetId)
         if (!current.reviewing || !targetAllowed) return
         perform {
-            val contract = products.createChallenge(group, current.draft)
+            val contract = products.createChallengeInGroup(group, current.draft)
             mutable.value.selectedPhoto?.clear()
             mutable.update { it.copy(contract = contract, contractStateStale = false,
                 route = ConnectedRoute.CONTRACT, reviewing = false,
@@ -144,8 +139,11 @@ class ConnectedViewModel @Inject constructor(
         if (more && (!current.hasMore || current.nextCursor == null)) return
         val version = queryVersion
         perform {
-            val page = products.tournaments(current.status, current.gameFilter.trim().ifEmpty { null },
-                current.nextCursor.takeIf { more })
+            val game = current.gameFilter.trim().ifEmpty { null }
+            val cursor = current.nextCursor.takeIf { more }
+            val page = if (current.groupTournamentsOnly) products.groupTournaments(
+                requireNotNull(current.group).id, current.status, game, cursor)
+            else products.tournaments(current.status, game, cursor)
             if (version == queryVersion) mutable.update { it.copy(
                 tournaments = ((if (more) it.tournaments else emptyList()) + page.items).distinctBy { item -> item.id },
                 tournamentsLoaded = true, nextCursor = page.nextCursor, hasMore = page.hasMore) }

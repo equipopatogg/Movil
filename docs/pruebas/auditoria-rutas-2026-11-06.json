@@ -1,0 +1,7 @@
+{
+  "routes": 36,
+  "missing": [],
+  "routes_without_consumer": [],
+  "scope": "Static source audit, not runtime endpoint acceptance",
+  "new_regression_cases": 9
+}

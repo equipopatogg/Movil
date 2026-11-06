@@ -3,6 +3,7 @@ package com.pactogg.app.feature.connected.presentation
 
 
 import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.viewModelScope
 import com.pactogg.app.core.network.ApiFailure
 import com.pactogg.app.core.network.PactoApi
 import com.pactogg.app.core.session.SessionManager
@@ -55,12 +56,21 @@ class ConnectedFlowTest {
         val api = repository<PactoApi>()
         sessions = SessionManager(api, store)
         sessions.restore()
-        model = ConnectedViewModel(sessions, repository<ProductRepository>(), repository<SocialRepository>())
+        model = ConnectedViewModel(sessions, repository<ProductRepository>(), repository<SocialRepository>(),
+            com.pactogg.app.feature.community.data.CommunityRepository(api, sessions))
         lifecycle.put("test", model)
         model.state.first { !it.restoring && it.account != null }
         model.mutable.value = ConnectedState(restoring = false, account = account, group = group, contract = contract)
     }
-    @After fun cleanup() { lifecycle.clear(); Dispatchers.resetMain() }
+    @After fun cleanup() {
+        try {
+            runTest(dispatcher) {
+                val job = model.viewModelScope.coroutineContext[Job]!!
+                lifecycle.clear()
+                job.join()
+            }
+        } finally { Dispatchers.resetMain() }
+    }
 
     private suspend fun switchAccount() {
         val user = com.pactogg.app.feature.auth.data.UserDto("555555555555555555555555", "second@example.com", "Second")
@@ -184,7 +194,7 @@ class ConnectedFlowTest {
         model.targetMember(null); assertNull(model.state.value.social.selectedRival)
     }
     @Test fun challengeCreationRequiresReviewAndResetsDraftAfterConfirmation() = runTest(dispatcher) {
-        runCurrent(); handlers["createChallenge"] = { contract }
+        runCurrent(); handlers["createChallengeInGroup"] = { contract }
         model.createChallenge(); assertTrue(calls.isEmpty())
         model.mutable.value = model.mutable.value.copy(reviewing = true, draft = ChallengeDraft(game = "Halo"))
         model.createChallenge(); runCurrent()
@@ -338,7 +348,7 @@ class ConnectedFlowTest {
         for ((status, code) in listOf(422 to "CONTENT_REJECTED", 503 to "MODERATION_UNAVAILABLE")) {
             val draft = ChallengeDraft(game = "Halo", condition = "Win", reward = "Reward")
             model.mutable.value = model.state.value.copy(reviewing = true, draft = draft)
-            handlers["createChallenge"] = { throw ApiFailure(status, code) }
+            handlers["createChallengeInGroup"] = { throw ApiFailure(status, code) }
             model.createChallenge(); runCurrent()
             assertEquals(draft, model.state.value.draft); assertEquals(contract, model.state.value.contract)
             assertEquals(code, model.state.value.diagnostic?.code); assertNull(model.state.value.notice)
@@ -441,5 +451,33 @@ class ConnectedFlowTest {
         assertTrue(model.state.value.evidenceUnavailable)
         assertFalse(model.state.value.evidenceLoaded); assertNull(model.state.value.error)
         assertEquals(listOf("evidence"), calls)
+    }
+
+    @Test fun VOT_03_failedRefreshClearsPreviousVotingPermissions() = runTest(dispatcher) {
+        runCurrent()
+        model.mutable.value = model.state.value.copy(route = ConnectedRoute.VOTING,
+            community = CommunityState(loaded = true,
+                summary = com.pactogg.app.feature.community.domain.VoteSummaryModel(contract.id,
+                    "voting", 3, 0, 3, iAmJuror = true, iVoted = false, adminCanResolve = false)))
+        handlers["voteSummary"] = { throw ApiFailure(403, "NOT_GROUP_MEMBER") }
+        model.loadCommunity()
+        model.state.first { !it.busy && it.error != null }
+        assertFalse(model.state.value.community.loaded)
+        assertNull(model.state.value.community.summary)
+        assertFalse(communityActionAllowed(model.state.value, CommunityAction("vote", contract.id, "legit")))
+    }
+
+    @Test fun EVI_03_returnFromEvidenceRestoresVotingScreen() = runTest(dispatcher) {
+        runCurrent()
+        handlers["evidence"] = { emptyList<Evidence>() }
+        handlers["voteSummary"] = { throw ApiFailure(503, "SERVICE_UNAVAILABLE") }
+        model.mutable.value = model.state.value.copy(route = ConnectedRoute.VOTING)
+        model.navigate(ConnectedRoute.EVIDENCE)
+        model.state.first { !it.busy }
+        assertEquals(ConnectedRoute.VOTING, model.state.value.evidenceReturnRoute)
+        model.back()
+        model.state.first { !it.busy }
+        assertEquals(ConnectedRoute.VOTING, model.state.value.route)
+        assertEquals(ConnectedRoute.HOME, navigationSection(model.state.value.route))
     }
 }
