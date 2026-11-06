@@ -1,5 +1,9 @@
 package com.pactogg.app.feature.connected.presentation
 
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.first
 import org.junit.experimental.categories.Category
 import com.pactogg.app.testing.UnitChecks
 import com.pactogg.app.core.network.ApiClientFactory
@@ -33,12 +37,13 @@ import org.junit.Test
 @Category(UnitChecks::class)
 class EvidenceConfirmationTest {
     private val dispatcher = StandardTestDispatcher()
+    private val lifecycle = ViewModelStore()
     private val contract = Challenge("contract", "group", "Halo", "Ganar", "Elegir juego", "2099-01-01T00:00:00Z", 25, "open")
     private val evidence = Evidence("evidence", "contract", "photo", "approved")
     private lateinit var model: ConnectedViewModel
     private val products = FakeProducts()
 
-    @Before fun setup() {
+    @Before fun setup() = runTest(dispatcher) {
         Dispatchers.setMain(dispatcher)
         val api = ApiClientFactory().create("https://localhost/").create(PactoApi::class.java)
         val store = object : SessionStore {
@@ -49,9 +54,19 @@ class EvidenceConfirmationTest {
         val sessions = SessionManager(api, store)
         model = ConnectedViewModel(sessions, products,
             com.pactogg.app.feature.connected.data.ApiSocialRepository(api, sessions))
+        lifecycle.put("test", model)
+        model.state.first { !it.restoring }
     }
 
-    @After fun cleanup() { Dispatchers.resetMain() }
+    @After fun cleanup() {
+        try {
+            runTest(dispatcher) {
+                val job = model.viewModelScope.coroutineContext[Job]!!
+                lifecycle.clear()
+                job.join()
+            }
+        } finally { Dispatchers.resetMain() }
+    }
 
     @Test fun confirmedUploadRefreshesActualStatusWithoutInventingIt() = runTest(dispatcher) {
         prepare()

@@ -1,3 +1,10 @@
+# Aislamiento de pruebas JVM - 2026-11-06
+
+La captura de GitHub reporta 99 pruebas unitarias y un fallo UncaughtExceptionsBeforeTest en NicknameQueriesTest.elapsedCooldownAllowsNewQueryAndEditingWithoutAutomaticPolling. El resumen no incluye la excepcion original suprimida; no demuestra un fallo de la regla del apodo.
+
+Revision: NicknameQueriesTest y EvidenceConfirmationTest no cerraban el ViewModel antes de resetMain, y comenzaban sin esperar la restauracion de sesion en Dispatchers.IO. Se registra el modelo en ViewModelStore, se espera restoring=false y al terminar se cancela y espera su Job antes de resetMain. ConnectedFlowTest tambien espera la finalizacion tras clear. Se conservan todos los casos y aserciones, sin excluir pruebas ni modificar app/backend.
+
+Validacion: git diff --check correcto. Intento de ejecutar la categoria unit bloqueado antes de las pruebas: acceso denegado al lock del Wrapper global; con Gradle instalado y cache local, Could not connect to the Gradle daemon. Los XML previos no validan esta correccion. Pendiente ejecutar categoria unit y suite completa en terminal del usuario/CI. GitHub no accesible desde esta sesion (Could not resolve host); entrega remota pendiente.
 # Preparación de entrega en rama - 2026-11-06
 
 Usuario autoriza subir la ampliación local en una rama nueva. Rama: codex/integracion-completa-movil. El usuario informa que la comprobación final ya terminó bien; los informes locales revisados acreditan 329 pruebas sin fallos, cobertura y build PASS. Instrumentación y aceptación del proveedor siguen pendientes. Estado remoto pendiente de push; no atribuir entrega hasta confirmación de GitHub.

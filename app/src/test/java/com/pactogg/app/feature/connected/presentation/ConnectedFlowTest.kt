@@ -3,6 +3,7 @@ package com.pactogg.app.feature.connected.presentation
 
 
 import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.viewModelScope
 import com.pactogg.app.core.network.ApiFailure
 import com.pactogg.app.core.network.PactoApi
 import com.pactogg.app.core.session.SessionManager
@@ -61,7 +62,15 @@ class ConnectedFlowTest {
         model.state.first { !it.restoring && it.account != null }
         model.mutable.value = ConnectedState(restoring = false, account = account, group = group, contract = contract)
     }
-    @After fun cleanup() { lifecycle.clear(); Dispatchers.resetMain() }
+    @After fun cleanup() {
+        try {
+            runTest(dispatcher) {
+                val job = model.viewModelScope.coroutineContext[Job]!!
+                lifecycle.clear()
+                job.join()
+            }
+        } finally { Dispatchers.resetMain() }
+    }
 
     private suspend fun switchAccount() {
         val user = com.pactogg.app.feature.auth.data.UserDto("555555555555555555555555", "second@example.com", "Second")
