@@ -19,10 +19,12 @@ room = "2.8.4"
 datastore = "1.2.1"
 graphicsPath = "1.1.0"
 coil = "3.3.0"
+exif = "1.4.1"
 detekt = "1.23.8"
 cyclonedx = "3.5.1"
 
 [libraries]
+androidx-exifinterface = { module = "androidx.exifinterface:exifinterface", version.ref = "exif" }
 androidx-graphics-path = { module = "androidx.graphics:graphics-path", version.ref = "graphicsPath" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }

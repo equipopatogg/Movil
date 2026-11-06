@@ -1,31 +1,37 @@
-# PactoGG Android — consumidor conectado
+# PactoGG Android
 
-Organización local de pruebas actualizada: cada operación tiene archivos específicos de validación, API y seguridad. [Abrir tabla por operación](docs/pruebas/matriz-operaciones.md) · [Verificación de conservación de los 196 casos](docs/pruebas/reorganizacion-especifica-2026-11-05.md). Esta reorganización todavía no se sube a GitHub.
+Cliente Android Kotlin con Compose, Hilt y Retrofit. El recorrido conectado utiliza datos reales del backend; las pantallas del prototipo se conservan sin introducir muestras en ese recorrido.
 
-Integración local de las 19 operaciones confirmadas por backend: ocho del corte anterior y once sociales nuevas. Perfil/apodo, grupos/miembros, tablero/detalle y aceptar/rechazar están conectados con datos reales. Se conserva diseño y funciones adelantadas fuera del recorrido. Avatar pendiente de catálogo, sin selección activa.
+## Alcance actual
 
-Calidad local actual: 192 pruebas JVM (54 unitarias, 42 de integración y 96 de seguridad). Cinco pruebas Android offline y CI previo correctos; candidato ampliado sujeto al PR de esta fase. Cobertura JVM medida: 27,14 % local y 26,96 % en CI, sin mínimo ratificado. CI del candidato verificado en GitHub con gate PASS y APK descargado. [Entrega por PR y límites](docs/pruebas/entrega-github-2026-11-04.md). [Informe de calidad](docs/pruebas/verificacion-calidad-2026-11-04.md) · [matriz de operaciones](docs/pruebas/matriz-operaciones.md) · [pipeline](docs/pruebas/pipeline-movil.md).
+Acceso y sesión, perfil/apodo, grupos y miembros, creación/listado/detalle/aceptación/rechazo de retos, evidencias y consulta de torneos. Se mantienen las 19 operaciones principales de la [matriz de pruebas](docs/pruebas/operaciones.json). GET de evidencias se añade como lectura auxiliar confirmada para imágenes dentro de [MO-EVI-02](specs/MO-EVI-02-evidencias/spec.md).
 
-Historial funcional: recorrido positivo real de once operaciones y regresión de acceso correctos en teléfono. **Esto no cierra todos los criterios ni la aceptación de las specs.** [Informe y límites](docs/integracion/integracion-social-2026-11-04.md).
+La barra inferior sigue Make: Inicio, Explorar, Crear, Torneos y Grupos. Explorar muestra un aviso de próxima disponibilidad. Perfil está en la cabecera. Las fotos se eligen desde la galería, se preparan y previsualizan antes de enviarse; no hay cámara integrada ni carga de video.
 
-[Specs y estados](specs/README.md) · [Correspondencia con Sistema.docx](docs/integracion/specs-confirmadas-sistema-2026-11-04.md) · [Historial de prueba física](docs/integracion/verificacion-telefono-2026-11-04.md).
+**Pendiente del proveedor comprobado el 2026-11-05:** la API desplegada devuelve 405 en GET /api/v1/contracts/{id}/evidence, aunque la ruta está en su contrato/repositorio. La app muestra indisponibilidad y conserva los envíos confirmados. No se presenta ese resultado como historial vacío ni se repite POST. Las reglas de primer voto y estados también requieren conciliación del servidor con su mensaje reciente.
 
-Backend, credenciales, notas privadas y builds quedan fuera del repositorio móvil. Las cinco ramas anteriores ya se fusionaron; esta integración se entrega en los PR dependientes 6, 7 y 8. Consultar sus estados de merge y ejecuciones en GitHub; no equivalen a aceptación integral.
+S3 directo con URL firmada (ID156), aviso definitivo y catálogo de avatares esperan al backend. Jurado, puntos/ranking y otras adiciones del repositorio backend no se activan por su mera presencia. Google Play queda fuera de esta etapa.
 
+## Trabajar con el proyecto
 
-[Cierre de pendientes y release](docs/pruebas/cierre-pendientes-2026-11-04.md) · [Estado de criterios](docs/pruebas/estado-criterios-2026-11-04.md).
+Abrir esta carpeta en Android Studio y usar su JDK integrado. URL HTTPS de la API mediante la propiedad Gradle `pactogg.apiBaseUrl`; no introducir credenciales ni claves AWS en el cliente.
 
+```powershell
+.\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :app:lintDebug :app:detekt --max-workers=1
+```
 
-## Revisión documental actual — 2026-11-05
+Las pruebas de operaciones están separadas en validación, API y seguridad; [matriz y escenarios](docs/pruebas/matriz-operaciones.md). Usan fixtures HTTPS y no crean datos reales. Las pruebas Android offline se ejecutan en emulador aislado con [run-instrumented.py](scripts/run-instrumented.py); los sondeos live son explícitos, con cuentas QA externas al proyecto. No pasar credenciales en Git.
 
-[Revisión de las 19 specs y sus 84 criterios](docs/pruebas/revision-specs-2026-11-05.md): 60 criterios parcialmente comprobados, cinco sin caso específico y 19 criterios de calidad con controles locales parciales. Se vinculan tareas, casos y resultados existentes; no se ejecutaron nuevas pruebas por esta edición. Los estados anteriores se conservan como historial. No hay aceptación completa ni publicación.
+El flujo sigue spec → plan/tareas → implementación y pruebas pertinentes → resultados reales → revisión. [Specs activas](specs/README.md) · [constitución](constitution.md) · [diseño](DESIGN.md) · [estado actual](Memoria.md). Esta revisión general no crea una spec ni un expediente de relevo: únicamente las imágenes amplían MO-EVI-02.
 
+## Verificaciones y antecedentes
 
-## Pruebas pendientes ejecutadas localmente — 2026-11-05
+El resultado del candidato de imágenes se registra en el [checklist de evidencias](specs/MO-EVI-02-evidencias/checklists/checklist.md), la [trazabilidad por criterio](docs/pruebas/trazabilidad-criterios.json) y Memoria. Las ejecuciones de GitHub de versiones anteriores son historia y no acreditan los cambios locales actuales.
 
-[Resultado actual](docs/pruebas/pruebas-pendientes-2026-11-05.md): 237 JVM y nueve Android correctos; 41 casos JVM nuevos. Los cinco criterios sin caso específico tienen comprobación local de consumidor. No equivale a cerrar íntegramente las 19 specs; se conservan límites por criterio y aceptación humana/proveedor pendiente. Sin cambios visuales ni entrega a GitHub. Los recuentos de revisiones anteriores son históricos.
+- [Mensajes y zona segura anteriores](docs/pruebas/ajustes-ux-2026-11-05.md).
+- [Pruebas pendientes anteriores](docs/pruebas/pruebas-pendientes-2026-11-05.md) y [organización por operación](docs/pruebas/reorganizacion-especifica-2026-11-05.md).
+- [Revisión de criterios](docs/pruebas/revision-specs-2026-11-05.md) y [estado histórico](docs/pruebas/estado-criterios-2026-11-04.md).
+- [Integración social y límites](docs/integracion/integracion-social-2026-11-04.md), [correspondencia con Sistema.docx](docs/integracion/specs-confirmadas-sistema-2026-11-04.md) y [prueba física histórica](docs/integracion/verificacion-telefono-2026-11-04.md).
+- [Calidad anterior](docs/pruebas/verificacion-calidad-2026-11-04.md), [entrega anterior por PR](docs/pruebas/entrega-github-2026-11-04.md), [release anterior](docs/pruebas/cierre-pendientes-2026-11-04.md) y [pipeline](docs/pruebas/pipeline-movil.md).
 
-
-## Ajustes visuales locales — 2026-11-05
-
-Zona segura dinámica, mensajes contextuales y confirmaciones modales implementados. [Resultado UX-01](docs/pruebas/ajustes-ux-2026-11-05.md): 239 JVM, 14 Android y controles locales correctos. Revisión visual del usuario pendiente. Sin Git/publicación; recuentos anteriores conservados como históricos.
+Backend, cuentas QA, claves de firma, referencias personales, APK y resultados generados permanecen fuera del repositorio móvil. Las verificaciones locales no sustituyen la aceptación del proveedor ni la revisión humana.

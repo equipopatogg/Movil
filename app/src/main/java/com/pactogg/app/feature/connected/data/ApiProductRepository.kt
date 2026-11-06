@@ -43,14 +43,22 @@ class ApiProductRepository(private val api: PactoApi, private val sessions: Sess
     override suspend fun sendLink(contract: Challenge, url: String): Evidence {
         require(InputRules.evidenceLink(url))
         return sessions.authorized { api.link(it, contract.id, LinkRequest(url)) }.checked(201).data
-            .toDomain().verified(contract.id)
+            .toDomain().verified(contract.id, "link")
     }
 
     override suspend fun sendPhoto(contract: Challenge, bytes: ByteArray, mimeType: String): Evidence {
         require(bytes.size in 1..MaxPhotoBytes && mimeType in AllowedPhotoTypes)
-        val file = MultipartBody.Part.createFormData("file", "evidence", bytes.toRequestBody(mimeType.toMediaType()))
-        return sessions.authorized { api.photo(it, contract.id, file, "photo".toRequestBody()) }.checked(201).data
-            .toDomain().verified(contract.id)
+        val extension = when (mimeType) { "image/png" -> "png"; "image/webp" -> "webp"; else -> "jpg" }
+        val file = MultipartBody.Part.createFormData("file", "evidencia.$extension",
+            bytes.toRequestBody(mimeType.toMediaType()))
+        return sessions.authorized { api.photo(it, contract.id, file,
+            "photo".toRequestBody("text/plain".toMediaType())) }.checked(201).data
+            .toDomain().verified(contract.id, "photo")
+    }
+
+    override suspend fun evidence(contract: Challenge): List<Evidence> {
+        val items = sessions.authorized(readOnly = true) { api.evidence(it, contract.id) }.checked(200).data
+        return items.map { it.toDomain().verified(contract.id) }.distinctBy { it.id }
     }
 
     override suspend fun tournaments(status: String?, game: String?, cursor: String?): TournamentPage {
@@ -64,8 +72,8 @@ class ApiProductRepository(private val api: PactoApi, private val sessions: Sess
         return TournamentPage(body.data.map { it.toDomain() }, meta.hasMore, meta.nextCursor)
     }
 
-    private fun Evidence.verified(id: String): Evidence = also {
-        if (contractId != id) throw ApiFailure(0, "INVALID_RESPONSE")
+    private fun Evidence.verified(id: String, expectedType: String = type): Evidence = also {
+        if (contractId != id || type != expectedType) throw ApiFailure(0, "INVALID_RESPONSE")
     }
 
     companion object {

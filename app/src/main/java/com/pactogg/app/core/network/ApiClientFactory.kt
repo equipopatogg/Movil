@@ -26,6 +26,7 @@ class ApiClientFactory @Inject constructor() {
         }
 
         fun defaultClient(): OkHttpClient = OkHttpClient.Builder()
+            .retryOnConnectionFailure(false)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .callTimeout(45, TimeUnit.SECONDS)

@@ -223,3 +223,28 @@ Actualización posterior: la reprueba física de reto/enlace/foto fue positiva t
 
 
 AC5: verificación local positiva (HTTP/estado) y controles del candidato correctos; recorrido real posterior a subida/aceptación pendiente. [Informe](../../../docs/integracion/ajuste-estado-evidencia-2026-11-04.md). Se conserva casilla integral abierta.
+
+
+## Imágenes — ejecución local del candidato 2026-11-05
+
+| Control | Resultado real | Alcance |
+|---|---|---|
+| Build debug y androidTest | PASS | APK generado y probado en emulador |
+| JVM | 256 PASS, 0 fallos/omisiones | 76 unitarias, 79 integración, 101 seguridad |
+| Android offline | 22 PASS, 0 fallos/omisiones | API37 x86_64, AVD aislado de solo lectura; cutout tall activo |
+| Lint / Detekt | PASS; 0 errores y 0 advertencias Lint, 0 hallazgos Detekt | Dos hints previos del prototipo; no se redujeron reglas |
+| Validadores de evidencia | 27 PASS | Rechazan resultados ausentes, omitidos, desactualizados o de categoría incorrecta |
+| Secretos | Gitleaks 8.30.1 PASS, 0 hallazgos | Exportación del candidato local; sin excepciones nuevas |
+| SBOM | CycloneDX generado, 192 componentes | ExifInterface 1.4.1; declaración directa de dependencia ya transitiva |
+| Cobertura JVM | 907/3105 líneas, 29,21 % | JaCoCo, sin umbral inventado; no mide cobertura Android |
+| Compatibilidad de rutas | 20 método/ruta únicos presentes en OpenAPI | 19 principales y GET auxiliar; 21 firmas al separar foto/enlace |
+| API real | 9 comprobaciones correctas; GET evidencia 405 | Login/lecturas con QA existente; logout del sondeo 204; ninguna escritura de negocio |
+| CI/SAST/SCA del candidato nuevo | NO_EJECUTADO | Los PASS remotos anteriores corresponden al PR anterior, no a estos cambios |
+
+Evidencia generada e ignorada: `artifacts/current-backend/verification.json`, `live-read-results.json`, `route-comparison.json`, `gitleaks-final.json`; reportes actuales en app/build y artifacts/android-ci. Fuentes, métodos exactos y hashes en [trazabilidad](../../../docs/pruebas/trazabilidad-criterios.json).
+
+- IMG-AC1 → IMG-T2/T5 → `PhotoPreparerTest.jpegPngAndWebpBecomeBoundedJpegWithOriginalDimensions`, `largeImageIsSampledAndInvalidOrOverdimensionedImagesAreRejected`, `exifRotationIsAppliedAndRemovedFromUpload`; `EvidenceUiTest.photoPreviewCanBeDiscardedWithoutUploading`; `SendEvidenceApiTest.EVI_02_photoHasExplicitMultipartTypeMimeFilenameAndResponseMetadata`. PASS local. El contrato de cancelación nativa y ausencia de permisos generales/cámara se comprueban en `cancellingNativePickerProducesNoSelection`; todavía no se automatizó elegir una foto real en el selector del sistema.
+- IMG-AC2 → IMG-T3/T5/T6 → `SendEvidenceApiTest.EVI_02_listsSavedEvidenceWithSessionAndRejectsOtherContract`, `EVI_02_acknowledgedPhotoWithNoUrlRemainsSuccessfulForFollowupGet`; `SendEvidenceValidationTest.EVI_02_onlyHttpsImagesAndUnexpiredDatesAreDisplayable`; `SendEvidenceSecurityTest.EVI_02_cdnRequestStripsAuthorizationAndNeverFollowsRedirect`; `ConnectedFlowTest.unavailableEvidenceListDoesNotInventAnEmptyHistoryOrResend`. PASS local de consumidor; proveedor BLOQUEADO por GET 405, sin acreditación CDN real.
+- IMG-AC3 → IMG-T4/T5/T6 → `SendEvidenceValidationTest.EVI_02_onlyExecutorInActiveStateBeforeDeadlineCanUpload`, `SendEvidenceSecurityTest.EVI_02_photoErrorsNeverRetryOrApproveAndKeepSession`; `ConnectedFlowTest.forbiddenEvidenceHidesFurtherUploadsAndDoesNotReadAnotherPhoto`, `lostPhotoResponseBlocksAnotherWriteUntilContractRefresh`, `delayedPhotoPreparationCannotPopulateNextAccount`; `EvidenceUiTest.unauthorizedReaderCanRefreshEvidenceWithoutUploadButtons`, `linkConfirmationCanBeCancelledWithoutSending`. PASS local. Las reglas completas del proveedor y la aceptación humana siguen pendientes.
+
+Navegación general, fuera de una nueva spec: `EvidenceUiTest.navigationKeepsFiveMakeEntriesAndExploreDoesNotNavigate` PASS. Se conservan además las regresiones anteriores de mensajes/zona segura y sesión. No se marcan los AC integrales como aceptados por estos resultados parciales.

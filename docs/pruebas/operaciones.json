@@ -163,7 +163,14 @@
       "session_test": {
         "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
         "name": "EVI_02_missingSessionPreventsSendEvidenceRequest"
-      }
+      },
+      "supporting_operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/contracts/{id}/evidence",
+          "source": "Mensaje backend y 451c8ae; auxiliar de imágenes"
+        }
+      ]
     },
     {
       "id": "TOR-02",
@@ -735,6 +742,38 @@
       {
         "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
         "name": "fieldErrorsStayWithTheirScreenAndDoNotHideOtherErrors"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceValidationTest",
+        "name": "EVI_02_onlyExecutorInActiveStateBeforeDeadlineCanUpload"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceValidationTest",
+        "name": "EVI_02_onlyHttpsImagesAndUnexpiredDatesAreDisplayable"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceValidationTest",
+        "name": "EVI_02_oversizedAndInvalidMimePhotosStopBeforeHttp"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "preparedPhotoIsNotUploadedUntilConfirmedAndIsErasedWhenLeaving"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "forbiddenEvidenceHidesFurtherUploadsAndDoesNotReadAnotherPhoto"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "delayedPhotoPreparationCannotPopulateNextAccount"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "lostPhotoResponseBlocksAnotherWriteUntilContractRefresh"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "unavailableEvidenceListDoesNotInventAnEmptyHistoryOrResend"
       }
     ],
     "security": [
@@ -985,6 +1024,26 @@
       {
         "class": "com.pactogg.app.core.network.ApiErrorMapperTest",
         "name": "rejectsUnsafeCorrelationIds"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_photoErrorsNeverRetryOrApproveAndKeepSession"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_evidenceListWithoutSessionMakesNoRequest"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_conflictDoesNotExposeUnsafeServerText"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_imageClientHasNoSessionOrRedirectsAndRejectsCleartext"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
+        "name": "EVI_02_cdnRequestStripsAuthorizationAndNeverFollowsRedirect"
       }
     ],
     "integration": [
@@ -1211,6 +1270,22 @@
       {
         "class": "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest",
         "name": "TOR_02_lostResponseIsNotReplayedOrReportedAsSuccess"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
+        "name": "EVI_02_photoHasExplicitMultipartTypeMimeFilenameAndResponseMetadata"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
+        "name": "EVI_02_listsSavedEvidenceWithSessionAndRejectsOtherContract"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
+        "name": "EVI_02_acknowledgedPhotoWithNoUrlRemainsSuccessfulForFollowupGet"
+      },
+      {
+        "class": "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
+        "name": "EVI_02_photoCannotBeConfirmedByALinkResponse"
       }
     ]
   }

@@ -13,6 +13,14 @@ MATRIX = ROOT / "docs/pruebas/operaciones.json"
 OUT = ROOT / "artifacts/android-ci"
 KINDS = ("unit", "integration", "security")
 EXPECTED_DEVICE = {
+    ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "navigationKeepsFiveMakeEntriesAndExploreDoesNotNavigate"),
+    ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "unauthorizedReaderCanRefreshEvidenceWithoutUploadButtons"),
+    ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "photoPreviewCanBeDiscardedWithoutUploading"),
+    ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "linkConfirmationCanBeCancelledWithoutSending"),
+    ("com.pactogg.app.feature.connected.data.PhotoPreparerTest", "jpegPngAndWebpBecomeBoundedJpegWithOriginalDimensions"),
+    ("com.pactogg.app.feature.connected.data.PhotoPreparerTest", "largeImageIsSampledAndInvalidOrOverdimensionedImagesAreRejected"),
+    ("com.pactogg.app.feature.connected.data.PhotoPreparerTest", "exifRotationIsAppliedAndRemovedFromUpload"),
+    ("com.pactogg.app.feature.connected.data.PhotoPreparerTest", "cancellingNativePickerProducesNoSelection"),
     ("com.pactogg.app.feature.connected.presentation.FeedbackDialogsTest", "successNoticeCanBeDismissedWithoutChangingScreen"),
     ("com.pactogg.app.feature.connected.presentation.FeedbackDialogsTest", "generalErrorIsDismissibleWithoutRetryingOperation"),
     ("com.pactogg.app.feature.connected.presentation.FeedbackDialogsTest", "invalidConfirmationCanStillBeCancelledWithoutExecutingAction"),

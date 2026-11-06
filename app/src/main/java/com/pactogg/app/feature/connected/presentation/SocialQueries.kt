@@ -21,8 +21,11 @@ fun ConnectedViewModel.loadGroups(more: Boolean = false) {
 fun ConnectedViewModel.selectGroup(id: String) = perform { applyGroup(socials.group(id)) }
 internal fun ConnectedViewModel.applyGroup(group: Group) {
     queryVersion++
+    mutable.value.selectedPhoto?.clear()
     mutable.update { it.copy(group = group, contract = null, contractStateStale = false,
-        evidence = null, draft = com.pactogg.app.feature.connected.domain.ChallengeDraft(), reviewing = false,
+        evidence = null, evidenceItems = emptyList(), evidenceLoaded = false, evidenceUnavailable = false,
+        evidenceBlockedId = null, selectedPhoto = null, link = "",
+        draft = com.pactogg.app.feature.connected.domain.ChallengeDraft(), reviewing = false,
         social = it.social.copy(selectedRival = null, members = ListState(), contracts = ListState(),
             profile = null, pendingAction = null)) }
 }
@@ -51,8 +54,10 @@ fun ConnectedViewModel.loadBoard(more: Boolean = false) {
 fun ConnectedViewModel.openChallenge(contract: Challenge) = perform {
     val fresh = products.challenge(contract)
     val group = socials.group(fresh.groupId)
+    mutable.value.selectedPhoto?.clear()
     mutable.update { it.copy(group = group, contract = fresh, contractStateStale = false,
-        route = ConnectedRoute.CONTRACT, evidence = null,
+        route = ConnectedRoute.CONTRACT, evidence = null, evidenceItems = emptyList(),
+        evidenceLoaded = false, evidenceUnavailable = false, evidenceBlockedId = null, selectedPhoto = null, link = "",
         social = it.social.copy(pendingAction = null)) }
 }
 fun ConnectedViewModel.groupSearch(value: String) {

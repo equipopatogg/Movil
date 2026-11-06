@@ -64,13 +64,10 @@ fun ConnectedContract(state: ConnectedState, model: ConnectedViewModel) {
                 ConnectedContractMetadata(contract)
                 Action("Actualizar reto", enabled = !state.busy) { model.openChallenge(contract) }
                 ConnectedContractActions(state, model, contract)
-                val evidenceTarget = contract.targetType != "member" || contract.targetId == state.account?.id
-                if (contract.status in listOf("open", "in_progress", "accepted", "evidence_pending", "voting") &&
-                    (contract.evidenceCount ?: 0) < 3 && evidenceTarget) {
-                    Action("Agregar evidencia", enabled = !state.busy) { model.navigate(ConnectedRoute.EVIDENCE) }
-                }
+                Action("Ver evidencias", enabled = !state.busy) { model.navigate(ConnectedRoute.EVIDENCE) }
+
             }
         } ?: Text("No hay un reto confirmado en esta sesión.")
-        Text("Los puntos son virtuales. La votación y resolución del reto siguen pendientes en backend.")
+        Text("Los puntos son virtuales. La votación y resolución todavía no están disponibles en esta app.")
     }
 }
