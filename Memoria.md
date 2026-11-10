@@ -1,3 +1,12 @@
+# Diagnostico de instrumentacion PR13 - 2026-11-10
+
+- **Estado:** run 42760790627 sobre head 35d5987997c8132c9aa0975b954ca1932158f830 confirma entrega remota y 27 casos Android, cinco fallos y cero omitidos. XML del usuario identifica los cuatro AccessNavigationTest y SafeAreaTest; los otros 22 pasan. No se conoce todavia la excepcion original ni una causa comun confirmada.
+- **Decision/motivo:** el runner sustituia toda excepcion por un mensaje generico. PG01-AC5 se corrige conservando solo tipos de excepcion y ubicaciones de codigo permitidas en el XML; se excluyen mensajes, arbol UI, payloads, tokens y respuestas del proveedor. No se cambian casos, aserciones ni gate.
+- **Verificacion:** 13 pruebas Python del controlador correctas, incluidas dos regresiones de correlacion/redaccion y serializacion XML; diff-check correcto. No es ejecucion Android. adb no presenta dispositivos accesibles; causa de los cinco fallos aun pendiente de diagnostico de nueva ejecucion.
+- **Deuda:** subir ajuste de diagnostico a la rama del PR y ejecutar CI para obtener ubicaciones de fallo; luego corregir la causa demostrada. Sin cambios backend ni fusion. Firebase y Google reales pendientes.
+- **A evitar:** atribuir los fallos a Firebase/Google o declararlos corregidos solo por mejorar el informe.
+- **Slice actual/siguiente paso:** ajuste local verificado; entrega de este ajuste y nueva instrumentacion pendientes.
+
 # Reanudacion segura de entrega sin pager - 2026-11-09
 
 El usuario avanzo hasta staging y diff --cached --check, que fallo porque Git intento abrir less no disponible. Los avisos CRLF/LF son informativos. Comprobado HEAD aun en 14579926b37a10d7718febd55b22bd115f3fd63b y rama codex/push-google-notificaciones-20261109 ya creada. Los 91 blobs preparados coinciden con la lista, fuentes y hashes revisados; no hay commit nuevo ni push confirmado.

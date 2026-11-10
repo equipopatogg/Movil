@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -35,14 +36,45 @@ def parse_status(output):
     return cases
 
 
-def write_junit(cases):
+def failure_diagnostics(output):
+    """Retain exception types and code locations, never assertion/provider messages."""
+    diagnostics, fields, stack = {}, {}, []
+    collecting = False
+    for line in output.splitlines():
+        if line.startswith("INSTRUMENTATION_STATUS: "):
+            key, _, value = line[len("INSTRUMENTATION_STATUS: "):].partition("=")
+            collecting = key == "stack"
+            if key in ("class", "test"):
+                fields[key] = value.strip()
+            if collecting:
+                stack = [value]
+        elif line.startswith("INSTRUMENTATION_STATUS_CODE:"):
+            key = (fields.get("class"), fields.get("test"))
+            if all(key) and int(line.partition(":")[2].strip()) in (-1, -2):
+                safe = []
+                for entry in stack:
+                    exception = re.match(r"^(?:Caused by: )?((?:[A-Za-z_$][\w$]*\.)*[A-Za-z_$][\w$]*(?:Exception|Error))(?=:|$)", entry.strip())
+                    frame = re.fullmatch(r"\s*at ((?:com\.pactogg\.app|androidx|android|java|kotlin|kotlinx)\.[\w.$]+\([\w.$]+\.(?:kt|java):\d+\))\s*", entry)
+                    if exception:
+                        safe.append(exception.group(1))
+                    elif frame:
+                        safe.append("at " + frame.group(1))
+                diagnostics[key] = "\n".join(safe[:40]) or "No safe exception type or code location supplied by runner"
+            fields, stack, collecting = {}, [], False
+        elif collecting:
+            stack.append(line)
+    return diagnostics
+
+
+def write_junit(cases, diagnostics=None):
     root = ET.Element("testsuite", name="AndroidOffline", tests=str(len(cases)),
                       failures=str(sum(v == "FAIL" for v in cases.values())),
                       skipped=str(sum(v == "SKIPPED" for v in cases.values())))
     for (klass, name), result in sorted(cases.items()):
         case = ET.SubElement(root, "testcase", classname=klass, name=name)
         if result == "FAIL":
-            ET.SubElement(case, "failure", message="Android assertion failed; raw UI/token data not retained")
+            failure = ET.SubElement(case, "failure", message="Android failure; messages and UI/token data redacted")
+            failure.text = (diagnostics or {}).get((klass, name), "No safe diagnostic available")
         elif result == "SKIPPED":
             ET.SubElement(case, "skipped")
     OUT.mkdir(parents=True, exist_ok=True)
@@ -56,6 +88,7 @@ def main():
     sdk = os.environ.get("ANDROID_HOME") or os.environ.get("ANDROID_SDK_ROOT")
     adb = str(Path(sdk) / "platform-tools" / ("adb.exe" if os.name == "nt" else "adb")) if sdk else "adb"
     cases = {}
+    diagnostics = {}
     environment = {"state": "ERROR", "expectedTests": len(EXPECTED),
                    "deviceHash": hashlib.sha256(args.device.encode()).hexdigest()}
     def call(*command, timeout=60):
@@ -76,6 +109,7 @@ def main():
         output = call("shell", "am", "instrument", "-w", "-r", "-e", "class", classes,
                       "com.pactogg.app.test/androidx.test.runner.AndroidJUnitRunner", timeout=300)
         cases = parse_status(output)
+        diagnostics = failure_diagnostics(output)
         environment["missing"] = ["::".join(key) for key in sorted(EXPECTED - set(cases))]
         failed = any(v != "PASS" for v in cases.values()) or set(cases) != EXPECTED
         final_codes = [line.partition(":")[2].strip() for line in output.splitlines()
@@ -85,7 +119,7 @@ def main():
         environment["state"] = "PASS" if not failed and not crashed and completed else "FAIL"
     except (OSError, ValueError, subprocess.SubprocessError):
         environment["reason"] = "Device, install or instrumentation environment failed; no fabricated successful cases"
-    write_junit(cases)
+    write_junit(cases, diagnostics)
     (OUT / "run.json").write_text(json.dumps(environment, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"state": environment["state"], "tests": len(cases),
                       "failures": sum(v == "FAIL" for v in cases.values()),
