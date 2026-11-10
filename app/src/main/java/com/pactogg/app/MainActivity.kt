@@ -33,7 +33,8 @@ class MainActivity : ComponentActivity() {
         connected = model
         extras = ViewModelProvider(this)[ExtrasViewModel::class.java]
         pushPending = savedInstanceState?.getBoolean("push_pending") == true
-        consumePush(intent)
+        // The saved flag already records whether this launch notification was consumed.
+        if (savedInstanceState == null) consumePush(intent)
         consumeAccountLink(intent)
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
@@ -65,7 +66,7 @@ class MainActivity : ComponentActivity() {
             com.pactogg.app.core.push.knownPushType(value.getStringExtra("type"))) pushPending = true
         // FCM notification+data messages arrive here when opened from background.
         value.removeExtra("type")
-        value.action = null
+        // Keep the launch action: Android and ActivityScenario use it to identify this activity.
         openPendingPush()
     }
 

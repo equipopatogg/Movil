@@ -1,3 +1,12 @@
+# Correccion del arranque observado por ActivityScenario - 2026-11-10
+
+- **Estado:** run 42769671888 sobre c209ae86e2f874cb4228990b43904a073c389cba conserva cinco fallos de 27, cero omitidos/faltantes, API35/x86_64. Informe nuevo leido del ZIP descargado por el usuario: todos fallan en ActivityScenario.waitForActivityToBecomeAnyOf, antes de ejecutar las aserciones de acceso/zona segura.
+- **Decision/motivo:** MainActivity.consumePush asignaba action=null incluso al arranque ACTION_MAIN. Corroborado en core-1.7.0-sources.jar: activityMatchesIntent compara action/data con el Intent de lanzamiento y descarta eventos que no coinciden. Se conserva la accion original y solo se consume push en onCreate sin savedInstanceState; recreacion restaura push_pending sin volver a abrir un aviso consumido. onNewIntent conserva la recepcion de avisos posteriores.
+- **Verificacion:** revision del codigo de AndroidX de la version usada, fuente movil y diff-check. Se refuerzan dos casos existentes de AccessNavigationTest con ACTION_MAIN tras lanzamiento/recreacion; no se eliminan ni omiten casos. Gradle no pudo iniciar por acceso denegado al lock global del wrapper; compilacion/Lint/Detekt e instrumentacion del ajuste pendientes. Los 13 controles Python anteriores solo validan el diagnostico.
+- **Deuda:** ejecutar check-android y CI sobre este ajuste. No declarar 27 Android aprobados sin informe nuevo; configuracion/entrega real Firebase y Google siguen independientes y pendientes.
+- **A evitar:** confundir errores al apagar el emulador con la causa anterior del fallo, o describir esta correccion como verificada en Android antes de ejecutar.
+- **Slice actual/siguiente paso:** correccion y regresiones locales preparadas para la misma rama PR13; sin cambios backend ni merge.
+
 # Diagnostico de instrumentacion PR13 - 2026-11-10
 
 - **Estado:** run 42760790627 sobre head 35d5987997c8132c9aa0975b954ca1932158f830 confirma entrega remota y 27 casos Android, cinco fallos y cero omitidos. XML del usuario identifica los cuatro AccessNavigationTest y SafeAreaTest; los otros 22 pasan. No se conoce todavia la excepcion original ni una causa comun confirmada.
