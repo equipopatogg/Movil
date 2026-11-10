@@ -50,7 +50,7 @@ class CiChecksTests(unittest.TestCase):
                 "app-debug-androidTest.apkSha256":hashlib.sha256(b"synthetic-apk").hexdigest()}))
         return directory
     def test_exact_matrix_and_no_duplicate_or_escaping_spec(self):
-        self.assertEqual(19, len(checks.matrix()))
+        self.assertEqual(33, len(checks.matrix()))
         data = json.loads(self.matrix.read_text()); original = copy.deepcopy(data)
         data["endpoints"][1]["id"] = data["endpoints"][0]["id"]
         self.matrix.write_text(json.dumps(data))
@@ -62,7 +62,7 @@ class CiChecksTests(unittest.TestCase):
         for kind in checks.KINDS:
             result = checks.tests(kind, self.xml(kind))
             self.assertEqual("PASS", result["state"])
-            self.assertGreaterEqual(result["tests"], 19)
+            self.assertGreaterEqual(result["tests"], 33)
     def test_zero_missing_failure_skip_and_prefix_are_not_pass(self):
         mutations = [lambda root: root.clear(), lambda root: root.remove(list(root)[0]),
                      lambda root: ET.SubElement(list(root)[0], "failure"),
@@ -167,6 +167,46 @@ class CiChecksTests(unittest.TestCase):
         file = inputs / "android-unit/artifacts/android-ci/unit.json"
         data = json.loads(file.read_text()); data["state"] = "FAIL"; file.write_text(json.dumps(data))
         self.assertNotEqual("PASS", checks.gate(inputs, jobs)["state"])
+    def test_runner_keeps_failure_locations_without_private_messages(self):
+        output = (
+            'INSTRUMENTATION_STATUS: class=com.pactogg.app.navigation.AccessNavigationTest\n'
+            'INSTRUMENTATION_STATUS: test=emptyLoginCannotBypassAuthentication\n'
+            'INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: secret@example.invalid\n'
+            'UI text: private-password-and-token\n'
+            '\tat com.pactogg.app.navigation.AccessNavigationTest.waitForLogin(AccessNavigationTest.kt:94)\n'
+            'Caused by: java.lang.IllegalStateException: Bearer private-token\n'
+            '\tat androidx.compose.ui.test.TestContext.run(TestContext.kt:12)\n'
+            'INSTRUMENTATION_STATUS_CODE: -2\n'
+        )
+        key = ('com.pactogg.app.navigation.AccessNavigationTest',
+               'emptyLoginCannotBypassAuthentication')
+        diagnostic = runner.failure_diagnostics(output)[key]
+        self.assertIn('java.lang.AssertionError', diagnostic)
+        self.assertIn('AccessNavigationTest.kt:94', diagnostic)
+        self.assertIn('java.lang.IllegalStateException', diagnostic)
+        self.assertNotIn('secret@', diagnostic)
+        self.assertNotIn('private-', diagnostic)
+        self.assertNotIn('Bearer', diagnostic)
+        with patch.object(runner, 'OUT', self.root / 'diagnostics'):
+            runner.write_junit({key: 'FAIL'}, {key: diagnostic})
+            report = (runner.OUT / 'TEST-AndroidOffline.xml').read_text()
+        self.assertIn('AccessNavigationTest.kt:94', report)
+        self.assertNotIn('private-', report)
+
+    def test_runner_diagnostics_follow_failed_case_only(self):
+        output = (
+            'INSTRUMENTATION_STATUS: class=Example\n'
+            'INSTRUMENTATION_STATUS: test=failed\n'
+            'INSTRUMENTATION_STATUS: stack=arbitrary provider response\n'
+            'INSTRUMENTATION_STATUS_CODE: -2\n'
+            'INSTRUMENTATION_STATUS: class=Example\n'
+            'INSTRUMENTATION_STATUS: test=passed\n'
+            'INSTRUMENTATION_STATUS_CODE: 0\n'
+        )
+        diagnostics = runner.failure_diagnostics(output)
+        self.assertEqual({('Example', 'failed')}, set(diagnostics))
+        self.assertNotIn('provider response', diagnostics[('Example', 'failed')])
+
     def test_runner_does_not_count_started_tests_as_success(self):
         started = 'INSTRUMENTATION_STATUS: class=Example\nINSTRUMENTATION_STATUS: test=one\nINSTRUMENTATION_STATUS_CODE: 1\n'
         self.assertEqual({}, runner.parse_status(started))

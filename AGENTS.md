@@ -1,3 +1,27 @@
+# Entrega movil autorizada en rama - 2026-11-09
+
+Usuario autoriza hacer push del trabajo movil aunque Firebase/push y Google sigan pendientes de configuracion y prueba en backend. Se permite commit y push a una rama nueva de equipopatogg/Movil; sin fusionar main ni modificar backend. Esta instruccion sustituye la prohibicion local de Git para esta entrega. Excluir JSON de cuenta de servicio, configuracion Firebase local, secretos, APK, caches y referencias privadas. No declarar entrega remota mientras no se confirme el commit en GitHub; no confundir suites locales con recepcion push o login Google reales.
+
+# Continuacion push Android, solo local - 2026-11-08
+
+Usuario autoriza continuar push con el contrato local v0.8: FCM Android, permiso/canal, registro/rotacion/baja, pruebas y evidencia local en PG-09. Supera el aplazamiento historico de FCM solo para este alcance. Sin backend, commits/push ni GitHub. Google sigue pendiente de habilitacion del servidor. Nunca incluir cuentas de servicio Firebase ni secretos en el APK. Ver docs/integracion/push-android-2026-11-08.md; no declarar entrega real ni Android verificado por JVM directas.
+
+# Ampliacion a 54 rutas, solo local - 2026-11-06
+
+Usuario autoriza continuar SDD, integracion, pruebas y buenas practicas con las 54 rutas compartidas. Sin push ni cambios backend. Esta instruccion prevalece sobre autorizaciones anteriores de entrega. La copia local de API-movil.md sigue en v0.6.0; no inventar cuerpos/respuestas de rutas nuevas. Mantener TLS, permisos, pruebas y evidencia real. Correo y push tienen dependencias del proveedor pendientes segun el usuario. Nunca incluir el JSON de cuenta de servicio Firebase ni contrasena SMTP dentro del APK.
+
+# Entrega en rama autorizada - 2026-11-06
+
+El usuario autoriza commit y push de la ampliación móvil a equipopatogg/Movil en una rama nueva. Esta autorización sustituye la prohibición previa de subir cambios para este encargo. No modificar backend ni fusionar main. Excluir credenciales, artefactos generados y referencias privadas.
+
+# Encargo vigente - 2026-11-06
+
+Completar integración de las 36 rutas, pantallas y navegación, ejecutar pruebas y corregir errores. Trabajar en esta copia local; no modificar backend ni subir cambios a GitHub. Esta prohibición actual prevalece sobre autorizaciones históricas de entrega. Ver Memoria.md y docs/pruebas/ampliacion-local-2026-11-06.md para estado, comprobaciones y bloqueo de Gradle. No declarar aceptación ni suites verdes sin ejecución del candidato.
+
+# Ampliación móvil autorizada — 2026-11-05
+
+Usuario solicita integrar todas las operaciones pendientes, sus pantallas, specs y pruebas. Backend solo lectura; sin push. Este alcance sustituye el límite anterior de 19 operaciones. Mantener SDD, separación de dominio, HTTPS y evidencia real; no atribuir aceptación externa por fixtures.
+
 # Entrega por PR de imágenes autorizada — 2026-11-05
 
 Usuario autoriza subir el candidato de fotos/evidencias y navegación aprobado a equipopatogg/Movil mediante rama y PR hacia main. Dejar las pruebas GitHub iniciadas y esperar su aviso antes de revisar resultados. No fusionar ni activar fusión automática. Excluir APK, artefactos, cuentas y referencias privadas. Esta autorización sustituye el límite local de la fase inmediatamente inferior; conservar el bloqueo real de GET evidencias 405 y la aceptación pendiente.

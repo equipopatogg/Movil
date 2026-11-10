@@ -33,6 +33,13 @@ fun ConnectedViewModel.tournament(value: Tournament?) {
     mutable.update { it.copy(selectedTournament = value, error = null, diagnostic = null, notice = null) }
 }
 
+fun ConnectedViewModel.tournamentScope(groupOnly: Boolean) {
+    if (mutable.value.busy || groupOnly && mutable.value.group == null) return
+    mutable.update { it.copy(groupTournamentsOnly = groupOnly) }
+    filter(mutable.value.status, mutable.value.gameFilter)
+    loadTournaments()
+}
+
 
 fun ConnectedViewModel.review() {
     val current = mutable.value

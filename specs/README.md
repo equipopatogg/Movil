@@ -1,3 +1,11 @@
+# Push Android - 2026-11-08
+
+[PG-09 - transporte push Android](PG-09-push/spec.md): implementacion local parcial; Android/proveedor y destino detallado pendientes. Regresiones DEV adicionales al recuento de 33 operaciones MO.
+
+# Actualización 2026-11-06
+
+Las 14 operaciones de la ampliación tienen consumidor y pantalla en el candidato local. Se incorporaron los alias a CON-01/TOR-02. Las tareas de ejecución y aceptación siguen abiertas: Gradle no pudo conectar a su proceso local durante esta revisión. [Detalle y límites](../docs/pruebas/ampliacion-local-2026-11-06.md). Los estados anteriores se conservan debajo como historial.
+
 # Specs activas del móvil
 
 Actualizado 2026-11-04. Se mantienen 23 expedientes: PG-00/01/02 de base técnica, PG-03 de coordinación del acceso, ocho MO-* de la integración anterior y once MO-* nuevas confirmadas en Sistema.docx enviado por backend. Los borradores de pantallas adelantadas y la propuesta adicional de alcance se retiraron del expediente activo; no son dependencias ni tareas del proyecto.
@@ -54,3 +62,22 @@ Antecedente del ajuste acotado: MO-EVI-02 añadió lectura auxiliar de detalle t
 
 
 USR-03: edición de apodo verificada; selección de avatar pendiente de catálogo. Las casillas integrales permanecen abiertas según evidencia por criterio, aunque T2/T3 de las otras operaciones acreditan implementación local.
+
+## Ampliación autorizada 2026-11-05
+
+14 operaciones adicionales en preparación, conforme a D-SDD-40.
+
+- [MO-ACH-01-hall-of-fame](MO-ACH-01-hall-of-fame/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-COM-01-list-commitments](MO-COM-01-list-commitments/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-COM-03-complete-commitment](MO-COM-03-complete-commitment/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-COM-04-request-complete](MO-COM-04-request-complete/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-NOT-01-list-notifications](MO-NOT-01-list-notifications/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-NOT-02-read-notification](MO-NOT-02-read-notification/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-NOT-03-read-all](MO-NOT-03-read-all/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-PTS-01-my-points](MO-PTS-01-my-points/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-PTS-02-points-ranking](MO-PTS-02-points-ranking/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-VOT-01-pending-votes](MO-VOT-01-pending-votes/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-VOT-02-cast-vote](MO-VOT-02-cast-vote/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-VOT-03-vote-summary](MO-VOT-03-vote-summary/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-VOT-04-resolve-voting](MO-VOT-04-resolve-voting/spec.md): preparada; implementación y pruebas pendientes.
+- [MO-VOT-05-contract-result](MO-VOT-05-contract-result/spec.md): preparada; implementación y pruebas pendientes.

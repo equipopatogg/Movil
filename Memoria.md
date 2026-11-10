@@ -1,3 +1,194 @@
+# Correccion del arranque observado por ActivityScenario - 2026-11-10
+
+- **Estado:** run 42769671888 sobre c209ae86e2f874cb4228990b43904a073c389cba conserva cinco fallos de 27, cero omitidos/faltantes, API35/x86_64. Informe nuevo leido del ZIP descargado por el usuario: todos fallan en ActivityScenario.waitForActivityToBecomeAnyOf, antes de ejecutar las aserciones de acceso/zona segura.
+- **Decision/motivo:** MainActivity.consumePush asignaba action=null incluso al arranque ACTION_MAIN. Corroborado en core-1.7.0-sources.jar: activityMatchesIntent compara action/data con el Intent de lanzamiento y descarta eventos que no coinciden. Se conserva la accion original y solo se consume push en onCreate sin savedInstanceState; recreacion restaura push_pending sin volver a abrir un aviso consumido. onNewIntent conserva la recepcion de avisos posteriores.
+- **Verificacion:** revision del codigo de AndroidX de la version usada, fuente movil y diff-check. Se refuerzan dos casos existentes de AccessNavigationTest con ACTION_MAIN tras lanzamiento/recreacion; no se eliminan ni omiten casos. Gradle no pudo iniciar por acceso denegado al lock global del wrapper; compilacion/Lint/Detekt e instrumentacion del ajuste pendientes. Los 13 controles Python anteriores solo validan el diagnostico.
+- **Deuda:** ejecutar check-android y CI sobre este ajuste. No declarar 27 Android aprobados sin informe nuevo; configuracion/entrega real Firebase y Google siguen independientes y pendientes.
+- **A evitar:** confundir errores al apagar el emulador con la causa anterior del fallo, o describir esta correccion como verificada en Android antes de ejecutar.
+- **Slice actual/siguiente paso:** correccion y regresiones locales preparadas para la misma rama PR13; sin cambios backend ni merge.
+
+# Diagnostico de instrumentacion PR13 - 2026-11-10
+
+- **Estado:** run 42760790627 sobre head 35d5987997c8132c9aa0975b954ca1932158f830 confirma entrega remota y 27 casos Android, cinco fallos y cero omitidos. XML del usuario identifica los cuatro AccessNavigationTest y SafeAreaTest; los otros 22 pasan. No se conoce todavia la excepcion original ni una causa comun confirmada.
+- **Decision/motivo:** el runner sustituia toda excepcion por un mensaje generico. PG01-AC5 se corrige conservando solo tipos de excepcion y ubicaciones de codigo permitidas en el XML; se excluyen mensajes, arbol UI, payloads, tokens y respuestas del proveedor. No se cambian casos, aserciones ni gate.
+- **Verificacion:** 13 pruebas Python del controlador correctas, incluidas dos regresiones de correlacion/redaccion y serializacion XML; diff-check correcto. No es ejecucion Android. adb no presenta dispositivos accesibles; causa de los cinco fallos aun pendiente de diagnostico de nueva ejecucion.
+- **Deuda:** subir ajuste de diagnostico a la rama del PR y ejecutar CI para obtener ubicaciones de fallo; luego corregir la causa demostrada. Sin cambios backend ni fusion. Firebase y Google reales pendientes.
+- **A evitar:** atribuir los fallos a Firebase/Google o declararlos corregidos solo por mejorar el informe.
+- **Slice actual/siguiente paso:** ajuste local verificado; entrega de este ajuste y nueva instrumentacion pendientes.
+
+# Reanudacion segura de entrega sin pager - 2026-11-09
+
+El usuario avanzo hasta staging y diff --cached --check, que fallo porque Git intento abrir less no disponible. Los avisos CRLF/LF son informativos. Comprobado HEAD aun en 14579926b37a10d7718febd55b22bd115f3fd63b y rama codex/push-google-notificaciones-20261109 ya creada. Los 91 blobs preparados coinciden con la lista, fuentes y hashes revisados; no hay commit nuevo ni push confirmado.
+
+Se agrega --no-pager a todas las invocaciones Git y reanudacion del staging solo en la rama de entrega, con lista exacta y blobs previamente revisados o coincidentes con las fuentes actuales revisadas. No se hace reset ni se descartan cambios. -CheckDeliveryOnly comprueba la entrega sin modificar staging, crear commits o subir. La revision sin pager detecto tres problemas de espacios en referencias/backend-v08: linea vacia extra al final de API-movil.md y openapi.yaml y espacio final en meta del YAML. Se corrigen solo esos espacios, sin cambiar el contrato. Se conservan hashes de blobs previos en el manifiesto local y se actualizan solo script, memoria y los dos archivos de referencia corregidos. Pendiente ejecutar el script normal en la terminal del usuario; no atribuir entrega por validar el script.
+
+# Correccion del localizador Git para entrega - 2026-11-09
+
+El script del usuario fallo antes de preparar archivos: git no se reconoce en la terminal Android Studio. Se agrega localizacion del ejecutable mediante PATH, rutas habituales Windows, registro de GitForWindows y Git portable ya presente; opcion -GitPath para ruta explicita. No instala programas ni modifica PATH/permisos globales. Todas las invocaciones usan la ruta localizada; -CheckGitOnly comprueba el ejecutable sin crear ramas, staging, commits ni push. Sintaxis comprobada y ejecucion de Git correcta con/sin Git en PATH. Se actualizan exclusivamente los hashes revisados de este script y Memoria.md en el manifiesto local, conservando los demas controles. No hay entrega remota confirmada; repetir scripts/push-reviewed-mobile.ps1 en la terminal del usuario.
+
+# Entrega movil autorizada y preparada - 2026-11-09
+
+- **Estado:** usuario autoriza push aunque falte configurar backend. Entrega preparada para rama nueva codex/push-google-notificaciones-20261109 en equipopatogg/Movil, base 14579926b37a10d7718febd55b22bd115f3fd63b. No hay entrega nueva confirmada.
+- **Decision/motivo:** autorizacion actual sustituye la prohibicion local de Git solo para esta entrega movil. Conservar cambios acumulados y excluir configuracion Firebase local, cuentas de servicio, secretos y generados; sin backend ni fusion de main.
+- **Verificacion:** informes del usuario actuales: 361 JVM, cero fallos/errores/omisiones/faltantes y categorias correctas; matriz/coverage/build revalidados. No es nueva ejecucion Gradle ni aceptacion proveedor. Ver docs/preparacion/entrega-google-push-2026-11-09.md.
+- **Deuda:** GitHub conectado solo permite lectura (push=false) y git local no resuelve github.com. scripts/push-reviewed-mobile.ps1 prepara commit y push desde terminal normal con hashes/lista revisados; entrega remota pendiente. Firebase/push y Google requieren configuracion y prueba en servidor; recepcion real no verificada.
+- **A evitar:** declarar subida por preparar un script, publicar JSON privados/APK o confundir 361 JVM con entrega real FCM/Google. La configuracion Android app/google-services.json permanece local ignorada y README explica su reposicion al clonar.
+- **Slice actual/siguiente paso:** ejecutar el script local de entrega y comprobar rama/commit en GitHub. No se fusiona main.
+
+# Revision remota backend push, solo lectura - 2026-11-08
+
+Usuario solicita revisar https://github.com/equipopatogg/backend.git. Revisado HEAD 86123cc37c01df2c498e704d601e38a6e50684bd via conector GitHub; sin modificar backend, ejecutar despliegues ni hacer commits/push.
+
+Codigo presente y conectado: Program configura FirebaseOptions, IPushSender/FcmPushSender, PushQueue y PushDispatcher como servicio en segundo plano. ContractService.NotifyCreatedAsync envia contract_received al destinatario o a los miembros salvo creador. NotificationService guarda aviso y encola push. PushDispatcher filtra usuarios activos/preferencias y obtiene sus tokens. FcmPushSender usa HTTP v1, cuenta de servicio, data.type e IDs y canal pactogg_default; coincide con el consumidor movil.
+
+Hallazgo clave: PushDispatcher.DeliverAsync retorna Sent=0 sin error si sender.IsConfigured=false; DeviceService registra el dispositivo sin verificar configuracion de Firebase. Por tanto registro correcto y aviso interno no prueban envio configurado. appsettings.json solo trae Firebase.ProjectId vacio, sin credencial versionada (correcto). Runtime requiere Firebase__ServiceAccountJson con JSON de cuenta de servicio; Firebase__ProjectId opcional si se toma project_id del JSON, y debe coincidir con el proyecto Android pactogg.
+
+Despliegue user_data.sh.tftpl lee opcionalmente Firebase__ProjectId y Firebase__ServiceAccountJson de SSM bajo PARAM_PREFIX (por defecto usado en configure-email: /pactogg/prod). Omite parametros inexistentes/errores y usa /opt/pactogg/api.env para el contenedor. Comentario atribuye creacion al script configure-email.sh, pero ese script solo configura correo y verificacion; no crea parametros Firebase. parameters.tf tampoco los crea. El comentario de PushModels menciona otra ruta /pactogg/firebase/service-account; la ruta efectiva del despliegue es PARAM_PREFIX/Firebase__ServiceAccountJson. Es una discrepancia documental que puede explicar configuracion no cargada, no evidencia de su estado real.
+
+Pendiente confirmar configuracion efectiva en cada instancia/contenedor del servidor y resultado de envio FCM; leer repositorio no permite verificar valores desplegados, credenciales validas, IAM/proyecto Firebase ni logs. Los tests revisados usan emisor falso, no acreditan entrega Google real; no se ejecutaron suites backend. No imprimir JSON, claves ni tokens en diagnosticos. Google Sign-In sigue independiente.
+
+Fuentes al commit: Pactogg.Api/Infrastructure/Push/{PushDispatcher,FcmPushSender,PushModels}.cs, Modules/{Devices/DeviceModule,Notifications/NotificationService,Contracts/ContractService}.cs, Program.cs, appsettings.json, deploy/terraform/{user_data.sh.tftpl,parameters.tf}, scripts/configure-email.sh e IntegrationTest/AccountAndPushTests.cs.
+
+# Registro push confirmado en captura del usuario - 2026-11-08
+
+Captura de Preferencias de avisos: notificaciones permitidas en el dispositivo y estado Este telefono quedo registrado para recibir avisos. Conforme al consumidor actual, este estado requiere registro DEV-01 confirmado/validado; acredita el registro reportado, no envio ni entrega FCM. El usuario ya confirmo que el aviso aparece dentro de la app, pero no en la barra del telefono.
+
+No aparecen switches Retos/Votos/Torneos/Compromisos en la captura: la pantalla aun ofrece Continuar para consultar DEV-03. Siguiente paso: pulsar Continuar, comprobar/guardar Retos activado en la cuenta receptora. Si ya esta activado y sigue sin entrega, revisar con el responsable backend la configuracion Firebase del servidor, coincidencia del proyecto, seleccion del dispositivo receptor y resultado del intento de envio. No se ha inspeccionado ni modificado servidor; no declarar causa definitiva. Sin backend ni GitHub. Google Sign-In permanece independiente y pendiente de habilitacion.
+
+# Aviso interno confirmado y diagnostico visible push - 2026-11-08
+
+El usuario confirma que el aviso aparece dentro de PactoGG pero no en la barra del telefono. Esto acredita el aviso interno reportado, no el registro DEV-01 ni el envio/entrega FCM. No se atribuye causa aun al servidor o dispositivo.
+
+Se agrega estado visible en preferencias: configuracion ausente, sesion/permiso necesarios, conexion Firebase, registro pendiente, registro confirmado o error de token/servidor. Confirmacion solo despues de respuesta validada del registro; no contiene tokens, payloads ni textos arbitrarios del proveedor. Reintento explicito del registro fallido, sin repetir retos. Nuevas regresiones comprueban pendiente/fallo/reintento y cambio de cuenta sin confirmacion obsoleta.
+
+Verificacion acotada: 15 pruebas coordinador/sesion directas correctas, incluidas tres nuevas de estados; Detekt CLI, matriz, XML y diff-check correctos. El intento assembleDebug/lintDebug se detuvo por acceso denegado al lock global de Gradle. Compilacion Android y Lint del candidato actual pendientes; no trasladar las 356 JVM previas a estos cambios. Siguiente paso: ejecutar check-android.ps1 -UseWindowsTrust, instalar con Run y leer el estado en Preferencias de avisos de la cuenta receptora. Sin backend ni GitHub; Google sigue pendiente del servidor.
+
+# Prueba manual push sin recepcion reportada - 2026-11-08
+
+El usuario informa que ya pudo continuar la prueba pero no recibio push. No confirma todavia cuenta receptora, permiso/canal, estado foreground/background, presencia del aviso interno ni habilitacion Firebase del servidor. Recepcion real sigue pendiente; no atribuir causa al backend ni al telefono sin evidencia. Revision del cliente: registro ocurre con sesion y permiso; fallos de obtener token/PUT se capturan sin logs de secretos y actualmente no hay estado visible de registro en preferencias. Hace falta distinguir generacion del aviso interno, registro DEV-01 y entrega FCM. No se ejecutaron escrituras reales ni cambios backend/GitHub por este diagnostico.
+
+# Diagnostico de creacion de reto y mensaje 409 - 2026-11-08
+
+El usuario muestra al confirmar un reto el texto generico de HTTP 409: La informacion cambio. No hay codigo de respuesta/request_id en la captura; causa real sin confirmar. Contrato local v0.8 documenta GROUP_TOO_SMALL cuando hay menos de tres integrantes, tanto en POST contracts como en su alias por grupo. Se agrega mensaje propio para ese codigo, sin cambiar la regla del servidor ni atribuirla a cualquier 409. Se conserva el mensaje generico para conflictos desconocidos. No se repitio POST ni se consultaron cuentas reales.
+
+Regresiones nuevas en ApiErrorMapperTest: CON_01_smallGroupConflictExplainsMinimumWithoutExposingServerText y CON_01_unknownConflictDoesNotClaimGroupIsTooSmall, registradas en la matriz como security. Las cuatro pruebas de esa clase pasan por compilacion/ejecucion Kotlin-JUnit directa, con ErrorMessages actual y dependencias compiladas anteriores; Detekt CLI y matriz correctos. No equivale a build Android nuevo. Pendiente confirmacion del numero de integrantes y, si ya hay tres o mas, diagnostico del codigo real. El resultado 356 pruebas anterior corresponde al candidato previo a este cambio; actualizacion completa Gradle pendiente. Sin backend ni GitHub.
+
+# Verificacion Gradle del candidato push - 2026-11-08
+
+- **Estado:** ejecucion del usuario BUILD SUCCESSFUL; informes locales all/build/coverage PASS. XML revisados: 356 pruebas, cero fallos/errores/omitidas, sin casos faltantes ni categorias incorrectas. Incluyen las 14 pruebas push (9 coordinador, 3 sesion y 2 API HTTPS); las dos HTTP previamente bloqueadas ahora pasan. Lint y Detekt completados en la ejecucion del usuario.
+- **Decision/motivo:** actualizar evidencia del candidato tras correcciones resValues y cinco errores Lint; no trasladar resultados anteriores. T2 y T4 de PG-09 verificadas para implementacion/consumidor local.
+- **Deuda:** captura muestra cyclonedxDirectBom en curso, aunque archivos bom.json/xml ya existen; no confirma el final de esa tarea. Pendientes emulador aislado, permisos/canal, entrega real foreground/background, proceso terminado, cuentas, baja offline y destino directo por recurso. Google pendiente del servidor.
+- **A evitar:** confundir las 356 JVM con pruebas Android ejecutadas o entrega real; el aviso releaseRuntimeClasspath es de rendimiento, no un fallo funcional. Sin backend ni GitHub.
+- **Slice actual/siguiente paso:** confirmar fin del script y continuar validacion de notificaciones en Android aislado. Evidencia en docs/integracion/push-android-2026-11-08.md.
+
+# Correccion de cinco errores Lint push - 2026-11-08
+
+El informe completo generado por el usuario identifica dos InlinedApi (ACTION_APP_NOTIFICATION_SETTINGS y EXTRA_APP_PACKAGE requieren API 26) y tres apariciones UnusedResources del mismo project_id generado. Se protegen los ajustes de notificaciones con SDK >=26; Android 7/API 24-25 abre los detalles de la aplicacion mediante URI package. project_id ahora se usa para comprobar que el proyecto inicializado de Firebase coincide con la configuracion Android antes de habilitar Messaging. No se eliminan recursos requeridos por Firebase, no se sube minSdk ni se agregan baseline/supresiones.
+
+Detekt CLI directo correcto sobre las fuentes modificadas; git diff --check correcto. El intento de lintDebug/detekt por Gradle se detuvo antes de configurar por acceso denegado al lock global del wrapper. Falta repetir check-android.ps1 -UseWindowsTrust en la terminal normal; no se declara Lint aprobado. Dos hints anteriores de autoboxing no son errores. Sin backend ni GitHub; Google sigue pendiente del servidor.
+
+# Correccion de recursos Gradle para push - 2026-11-08
+
+La ejecucion del usuario se detuvo al configurar app: defaultConfig contains custom resource values, but the feature is disabled. Se habilito resValues = true en android.buildFeatures para los recursos Android de Firebase declarados mediante resValue. No se desactivan controles ni se cambian credenciales. Correccion local comprobada en el archivo; compilacion y suite completas pendientes de repetir con scripts/check-android.ps1 -UseWindowsTrust. Sin backend ni GitHub; Google sigue pendiente del servidor.
+
+# Continuacion push Android - 2026-11-08
+
+- **Estado:** integracion local parcial: FCM/configuracion Android, servicio no exportado, canal/permiso, registro/rotacion y baja antes de logout, apertura de avisos tras acceso. [Evidencia y limites](docs/integracion/push-android-2026-11-08.md), [PG-09](specs/PG-09-push/spec.md).
+- **Decision/motivo:** solicitud expresa de continuar push sin backend ni GitHub; contrato local v0.8 DEV-01/02/03. Google sigue pendiente de habilitacion del servidor.
+- **Verificacion:** 12 JVM directas de coordinador/sesion correctas, Detekt CLI y matriz de 33 operaciones correctos. Dos pruebas HTTP fallaron por bloqueo de conexiones locales. Gradle y ADB no conectan a sus daemons: sin build/Lint/Android ni entrega real nuevos.
+- **Deuda:** ejecutar check-android.ps1 -UseWindowsTrust desde terminal normal; permiso/canal, segundo plano, proceso terminado, rotacion, cuentas y logout offline en emulador aislado. Destino directo por recurso y aceptacion proveedor abiertos; por ahora el toque abre avisos.
+- **A evitar:** atribuir los 342 casos anteriores a este candidato, prometer baja remota offline o texto generico para mensajes background que muestra el SDK; incluir cuentas de servicio o imprimir tokens.
+- **Slice actual/siguiente paso:** verificar integralmente el candidato y entrega real. Sin commit/push ni cambios backend.
+
+# Bloqueo KSP y verificacion fuera de OneDrive - 2026-11-08
+
+Usuario reporta Cannot snapshot ConnectedModule_ApiFactory.java: not a regular file y pide ejecutar las pruebas. El archivo generado tiene atributo ReparsePoint. Se intento copiar/compilar fuera de OneDrive sin borrar el original: C:/workspace no permite crear directorios desde esta sesion; la copia bajo Temp estable no resulta escribible para Java y la ejecucion en Temp de sesion falla al crear/mover gradle-api-9.5.0.jar. Ninguno de esos intentos ejecuto pruebas; los 342 casos aprobados siguen siendo la ejecucion anterior del usuario. adb devices no mostro dispositivos accesibles desde esta sesion.
+
+Se agrega scripts/verify-local-workspace.ps1, con sintaxis PowerShell comprobada, para ejecutar en la terminal normal del usuario: crea una copia nueva en UserProfile/Proyectos/PactoGG-Movil-fecha, conserva Git/codigo/configuracion Android, excluye build/caches/IDE y atributos de OneDrive, no sobreescribe destinos ni elimina el original. Ejecuta check-android.ps1 -UseWindowsTrust y falla si copia/verificacion falla. No se afirma que la copia o sus pruebas hayan pasado; falta ejecutar ese script fuera de las restricciones de esta sesion y abrir su destino en Android Studio. Sin push ni cambios backend.
+
+# Verificacion del usuario y limpieza DEX - 2026-11-08
+
+La captura del usuario acredita check-android.ps1 terminado: BUILD SUCCESSFUL, matriz de 33 operaciones OK, 342 pruebas sin fallos/omitidas/faltantes, coverage PASS, build PASS, Lint y Detekt terminados y cyclonedxDirectBom BUILD SUCCESSFUL. No acredita aceptacion real de 54 rutas, Google o push, ni instrumentacion ejecutada en dispositivo.
+
+Un Run posterior desde Android Studio fallo en dexBuilderDebug por no poder borrar la salida project_dex_archive/debug/dexBuilderDebug/out. Se verifico la ruta absoluta bajo app/build/intermediates y se elimino exclusivamente ese directorio generado; ausencia comprobada. Pendiente repetir Run. Causa del bloqueo no determinada; no se modifican permisos globales ni fuentes. Sin push.
+
+# Pruebas JVM y limpieza del informe de cobertura - 2026-11-08
+
+Los XML actuales de app/build/test-results/testDebugUnitTest suman 342 pruebas, cero fallos, cero errores y cero omitidas; informe mas reciente observado 08/11/2026 13:07:59 en el reloj local. La siguiente tarea createDebugUnitTestCoverageReport del usuario fallo por AccessDeniedException en app/build/reports/coverage/test/debug/com.pactogg.app.feature.account.data. Se verifico la ruta absoluta bajo app/build/reports y se elimino exclusivamente la salida generada coverage/test/debug. Se comprobo su ausencia; JUnit conservado. Cobertura y Lint completos pendientes de repetir con check-android.ps1 -UseWindowsTrust; no declarar verificacion integral aprobada. Sin cambios de codigo, permisos globales o push en esta limpieza.
+
+# Limpieza de salida ASM de pruebas - 2026-11-08
+
+La ejecucion del usuario se detuvo antes de Lint en transformDebugUnitTestClassesWithAsm por no poder borrar dirs. Se verifico la ruta absoluta bajo Movil/app/build y se elimino exclusivamente app/build/intermediates/classes/debugUnitTest/transformDebugUnitTestClassesWithAsm/dirs con Remove-Item nativo. La eliminacion termino correctamente y se comprobo la ausencia del destino. No se tocaron fuentes, permisos ni caches globales. Repetir check-android.ps1 -UseWindowsTrust en la terminal del usuario; esta limpieza no acredita compilacion, pruebas o Lint aprobados.
+
+# Correccion de los tres errores Lint - 2026-11-08
+
+Estado: correccion local aplicada; Lint completo pendiente de repetir desde la terminal del usuario. El informe lint-results-debug.txt identifica CredentialManagerMisuse en GoogleAccessButton y dos IntentFilterUniqueDataAttributes en AndroidManifest. Se captura NoCredentialException antes de GetCredentialException con mensaje de cuenta no disponible, y se separan scheme, host y los dos path en data individuales conservando pactogg://auth/verify-email y pactogg://auth/reset-password. No se agregan baseline ni supresiones.
+
+Verificacion: Detekt CLI directo sobre app/src/main/java termina con codigo 0. XML del manifiesto y combinacion de esquema/host/rutas comprobados. El intento de :app:lintDebug :app:detekt por Gradle no inicia: acceso denegado al lock global del wrapper fuera del espacio de trabajo. No equivale a fallo del codigo ni a Lint aprobado. No se modifican permisos ni cache global; las dos sugerencias de autoboxing quedan fuera de esta correccion. Siguiente paso: scripts/check-android.ps1 -UseWindowsTrust en la terminal del usuario. Sin push ni cambios backend.
+
+# Configuracion Android de Google recibida - 2026-11-06
+
+Se reemplazo app/google-services.json con el archivo actualizado del usuario. Proyecto pactogg, paquete com.pactogg.app; OAuth Android SHA-1 F0:37:60:4D:8A:A7:E0:18:EA:05:EB:43:8E:FA:E3:2C:C2:C2:AB:87 coincide con la firma debug consultada con keytool. Existe cliente OAuth web de tipo 3.
+
+Se conecto el boton Continuar con Google con Credential Manager (seleccion explicita), googleid y el consumidor POST auth/google existente. No se incorpora Firebase Auth como custodio alterno: los tokens de sesion de PactoGG siguen en SessionManager y almacenamiento cifrado. El Client ID se lee del JSON para com.pactogg.app o de pactogg.googleWebClientId. NICKNAME_REQUIRED abre el formulario de apodo y consentimiento; cancelar el selector no envia una solicitud de autenticacion. No se registran ID tokens ni mensajes arbitrarios de Google.
+
+Cliente web publico que debe aceptar el backend:
+841778632932-0jnd246u1mvbl6n9djtthsdgvb0um6do.apps.googleusercontent.com
+
+Dependencias fijadas: androidx.credentials 1.5.0 y googleid 1.1.1. Detekt directo paso tras incorporar el boton; pendiente compilar, ejecutar JVM/Android y probar Google con cuenta autorizada. La configuracion de firma es debug; una entrega firmada con otra clave requiere su propia huella. No hay prueba real de login ni de entrega push. El archivo Firebase por si solo no implementa recepcion de notificaciones. Backend y GitHub sin cambios.
+# Ampliacion a 54 rutas - 2026-11-06
+
+Trabajo local sin push. Revisadas las 18 rutas nuevas frente a 36 existentes; la guia disponible y OpenAPI siguen en v0.6.0. Pendiente recibir contrato actualizado para implementar payloads y pantallas nuevas sin inventarlos. Implementada cabecera Idempotency-Key en CON-06/VOT-02/VOT-04 y ampliadas sus pruebas existentes. Detekt main correcto; matriz de 33 operaciones correcta. JVM focalizado bloqueado por conexion al daemon; no hay nuevos tests JVM aprobados. Ver [alcance, plan, dependencias y evidencia](docs/integracion/ampliacion-54-rutas-2026-11-06.md).
+
+# Aislamiento de pruebas JVM - 2026-11-06
+
+La captura de GitHub reporta 99 pruebas unitarias y un fallo UncaughtExceptionsBeforeTest en NicknameQueriesTest.elapsedCooldownAllowsNewQueryAndEditingWithoutAutomaticPolling. El resumen no incluye la excepcion original suprimida; no demuestra un fallo de la regla del apodo.
+
+Revision: NicknameQueriesTest y EvidenceConfirmationTest no cerraban el ViewModel antes de resetMain, y comenzaban sin esperar la restauracion de sesion en Dispatchers.IO. Se registra el modelo en ViewModelStore, se espera restoring=false y al terminar se cancela y espera su Job antes de resetMain. ConnectedFlowTest tambien espera la finalizacion tras clear. Se conservan todos los casos y aserciones, sin excluir pruebas ni modificar app/backend.
+
+Validacion: git diff --check correcto. Intento de ejecutar la categoria unit bloqueado antes de las pruebas: acceso denegado al lock del Wrapper global; con Gradle instalado y cache local, Could not connect to the Gradle daemon. Los XML previos no validan esta correccion. Pendiente ejecutar categoria unit y suite completa en terminal del usuario/CI. GitHub no accesible desde esta sesion (Could not resolve host); entrega remota pendiente.
+# Preparación de entrega en rama - 2026-11-06
+
+Usuario autoriza subir la ampliación local en una rama nueva. Rama: codex/integracion-completa-movil. El usuario informa que la comprobación final ya terminó bien; los informes locales revisados acreditan 329 pruebas sin fallos, cobertura y build PASS. Instrumentación y aceptación del proveedor siguen pendientes. Estado remoto pendiente de push; no atribuir entrega hasta confirmación de GitHub.
+
+# Verificación de informes corregida - 2026-11-06
+
+La ejecución del usuario terminó BUILD SUCCESSFUL con testDebugUnitTest, cobertura, lintDebug y detekt. El rechazo posterior de all se debía a cuatro casos de CommunitySecurityTest fuera de category_classes, no a fallos JVM. Se registró la clase en security, sus cuatro métodos como regresiones obligatorias y la anotación SecurityChecks en Kotlin. No se modificaron ni relajaron las reglas del validador.
+
+Comprobación local posterior sobre los informes generados por el usuario: matrix OK; all PASS (329 pruebas, cero fallos, cero omitidas, sin faltantes ni categorías incorrectas); coverage PASS; build PASS. Los 27 tests Python de los controles pasan. Estos resultados revalidan los informes existentes; la nueva anotación de categoría requiere la siguiente ejecución Gradle. Pendiente repetir scripts/check-android.ps1 -UseWindowsTrust para completar el script incluido SBOM. No acredita instrumentación ni aceptación del proveedor. Sin cambios backend ni GitHub.
+
+# Estado: JVM correctas, corrección de Lint - 2026-11-06
+
+Los XML de la última ejecución del usuario confirman 329 pruebas JVM, cero fallos, cero errores y cero omitidas. La corrección de los fixtures HTTPS permite completar la suite y generar cobertura. Lint detuvo la ejecución con siete errores: una sangría incorrecta en CommunityActions y seis recursos sin referencias en community_strings.xml.
+
+Se corrigieron esas siete causas y se normalizó la misma sangría en CommunityQueries, ConnectedCommunity y ConnectedRouteLoading. Solo cambios de formato y retirada de recursos no utilizados; sin supresiones ni baseline. XML válido y Detekt ejecutado directamente sin incidencias después del cambio. Pendiente repetir Lint/build mediante scripts/check-android.ps1 -UseWindowsTrust; no declarar aún verificación integral ni instrumentación completadas. Los dos hints sobre mutableIntStateOf son recomendaciones no bloqueantes.
+
+## Antecedente: seguimiento de pruebas HTTPS - 2026-11-06
+
+El registro posterior del usuario con UseWindowsTrust llega a assembleDebug, assembleDebugAndroidTest y testDebugUnitTest: 329 pruebas, 191 fallidas, cero omitidas. El XML local confirma SSLPeerUnverifiedException: Hostname gen-webserver.internal not verified, frente a un certificado de fixture con SAN localhost/127.0.0.1/::1. No confundirlo con el PKIX anterior al descargar JaCoCo.
+
+Se corrigieron cinco fixtures JVM: bind explícito a 127.0.0.1 y URL HTTPS con ese host, ya incluido en el certificado. No se alteró hostnameVerifier, confianza del cliente real, backend ni reglas de aceptación. Cambios de pruebas pendientes de nueva ejecución; el resultado 329/191 pertenece al candidato anterior a esta corrección. Repetir scripts/check-android.ps1 -UseWindowsTrust desde la terminal local.
+
+## Estado anterior de la ampliación local, 2026-11-06
+
+- Alcance: petición actual de completar los consumidores de las 36 rutas; backend sin cambios y sin GitHub.
+- Código: se conservaron las pantallas nuevas presentes en la copia; se conectaron los alias por grupo, se corrigieron regreso a votación, selección de navegación, invalidación de permisos/contexto y validación de paginación. Se separaron interfaces, notificaciones y políticas para cumplir el análisis estático sin relajar reglas.
+- Evidencia: auditoría estática 36/36 rutas con consumidores; matriz de 33 operaciones correcta; 27 pruebas Python de controles correctas. Nueve regresiones JVM nuevas escritas. Detekt ejecutado directamente, ver el informe de esta revisión.
+- Bloqueo: Gradle no puede conectar a su daemon local; build, JVM y Lint no llegaron a ejecutarse. No hay resultado nuevo de tests JVM, instrumentación ni API real. El anterior fallo SSL/PKIX no se declara resuelto.
+- Pendientes: ejecutar scripts/check-android.ps1 en la terminal de Android Studio, instrumentación en emulador aislado, revisión visual y aceptación del proveedor; GET evidencias 405 es evidencia histórica pendiente de reprueba.
+- Informe: [ampliación local](docs/pruebas/ampliacion-local-2026-11-06.md). No reutilizar resultados previos como verificación de este candidato.
+
+## Antecedentes conservados
+
+# Ampliación móvil en curso — 2026-11-05
+
+- Autorización: integrar 14 operaciones restantes, con SDD y pruebas; backend solo referencia, sin cambios.
+- Fuente: backend 451c8ae1bfae3df64cf95f5a26ace7b1eacb3b1e. Decisión D-SDD-40.
+- Preparado: 14 expedientes spec/plan/tasks/checklist; CommunityApi, DTO y primer repositorio consumidor; cuatro casos de seguridad nuevos.
+- Incompleto: mapeo a dominio, pantallas/navegación/estado, paginación validada, alias dentro de CON-01/TOR-02, matrices y pruebas completas por operación, instrumentación, Lint/Detekt y controles de seguridad.
+- Ejecución inicial: 256 tests JVM, 158 fallidos, sin acreditar cambios nuevos. Numerosos fallos SSLHandshakeException/PKIX frente a MockWebServer HTTPS; causa raíz todavía no determinada. No desactivar TLS para resolverlos.
+- No hay aceptación, CI remoto ni entrega funcional de esta ampliación. Las tareas permanecen abiertas.
+
 # Estado actual — imágenes y navegación, 2026-11-05
 
 - Estado: integración local implementada y verificada; 256 JVM y 22 Android correctos, sin fallos/omisiones. Lint/Detekt, 27 validadores, secretos y generación SBOM correctos; cobertura JVM 907/3105 líneas (29,21 %). No hay CI remoto de este candidato.
@@ -218,3 +409,7 @@ Usuario autoriza botones navegables. En catálogo: acceso → tablero; Explorar/
 ## Ajustes visuales locales — 2026-11-05
 
 Zona segura dinámica, mensajes contextuales y confirmaciones modales implementados. [Resultado UX-01](docs/pruebas/ajustes-ux-2026-11-05.md): 239 JVM, 14 Android y controles locales correctos. Revisión visual del usuario pendiente. Sin Git/publicación; recuentos anteriores conservados como históricos.
+
+## Metadatos generados invalidos - 2026-11-06
+
+El usuario avanzo hasta packageDebugAndroidTest tras reparar los bloqueos. Se inspecciono el output-metadata.json de processDebugAndroidTestResources: 426 bytes, todos nulos; no era JSON valido. Se elimino solo el directorio generado afectado. check-android.ps1 admite -Rebuild para ejecutar --rerun-tasks --no-build-cache en las tareas de verificacion, conservando las comprobaciones, TLS y el pipeline. Sintaxis PowerShell comprobada; pendiente ejecutar la reconstruccion desde la terminal del usuario. No se atribuye la causa a OneDrive sin evidencia adicional; no hay PASS integral del candidato.

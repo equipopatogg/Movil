@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="community_todavia_no_hay_retos_en_el_muro">Todavía no hay retos en el muro.</string>
+    <string name="community_imagen_no_disponible">Imagen no disponible.</string>
+    <string name="community_sin_movimientos">Sin movimientos.</string>
+    <string name="community_sin_posiciones_disponibles">Sin posiciones disponibles.</string>
+    <string name="community_no_hay_compromisos">No hay compromisos.</string>
+    <string name="community_confirmar_que_cumplio">Confirmar que cumplió</string>
+    <string name="community_avisar_que_ya_cumpli">Avisar que ya cumplí</string>
+    <string name="community_no_tienes_notificaciones">No tienes notificaciones.</string>
+    <string name="community_marcar_todas_como_leidas">Marcar todas como leídas</string>
+    <string name="community_leida">Leída</string>
+    <string name="community_marcar_como_leida">Marcar como leída</string>
+    <string name="community_no_tienes_votaciones_pendientes">No tienes votaciones pendientes.</string>
+    <string name="community_revisar_reto">Revisar reto</string>
+    <string name="community_revisar_evidencias">Revisar evidencias</string>
+    <string name="community_ya_emitiste_tu_voto">Ya emitiste tu voto.</string>
+    <string name="community_comentario_opcional_maximo_140">Comentario opcional (máximo 140)</string>
+    <string name="community_votar_legitimo">Votar legítimo</string>
+    <string name="community_votar_trampa">Votar trampa</string>
+    <string name="community_resolver_como_cumplido">Resolver como cumplido</string>
+    <string name="community_resolver_como_trampa">Resolver como trampa</string>
+    <string name="community_jurado_votaciones_pendientes">Jurado: votaciones pendientes</string>
+    <string name="community_notificaciones">Notificaciones</string>
+    <string name="community_mis_puntos">Mis puntos</string>
+    <string name="community_ranking_del_grupo">Ranking del grupo</string>
+    <string name="community_compromisos">Compromisos</string>
+    <string name="community_muro_de_la_fama">Muro de la fama</string>
+    <string name="community_actualizar">Actualizar</string>
+    <string name="community_actualiza_para_consultar_los_datos_del_servicio">Actualiza para consultar los datos del servicio.</string>
+    <string name="community_cargar_mas">Cargar más</string>
+</resources>

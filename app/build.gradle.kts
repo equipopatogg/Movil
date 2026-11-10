@@ -1,4 +1,5 @@
 import java.net.URI
+import groovy.json.JsonSlurper
 
 plugins {
     alias(libs.plugins.android.application)
@@ -17,6 +18,24 @@ require(apiBaseUrl.isEmpty() || URI(apiBaseUrl).let {
         it.query == null && it.fragment == null && it.path.endsWith("/")
 }) { "pactogg.apiBaseUrl debe ser una URL HTTPS pública, sin credenciales y terminada en /." }
 
+
+// Client configuration only: service-account credentials are never accepted here.
+val googleConfig = file("google-services.json").takeIf { it.exists() }?.let {
+    JsonSlurper().parse(it) as Map<*, *>
+}
+require(googleConfig?.get("type") != "service_account") { "Usa la configuracion Android, no una cuenta de servicio." }
+val googleAndroidClient = (googleConfig?.get("client") as? List<*>)?.filterIsInstance<Map<*, *>>()?.singleOrNull {
+    val info = it["client_info"] as? Map<*, *>
+    val androidInfo = info?.get("android_client_info") as? Map<*, *>
+    androidInfo?.get("package_name") == "com.pactogg.app"
+}
+require(googleConfig == null || googleAndroidClient != null) { "El archivo Firebase no corresponde a com.pactogg.app." }
+val configuredWebClient = (googleAndroidClient?.get("oauth_client") as? List<*>)
+    ?.filterIsInstance<Map<*, *>>()?.firstOrNull { it["client_type"].toString() == "3" }
+    ?.get("client_id") as? String ?: ""
+val googleWebClientId = providers.gradleProperty("pactogg.googleWebClientId").orElse(configuredWebClient).get()
+require(googleWebClientId.isEmpty() || googleWebClientId.matches(
+    Regex("[A-Za-z0-9._-]+\\.apps\\.googleusercontent\\.com"))) { "Client ID web de Google invalido." }
 android {
     namespace = "com.pactogg.app"
     compileSdk {
@@ -31,8 +50,21 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.1.0"
+        // Public Android client resources; never embed server service-account credentials.
+        val project = googleConfig?.get("project_info") as? Map<*, *>
+        val info = googleAndroidClient?.get("client_info") as? Map<*, *>
+        val keys = googleAndroidClient?.get("api_key") as? List<*>
+        val key = keys?.filterIsInstance<Map<*, *>>()?.firstOrNull()?.get("current_key") as? String
+        mapOf("google_app_id" to info?.get("mobilesdk_app_id"),
+            "gcm_defaultSenderId" to project?.get("project_number"),
+            "project_id" to project?.get("project_id"), "google_api_key" to key).forEach { (name, value) ->
+            val text = value?.toString().orEmpty()
+            require(text.matches(Regex("[A-Za-z0-9_:.-]*"))) { "Configuracion Firebase Android invalida." }
+            resValue("string", name, text)
+        }
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
         buildConfigField("String", "PRIVACY_VERSION", "\"$privacyVersion\"")
+        buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$googleWebClientId\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,6 +86,7 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        resValues = true
     }
     lint {
         abortOnError = true
@@ -67,6 +100,10 @@ android {
 ksp { arg("room.schemaLocation", "$projectDir/schemas") }
 
 dependencies {
+    implementation(libs.firebase.messaging)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services)
+    implementation(libs.google.identity)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
@@ -108,7 +145,8 @@ dependencies {
 }
 
 val detektTool by configurations.creating
-dependencies { detektTool(libs.detekt.cli) }
+dependencies {
+ detektTool(libs.detekt.cli) }
 tasks.register<JavaExec>("detekt") {
     group = "verification"
     description = "Checks Kotlin sources using the pinned standalone Detekt CLI."

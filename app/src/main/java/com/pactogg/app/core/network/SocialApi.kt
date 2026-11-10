@@ -49,7 +49,8 @@ interface ContractActionsApi {
         @Query("limit") limit: Int = 20): Response<Envelope<List<ContractDto>>>
     @POST("api/v1/contracts/{id}/accept")
     suspend fun accept(@Header("Authorization") bearer: String, @Path("id") id: String,
-        @Body body: ContractAction): Response<Envelope<ContractDto>>
+        @Body body: ContractAction,
+        @Header("Idempotency-Key") operationKey: String): Response<Envelope<ContractDto>>
     @POST("api/v1/contracts/{id}/reject")
     suspend fun reject(@Header("Authorization") bearer: String, @Path("id") id: String,
         @Body body: ContractAction): Response<Envelope<ContractDto>>

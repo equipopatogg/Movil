@@ -1,5 +1,20 @@
 # PactoGG Android
 
+## Configuracion local de Firebase
+
+El archivo Android `google-services.json` se conserva localmente en `app/` y no se incluye en Git. Al clonar, obtener la configuracion Android del proyecto Firebase para `com.pactogg.app` y colocarla en esa ruta. Sin ese archivo el proyecto compila con Google/push sin configurar; el acceso habitual con correo sigue disponible. El archivo de cuenta de servicio es exclusivo del servidor y nunca se copia al proyecto movil. Firebase del servidor y Google Sign-In conservan su aceptacion real pendiente.
+
+Push Android, 2026-11-08: integracion local parcial de FCM, canal/permiso y registro/rotacion/baja. [Evidencia y pendientes](docs/integracion/push-android-2026-11-08.md). Compilacion Android y entrega real pendientes; Google espera habilitacion del servidor. Sin cambios backend ni GitHub.
+
+## Estado de la ampliación - 2026-11-06
+
+Las 36 rutas tienen consumidores en el código. Se incluyen pantallas de jurado, puntos/ranking, compromisos, avisos y fama; creación de retos por grupo y filtro de torneos por grupo. La compilación y validación JVM/Android de este candidato siguen pendientes por un fallo de conexión con el daemon de Gradle en la sesión de revisión. Ver [resultado y comandos](docs/pruebas/ampliacion-local-2026-11-06.md).
+
+Ejecutar `scripts/check-android.ps1` desde la terminal de Android Studio para continuar la comprobación. No se subieron cambios a GitHub ni se modificó el backend.
+
+Los apartados siguientes conservan antecedentes del alcance anterior; no sustituyen este estado.
+
+
 Cliente Android Kotlin con Compose, Hilt y Retrofit. El recorrido conectado utiliza datos reales del backend; las pantallas del prototipo se conservan sin introducir muestras en ese recorrido.
 
 ## Alcance actual

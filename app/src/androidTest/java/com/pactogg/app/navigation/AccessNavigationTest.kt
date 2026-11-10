@@ -2,6 +2,7 @@ package com.pactogg.app.navigation
 
 import android.app.Activity
 import android.app.Application
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.AnnotatedString
 import com.pactogg.app.MainActivity
 import java.util.concurrent.atomic.AtomicBoolean
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -34,6 +36,7 @@ class AccessNavigationTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
 
     @Test fun emptyLoginCannotBypassAuthentication() {
+        compose.activityRule.scenario.onActivity { assertEquals(Intent.ACTION_MAIN, it.intent.action) }
         compose.waitUntil(5000) {
             compose.onAllNodes(hasText("Iniciar sesión") and hasClickAction()).fetchSemanticsNodes().isNotEmpty()
         }
@@ -71,6 +74,7 @@ class AccessNavigationTest {
                 compose.activity.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
             }
             compose.activityRule.scenario.recreate()
+            compose.activityRule.scenario.onActivity { assertEquals(Intent.ACTION_MAIN, it.intent.action) }
             compose.waitForIdle()
             compose.onNode(hasText("Correo electrónico") and hasSetTextAction())
                 .performScrollTo().assertTextContains(email)

@@ -1,5 +1,8 @@
 package com.pactogg.app.feature.connected.presentation
 
+import com.pactogg.app.feature.account.presentation.LocalExtras
+import com.pactogg.app.feature.account.presentation.ExtrasPage
+
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,9 +50,12 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
         return
     }
     if (state.account == null) {
+        val extras = LocalExtras.current
         AccessScreen(state.access.copy(loading = state.busy), model::access,
-            fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code) {
+            fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code,
+            onRecover = { extras?.open(ExtrasPage.FORGOT) }) {
             if (state.access.registering) state.social.nicknameNotice?.let { Text(it) }
+            com.pactogg.app.feature.account.presentation.GoogleAccessButton(state.busy)
         }
         return
     }
@@ -90,6 +96,7 @@ private fun ConnectedContent(state: ConnectedState, model: ConnectedViewModel) {
         ConnectedRoute.EVIDENCE -> ConnectedEvidence(state, model)
         ConnectedRoute.TOURNAMENTS -> ConnectedTournaments(state, model)
         ConnectedRoute.PROFILE -> ConnectedProfile(state, model)
+        else -> ConnectedCommunity(state, model)
     }
 }
 
@@ -108,6 +115,7 @@ private fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
         if (state.group != null) Action("Crear reto manual", enabled = !state.busy) {
             model.navigate(ConnectedRoute.CREATE)
         }
+        CommunityHomeActions(state, model)
         Action("Consultar torneos", enabled = !state.busy) { model.navigate(ConnectedRoute.TOURNAMENTS) }
         if (state.contract != null) Action("Ver reto seleccionado", enabled = !state.busy) {
             model.navigate(ConnectedRoute.CONTRACT)

@@ -28,9 +28,12 @@ data class TournamentPage(val items: List<Tournament>, val hasMore: Boolean, val
 interface ProductRepository {
     suspend fun createGroup(name: String): Group
     suspend fun createChallenge(group: Group, draft: ChallengeDraft): Challenge
+    suspend fun createChallengeInGroup(group: Group, draft: ChallengeDraft): Challenge = createChallenge(group, draft)
     suspend fun challenge(contract: Challenge): Challenge
     suspend fun sendLink(contract: Challenge, url: String): Evidence
     suspend fun sendPhoto(contract: Challenge, bytes: ByteArray, mimeType: String): Evidence
     suspend fun evidence(contract: Challenge): List<Evidence>
     suspend fun tournaments(status: String?, game: String?, cursor: String?): TournamentPage
+    suspend fun groupTournaments(groupId: String, status: String?, game: String?, cursor: String?): TournamentPage =
+        tournaments(status, game, cursor)
 }

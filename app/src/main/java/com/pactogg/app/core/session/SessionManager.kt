@@ -27,6 +27,15 @@ class SessionManager(private val api: PactoApi, private val store: SessionStore,
     val current = mutable.asStateFlow()
     private var initialized = false
     private var generation = 0L
+    var beforeLogout: (suspend () -> Boolean)? = null
+    internal val accounts = SessionMutations(
+        commit = { call -> authenticate(call) },
+        clear = { expected ->
+            withContext(Dispatchers.IO + NonCancellable) {
+                mutex.withLock { if (mutable.value === expected) clearLocked() }
+            }
+        },
+    )
 
     suspend fun restore() = withContext(Dispatchers.IO) {
         mutex.withLock {
@@ -105,14 +114,21 @@ class SessionManager(private val api: PactoApi, private val store: SessionStore,
 
     /** Return true only when remote revocation is confirmed. Always close locally. */
     suspend fun logout(): Boolean = withContext(Dispatchers.IO) {
+        val deviceRemoved = try {
+            beforeLogout?.invoke() ?: true
+        } catch (error: kotlinx.coroutines.CancellationException) {
+            throw error
+        } catch (_: Exception) {
+            false
+        }
         val previous = mutex.withLock {
             val value = mutable.value
             withContext(NonCancellable) { clearLocked() }
             value
-        } ?: return@withContext true
+        } ?: return@withContext deviceRemoved
         val response = api.logout("Bearer ${previous.accessToken}", LogoutRequest(previous.refreshToken))
         if (response.code() != 204) throw response.failure()
-        true
+        deviceRemoved
     }
 
     suspend fun updateAccount(account: com.pactogg.app.feature.auth.domain.Account) =

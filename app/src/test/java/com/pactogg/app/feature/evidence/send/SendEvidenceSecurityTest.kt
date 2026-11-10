@@ -124,12 +124,12 @@ class SendEvidenceSecurityTest {
         val trust = okhttp3.tls.HandshakeCertificates.Builder().addTrustedCertificate(certificate.certificate).build()
         okhttp3.mockwebserver.MockWebServer().use { server ->
             server.useHttps(okhttp3.tls.HandshakeCertificates.Builder().heldCertificate(certificate).build().sslSocketFactory(), false)
-            server.start()
+            server.start(java.net.InetAddress.getByName("127.0.0.1"), 0)
             server.enqueue(okhttp3.mockwebserver.MockResponse().setResponseCode(302).setHeader("Location", "https://other.example/photo"))
             val client = com.pactogg.app.core.network.EvidenceImageClient.create().newBuilder()
                 .sslSocketFactory(trust.sslSocketFactory(), trust.trustManager).build()
             assertFalse(client.retryOnConnectionFailure)
-            client.newCall(okhttp3.Request.Builder().url(server.url("/photo.jpg"))
+            client.newCall(okhttp3.Request.Builder().url(server.url("/photo.jpg").newBuilder().host("127.0.0.1").build())
                 .header("Authorization", "Bearer synthetic-should-not-be-sent").build()).execute().use {
                 assertEquals(302, it.code)
             }

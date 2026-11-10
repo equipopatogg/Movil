@@ -33,3 +33,6 @@ T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar 
 - [ ] MO-CON-01-T4-AC3: Faltan casos sin grupo y sin settings, bloqueo de voz y separación de aceptar frente a crear en UI; inspección de código no sustituye esos casos. [Criterio y pruebas](checklists/checklist.md#mo-con-01-ac3).
 - [ ] MO-CON-01-T4-AC4: Desconexión tras recepción de POST no repite creación ni confirma éxito; falta recorrido de recuperación en Compose. [Criterio y pruebas](checklists/checklist.md#mo-con-01-ac4).
 - [ ] MO-CON-01-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-con-01-acq).
+# Correccion de mensaje GROUP_TOO_SMALL - 2026-11-08
+
+Implementado mensaje por codigo conforme al contrato local v0.8 (al menos tres integrantes). No cambia la autorizacion del servidor ni supone que todos los conflictos 409 tengan esa causa. Regresiones especificas en ApiErrorMapperTest: CON_01_smallGroupConflictExplainsMinimumWithoutExposingServerText y CON_01_unknownConflictDoesNotClaimGroupIsTooSmall; ejecucion y limites en Memoria.md. La captura del usuario no revela el codigo real y no acredita esta causa ni creacion exitosa.

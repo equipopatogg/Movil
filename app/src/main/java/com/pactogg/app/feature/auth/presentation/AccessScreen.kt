@@ -37,7 +37,8 @@ import com.pactogg.app.ui.theme.PactoInput
 
 @Composable
 fun AccessScreen(state: AccessState, onEvent: (AccessEvent) -> Unit,
-    fieldError: String? = null, fieldErrorCode: String? = null, tools: @Composable () -> Unit = {}) {
+    fieldError: String? = null, fieldErrorCode: String? = null,
+    onRecover: (() -> Unit)? = null, tools: @Composable () -> Unit = {}) {
     PageLayout {
         Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.primary)
@@ -62,6 +63,11 @@ fun AccessScreen(state: AccessState, onEvent: (AccessEvent) -> Unit,
                     style = MaterialTheme.typography.titleLarge)
             }
             AccessFields(state, onEvent, fieldError, fieldErrorCode)
+            if (!state.registering && onRecover != null) {
+                TextButton(onClick = onRecover, enabled = !state.loading) {
+                    Text("Olvidé mi contraseña", color = MaterialTheme.colorScheme.secondary)
+                }
+            }
             if (state.registering) PrivacyConsent(state.acceptedPrivacy, !state.loading) {
                 onEvent(AccessEvent.AcceptPrivacy(it))
             }

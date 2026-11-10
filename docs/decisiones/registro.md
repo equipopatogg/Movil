@@ -292,3 +292,12 @@ Usuario autoriza completar integración de imágenes y mejorar UX, sin expedient
 Fotos: selector sin permisos generales/cámara, lectura original acotada a 32 MiB, máximo 8000 px por lado, muestreo hasta 2048 px, JPEG 90 con orientación aplicada y metadatos retirados, archivo final <=5 MiB. Son decisiones defensivas de cliente, no reglas nuevas del servidor. ExifInterface AndroidX 1.4.1 se declara explícitamente porque ya estaba transitiva y el analizador señala problemas del lector de plataforma en Android antiguos. No cambia versión de aplicación. URL y fechas se conservan; Coil usa cliente HTTPS sin sesión, cookies, redirects ni caché compartida. Se desactiva reintento implícito de transporte; escrituras inciertas requieren lectura y nueva decisión.
 
 Sondeo autorizado con cuenta QA existente y sin escrituras de negocio: nueve comprobaciones positivas y GET de evidencias 405; cierre de esa sesión 204. Repositorio y despliegue no se equiparan. La app maneja indisponibilidad y conserva evidencias confirmadas; no atribuir listado real verificado ni reglas de primer voto al cliente. Código backend permite respuesta POST con url=null, así que se consulta GET posteriormente sin repetir POST. ID156/subida directa S3, privacidad definitiva y catálogo permanecen diferidos. Resultados locales y límites se registran en checklist de MO-EVI-02 y memoria; no aceptación humana, subida Git ni publicación inferidas.
+
+## D-SDD-40 — ampliación móvil autorizada, 2026-11-05
+
+Usuario solicita integrar las 14 operaciones restantes del backend, con specs y pruebas correspondientes, sin modificar backend. Fuente fijada 451c8ae. Se crean 14 expedientes MO; alias se tratarán dentro de CON-01/TOR-02. La autorización amplía el alcance anterior de 19 operaciones. Implementación, pruebas y aceptación aún pendientes.
+
+
+## D-PUSH-20261108 - continuar FCM Android local
+
+Solicitud expresa del usuario: continuar push sin backend ni GitHub; Google pendiente del servidor. Se autoriza el transporte FCM Android con contrato local v0.8, registro/rotacion/baja, canal/permiso, pruebas y evidencia en specs/PG-09-push. Supera el aplazamiento historico FCM solo para este alcance. Sin cuentas de servicio en APK. Apertura inicial al centro de avisos; destino detallado y aceptacion Android/proveedor siguen abiertos. No equivale a validar 54 rutas ni habilitar Google. Ver ../integracion/push-android-2026-11-08.md.

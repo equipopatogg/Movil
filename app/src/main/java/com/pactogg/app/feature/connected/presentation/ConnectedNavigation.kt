@@ -52,12 +52,16 @@ internal fun ConnectedNavigation(route: ConnectedRoute, busy: Boolean, nav: (Con
 internal fun navigationSection(route: ConnectedRoute): ConnectedRoute = when (route) {
     ConnectedRoute.MEMBERS -> ConnectedRoute.GROUPS
     ConnectedRoute.BOARD, ConnectedRoute.CONTRACT, ConnectedRoute.EVIDENCE -> ConnectedRoute.HOME
+    ConnectedRoute.JURY, ConnectedRoute.VOTING, ConnectedRoute.NOTIFICATIONS -> ConnectedRoute.HOME
+    ConnectedRoute.POINTS, ConnectedRoute.RANKING, ConnectedRoute.COMMITMENTS, ConnectedRoute.FAME ->
+        ConnectedRoute.GROUPS
     else -> route
 }
 
 internal fun ConnectedViewModel.back() {
     navigate(when (state.value.route) {
-        ConnectedRoute.EVIDENCE -> ConnectedRoute.CONTRACT
+        ConnectedRoute.EVIDENCE -> state.value.evidenceReturnRoute
+        ConnectedRoute.VOTING -> ConnectedRoute.CONTRACT
         ConnectedRoute.CONTRACT -> ConnectedRoute.BOARD
         ConnectedRoute.BOARD, ConnectedRoute.MEMBERS -> ConnectedRoute.GROUPS
         else -> ConnectedRoute.HOME

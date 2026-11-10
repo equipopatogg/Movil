@@ -44,11 +44,11 @@ class ApiIntegrationTest {
         val certificate = HeldCertificate.Builder().commonName("localhost").addSubjectAlternativeName("localhost")
             .addSubjectAlternativeName("127.0.0.1").addSubjectAlternativeName("::1").build()
         server.useHttps(HandshakeCertificates.Builder().heldCertificate(certificate).build().sslSocketFactory(), false)
-        server.start()
+        server.start(java.net.InetAddress.getByName("127.0.0.1"), 0)
         val trusted = HandshakeCertificates.Builder().addTrustedCertificate(certificate.certificate).build()
         val client = OkHttpClient.Builder().sslSocketFactory(trusted.sslSocketFactory(), trusted.trustManager)
             .retryOnConnectionFailure(false).followRedirects(false).build()
-        api = ApiClientFactory().create(server.url("/").toString(), client).create(PactoApi::class.java)
+        api = ApiClientFactory().create(server.url("/").newBuilder().host("127.0.0.1").build().toString(), client).create(PactoApi::class.java)
         sessions = SessionManager(api, store) { nowMillis }
         products = ApiProductRepository(api, sessions)
     }

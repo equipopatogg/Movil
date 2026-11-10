@@ -32,3 +32,8 @@ T4 y T5 siguen abiertos donde faltan escenarios. Separar los archivos o aprobar 
 - [ ] MO-CON-06-T4-AC4: 402 conserva saldo de grupo y contrato, sin éxito y con acción invalidada en ViewModel; falta recorrido Compose. [Criterio y pruebas](checklists/checklist.md#mo-con-06-ac4).
 - [ ] MO-CON-06-T4-AC5: 403 NOT_CONTRACT_TARGET conserva contexto/saldo en consumidor; falta intento real de tercero y su pantalla. [Criterio y pruebas](checklists/checklist.md#mo-con-06-ac5).
 - [ ] MO-CON-06-T5-ACQ: Pruebas locales actuales y controles acotados registrados; CI remoto diferido por el usuario. Accesibilidad integral/aceptación humana siguen pendientes. [Criterio y pruebas](checklists/checklist.md#mo-con-06-acq).
+
+
+## Actualizacion de contrato recibida - 2026-11-06
+
+La lista de 54 rutas del usuario exige Idempotency-Key en esta operacion. El consumidor genera un UUID por invocacion antes de SessionManager y lo envia como cabecera obligatoria. No activa reintentos automaticos ni persiste claves en logs. La prueba HTTPS existente verifica presencia y formato UUID junto con autorizacion, ruta y numero de peticiones. Implementacion local; ejecucion del candidato pendiente. La semantica de reenvio manual despues de respuesta perdida y la vigencia del registro del servidor requieren el contrato actualizado.

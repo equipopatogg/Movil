@@ -31,6 +31,8 @@ private val ApiMessages = mapOf(
     "SESSION_RENEWED" to "Se renovó tu sesión. Revisa los datos y vuelve a enviar.",
     "SESSION_CHANGED" to "La sesión cambió. Vuelve a iniciar sesión.",
     "GROUP_LIMIT_REACHED" to "Alcanzaste el límite de grupos permitido.",
+    "GROUP_TOO_SMALL" to "El grupo necesita al menos 3 integrantes para crear retos. " +
+        "Invita a más personas y vuelve a consultar el grupo.",
     "CONTENT_REJECTED" to "El contenido fue rechazado. Elige otra imagen o revisa el texto o enlace.",
     "INVALID_BOND" to "La fianza no está permitida por el grupo.",
     "INVALID_TARGET" to "El destinatario del reto no es válido.",

@@ -1,5 +1,8 @@
 package com.pactogg.app.feature.connected.presentation
 
+import com.pactogg.app.feature.account.presentation.LocalExtras
+import com.pactogg.app.feature.account.presentation.ExtrasPage
+
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,6 +43,11 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
                 Text("El selector de avatares estará disponible cuando se confirme el catálogo.")
             }
         }
+        val extras = LocalExtras.current
+        listOf(ExtrasPage.VERIFY to "Verificar correo", ExtrasPage.RESEND to "Reenviar verificación",
+            ExtrasPage.PASSWORD to "Cambiar contraseña", ExtrasPage.CONSENT to "Aceptar aviso vigente",
+            ExtrasPage.PREFERENCES to "Preferencias de avisos", ExtrasPage.SERVICE to "Estado del servicio"
+        ).forEach { (page, label) -> Action(label, enabled = !state.busy) { extras?.open(page) } }
         Text("El cierre de sesión borra la sesión local; no elimina tu cuenta.")
         Action("Cerrar sesión", enabled = !state.busy) { confirmLogout = true }
     }

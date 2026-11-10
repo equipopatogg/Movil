@@ -1,5 +1,8 @@
 package com.pactogg.app.feature.connected.presentation
 
+import com.pactogg.app.feature.account.presentation.LocalExtras
+import com.pactogg.app.feature.account.presentation.ExtrasPage
+
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.pactogg.app.feature.connected.domain.Challenge
@@ -7,6 +10,8 @@ import com.pactogg.app.prototype.Action
 
 @Composable
 fun ConnectedContractActions(state: ConnectedState, model: ConnectedViewModel, contract: Challenge) {
+    Action("Jurado y resultado", enabled = !state.busy) { model.navigate(ConnectedRoute.VOTING) }
+    OwnerMaintenanceActions(state, contract)
     val accept = canAccept(contract, state.account?.id, state.group, state.contractStateStale)
     val reject = canReject(contract, state.account?.id, state.contractStateStale)
     if (state.social.pendingAction != null) {
@@ -33,4 +38,15 @@ fun ConnectedContractMetadata(contract: Challenge) {
     contract.acceptedAt?.let { Text("Aceptado: $it") }
     contract.updatedAt?.let { Text("Actualizado: $it") }
     contract.createdAt?.let { Text("Creado: $it") }
+}
+
+@Composable
+private fun OwnerMaintenanceActions(state: ConnectedState, contract: Challenge) {
+    val extras = LocalExtras.current
+    val allowed = contract.challengerId == state.account?.id && contract.status == "open" &&
+        contract.acceptedBy == null && !state.contractStateStale
+    if (allowed) {
+        Action("Editar reto", enabled = !state.busy) { extras?.open(ExtrasPage.EDIT, contract = contract) }
+        Action("Cancelar reto", enabled = !state.busy) { extras?.open(ExtrasPage.CANCEL, contract = contract) }
+    }
 }

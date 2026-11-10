@@ -1,5 +1,8 @@
 package com.pactogg.app.feature.connected.presentation
 
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.first
 
 import org.junit.experimental.categories.Category
 import com.pactogg.app.testing.UnitChecks
@@ -22,9 +25,10 @@ import org.junit.Test
 @Category(UnitChecks::class)
 class NicknameQueriesTest {
     private val dispatcher = StandardTestDispatcher()
+    private val lifecycle = ViewModelStore()
     private lateinit var model: ConnectedViewModel
     private val social = FakeSocial()
-    @Before fun setup() {
+    @Before fun setup() = runTest(dispatcher) {
         Dispatchers.setMain(dispatcher)
         val api = ApiClientFactory().create("https://localhost/").create(PactoApi::class.java)
         val store = object : SessionStore {
@@ -34,8 +38,18 @@ class NicknameQueriesTest {
         }
         val sessions = SessionManager(api, store)
         model = ConnectedViewModel(sessions, ApiProductRepository(api, sessions), social)
+        lifecycle.put("test", model)
+        model.state.first { !it.restoring }
     }
-    @After fun cleanup() { Dispatchers.resetMain() }
+    @After fun cleanup() {
+        try {
+            runTest(dispatcher) {
+                val job = model.viewModelScope.coroutineContext[Job]!!
+                lifecycle.clear()
+                job.join()
+            }
+        } finally { Dispatchers.resetMain() }
+    }
     @Test fun typingWaitsAndInvalidNameNeverQueries() = runTest(dispatcher) {
         runCurrent()
         model.checkNickname("a")
