@@ -10,6 +10,11 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class PactoGGApplication : Application(), SingletonImageLoader.Factory {
+    @javax.inject.Inject lateinit var push: com.pactogg.app.core.push.PushRuntime
+    override fun onCreate() {
+        super.onCreate()
+        push.start()
+    }
     override fun newImageLoader(context: Context): ImageLoader = ImageLoader.Builder(context)
         .components { add(OkHttpNetworkFetcherFactory(callFactory = { EvidenceImageClient.create() })) }
         .diskCache(null)

@@ -30,8 +30,8 @@ fun VoteSummaryResponse.toDomain() = VoteSummaryModel(
 )
 
 fun RevealedVoteResponse.toDomain() = RevealedVoteModel(
-    jurorId,
-    nickname,
+    "",
+    "",
     vote,
     comment,
     createdAt

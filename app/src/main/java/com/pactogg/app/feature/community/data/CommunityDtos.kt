@@ -41,8 +41,8 @@ data class VoteSummaryResponse(
 
 @Serializable
 data class RevealedVoteResponse(
-    @SerialName("juror_id") val jurorId: String,
-    @SerialName("nickname") val nickname: String,
+    @SerialName("juror_id") val jurorId: String = "",
+    @SerialName("nickname") val nickname: String = "",
     @SerialName("vote") val vote: String,
     @SerialName("comment") val comment: String? = null,
     @SerialName("created_at") val createdAt: String

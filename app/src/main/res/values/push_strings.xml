@@ -1,0 +1,17 @@
+<resources>
+    <string name="push_channel">Avisos de PactoGG</string>
+    <string name="push_new_notice">Tienes novedades. Abre PactoGG para consultarlas.</string>
+    <string name="push_permission_explanation">Activa las notificaciones para recibir avisos de retos, votos y compromisos. También puedes consultarlos dentro de PactoGG.</string>
+    <string name="push_enable">Activar notificaciones</string>
+    <string name="push_settings">Abrir ajustes de notificaciones</string>
+    <string name="push_enabled">Las notificaciones están permitidas en este dispositivo. La entrega depende del servicio.</string>
+    <string name="push_not_configured">Esta instalación no tiene una configuración de notificaciones válida. Instala la versión actualizada.</string>
+    <string name="push_sign_in_required">Inicia sesión para registrar este teléfono y recibir avisos.</string>
+    <string name="push_permission_required">Las notificaciones están bloqueadas en este dispositivo.</string>
+    <string name="push_connecting">Conectando este teléfono con Firebase…</string>
+    <string name="push_registering">Registrando este teléfono en PactoGG…</string>
+    <string name="push_registered">Este teléfono quedó registrado para recibir avisos. Esto no confirma que el servidor los haya enviado.</string>
+    <string name="push_token_error">No pudimos conectar este teléfono con Firebase. Revisa internet y los servicios de Google Play.</string>
+    <string name="push_server_error">No pudimos registrar este teléfono en PactoGG. Revisa la conexión y vuelve a intentarlo.</string>
+    <string name="push_check_connection">Reintentar conexión de avisos</string>
+</resources>

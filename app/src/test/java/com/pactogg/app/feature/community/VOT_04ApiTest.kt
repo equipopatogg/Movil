@@ -19,6 +19,8 @@ class VOT_04ApiTest {
             assertEquals("POST", request.method)
             assertEquals("/api/v1/contracts/333333333333333333333333/votes/resolve", request.requestUrl?.encodedPath)
             assertEquals("Bearer $Access", request.getHeader("Authorization"))
+            val key = requireNotNull(request.getHeader("Idempotency-Key"))
+            assertEquals(key, java.util.UUID.fromString(key).toString())
             assertEquals(1, f.server.requestCount)
         }
     }

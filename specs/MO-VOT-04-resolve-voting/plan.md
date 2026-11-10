@@ -22,3 +22,8 @@ Sin dependencias nuevas previstas. Aceptación del proveedor y revisión humana 
 - security: `com.pactogg.app.feature.community.VOT_04SecurityTest.VOT_04_serverErrorsNeverSucceedOrReplay`.
 
 Ejecución de estas pruebas pendiente; no heredar los resultados backend.
+
+
+## Actualizacion de contrato recibida - 2026-11-06
+
+La lista de 54 rutas del usuario exige Idempotency-Key en esta operacion. El consumidor genera un UUID por invocacion antes de SessionManager y lo envia como cabecera obligatoria. No activa reintentos automaticos ni persiste claves en logs. La prueba HTTPS existente verifica presencia y formato UUID junto con autorizacion, ruta y numero de peticiones. Implementacion local; ejecucion del candidato pendiente. La semantica de reenvio manual despues de respuesta perdida y la vigencia del registro del servidor requieren el contrato actualizado.

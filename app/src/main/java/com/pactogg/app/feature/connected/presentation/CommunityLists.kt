@@ -1,5 +1,8 @@
 package com.pactogg.app.feature.connected.presentation
 
+import com.pactogg.app.feature.account.presentation.LocalExtras
+import com.pactogg.app.feature.account.presentation.ExtrasPage
+
 import androidx.compose.ui.res.stringResource
 import com.pactogg.app.R
 import androidx.compose.material3.Text
@@ -66,6 +69,7 @@ internal fun CommunityCommitmentsContent(state: ConnectedState, onAction: (Commu
 
 @Composable
 internal fun CommunityNotifications(state: ConnectedState, model: ConnectedViewModel) {
+    val extras = LocalExtras.current
     if (state.community.loaded && state.community.notifications.isEmpty()) Text(stringResource(
         R.string.community_no_tienes_notificaciones))
     if (state.community.notifications.any { !it.read }) Action(stringResource(
@@ -75,6 +79,7 @@ internal fun CommunityNotifications(state: ConnectedState, model: ConnectedViewM
     state.community.notifications.forEach { item ->
         PactCard(item.title, item.body) {
             Text(item.createdAt)
+            Action("Eliminar aviso", enabled = !state.busy) { extras?.open(ExtrasPage.DELETE_NOTICE, item.id) }
             if (item.read) Text(stringResource(R.string.community_leida)) else Action(stringResource(
                 R.string.community_marcar_como_leida), enabled = !state.busy) {
                 model.requestCommunityAction(CommunityAction("read", item.id))

@@ -2,6 +2,7 @@
 *.iml
 .idea/
 .gradle/
+.gradle-push/
 .kotlin/
 **/build/
 .cxx/
@@ -27,3 +28,8 @@ __pycache__/
 *.p12
 *.pfx
 *.local.json
+
+# Local Firebase client configuration and server credentials are never part of a delivery.
+/app/google-services.json
+*-firebase-adminsdk-*.json
+*service-account*.json

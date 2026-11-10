@@ -1,5 +1,8 @@
 package com.pactogg.app.feature.connected.presentation
 
+import com.pactogg.app.feature.account.presentation.LocalExtras
+import com.pactogg.app.feature.account.presentation.ExtrasPage
+
 import androidx.compose.ui.res.stringResource
 import com.pactogg.app.R
 import androidx.compose.material3.Text
@@ -13,6 +16,11 @@ internal fun CommunityHomeActions(state: ConnectedState, model: ConnectedViewMod
         model.navigate(ConnectedRoute.JURY) }
     Action(stringResource(R.string.community_notificaciones), enabled = !state.busy) { model.navigate(
         ConnectedRoute.NOTIFICATIONS) }
+    val extras = LocalExtras.current
+    if (state.group?.role in listOf("admin", "owner")) Action("Historial del grupo", enabled = !state.busy) {
+        extras?.open(ExtrasPage.AUDIT, state.group?.id.orEmpty())
+        extras?.submit()
+    }
     if (state.group != null) {
         Action(stringResource(R.string.community_mis_puntos), enabled = !state.busy) { model.navigate(
             ConnectedRoute.POINTS) }

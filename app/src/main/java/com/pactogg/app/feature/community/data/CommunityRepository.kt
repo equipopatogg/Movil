@@ -20,7 +20,9 @@ class CommunityRepository @Inject constructor(private val api: PactoApi, private
     suspend fun vote(id: String, vote: String, comment: String?): CastVoteResponse {
         validId(id)
         require(vote in setOf("legit", "cheat") && (comment == null || comment.length <= 140))
-        return sessions.authorized { api.castVote(it, id, CastVoteRequest(vote, comment)) }.checked(200).data.also {
+        val operationKey = java.util.UUID.randomUUID().toString()
+        return sessions.authorized { api.castVote(it, id, CastVoteRequest(vote, comment), operationKey) }
+            .checked(200).data.also {
             same(id, it.contractId)
             if (it.vote != vote) throw ApiFailure(0, "INVALID_RESPONSE")
         }
@@ -28,7 +30,9 @@ class CommunityRepository @Inject constructor(private val api: PactoApi, private
     suspend fun resolve(id: String, outcome: String): ContractResultResponse {
         validId(id)
         require(outcome in setOf("fulfilled", "cheating"))
-        return sessions.authorized { api.resolveVotes(it, id, ResolveVotingRequest(outcome)) }.checked(200).data.also {
+        val operationKey = java.util.UUID.randomUUID().toString()
+        return sessions.authorized { api.resolveVotes(it, id, ResolveVotingRequest(outcome), operationKey) }
+            .checked(200).data.also {
             same(id, it.contractId)
             if (it.outcome != outcome) throw ApiFailure(0, "INVALID_RESPONSE")
         }

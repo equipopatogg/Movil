@@ -1,4 +1,4 @@
-﻿param([switch]$Instrumented, [string]$Device, [string]$Python = 'python', [switch]$UseWindowsTrust)
+﻿param([switch]$Instrumented, [string]$Device, [string]$Python = 'python', [switch]$UseWindowsTrust, [switch]$Rebuild)
 $ErrorActionPreference = 'Stop'
 if ($Instrumented -and [string]::IsNullOrWhiteSpace($Device)) {
     throw 'Indica -Device con el serial de un emulador fresco y aislado. No se elige ni borra un teléfono automáticamente.'
@@ -34,8 +34,13 @@ try {
         $tlsOptions = @('-Djavax.net.ssl.trustStoreType=Windows-ROOT', '-Djavax.net.ssl.trustStore=NONE')
         Write-Host 'Gradle usara los certificados de confianza de Windows para esta ejecucion.'
     }
+    $rebuildOptions = @()
+    if ($Rebuild) {
+        $rebuildOptions = @('--rerun-tasks', '--no-build-cache')
+        Write-Host 'Reconstruccion completa: se ejecutaran las tareas sin reutilizar la cache de build.'
+    }
     Write-Host "JAVA_HOME: $env:JAVA_HOME"
-    & .\gradlew.bat :app:assembleDebug :app:assembleDebugAndroidTest :app:createDebugUnitTestCoverageReport :app:lintDebug :app:detekt --no-configuration-cache --max-workers=1 --console=plain @tlsOptions
+    & .\gradlew.bat :app:assembleDebug :app:assembleDebugAndroidTest :app:createDebugUnitTestCoverageReport :app:lintDebug :app:detekt --no-configuration-cache --max-workers=1 --console=plain @tlsOptions @rebuildOptions
     if ($LASTEXITCODE -ne 0) { throw 'Falló la verificación Android.' }
     foreach ($stage in @('matrix', 'all', 'coverage', 'build')) {
         & $Python .github/scripts/android-ci-checks.py $stage

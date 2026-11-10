@@ -153,9 +153,10 @@ class ConnectedViewModel @Inject constructor(
     fun logout() {
         if (mutable.value.busy) return
         perform {
-            val failed = runCatching { sessions.logout() }.exceptionOrNull()
+            val result = runCatching { sessions.logout() }
+            val failed = result.exceptionOrNull()
             if (failed is CancellationException) throw failed
-            if (failed != null) mutable.update { it.copy(
+            if (failed != null || result.getOrNull() == false) mutable.update { it.copy(
                 notice = "Cerraste sesión en este dispositivo. No pudimos confirmar el cierre remoto.") }
 
         }

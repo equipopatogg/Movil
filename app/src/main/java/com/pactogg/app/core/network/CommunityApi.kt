@@ -36,7 +36,8 @@ interface VotingApi {
     suspend fun castVote(
         @Header("Authorization") bearer: String,
         @Path("id") id: String,
-        @Body body: CastVoteRequest
+        @Body body: CastVoteRequest,
+        @Header("Idempotency-Key") operationKey: String
     ): Response<Envelope<CastVoteResponse>>
 
     @GET("api/v1/contracts/{id}/votes/summary")
@@ -49,7 +50,8 @@ interface VotingApi {
     suspend fun resolveVotes(
         @Header("Authorization") bearer: String,
         @Path("id") id: String,
-        @Body body: ResolveVotingRequest
+        @Body body: ResolveVotingRequest,
+        @Header("Idempotency-Key") operationKey: String
     ): Response<Envelope<ContractResultResponse>>
 
     @GET("api/v1/contracts/{id}/result")

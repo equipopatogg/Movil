@@ -27,6 +27,8 @@ class AcceptChallengeApiTest {
             assertEquals("POST", request.method)
             assertEquals("/api/v1/contracts/$ContractId/accept", request.path?.substringBefore('?'))
             assertEquals("Bearer $Access", request.getHeader("Authorization"))
+            val key = requireNotNull(request.getHeader("Idempotency-Key"))
+            assertEquals(key, java.util.UUID.fromString(key).toString())
             val data = request.body.readUtf8().takeIf { it.isNotEmpty() }?.let { Json.parseToJsonElement(it).jsonObject }
             assertEquals(7, data?.get("version")?.jsonPrimitive?.int)
             assertEquals(1, fixture.server.requestCount)

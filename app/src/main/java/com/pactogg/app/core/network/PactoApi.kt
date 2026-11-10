@@ -24,7 +24,8 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface PactoApi : GroupAliasesApi, CommunityApi, ProfileApi, GroupReadApi, ContractActionsApi, EvidenceReadApi {
+interface PactoApi : AccountApi, MaintenanceApi, GroupAliasesApi,
+    CommunityApi, ProfileApi, GroupReadApi, ContractActionsApi, EvidenceReadApi {
     @POST("api/v1/auth/register")
     suspend fun register(@Body body: RegisterRequest): Response<Envelope<SessionDto>>
 

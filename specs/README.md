@@ -1,3 +1,7 @@
+# Push Android - 2026-11-08
+
+[PG-09 - transporte push Android](PG-09-push/spec.md): implementacion local parcial; Android/proveedor y destino detallado pendientes. Regresiones DEV adicionales al recuento de 33 operaciones MO.
+
 # Actualización 2026-11-06
 
 Las 14 operaciones de la ampliación tienen consumidor y pantalla en el candidato local. Se incorporaron los alias a CON-01/TOR-02. Las tareas de ejecución y aceptación siguen abiertas: Gradle no pudo conectar a su proceso local durante esta revisión. [Detalle y límites](../docs/pruebas/ampliacion-local-2026-11-06.md). Los estados anteriores se conservan debajo como historial.

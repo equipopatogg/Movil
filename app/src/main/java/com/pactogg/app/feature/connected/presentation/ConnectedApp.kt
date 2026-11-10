@@ -1,5 +1,8 @@
 package com.pactogg.app.feature.connected.presentation
 
+import com.pactogg.app.feature.account.presentation.LocalExtras
+import com.pactogg.app.feature.account.presentation.ExtrasPage
+
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,9 +50,12 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
         return
     }
     if (state.account == null) {
+        val extras = LocalExtras.current
         AccessScreen(state.access.copy(loading = state.busy), model::access,
-            fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code) {
+            fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code,
+            onRecover = { extras?.open(ExtrasPage.FORGOT) }) {
             if (state.access.registering) state.social.nicknameNotice?.let { Text(it) }
+            com.pactogg.app.feature.account.presentation.GoogleAccessButton(state.busy)
         }
         return
     }

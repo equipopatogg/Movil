@@ -69,11 +69,11 @@ private fun CommunityResult(state: ConnectedState) {
             Text("Legítimo: ${result.legitVotes} · Trampa: ${result.cheatVotes}")
             Text("Fianza: ${result.bondRequired} puntos virtuales")
             Text(when (result.bondMovement) {
-                "bond_release" -> "La fianza fue devuelta."
+                "bond_release", "bond_release_and_reward" -> "La fianza fue devuelta."
                 "bond_forfeit" -> "La fianza fue transferida al retador."
                 else -> "Sin movimiento de fianza."
             })
-            result.votes.forEach { Text("${it.nickname}: ${if (it.vote == "legit") "Legítimo" else "Trampa"}") }
+            result.votes.forEach { Text("Voto anónimo: ${if (it.vote == "legit") "Legítimo" else "Trampa"}") }
         }
     }
 }

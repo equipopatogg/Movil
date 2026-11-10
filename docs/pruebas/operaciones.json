@@ -861,7 +861,8 @@
       "com.pactogg.app.feature.community.NOT_02ValidationTest",
       "com.pactogg.app.feature.community.NOT_03ValidationTest",
       "com.pactogg.app.feature.community.ACH_01ValidationTest",
-      "com.pactogg.app.feature.connected.presentation.CommunityPolicyTest"
+      "com.pactogg.app.feature.connected.presentation.CommunityPolicyTest",
+      "com.pactogg.app.feature.account.AccountLinksTest"
     ],
     "integration": [
       "com.pactogg.app.integration.ApiIntegrationTest",
@@ -899,7 +900,10 @@
       "com.pactogg.app.feature.community.NOT_02ApiTest",
       "com.pactogg.app.feature.community.NOT_03ApiTest",
       "com.pactogg.app.feature.community.ACH_01ApiTest",
-      "com.pactogg.app.feature.community.GroupAliasesTest"
+      "com.pactogg.app.feature.community.GroupAliasesTest",
+      "com.pactogg.app.feature.account.AccountAccessApiTest",
+      "com.pactogg.app.feature.account.MaintenanceApiTest",
+      "com.pactogg.app.core.push.PushLogoutApiTest"
     ],
     "security": [
       "com.pactogg.app.core.network.ApiClientFactoryTest",
@@ -937,7 +941,10 @@
       "com.pactogg.app.feature.community.NOT_02SecurityTest",
       "com.pactogg.app.feature.community.NOT_03SecurityTest",
       "com.pactogg.app.feature.community.ACH_01SecurityTest",
-      "com.pactogg.app.feature.community.CommunitySecurityTest"
+      "com.pactogg.app.feature.community.CommunitySecurityTest",
+      "com.pactogg.app.feature.account.AccountSecurityTest",
+      "com.pactogg.app.core.push.PushRegistrationTest",
+      "com.pactogg.app.core.push.PushSessionTest"
     ]
   },
   "required_regressions": {
@@ -1189,6 +1196,14 @@
       {
         "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
         "name": "EVI_03_returnFromEvidenceRestoresVotingScreen"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountLinksTest",
+        "name": "supportedLinkParsesButForeignHostsAndAmbiguousQueriesDoNot"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountLinksTest",
+        "name": "anonymousVoteDoesNotRequireIdentityAndLegacyIdentityNeverReachesDomain"
       }
     ],
     "security": [
@@ -1475,6 +1490,90 @@
       {
         "class": "com.pactogg.app.feature.community.CommunitySecurityTest",
         "name": "NOT_03_anonymousNeverSendsRequest"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountSecurityTest",
+        "name": "anonymousResendDoesNotReachTransport"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountSecurityTest",
+        "name": "invalidRecoveryAndEmptyDeviceTokenNeverReachTransport"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountSecurityTest",
+        "name": "rejectedResetPreservesSessionAndDoesNotRetry"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountSecurityTest",
+        "name": "passwordResponseCannotSwitchToAnotherAccount"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_01_requiresSessionPermissionAndValidToken"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_01_deduplicatesAndRemovesOldTokenBeforeRotation"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_01_registersAgainWhenAccountChanges"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_02_detachBlocksLateRefreshUntilNextSession"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_02_failedRemovalDoesNotPermitLateRegistration"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_01_failedRegistrationCanBeRetriedOnExplicitEvent"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_02_waitsForInflightRegistrationBeforeRemoval"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_01_unknownPushTypesCannotTriggerNotification"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_02_unknownTokenCannotClaimConfirmedRemoteRemoval"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushSessionTest",
+        "name": "DEV_02_deviceHookRunsBeforeSessionClearingAndRemoteLogout"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushSessionTest",
+        "name": "DEV_02_deviceHookFailureCannotPreventLocalLogout"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushSessionTest",
+        "name": "DEV_02_withoutFirebaseExistingLogoutRemainsAvailable"
+      },
+      {
+        "class": "com.pactogg.app.core.network.ApiErrorMapperTest",
+        "name": "CON_01_smallGroupConflictExplainsMinimumWithoutExposingServerText"
+      },
+      {
+        "class": "com.pactogg.app.core.network.ApiErrorMapperTest",
+        "name": "CON_01_unknownConflictDoesNotClaimGroupIsTooSmall"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_01_statusNeverClaimsRegistrationWhileRequestIsPending"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_01_statusShowsServerFailureAndRequiresConfirmedRetry"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushRegistrationTest",
+        "name": "DEV_01_changedAccountCannotReceiveStaleRegistrationConfirmation"
       }
     ],
     "integration": [
@@ -1733,6 +1832,42 @@
       {
         "class": "com.pactogg.app.feature.community.GroupAliasesTest",
         "name": "TOR_02_invalidGroupCannotSendAnAliasRequest"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountAccessApiTest",
+        "name": "forgotUsesPublic202WithoutCreatingSessionOrAssumingDelivery"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountAccessApiTest",
+        "name": "verifyConsumesExplicitConfirmationWithoutSession"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountAccessApiTest",
+        "name": "successfulResetClosesObservedSession"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountAccessApiTest",
+        "name": "passwordChangeSavesReturnedRotatedSession"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.AccountAccessApiTest",
+        "name": "googleHandlesCreatedSessionWithoutSendingBearer"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.MaintenanceApiTest",
+        "name": "cancelUsesObservedVersionAndRequiresNoContent"
+      },
+      {
+        "class": "com.pactogg.app.feature.account.MaintenanceApiTest",
+        "name": "deviceRemovalTargetsOnlyTheCurrentToken"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushLogoutApiTest",
+        "name": "DEV_02_removesSpecificTokenBeforeRevokingSession"
+      },
+      {
+        "class": "com.pactogg.app.core.push.PushLogoutApiTest",
+        "name": "DEV_02_unconfirmedRemovalStillClosesSessionAndReportsFalse"
       }
     ]
   }

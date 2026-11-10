@@ -1,3 +1,15 @@
+# Entrega movil autorizada en rama - 2026-11-09
+
+Usuario autoriza hacer push del trabajo movil aunque Firebase/push y Google sigan pendientes de configuracion y prueba en backend. Se permite commit y push a una rama nueva de equipopatogg/Movil; sin fusionar main ni modificar backend. Esta instruccion sustituye la prohibicion local de Git para esta entrega. Excluir JSON de cuenta de servicio, configuracion Firebase local, secretos, APK, caches y referencias privadas. No declarar entrega remota mientras no se confirme el commit en GitHub; no confundir suites locales con recepcion push o login Google reales.
+
+# Continuacion push Android, solo local - 2026-11-08
+
+Usuario autoriza continuar push con el contrato local v0.8: FCM Android, permiso/canal, registro/rotacion/baja, pruebas y evidencia local en PG-09. Supera el aplazamiento historico de FCM solo para este alcance. Sin backend, commits/push ni GitHub. Google sigue pendiente de habilitacion del servidor. Nunca incluir cuentas de servicio Firebase ni secretos en el APK. Ver docs/integracion/push-android-2026-11-08.md; no declarar entrega real ni Android verificado por JVM directas.
+
+# Ampliacion a 54 rutas, solo local - 2026-11-06
+
+Usuario autoriza continuar SDD, integracion, pruebas y buenas practicas con las 54 rutas compartidas. Sin push ni cambios backend. Esta instruccion prevalece sobre autorizaciones anteriores de entrega. La copia local de API-movil.md sigue en v0.6.0; no inventar cuerpos/respuestas de rutas nuevas. Mantener TLS, permisos, pruebas y evidencia real. Correo y push tienen dependencias del proveedor pendientes segun el usuario. Nunca incluir el JSON de cuenta de servicio Firebase ni contrasena SMTP dentro del APK.
+
 # Entrega en rama autorizada - 2026-11-06
 
 El usuario autoriza commit y push de la ampliación móvil a equipopatogg/Movil en una rama nueva. Esta autorización sustituye la prohibición previa de subir cambios para este encargo. No modificar backend ni fusionar main. Excluir credenciales, artefactos generados y referencias privadas.

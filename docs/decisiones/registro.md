@@ -296,3 +296,8 @@ Sondeo autorizado con cuenta QA existente y sin escrituras de negocio: nueve com
 ## D-SDD-40 — ampliación móvil autorizada, 2026-11-05
 
 Usuario solicita integrar las 14 operaciones restantes del backend, con specs y pruebas correspondientes, sin modificar backend. Fuente fijada 451c8ae. Se crean 14 expedientes MO; alias se tratarán dentro de CON-01/TOR-02. La autorización amplía el alcance anterior de 19 operaciones. Implementación, pruebas y aceptación aún pendientes.
+
+
+## D-PUSH-20261108 - continuar FCM Android local
+
+Solicitud expresa del usuario: continuar push sin backend ni GitHub; Google pendiente del servidor. Se autoriza el transporte FCM Android con contrato local v0.8, registro/rotacion/baja, canal/permiso, pruebas y evidencia en specs/PG-09-push. Supera el aplazamiento historico FCM solo para este alcance. Sin cuentas de servicio en APK. Apertura inicial al centro de avisos; destino detallado y aceptacion Android/proveedor siguen abiertos. No equivale a validar 54 rutas ni habilitar Google. Ver ../integracion/push-android-2026-11-08.md.
