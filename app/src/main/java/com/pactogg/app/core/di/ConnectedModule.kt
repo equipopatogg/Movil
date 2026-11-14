@@ -28,6 +28,20 @@ object ConnectedModule {
 
     @Provides
     @Singleton
+    fun playApi(factory: ApiClientFactory): com.pactogg.app.feature.play.data.PlayApi {
+        val client = ApiClientFactory.defaultClient().newBuilder().retryOnConnectionFailure(false).build()
+        return factory.create(BuildConfig.API_BASE_URL, client)
+            .create(com.pactogg.app.feature.play.data.PlayApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun play(api: com.pactogg.app.feature.play.data.PlayApi, sessions: SessionManager):
+        com.pactogg.app.feature.play.domain.PlayRepository =
+        com.pactogg.app.feature.play.data.ApiPlayRepository(api, sessions)
+
+    @Provides
+    @Singleton
     fun store(@ApplicationContext context: Context): SessionStore = EncryptedSessionStore(context)
 
     @Provides

@@ -1,3 +1,11 @@
+# Rediseño según la maqueta y funciones pendientes — 2026-11-14
+
+- Estado: el PO (David) autoriza rehacer la apariencia de las pantallas conectadas según la maqueta de Figma Make (exportada a `G:\PactoGGMovil\MaquetaFigmaMake`, commit `02db210`) y terminar las funciones que faltan antes del martes 2026-11-18. El acceso (login/registro) ya está aprobado y no se toca.
+- Hecho en local: inventario maqueta/app/backend (`docs/integracion/inventario-maqueta-2026-11-14.md`); spec UX-02 y kit visual `core/designsystem/MakeKit.kt`; Inicio, Grupos, Miembros, Tablero, Crear, Contrato, Evidencia, Torneos y Perfil rehechos solo en apariencia (mismas acciones del ViewModel, mismos textos que usan las pruebas de UI). Specs nuevas MO-VOT, MO-NOT, MO-RANK, MO-TOR-JUGAR y MO-CON-08 con su capa de datos (`feature/play`), sin pantallas todavía.
+- Corrección: `POST /contracts/{id}/accept` ahora manda `Idempotency-Key` (el backend 0.12 la exige; sin ella responde 400).
+- Verificación SDD de lo anterior: las 19 operaciones tienen spec/plan/tasks/checklist y trazabilidad; falta su aceptación en dispositivo.
+- Pendiente: compilar en Android Studio (aquí no hay SDK), pruebas, Detekt y Lint; revisión visual del PO.
+
 # Estado actual — imágenes y navegación, 2026-11-05
 
 - Estado: integración local implementada y verificada; 256 JVM y 22 Android correctos, sin fallos/omisiones. Lint/Detekt, 27 validadores, secretos y generación SBOM correctos; cobertura JVM 907/3105 líneas (29,21 %). No hay CI remoto de este candidato.
