@@ -5,6 +5,8 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import com.pactogg.app.core.designsystem.LocalPageBack
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -29,19 +31,20 @@ fun ConnectedEvidence(state: ConnectedState, model: ConnectedViewModel) {
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) model.preparePhoto { PhotoPreparer(context).prepare(uri) }
     }
-    EvidenceContent(state,
+    CompositionLocalProvider(LocalPageBack provides { model.back() }) {
+        EvidenceContent(state,
         onPick = { picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) },
         onUpload = model::uploadSelectedPhoto, onLink = model::sendLink, onEdit = model::link,
-        onRefresh = model::loadEvidence, onDiscard = model::discardPhoto, onBack = { model.back() })
+        onRefresh = model::loadEvidence, onDiscard = model::discardPhoto)
+    }
 }
 
 /** Evidencias con el estilo de la maqueta (`Subir evidencia`): foto o enlace y lo ya recibido. */
 @Composable
 internal fun EvidenceContent(state: ConnectedState, onPick: () -> Unit, onUpload: () -> Unit,
-    onLink: () -> Unit, onEdit: (String) -> Unit, onRefresh: () -> Unit, onDiscard: () -> Unit,
-    onBack: (() -> Unit)? = null) {
+    onLink: () -> Unit, onEdit: (String) -> Unit, onRefresh: () -> Unit, onDiscard: () -> Unit) {
     var confirmLink by rememberSaveable(state.contract?.id) { mutableStateOf(false) }
-    MakePage("Subir evidencia", "Lo que ocurrió, respaldado por pruebas", onBack = onBack) {
+    MakePage("Subir evidencia", "Lo que ocurrió, respaldado por pruebas") {
         if (state.contract == null) {
             EmptyState("No hay reto abierto.", "Abre un reto para consultar o enviar sus evidencias.")
         } else {

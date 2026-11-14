@@ -29,6 +29,7 @@ import com.pactogg.app.core.designsystem.Tone
 import com.pactogg.app.core.designsystem.localDate
 import com.pactogg.app.core.designsystem.statusLabel
 import com.pactogg.app.core.designsystem.statusTone
+import com.pactogg.app.feature.play.presentation.openVote
 import com.pactogg.app.prototype.Choices
 import com.pactogg.app.ui.theme.PactoCyan
 import com.pactogg.app.ui.theme.PactoViolet
@@ -136,6 +137,11 @@ fun ConnectedContract(state: ConnectedState, model: ConnectedViewModel) {
             ConnectedContractMetadata(contract)
         }
         ConnectedContractActions(state, model, contract)
+        if (contract.status in setOf("voting", "fulfilled", "cheating")) {
+            MakeButton("Votación y resultado", ButtonKind.Secondary, enabled = !state.busy) {
+                model.openVote(contract)
+            }
+        }
         MakeButton("Ver evidencias", enabled = !state.busy) { model.navigate(ConnectedRoute.EVIDENCE) }
         MakeButton("Actualizar reto", ButtonKind.Ghost, enabled = !state.busy) { model.openChallenge(contract) }
         SafetyNote("Los puntos son virtuales. Con la primera evidencia el reto pasa a votación del jurado.")

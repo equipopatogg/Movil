@@ -1,6 +1,6 @@
-# MO-TOR-JUGAR — Crear, inscribirse y jugar torneos
+# PL-04 — Crear, inscribirse y jugar torneos
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA EN LOCAL**. Amplía MO-TOR-02 (consulta). Backend: TOR-01, TOR-03, TOR-06, TOR-07, TOR-08, MAT-01..07 (API 0.12.x). Maqueta: `torneos`, `torneo/nuevo`, `torneo/bracket`, `torneo/reportar`, `torneo/confirmar`.
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLAS ESCRITAS, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Amplía MO-TOR-02 (consulta). Backend: TOR-01, TOR-03, TOR-06, TOR-07, TOR-08, MAT-01..07 (API 0.12.x). Maqueta: `torneos`, `torneo/nuevo`, `torneo/bracket`, `torneo/reportar`, `torneo/confirmar`.
 
 ## Requisitos
 - RF1: **Nuevo torneo** (admin del grupo seleccionado): juego, formato (por defecto eliminación directa), máx. grupos (2–16), inscripción en puntos y fecha → `POST /groups/{gid}/tournaments`. Muestra el código para compartir.
@@ -10,13 +10,13 @@ Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA EN LOCAL**. Ampl�
   - Reportar (miembro de uno de los dos grupos): marcador sin empate + foto de galería (JPEG/PNG/WebP, ≤5 MB, misma preparación que evidencias) → `POST /matches/{id}/report` multipart.
   - Grupo rival: "Confirmar" (`/confirm`) o "Disputar" con motivo 5–140 (`/dispute`).
   - Organizador: "Resolver" eligiendo ganador (`/resolve`) cuando la partida está en disputa, lleva 24 h reportada o es abandono.
-- RF5: Inicio muestra "Tu siguiente partida" con `GET /me/matches/next` (204 = no hay).
+- RF5: Inicio muestra "Tu siguiente partida" con `GET /me/matches/next` (`data: null` = no hay).
 - RF6: Errores por código: `TIE_NOT_ALLOWED`, `NOT_MATCH_PLAYER`, `CANNOT_CONFIRM_OWN_REPORT`, `ORGANIZER_PLAYS_MATCH`, `REPORT_TOO_RECENT`, `INVALID_MATCH_STATE`, `TOURNAMENT_NOT_IN_PROGRESS`, `INSUFFICIENT_POINTS`.
 
 ## Criterios
 | ID | Resultado |
 |---|---|
-| MO-TORJ-AC1 | Crear torneo muestra su código y aparece en la lista. |
-| MO-TORJ-AC2 | Otro grupo se inscribe con el código y el organizador lo inicia; aparece el bracket. |
-| MO-TORJ-AC3 | Reportar con foto, confirmar por el rival y ver al ganador avanzar. |
-| MO-TORJ-AC4 | Disputar y que el organizador resuelva; al terminar la final el torneo queda `finished`. |
+| PL-04-AC1 | Crear torneo muestra su código y aparece en la lista. |
+| PL-04-AC2 | Otro grupo se inscribe con el código y el organizador lo inicia; aparece el bracket. |
+| PL-04-AC3 | Reportar con foto, confirmar por el rival y ver al ganador avanzar. |
+| PL-04-AC4 | Disputar y que el organizador resuelva; al terminar la final el torneo queda `finished`. |

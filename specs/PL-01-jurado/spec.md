@@ -1,4 +1,4 @@
-# MO-VOT — Jurado: votar retos de otros
+# PL-01 — Jurado: votar retos de otros
 
 Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA EN LOCAL / aceptación en dispositivo pendiente**. Backend: VOT-01..05 (API 0.12.x, `docs/API-movil.md` §VOT). Maqueta: pantalla `jurado` y filtro "Jurado" del inicio (`MaquetaFigmaMake/src/App.tsx`, función `Jury`).
 
@@ -19,8 +19,8 @@ Mismas reglas del repo: HTTPS, sin registrar tokens ni cuerpos, mensajes por `co
 ## 4. Criterios de aceptación
 | ID | Resultado observable |
 |---|---|
-| MO-VOT-AC1 | El inicio muestra cuántos retos esperan mi voto y abre la lista. |
-| MO-VOT-AC2 | Votar envía `Idempotency-Key` y, al volver, el reto ya no aparece como pendiente. |
-| MO-VOT-AC3 | Un segundo voto o fuera de plazo muestra el mensaje del código 409 sin cerrar la pantalla. |
-| MO-VOT-AC4 | Un reto cerrado muestra resultado, conteo y movimiento de fianza. |
-| MO-VOT-AC5 | Un admin neutral puede decidir cuando el servidor lo permite; los demás no ven el botón. |
+| PL-01-AC1 | El inicio muestra cuántos retos esperan mi voto y abre la lista. |
+| PL-01-AC2 | Votar envía `Idempotency-Key` y, al volver, el reto ya no aparece como pendiente. |
+| PL-01-AC3 | Un segundo voto o fuera de plazo muestra el mensaje del código 409 sin cerrar la pantalla. |
+| PL-01-AC4 | Un reto cerrado muestra resultado, conteo y movimiento de fianza. |
+| PL-01-AC5 | Un admin neutral puede decidir cuando el servidor lo permite; los demás no ven el botón. |

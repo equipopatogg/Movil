@@ -33,7 +33,8 @@ class NicknameQueriesTest {
             override fun clear() = Unit
         }
         val sessions = SessionManager(api, store)
-        model = ConnectedViewModel(sessions, ApiProductRepository(api, sessions), social)
+        model = ConnectedViewModel(sessions, ApiProductRepository(api, sessions), social,
+            com.pactogg.app.feature.play.UnusedPlayRepository)
     }
     @After fun cleanup() { Dispatchers.resetMain() }
     @Test fun typingWaitsAndInvalidNameNeverQueries() = runTest(dispatcher) {

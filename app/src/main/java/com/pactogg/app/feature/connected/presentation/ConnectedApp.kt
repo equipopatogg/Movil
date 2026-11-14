@@ -68,6 +68,7 @@ private fun ConnectedContent(state: ConnectedState, model: ConnectedViewModel) {
         ConnectedRoute.EVIDENCE -> ConnectedEvidence(state, model)
         ConnectedRoute.TOURNAMENTS -> ConnectedTournaments(state, model)
         ConnectedRoute.PROFILE -> ConnectedProfile(state, model)
+        else -> com.pactogg.app.feature.play.presentation.PlayContent(state, model)
     }
 }
 

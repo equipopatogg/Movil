@@ -33,6 +33,8 @@ import com.pactogg.app.core.designsystem.MakeButton
 import com.pactogg.app.core.designsystem.MakeCard
 import com.pactogg.app.core.designsystem.PageLayout
 import com.pactogg.app.core.designsystem.SectionTitle
+import com.pactogg.app.core.designsystem.statusLabel
+import com.pactogg.app.feature.play.presentation.openMatch
 import com.pactogg.app.ui.theme.PactoBackground
 import com.pactogg.app.ui.theme.PactoCyan
 import com.pactogg.app.ui.theme.PactoOrange
@@ -53,6 +55,19 @@ internal fun AppHeader(state: ConnectedState, model: ConnectedViewModel) {
             Column {
                 Text("PACTOGG", style = MaterialTheme.typography.titleMedium)
                 Kicker("Tu palabra está en juego")
+            }
+        }
+        Box(Modifier.padding(end = 10.dp).size(38.dp).clickable(enabled = !state.busy, role = Role.Button) {
+            model.navigate(ConnectedRoute.NOTIFICATIONS)
+        }, contentAlignment = Alignment.Center) {
+            Icon(painterResource(R.drawable.ic_pacto_bell), "Notificaciones", tint = PactoCyan,
+                modifier = Modifier.size(22.dp))
+            val unread = state.play.unread
+            if (unread > 0) Box(Modifier.align(Alignment.TopEnd).size(17.dp).background(PactoOrange,
+                RoundedCornerShape(9.dp)),
+                contentAlignment = Alignment.Center) {
+                Text(if (unread > 9) "9+" else "$unread", color = PactoBackground,
+                    style = MaterialTheme.typography.labelSmall)
             }
         }
         Box(Modifier.clickable(enabled = !state.busy, role = Role.Button) { model.navigate(ConnectedRoute.PROFILE) }) {
@@ -84,9 +99,24 @@ internal fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
             LinkCard("Tablero de retos", "Los pactos de ${state.group.name}", R.drawable.ic_pacto_bolt) {
                 go(ConnectedRoute.BOARD)
             }
+            LinkCard("Palabra y ranking", "Rey del grupo, compromisos y muro de fama", R.drawable.ic_pacto_trophy) {
+                go(ConnectedRoute.STANDINGS)
+            }
         } else {
             MakeButton("Elegir grupo", enabled = !state.busy) { go(ConnectedRoute.GROUPS) }
         }
+        state.play.nextMatch?.let { next ->
+            MakeCard(accent = PactoCyan, onClick = { if (!state.busy) model.openMatch(next.match.id) }) {
+                Kicker("Tu siguiente partida", PactoCyan)
+                Text(next.game.ifBlank { "Torneo" }, style = MaterialTheme.typography.titleMedium)
+                Text("Ronda ${next.match.round} · ${statusLabel(next.match.status)}",
+                    style = MaterialTheme.typography.bodySmall)
+                Text("Ver partida", color = PactoCyan, style = MaterialTheme.typography.labelLarge)
+            }
+        }
+        val pending = state.play.pendingVotes.size
+        LinkCard("Jurado", if (pending > 0) "Te toca revisar $pending reto(s)" else "Retos de otros para revisar",
+            R.drawable.ic_pacto_vote, badge = pending.takeIf { it > 0 }?.toString()) { go(ConnectedRoute.JURY) }
         TournamentLink { go(ConnectedRoute.TOURNAMENTS) }
         HowItWorks(guide) { guide = !guide }
     }

@@ -120,7 +120,9 @@ class SendEvidenceSecurityTest {
     @Test fun EVI_02_cdnRequestStripsAuthorizationAndNeverFollowsRedirect() {
         val certificate = okhttp3.tls.HeldCertificate.Builder().commonName("localhost")
             .addSubjectAlternativeName("localhost").addSubjectAlternativeName("127.0.0.1")
-            .addSubjectAlternativeName("::1").build()
+            .addSubjectAlternativeName("::1")
+            // Windows con Docker Desktop resuelve 127.0.0.1 como kubernetes.docker.internal.
+            .addSubjectAlternativeName(java.net.InetAddress.getByName("localhost").canonicalHostName).build()
         val trust = okhttp3.tls.HandshakeCertificates.Builder().addTrustedCertificate(certificate.certificate).build()
         okhttp3.mockwebserver.MockWebServer().use { server ->
             server.useHttps(okhttp3.tls.HandshakeCertificates.Builder().heldCertificate(certificate).build().sslSocketFactory(), false)

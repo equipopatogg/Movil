@@ -54,3 +54,16 @@ Antecedente del ajuste acotado: MO-EVI-02 añadió lectura auxiliar de detalle t
 
 
 USR-03: edición de apodo verificada; selección de avatar pendiente de catálogo. Las casillas integrales permanecen abiertas según evidencia por criterio, aunque T2/T3 de las otras operaciones acreditan implementación local.
+
+## Rediseño y funciones nuevas (2026-11-14)
+
+Las specs `PL-*` cubren pantallas nuevas de la maqueta que usan la API 0.12. Llevan el prefijo `PL-` y no `MO-` porque la matriz de CI (`.github/scripts/android-ci-checks.py matrix`) exige exactamente las 19 operaciones `MO-*` confirmadas con sus tres pruebas cada una; ampliar esa matriz requiere cambiar el workflow y queda como decisión aparte.
+
+| Expediente | Estado |
+|---|---|
+| [UX-02 — Rediseño según la maqueta](UX-02-rediseno-maqueta/spec.md) | Pantallas rediseñadas; falta revisión visual del PO |
+| [PL-01 — Jurado y votación](PL-01-jurado/spec.md) | Pantallas escritas y compiladas; falta prueba en teléfono |
+| [PL-02 — Avisos dentro de la app](PL-02-avisos/spec.md) | Pantallas escritas y compiladas; falta prueba en teléfono |
+| [PL-03 — Palabra y ranking](PL-03-palabra/spec.md) | Pantallas escritas y compiladas; falta prueba en teléfono |
+| [PL-04 — Crear, inscribirse y jugar torneos](PL-04-torneos-jugar/spec.md) | Pantallas escritas; falta compilar y probar en teléfono |
+| [PL-05 — Reto por voz](PL-05-voz/spec.md) | Datos listos; pantalla pendiente |

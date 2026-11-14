@@ -30,7 +30,8 @@ data class ContractRequest(@SerialName("group_id") val groupId: String, val game
     val condition: String, val reward: String, val deadline: String,
     @SerialName("bond_required") val bond: Int,
     @SerialName("target_type") val targetType: String = "group", val source: String = "manual",
-    @SerialName("target_id") val targetId: String? = null)
+    @SerialName("target_id") val targetId: String? = null,
+    @SerialName("original_phrase") val originalPhrase: String? = null)
 
 @Serializable
 data class ContractDto(val id: String, @SerialName("group_id") val groupId: String, val game: String,

@@ -28,6 +28,7 @@ import com.pactogg.app.core.designsystem.localDate
 import com.pactogg.app.core.designsystem.statusLabel
 import com.pactogg.app.core.designsystem.statusTone
 import com.pactogg.app.feature.connected.domain.Tournament
+import com.pactogg.app.feature.play.presentation.openTournament
 import com.pactogg.app.ui.theme.PactoCyan
 
 private val TournamentLabels = listOf("Todos", "Abiertos", "En curso", "Finalizados", "Cancelados")
@@ -48,12 +49,15 @@ fun ConnectedTournaments(state: ConnectedState, model: ConnectedViewModel) {
             model.filter(TournamentStatuses[TournamentLabels.indexOf(it)], state.gameFilter)
         }
         MakeField("Filtrar por juego", state.gameFilter, { model.filter(state.status, it) })
+        MakeButton("Crear torneo o unirme con código", ButtonKind.Secondary, enabled = !state.busy) {
+            model.navigate(ConnectedRoute.TOURNAMENT_NEW)
+        }
         MakeButton("Consultar torneos", ButtonKind.Ghost, enabled = !state.busy) { model.loadTournaments() }
         if (state.tournamentsLoaded && state.tournaments.isEmpty()) {
             EmptyState("No hay torneos para estos filtros.", "Cuando tu grupo se inscriba a uno aparecerá aquí.",
                 R.drawable.ic_pacto_trophy)
         }
-        state.tournaments.forEach { tournament -> TournamentCard(tournament) { model.tournament(tournament) } }
+        state.tournaments.forEach { tournament -> TournamentCard(tournament) { model.openTournament(tournament.id) } }
         if (state.hasMore) MakeButton("Cargar más", ButtonKind.Ghost, enabled = !state.busy) {
             model.loadTournaments(more = true)
         }

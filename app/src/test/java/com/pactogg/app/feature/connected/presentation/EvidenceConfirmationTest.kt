@@ -48,7 +48,8 @@ class EvidenceConfirmationTest {
         }
         val sessions = SessionManager(api, store)
         model = ConnectedViewModel(sessions, products,
-            com.pactogg.app.feature.connected.data.ApiSocialRepository(api, sessions))
+            com.pactogg.app.feature.connected.data.ApiSocialRepository(api, sessions),
+            com.pactogg.app.feature.play.UnusedPlayRepository)
     }
 
     @After fun cleanup() { Dispatchers.resetMain() }

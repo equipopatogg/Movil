@@ -32,6 +32,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -72,7 +73,7 @@ enum class ButtonKind { Primary, Secondary, Ghost }
 
 /** Página con encabezado de la maqueta (`page-header`): flecha de regreso, título y subtítulo. */
 @Composable
-fun MakePage(title: String, subtitle: String? = null, onBack: (() -> Unit)? = null,
+fun MakePage(title: String, subtitle: String? = null, onBack: (() -> Unit)? = LocalPageBack.current,
     content: @Composable ColumnScope.() -> Unit) {
     PageLayout {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -274,27 +275,31 @@ fun MakeField(label: String, value: String, onChange: (String) -> Unit, error: S
     }
 }
 
+private val StatusLabels = mapOf(
+    "open" to "Abierto",
+    "in_progress" to "En curso",
+    "voting" to "En votación",
+    "fulfilled" to "Cumplido",
+    "cheating" to "Hizo trampa",
+    "expired" to "Vencido",
+    "cancelled" to "Cancelado",
+    "rejected" to "Rechazado",
+    "pending" to "Pendiente",
+    "reported" to "Reportada",
+    "disputed" to "En disputa",
+    "confirmed" to "Confirmada",
+    "finished" to "Terminado",
+    "completed" to "Cumplido",
+    "pending_confirmation" to "Por confirmar",
+    "admin" to "Administrador",
+    "member" to "Miembro",
+)
+
+/** Acción "volver" para páginas que no la reciben por parámetro (p. ej. evidencias). */
+val LocalPageBack = staticCompositionLocalOf<(() -> Unit)?> { null }
+
 /** Texto en español para los estados que manda el servidor. */
-fun statusLabel(status: String): String = when (status) {
-    "open" -> "Abierto"
-    "in_progress" -> "En curso"
-    "voting" -> "En votación"
-    "fulfilled" -> "Cumplido"
-    "cheating" -> "Hizo trampa"
-    "expired" -> "Vencido"
-    "cancelled" -> "Cancelado"
-    "rejected" -> "Rechazado"
-    "pending" -> "Pendiente"
-    "reported" -> "Reportada"
-    "disputed" -> "En disputa"
-    "confirmed" -> "Confirmada"
-    "finished" -> "Terminado"
-    "completed" -> "Cumplido"
-    "pending_confirmation" -> "Por confirmar"
-    "admin" -> "Administrador"
-    "member" -> "Miembro"
-    else -> status
-}
+fun statusLabel(status: String): String = StatusLabels[status] ?: status
 
 /** Color de etiqueta según el estado. */
 fun statusTone(status: String): Tone = when (status) {

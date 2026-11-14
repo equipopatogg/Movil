@@ -51,7 +51,10 @@ internal fun ConnectedNavigation(route: ConnectedRoute, busy: Boolean, nav: (Con
 
 internal fun navigationSection(route: ConnectedRoute): ConnectedRoute = when (route) {
     ConnectedRoute.MEMBERS -> ConnectedRoute.GROUPS
-    ConnectedRoute.BOARD, ConnectedRoute.CONTRACT, ConnectedRoute.EVIDENCE -> ConnectedRoute.HOME
+    ConnectedRoute.BOARD, ConnectedRoute.CONTRACT, ConnectedRoute.EVIDENCE, ConnectedRoute.JURY, ConnectedRoute.VOTE,
+    ConnectedRoute.NOTIFICATIONS, ConnectedRoute.STANDINGS -> ConnectedRoute.HOME
+    ConnectedRoute.TOURNAMENT_NEW, ConnectedRoute.TOURNAMENT_PLAY, ConnectedRoute.MATCH -> ConnectedRoute.TOURNAMENTS
+    ConnectedRoute.VOICE -> ConnectedRoute.CREATE
     else -> route
 }
 
@@ -60,6 +63,24 @@ internal fun ConnectedViewModel.back() {
         ConnectedRoute.EVIDENCE -> ConnectedRoute.CONTRACT
         ConnectedRoute.CONTRACT -> ConnectedRoute.BOARD
         ConnectedRoute.BOARD, ConnectedRoute.MEMBERS -> ConnectedRoute.GROUPS
+        ConnectedRoute.VOTE -> if (state.value.play.pendingVotes.isEmpty()) ConnectedRoute.CONTRACT
+            else ConnectedRoute.JURY
+        ConnectedRoute.MATCH -> ConnectedRoute.TOURNAMENT_PLAY
+        ConnectedRoute.TOURNAMENT_PLAY, ConnectedRoute.TOURNAMENT_NEW -> ConnectedRoute.TOURNAMENTS
+        ConnectedRoute.VOICE -> ConnectedRoute.CREATE
         else -> ConnectedRoute.HOME
     })
+}
+
+/** Datos que se cargan al entrar a cada pantalla (separado de `navigate` por complejidad). */
+internal fun ConnectedViewModel.loadFor(route: ConnectedRoute) {
+    when (route) {
+        ConnectedRoute.TOURNAMENTS -> if (!state.value.tournamentsLoaded) loadTournaments()
+        ConnectedRoute.PROFILE -> loadProfile()
+        ConnectedRoute.GROUPS -> loadGroups()
+        ConnectedRoute.MEMBERS -> loadMembers()
+        ConnectedRoute.BOARD -> loadBoard()
+        ConnectedRoute.EVIDENCE -> loadEvidence()
+        else -> com.pactogg.app.feature.play.presentation.onPlayRoute(this, route)
+    }
 }

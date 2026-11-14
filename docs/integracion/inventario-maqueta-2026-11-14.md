@@ -15,9 +15,9 @@ Estado: **Conectada** = la pantalla usa la API real · **Maqueta local** = exist
 | 5 | Explorar (`explorar`) | Ideas de reto por categoría/juego, detalle de condiciones, "Usar esta idea" | ninguno (catálogo local) | Maqueta local | nueva MO-EXP (catálogo local) |
 | 6 | Grupos (`grupos`) | Mis grupos / Unirme / Crear grupo | GRP-01/02/03, MEM-01/02 | Conectada | MO-GRP-*, MO-MEM-* ✔ |
 | 7 | Crear reto manual (`crear`, 3 pasos) | Grupo, juego, condición, fecha; rival del grupo, acuerdo, fianza; resumen | CON-01 | Conectada | MO-CON-01 ✔ |
-| 8 | Crear por voz (`voz`) | Dictar, revisar los 4 campos, pasar al manual | CON-08 + CON-01 `source=voice` | Falta | nueva MO-CON-08 |
+| 8 | Crear por voz (`voz`) | Dictar, revisar los 4 campos, pasar al manual | CON-08 + CON-01 `source=voice` | Falta | nueva PL-05 |
 | 9 | Contrato y evidencia (`contrato`, `evidencia`) | Estado del contrato, subir foto o enlace, evidencia recibida | CON-03/06/07, EVI-02/03/04/05 | Conectada (sin reemplazar/borrar evidencia) | MO-CON-03/06/07, MO-EVI-02 ✔; falta MO-EVI-04/05 |
-| 10 | Jurado (`jurado`) | Revisar evidencia de otros, votar Legítimo/Trampa, conteo | VOT-01..05 | Falta | nuevas MO-VOT-01..05 |
+| 10 | Jurado (`jurado`) | Revisar evidencia de otros, votar Legítimo/Trampa, conteo | VOT-01..05 | Falta | nuevas PL-01-01..05 |
 | 11 | Torneos (`torneos`) | Pestañas, torneo destacado, otros torneos | TOR-02 (listar), TOR-03 | Parcial (solo consulta) | MO-TOR-02 ✔; ampliar |
 | 12 | Nuevo torneo (`torneo/nuevo`) | Configurar cuadro amistoso | TOR-01, TOR-06, TOR-08, TOR-09 | Falta | nuevas MO-TOR-01/06/08/09 |
 | 13 | Bracket (`torneo/bracket`) | Cuadro por rondas, reportes de partidas | MAT-01, MAT-02 | Maqueta local | nueva MO-MAT-01/02 |
@@ -25,7 +25,7 @@ Estado: **Conectada** = la pantalla usa la API real · **Maqueta local** = exist
 | 15 | Revisar resultado (`torneo/confirmar`) | Confirmar o disputar | MAT-04, MAT-05 (MAT-06 organizador) | Falta | nuevas MO-MAT-04/05/06 |
 | 16 | Palabra y ranking (`compromisos`) | Pestañas Ranking / Libro / Fama / Integridad, "¿Cómo se calcula?" | ACH-03, COM-01..05, ACH-01, ACH-02, PTS-01/02 | Falta | nuevas MO-ACH-01/02/03, MO-COM-01..05 |
 | 17 | Perfil (`perfil`) | Identidad (apodo, avatar), "Dentro de PactoGG", privacidad, cerrar sesión | USR-02/03, AUTH-04, ACH-04 | Conectada (sin logros) | MO-USR-02/03, MO-AUTH-04 ✔ |
-| 18 | Notificaciones (`notificaciones`) | Lista de avisos | NOT-01..04, DEV-01..03 (push) | Falta | nuevas MO-NOT-01..04, MO-DEV-01..03 |
+| 18 | Notificaciones (`notificaciones`) | Lista de avisos | NOT-01..04, DEV-01..03 (push) | Falta | nuevas PL-02-01..04, MO-DEV-01..03 |
 
 ## Funciones del backend que la maqueta no dibuja
 

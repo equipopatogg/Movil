@@ -64,6 +64,11 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
         LinkCard("Mis grupos", "Tu squad y sus invitaciones", R.drawable.ic_pacto_users) {
             model.navigate(ConnectedRoute.GROUPS)
         }
+        LinkCard("Notificaciones", "Retos, votos y resultados", R.drawable.ic_pacto_bell,
+            badge = state.play.unread.takeIf { it > 0 }?.toString()) { model.navigate(ConnectedRoute.NOTIFICATIONS) }
+        LinkCard("Palabra y ranking", "Ranking, libro de compromisos, fama e integridad", R.drawable.ic_pacto_trophy) {
+            model.navigate(ConnectedRoute.STANDINGS)
+        }
         LinkCard("Privacidad y seguridad", "Cómo se protege tu palabra", R.drawable.ic_pacto_shield) {
             privacy = !privacy
         }

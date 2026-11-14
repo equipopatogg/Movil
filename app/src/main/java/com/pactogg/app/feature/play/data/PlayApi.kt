@@ -18,8 +18,8 @@ import retrofit2.http.Query
 private const val Auth = "Authorization"
 private const val Idem = "Idempotency-Key"
 
-/** Rutas de la API 0.12.x para jurado, avisos, ranking, torneos y voz (specs MO-VOT, MO-NOT, MO-RANK,
- * MO-TOR-JUGAR, MO-CON-08). */
+/** Rutas de la API 0.12.x para jurado, avisos, ranking, torneos y voz (specs PL-01, PL-02, PL-03,
+ * PL-04, PL-05). */
 @Suppress("TooManyFunctions")
 interface PlayApi {
     // Jurado

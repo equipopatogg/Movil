@@ -1,4 +1,4 @@
-# Plan — MO-NOT-avisos
+# Plan — PL-02-avisos
 
 - Datos: `feature/play/data/PlayApi.kt` (Retrofit), `PlayDtos.kt` (snake_case, mapeo explícito), `ApiPlayRepository.kt`; dominio en `feature/play/domain/PlayModels.kt` sin Android ni Retrofit.
 - Estado: `PlayState` dentro de `ConnectedState`; acciones como extensiones de `ConnectedViewModel` en `feature/play/presentation/PlayActions.kt`, reutilizando `perform {}` (un solo indicador de ocupado y manejo de errores común).
