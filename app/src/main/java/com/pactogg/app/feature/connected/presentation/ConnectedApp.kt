@@ -3,33 +3,23 @@ package com.pactogg.app.feature.connected.presentation
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Surface
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.pactogg.app.R
 import com.pactogg.app.feature.auth.presentation.AccessScreen
-import com.pactogg.app.prototype.AppPage
-import com.pactogg.app.prototype.HeroPanel
-import com.pactogg.app.prototype.PactCard
-import com.pactogg.app.prototype.Action
 
 @Composable
 fun ConnectedApp(model: ConnectedViewModel) {
@@ -57,22 +47,10 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
         if (state.selectedTournament != null) model.tournament(null) else model.back()
     }
     Scaffold(topBar = {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            if (state.route != ConnectedRoute.HOME) TextButton(onClick = model::back, enabled = !state.busy) {
-                Text("Volver")
-            }
-            TextButton(onClick = { model.navigate(ConnectedRoute.HOME) }, enabled = !state.busy) {
-                Text("PACTOGG", color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.titleLarge)
-            }
-            Spacer(Modifier.weight(1f))
-            IconButton(onClick = { model.navigate(ConnectedRoute.PROFILE) }, enabled = !state.busy) {
-                Icon(painterResource(R.drawable.ic_pacto_user), "Perfil de ${state.account?.nickname.orEmpty()}")
-            }
-        }
+        AppHeader(state, model)
     }, bottomBar = { ConnectedNavigation(state.route, state.busy, model::navigate) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
-            if (state.busy) CircularProgressIndicator(Modifier.padding(12.dp))
+            if (state.busy) LinearProgressIndicator(Modifier.fillMaxWidth())
             Box(Modifier.weight(1f)) { ConnectedContent(state, model) }
         }
     }
@@ -90,28 +68,6 @@ private fun ConnectedContent(state: ConnectedState, model: ConnectedViewModel) {
         ConnectedRoute.EVIDENCE -> ConnectedEvidence(state, model)
         ConnectedRoute.TOURNAMENTS -> ConnectedTournaments(state, model)
         ConnectedRoute.PROFILE -> ConnectedProfile(state, model)
-    }
-}
-
-@Composable
-private fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
-    AppPage("Tu palabra.\nTu juego.", "Bienvenido, ${state.account?.nickname.orEmpty()}") {
-        HeroPanel("JUEGA CON TU GRUPO", "Crea tu próximo reto.",
-            "Grupos, retos manuales y torneos disponibles en el servicio.", R.drawable.ic_pacto_bolt)
-        PactCard(state.group?.name ?: "Tus grupos", "Recupera tus grupos o únete a tu equipo.",
-            R.drawable.ic_pacto_users) {
-            Action("Grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
-        }
-        if (state.group != null) Action("Tablero de retos", enabled = !state.busy) {
-            model.navigate(ConnectedRoute.BOARD)
-        }
-        if (state.group != null) Action("Crear reto manual", enabled = !state.busy) {
-            model.navigate(ConnectedRoute.CREATE)
-        }
-        Action("Consultar torneos", enabled = !state.busy) { model.navigate(ConnectedRoute.TOURNAMENTS) }
-        if (state.contract != null) Action("Ver reto seleccionado", enabled = !state.busy) {
-            model.navigate(ConnectedRoute.CONTRACT)
-        }
     }
 }
 

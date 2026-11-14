@@ -70,7 +70,8 @@ class ApiSocialRepository(private val api: PactoApi, private val sessions: Sessi
     }
     override suspend fun accept(contract: Challenge): Challenge {
         val version = requireNotNull(contract.version)
-        val result = sessions.authorized { api.accept(it, contract.id, ContractAction(version)) }
+        val key = java.util.UUID.randomUUID().toString()
+        val result = sessions.authorized { api.accept(it, contract.id, key, ContractAction(version)) }
             .checked(200).data.toDomain().forContract(contract)
         if (result.status != "in_progress" || result.myPoints == null || result.myPoints < 0) {
             throw ApiFailure(0, "INVALID_RESPONSE")
