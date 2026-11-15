@@ -1,0 +1,11 @@
+# Tareas — UX-02
+- [x] T1 Kit visual `MakeKit.kt`.
+- [x] T2 Inicio.
+- [x] T3 Grupos y miembros.
+- [x] T4 Tablero de retos.
+- [x] T5 Crear reto.
+- [x] T6 Contrato y evidencia.
+- [x] T7 Torneos.
+- [x] T8 Perfil.
+- [ ] T9 Compilar, pruebas, Detekt y Lint (David en Android Studio).
+- [ ] T10 Revisión visual del PO en el teléfono.

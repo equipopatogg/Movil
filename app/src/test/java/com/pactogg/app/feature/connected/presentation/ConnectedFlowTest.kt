@@ -55,7 +55,8 @@ class ConnectedFlowTest {
         val api = repository<PactoApi>()
         sessions = SessionManager(api, store)
         sessions.restore()
-        model = ConnectedViewModel(sessions, repository<ProductRepository>(), repository<SocialRepository>())
+        model = ConnectedViewModel(sessions, repository<ProductRepository>(), repository<SocialRepository>(),
+            com.pactogg.app.feature.play.UnusedPlayRepository)
         lifecycle.put("test", model)
         model.state.first { !it.restoring && it.account != null }
         model.mutable.value = ConnectedState(restoring = false, account = account, group = group, contract = contract)

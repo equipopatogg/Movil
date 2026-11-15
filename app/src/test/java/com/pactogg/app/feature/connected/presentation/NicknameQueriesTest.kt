@@ -12,6 +12,7 @@ import com.pactogg.app.feature.auth.domain.SessionStore
 import com.pactogg.app.feature.connected.data.ApiProductRepository
 import com.pactogg.app.feature.connected.domain.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Assert.*
@@ -24,7 +25,7 @@ class NicknameQueriesTest {
     private val dispatcher = StandardTestDispatcher()
     private lateinit var model: ConnectedViewModel
     private val social = FakeSocial()
-    @Before fun setup() {
+    @Before fun setup() = runTest(dispatcher) {
         Dispatchers.setMain(dispatcher)
         val api = ApiClientFactory().create("https://localhost/").create(PactoApi::class.java)
         val store = object : SessionStore {
@@ -33,7 +34,11 @@ class NicknameQueriesTest {
             override fun clear() = Unit
         }
         val sessions = SessionManager(api, store)
-        model = ConnectedViewModel(sessions, ApiProductRepository(api, sessions), social)
+        model = ConnectedViewModel(sessions, ApiProductRepository(api, sessions), social,
+            com.pactogg.app.feature.play.UnusedPlayRepository)
+        // La restauración usa un hilo real (Dispatchers.IO): se espera aquí para que no termine después
+        // de resetMain() y deje una excepción suelta que tumbe la siguiente prueba.
+        model.state.first { !it.restoring }
     }
     @After fun cleanup() { Dispatchers.resetMain() }
     @Test fun typingWaitsAndInvalidNameNeverQueries() = runTest(dispatcher) {

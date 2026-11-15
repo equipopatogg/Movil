@@ -40,7 +40,9 @@ class SocialApiIntegrationTest {
     }
     @Before fun setup() {
         val cert = HeldCertificate.Builder().commonName("localhost").addSubjectAlternativeName("localhost")
-            .addSubjectAlternativeName("127.0.0.1").addSubjectAlternativeName("::1").build()
+            .addSubjectAlternativeName("127.0.0.1").addSubjectAlternativeName("::1")
+            // Windows con Docker Desktop resuelve 127.0.0.1 como kubernetes.docker.internal.
+            .addSubjectAlternativeName(java.net.InetAddress.getByName("localhost").canonicalHostName).build()
         server.useHttps(HandshakeCertificates.Builder().heldCertificate(cert).build().sslSocketFactory(), false)
         server.start()
         val trust = HandshakeCertificates.Builder().addTrustedCertificate(cert.certificate).build()

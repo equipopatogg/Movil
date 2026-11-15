@@ -12,7 +12,9 @@ data class Challenge(val id: String, val groupId: String, val game: String,
     val executorId: String? = null)
 
 data class ChallengeDraft(val game: String = "", val condition: String = "", val reward: String = "",
-    val deadline: String = "", val bond: Int? = null, val targetId: String? = null)
+    val deadline: String = "", val bond: Int? = null, val targetId: String? = null,
+    /** Frase dictada (PL-05); si existe el reto se crea con `source=voice`. */
+    val originalPhrase: String? = null)
 
 data class Evidence(val id: String, val contractId: String, val type: String, val moderation: String,
     val url: String? = null, val createdAt: String? = null, val expiresAt: String? = null)

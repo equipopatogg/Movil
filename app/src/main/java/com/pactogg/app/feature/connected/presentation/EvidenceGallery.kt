@@ -22,20 +22,23 @@ import coil3.request.ImageRequest
 import com.pactogg.app.feature.connected.domain.Evidence
 import com.pactogg.app.feature.connected.domain.EvidenceRules
 import com.pactogg.app.feature.connected.domain.InputRules
-import com.pactogg.app.prototype.Action
-import com.pactogg.app.prototype.PactCard
+import androidx.compose.material3.MaterialTheme
+import com.pactogg.app.core.designsystem.Kicker
+import com.pactogg.app.core.designsystem.MakeButton
+import com.pactogg.app.core.designsystem.MakeCard
 
 @Composable
 internal fun EvidenceCard(evidence: Evidence) {
-    PactCard(if (evidence.type == "photo") "Foto del reto" else "Enlace del reto",
-        "Contenido aprobado por moderación") {
+    MakeCard {
+        Kicker(if (evidence.type == "photo") "Foto del reto" else "Enlace del reto")
+        Text("Contenido aprobado por moderación", style = MaterialTheme.typography.bodySmall)
         if (evidence.type == "photo") EvidencePhoto(evidence)
         else {
             val handler = LocalUriHandler.current
             var unavailable by remember(evidence.url) { mutableStateOf(false) }
             val url = evidence.url?.takeIf(InputRules::evidenceLink)
             if (url == null) Text("El enlace no está disponible.")
-            else Action("Abrir enlace") { unavailable = runCatching { handler.openUri(url) }.isFailure }
+            else MakeButton("Abrir enlace") { unavailable = runCatching { handler.openUri(url) }.isFailure }
             if (unavailable) Text("No encontramos una aplicación para abrir el enlace.")
         }
     }

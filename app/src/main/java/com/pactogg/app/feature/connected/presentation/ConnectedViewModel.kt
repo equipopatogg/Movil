@@ -26,6 +26,7 @@ class ConnectedViewModel @Inject constructor(
     private val sessions: SessionManager,
     internal val products: ProductRepository,
     internal val socials: com.pactogg.app.feature.connected.domain.SocialRepository,
+    internal val play: com.pactogg.app.feature.play.domain.PlayRepository,
 ) : ViewModel() {
     internal val mutable = MutableStateFlow(ConnectedState())
     val state = mutable.asStateFlow()
@@ -91,18 +92,12 @@ class ConnectedViewModel @Inject constructor(
     fun navigate(route: ConnectedRoute) {
         if (mutable.value.busy || mutable.value.account == null) return
         if (route != ConnectedRoute.EVIDENCE) mutable.value.selectedPhoto?.clear()
+        if (route != ConnectedRoute.MATCH) mutable.value.play.reportPhoto?.clear()
         mutable.update { it.copy(route = route, error = null, diagnostic = null, notice = null,
             selectedPhoto = if (route == ConnectedRoute.EVIDENCE) it.selectedPhoto else null,
-            selectedTournament = null) }
-        when (route) {
-            ConnectedRoute.TOURNAMENTS -> if (!mutable.value.tournamentsLoaded) loadTournaments()
-            ConnectedRoute.PROFILE -> loadProfile()
-            ConnectedRoute.GROUPS -> loadGroups()
-            ConnectedRoute.MEMBERS -> loadMembers()
-            ConnectedRoute.BOARD -> loadBoard()
-            ConnectedRoute.EVIDENCE -> loadEvidence()
-            else -> Unit
-        }
+            selectedTournament = null,
+            play = if (route == ConnectedRoute.MATCH) it.play else it.play.copy(reportPhoto = null)) }
+        loadFor(route)
     }
 
     fun createGroup() {

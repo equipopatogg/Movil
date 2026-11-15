@@ -47,8 +47,10 @@ interface ContractActionsApi {
     suspend fun contracts(@Header("Authorization") bearer: String, @Path("gid") id: String,
         @QueryMap filters: Map<String, String>, @Query("cursor") cursor: String?,
         @Query("limit") limit: Int = 20): Response<Envelope<List<ContractDto>>>
+    /** El backend exige `Idempotency-Key` para aceptar (retiene la fianza una sola vez). */
     @POST("api/v1/contracts/{id}/accept")
     suspend fun accept(@Header("Authorization") bearer: String, @Path("id") id: String,
+        @Header("Idempotency-Key") idempotencyKey: String,
         @Body body: ContractAction): Response<Envelope<ContractDto>>
     @POST("api/v1/contracts/{id}/reject")
     suspend fun reject(@Header("Authorization") bearer: String, @Path("id") id: String,

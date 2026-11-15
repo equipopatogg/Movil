@@ -66,7 +66,9 @@ class ApiTestFixture : AutoCloseable {
     init {
         val certificate = HeldCertificate.Builder().commonName("localhost")
             .addSubjectAlternativeName("localhost").addSubjectAlternativeName("127.0.0.1")
-            .addSubjectAlternativeName("::1").build()
+            .addSubjectAlternativeName("::1")
+            // Windows con Docker Desktop resuelve 127.0.0.1 como kubernetes.docker.internal.
+            .addSubjectAlternativeName(java.net.InetAddress.getByName("localhost").canonicalHostName).build()
         server.useHttps(HandshakeCertificates.Builder().heldCertificate(certificate).build().sslSocketFactory(), false)
         server.start()
         val trust = HandshakeCertificates.Builder().addTrustedCertificate(certificate.certificate).build()

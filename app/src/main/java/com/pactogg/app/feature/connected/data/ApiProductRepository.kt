@@ -25,7 +25,9 @@ class ApiProductRepository(private val api: PactoApi, private val sessions: Sess
         require(InputRules.challenge(group, draft, System.currentTimeMillis()))
         val body = ContractRequest(group.id, draft.game.trim(), draft.condition.trim(), draft.reward.trim(),
             draft.deadline, requireNotNull(draft.bond),
-            targetType = if (draft.targetId == null) "group" else "member", targetId = draft.targetId)
+            targetType = if (draft.targetId == null) "group" else "member",
+            source = if (draft.originalPhrase.isNullOrBlank()) "manual" else "voice", targetId = draft.targetId,
+            originalPhrase = draft.originalPhrase?.trim()?.take(300)?.takeIf { it.isNotEmpty() })
         return sessions.authorized { api.contract(it, body) }.checked(201).data.toDomain().also {
             if (it.groupId != group.id) throw ApiFailure(0, "INVALID_RESPONSE")
         }

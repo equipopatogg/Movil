@@ -3,7 +3,10 @@ package com.pactogg.app.feature.connected.presentation
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.pactogg.app.feature.connected.domain.Challenge
-import com.pactogg.app.prototype.Action
+import com.pactogg.app.core.designsystem.ButtonKind
+import com.pactogg.app.core.designsystem.InfoRow
+import com.pactogg.app.core.designsystem.MakeButton
+import com.pactogg.app.core.designsystem.localDate
 
 @Composable
 fun ConnectedContractActions(state: ConnectedState, model: ConnectedViewModel, contract: Challenge) {
@@ -18,8 +21,10 @@ fun ConnectedContractActions(state: ConnectedState, model: ConnectedViewModel, c
             enabled = !state.busy, confirmEnabled = !state.busy && if (accepting) accept else reject,
             onConfirm = model::confirmContractAction, onDismiss = model::cancelContractAction)
     } else {
-        if (accept) Action("Aceptar reto", enabled = !state.busy) { model.requestContractAction("accept") }
-        if (reject) Action("Rechazar reto", enabled = !state.busy) { model.requestContractAction("reject") }
+        if (accept) MakeButton("Aceptar reto", enabled = !state.busy) { model.requestContractAction("accept") }
+        if (reject) MakeButton("Rechazar reto", ButtonKind.Ghost, enabled = !state.busy) {
+            model.requestContractAction("reject")
+        }
         val insufficient = state.group?.points?.let { it < contract.bond } == true
         if (contract.status == "open" && contract.challengerId != state.account?.id && insufficient) {
             Text("No tienes puntos suficientes para esta fianza.")
@@ -29,8 +34,7 @@ fun ConnectedContractActions(state: ConnectedState, model: ConnectedViewModel, c
 
 @Composable
 fun ConnectedContractMetadata(contract: Challenge) {
-    contract.acceptedBy?.let { Text("Aceptado por: $it") }
-    contract.acceptedAt?.let { Text("Aceptado: $it") }
-    contract.updatedAt?.let { Text("Actualizado: $it") }
-    contract.createdAt?.let { Text("Creado: $it") }
+    contract.acceptedAt?.let { InfoRow("Aceptado", localDate(it)) }
+    contract.createdAt?.let { InfoRow("Creado", localDate(it)) }
+    contract.updatedAt?.let { InfoRow("Actualizado", localDate(it)) }
 }
