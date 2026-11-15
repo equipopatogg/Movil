@@ -2,15 +2,15 @@
 
 ## Estado al 2026-11-14
 
-Pantallas escritas y compiladas; detekt y lint en verde. Las pruebas JVM listadas son del 2026-11-14 y **aún no se han ejecutado**: cada una pasa a PASS solo cuando corra en local o en CI. Ningún criterio se ha comprobado en un teléfono (T6).
+Pantallas escritas y compiladas; detekt y lint en verde. Las pruebas JVM listadas pasaron en local el 2026-11-14. Ningún criterio se ha comprobado en un teléfono (T6).
 
 ### PL-04-AC1
 
 **Condición:** Crear torneo muestra su código y aparece en la lista.
 
-**Estado técnico: PARCIAL (prueba de red escrita, sin ejecutar; falta teléfono).**
+**Estado técnico: PARCIAL (prueba de red en verde; falta teléfono).**
 
-- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_createTournamentSendsSingleEliminationAndReturnsCode` · ESCRITA, SIN EJECUTAR
+- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_createTournamentSendsSingleEliminationAndReturnsCode` · PASS JVM local 2026-11-14
 
 - [ ] Comprobado en teléfono contra la API 0.12.x
 
@@ -18,9 +18,9 @@ Pantallas escritas y compiladas; detekt y lint en verde. Las pruebas JVM listada
 
 **Condición:** Otro grupo se inscribe con el código y el organizador lo inicia; aparece el bracket.
 
-**Estado técnico: PARCIAL (prueba de red escrita, sin ejecutar; falta teléfono).**
+**Estado técnico: PARCIAL (prueba de red en verde; falta teléfono).**
 
-- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_joinByCodeSendsKeyGroupAndCode` · ESCRITA, SIN EJECUTAR
+- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_joinByCodeSendsKeyGroupAndCode` · PASS JVM local 2026-11-14
 
 - [ ] Comprobado en teléfono contra la API 0.12.x
 
@@ -28,11 +28,11 @@ Pantallas escritas y compiladas; detekt y lint en verde. Las pruebas JVM listada
 
 **Condición:** Reportar con foto, confirmar por el rival y ver al ganador avanzar.
 
-**Estado técnico: PARCIAL (prueba de red escrita, sin ejecutar; falta teléfono).**
+**Estado técnico: PARCIAL (prueba de red en verde; falta teléfono).**
 
-- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_reportIsMultipartWithScoresPhotoAndGroup` · ESCRITA, SIN EJECUTAR
-- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_nullNextMatchMeansNoMatch` · ESCRITA, SIN EJECUTAR
-- [PlayValidationTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayValidationTest.kt) · `PL_04_tiesOversizedPhotosAndBadTournamentDataAreRejected` · ESCRITA, SIN EJECUTAR
+- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_reportIsMultipartWithScoresPhotoAndGroup` · PASS JVM local 2026-11-14
+- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_nullNextMatchMeansNoMatch` · PASS JVM local 2026-11-14
+- [PlayValidationTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayValidationTest.kt) · `PL_04_tiesOversizedPhotosAndBadTournamentDataAreRejected` · PASS JVM local 2026-11-14
 
 - [ ] Comprobado en teléfono contra la API 0.12.x
 
@@ -40,8 +40,8 @@ Pantallas escritas y compiladas; detekt y lint en verde. Las pruebas JVM listada
 
 **Condición:** Disputar y que el organizador resuelva; al terminar la final el torneo queda `finished`.
 
-**Estado técnico: PARCIAL (prueba de red escrita, sin ejecutar; falta teléfono).**
+**Estado técnico: PARCIAL (prueba de red en verde; falta teléfono).**
 
-- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_matchErrorKeepsCodeWithoutRetryOrServerText` · ESCRITA, SIN EJECUTAR
+- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_04_matchErrorKeepsCodeWithoutRetryOrServerText` · PASS JVM local 2026-11-14
 
 - [ ] Comprobado en teléfono contra la API 0.12.x

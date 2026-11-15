@@ -2,15 +2,15 @@
 
 ## Estado al 2026-11-14
 
-Pantallas escritas y compiladas; detekt y lint en verde. Las pruebas JVM listadas son del 2026-11-14 y **aún no se han ejecutado**: cada una pasa a PASS solo cuando corra en local o en CI. Ningún criterio se ha comprobado en un teléfono (T6).
+Pantallas escritas y compiladas; detekt y lint en verde. Las pruebas JVM listadas pasaron en local el 2026-11-14. Ningún criterio se ha comprobado en un teléfono (T6).
 
 ### PL-01-AC1
 
 **Condición:** El inicio muestra cuántos retos esperan mi voto y abre la lista.
 
-**Estado técnico: PARCIAL (prueba de red escrita, sin ejecutar; falta teléfono).**
+**Estado técnico: PARCIAL (prueba de red en verde; falta teléfono).**
 
-- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_01_pendingVotesMapContractAndDeadline` · ESCRITA, SIN EJECUTAR
+- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_01_pendingVotesMapContractAndDeadline` · PASS JVM local 2026-11-14
 
 - [ ] Comprobado en teléfono contra la API 0.12.x
 
@@ -18,10 +18,10 @@ Pantallas escritas y compiladas; detekt y lint en verde. Las pruebas JVM listada
 
 **Condición:** Votar envía `Idempotency-Key` y, al volver, el reto ya no aparece como pendiente.
 
-**Estado técnico: PARCIAL (prueba de red escrita, sin ejecutar; falta teléfono).**
+**Estado técnico: PARCIAL (prueba de red en verde; falta teléfono).**
 
-- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_01_voteSendsIdempotencyKeyThenReadsSummary` · ESCRITA, SIN EJECUTAR
-- [PlayValidationTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayValidationTest.kt) · `PL_01_unknownVoteOrOutcomeAndLongCommentAreRejected` · ESCRITA, SIN EJECUTAR
+- [PlayApiTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayApiTest.kt) · `PL_01_voteSendsIdempotencyKeyThenReadsSummary` · PASS JVM local 2026-11-14
+- [PlayValidationTest](../../../app/src/test/java/com/pactogg/app/feature/play/PlayValidationTest.kt) · `PL_01_unknownVoteOrOutcomeAndLongCommentAreRejected` · PASS JVM local 2026-11-14
 
 - [ ] Comprobado en teléfono contra la API 0.12.x
 

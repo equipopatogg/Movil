@@ -383,12 +383,20 @@ fun ConnectedViewModel.useVoiceDraft(rivalId: String? = null, rivalName: String?
             else "Completa lo que faltó: ${voice.missingFields.joinToString { f -> FieldNames[f] ?: f }}.") }
 }
 
-/** Explorar (PL-06): copia la idea al formulario para elegir rival, plazo y fianza. */
+/**
+ * Explorar (PL-06): copia la idea al borrador y manda a elegir rival entre los miembros del grupo.
+ * Al tocar "Retar a ..." se abre Crear con juego, reto y rival ya puestos. Sin grupo, primero se elige uno.
+ */
 fun ConnectedViewModel.useIdea(game: String, condition: String) {
     if (state.value.busy) return
-    mutable.update { it.copy(route = ConnectedRoute.CREATE, reviewing = false, error = null,
-        draft = it.draft.copy(game = game.take(60), condition = condition.take(280)),
-        notice = "Idea copiada. Ajusta el reto y elige rival, fecha y fianza.") }
+    mutable.update { it.copy(reviewing = false,
+        draft = it.draft.copy(game = game.take(60), condition = condition.take(280))) }
+    if (state.value.group == null) {
+        navigate(ConnectedRoute.GROUPS)
+        mutable.update { it.copy(notice = "Idea guardada. Elige o crea un grupo para retar a alguien.") }
+    } else {
+        navigate(ConnectedRoute.MEMBERS)
+    }
 }
 
 /** Sin IA: lleva la frase al formulario manual como condición para no perderla (PL-05 RF4). */
