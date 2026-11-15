@@ -496,7 +496,8 @@
       "com.pactogg.app.feature.profile.detail.ProfileDetailsValidationTest",
       "com.pactogg.app.feature.profile.edit.EditProfileValidationTest",
       "com.pactogg.app.feature.profile.nickname.CheckNicknameValidationTest",
-      "com.pactogg.app.feature.tournaments.list.ListTournamentsValidationTest"
+      "com.pactogg.app.feature.tournaments.list.ListTournamentsValidationTest",
+      "com.pactogg.app.feature.play.PlayValidationTest"
     ],
     "integration": [
       "com.pactogg.app.integration.ApiIntegrationTest",
@@ -519,7 +520,8 @@
       "com.pactogg.app.feature.profile.detail.ProfileDetailsApiTest",
       "com.pactogg.app.feature.profile.edit.EditProfileApiTest",
       "com.pactogg.app.feature.profile.nickname.CheckNicknameApiTest",
-      "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest"
+      "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest",
+      "com.pactogg.app.feature.play.PlayApiTest"
     ],
     "security": [
       "com.pactogg.app.core.network.ApiClientFactoryTest",

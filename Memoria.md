@@ -1,3 +1,13 @@
+# Bloques PL-01 a PL-05 y arreglos de CI — 2026-11-14 (tarde)
+
+- Pantallas escritas y compiladas: jurado/votación (PL-01), avisos con campana (PL-02), palabra y ranking (PL-03), torneos para jugar con partida (PL-04) y reto por voz (PL-05). Ninguna se ha probado todavía en teléfono.
+- Las specs nuevas usan prefijo `PL-` porque la matriz de CI exige exactamente las 19 operaciones `MO-*`.
+- Pruebas nuevas: `PlayApiTest` (integración, MockWebServer) y `PlayValidationTest` (unitaria), registradas en `docs/pruebas/operaciones.json`. Escritas el 2026-11-14; pendiente verlas pasar.
+- Arreglos de pruebas existentes: el certificado de prueba acepta el nombre que Windows da a `localhost` (Docker Desktop lo cambia a `kubernetes.docker.internal`), y `NicknameQueriesTest`/`EvidenceConfirmationTest` esperan la restauración de sesión antes de cada caso (carrera vista en el job de cobertura).
+- `ErrorMessages` cubre 27 códigos más del servidor (votos, compromisos, torneos, partidas, voz).
+- Explorar y Demo siguen como "próximamente" a propósito: la prueba de dispositivo `navigationKeepsFiveMakeEntriesAndExploreDoesNotNavigate` exige que Explorar no abra datos de prototipo, y la app solo muestra datos reales.
+- Voz depende de que el servidor tenga la IA conectada; sin ella la app ofrece escribir a mano.
+
 # Rediseño según la maqueta y funciones pendientes — 2026-11-14
 
 - Estado: el PO (David) autoriza rehacer la apariencia de las pantallas conectadas según la maqueta de Figma Make (exportada a `G:\PactoGGMovil\MaquetaFigmaMake`, commit `02db210`) y terminar las funciones que faltan antes del martes 2026-11-18. El acceso (login/registro) ya está aprobado y no se toca.

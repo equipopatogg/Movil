@@ -11,5 +11,5 @@ Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLA ESCRITA, FALTA COMPILA
 ## Criterios
 | ID | Resultado |
 |---|---|
-| MO-VOZ-AC1 | Con la IA conectada, una frase llena el formulario y el reto se crea con `source=voice`. |
-| MO-VOZ-AC2 | Sin IA, la app ofrece escribir a mano sin perder la frase. |
+| PL-05-AC1 | Con la IA conectada, una frase llena el formulario y el reto se crea con `source=voice`. |
+| PL-05-AC2 | Sin IA, la app ofrece escribir a mano sin perder la frase. |
