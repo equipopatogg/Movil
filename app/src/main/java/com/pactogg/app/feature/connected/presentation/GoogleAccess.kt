@@ -40,7 +40,8 @@ fun ConnectedViewModel.googleAccess(token: String) = perform {
         sessions.google(GoogleRequest(token))
     } catch (error: ApiFailure) {
         if (error.code != "NICKNAME_REQUIRED") throw error
-        mutable.update { it.copy(play = it.play.copy(googleToken = token)) }
+        mutable.update { it.copy(play = it.play.copy(googleToken = token),
+            notice = "Es tu primera vez con Google: elige tu apodo al final de la pantalla.") }
     }
 }
 
@@ -53,6 +54,21 @@ fun ConnectedViewModel.googleRegister(nickname: String, accepted: Boolean) {
         return
     }
     perform { sessions.google(GoogleRequest(token, nickname.trim(), true, BuildConfig.PRIVACY_VERSION)) }
+}
+
+/** Muestra en un aviso visible por qué Google no entregó la cuenta. */
+fun ConnectedViewModel.googleProblem(message: String) {
+    mutable.update { it.copy(error = message, diagnostic = null) }
+}
+
+/**
+ * Google rechaza la solicitud después de elegir cuenta cuando la firma del APK no está registrada
+ * en el proyecto de Google (código 28444). En versiones de desarrollo se muestra el detalle técnico.
+ */
+private fun googleFailure(error: GetCredentialException): String {
+    val detail = if (BuildConfig.DEBUG) " Detalle: ${error.type} · ${error.message.orEmpty().take(160)}" else ""
+    return "Google no completó el acceso. Revisa tu conexión; si el problema sigue, esta versión de la app " +
+        "todavía no está autorizada en Google." + detail
 }
 
 fun ConnectedViewModel.cancelGoogle() {
@@ -69,13 +85,11 @@ internal fun GoogleAccess(state: ConnectedState, model: ConnectedViewModel) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var choosing by remember { mutableStateOf(false) }
-    var message by remember { mutableStateOf<String?>(null) }
     OutlinedButton(modifier = Modifier.fillMaxWidth(),
         enabled = !state.busy && !choosing && BuildConfig.GOOGLE_WEB_CLIENT_ID.isNotBlank(),
         onClick = {
             scope.launch {
                 choosing = true
-                message = null
                 try {
                     val option = GetSignInWithGoogleOption.Builder(BuildConfig.GOOGLE_WEB_CLIENT_ID).build()
                     val request = GetCredentialRequest.Builder().addCredentialOption(option).build()
@@ -84,20 +98,20 @@ internal fun GoogleAccess(state: ConnectedState, model: ConnectedViewModel) {
                     val token = credential?.takeIf {
                         it.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
                     }?.let { runCatching { GoogleIdTokenCredential.createFrom(it.data).idToken }.getOrNull() }
-                    if (token == null) message = "No se pudo comprobar la respuesta de Google."
+                    if (token == null) model.googleProblem("No se pudo comprobar la respuesta de Google.")
                     else model.googleAccess(token)
                 } catch (_: GetCredentialCancellationException) {
                     // La persona cerró el selector de cuentas: no se envía nada.
                 } catch (_: NoCredentialException) {
-                    message = "No hay una cuenta de Google en este teléfono. Agrega una y vuelve a intentarlo."
-                } catch (_: GetCredentialException) {
-                    message = "No se pudo abrir Google. Revisa tu conexión y vuelve a intentarlo."
+                    model.googleProblem("No hay una cuenta de Google en este teléfono. " +
+                        "Agrega una y vuelve a intentarlo.")
+                } catch (error: GetCredentialException) {
+                    model.googleProblem(googleFailure(error))
                 } finally {
                     choosing = false
                 }
             }
         }) { Text(if (choosing) "Abriendo Google…" else "Continuar con Google") }
-    message?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error) }
 }
 
 @Composable
