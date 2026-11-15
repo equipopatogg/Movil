@@ -19,6 +19,7 @@ __pycache__/
 /.guias-locales/
 
 # Credentials and signing material
+google-services.json
 .env
 .env.*
 !.env.example
