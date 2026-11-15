@@ -66,6 +66,9 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
             Kicker("Grupo privado", PactoCyan)
             Text(group.name, style = MaterialTheme.typography.titleMedium)
         }
+        MakeButton("Crear por voz", ButtonKind.Secondary, enabled = !state.busy, icon = R.drawable.ic_pacto_mic) {
+            model.navigate(ConnectedRoute.VOICE)
+        }
         MakeCard {
             StepIntro("01", "Define el reto", "Que sea claro, posible y fácil de comprobar.")
             MakeField("Videojuego", draft.game, { model.draft(draft.copy(game = it)) })

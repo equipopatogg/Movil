@@ -66,4 +66,4 @@ Las specs `PL-*` cubren pantallas nuevas de la maqueta que usan la API 0.12. Lle
 | [PL-02 — Avisos dentro de la app](PL-02-avisos/spec.md) | Pantallas escritas y compiladas; falta prueba en teléfono |
 | [PL-03 — Palabra y ranking](PL-03-palabra/spec.md) | Pantallas escritas y compiladas; falta prueba en teléfono |
 | [PL-04 — Crear, inscribirse y jugar torneos](PL-04-torneos-jugar/spec.md) | Pantallas escritas; falta compilar y probar en teléfono |
-| [PL-05 — Reto por voz](PL-05-voz/spec.md) | Datos listos; pantalla pendiente |
+| [PL-05 — Reto por voz](PL-05-voz/spec.md) | Pantalla escrita; falta compilar y probar en teléfono (requiere IA conectada en el servidor) |

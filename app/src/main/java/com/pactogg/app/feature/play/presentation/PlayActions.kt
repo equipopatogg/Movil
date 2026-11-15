@@ -383,4 +383,12 @@ fun ConnectedViewModel.useVoiceDraft(rivalId: String? = null, rivalName: String?
             else "Completa lo que faltó: ${voice.missingFields.joinToString { f -> FieldNames[f] ?: f }}.") }
 }
 
-private val FieldNames = mapOf("game" to "juego", "condition" to "condición", "reward" to "recompensa")
+/** Sin IA: lleva la frase al formulario manual como condición para no perderla (PL-05 RF4). */
+fun ConnectedViewModel.manualFromPhrase() {
+    val text = state.value.play.phrase.trim()
+    mutable.update { it.copy(route = ConnectedRoute.CREATE, reviewing = false,
+        draft = if (it.draft.condition.isBlank()) it.draft.copy(condition = text.take(280)) else it.draft,
+        notice = "Completa el reto a mano.") }
+}
+
+internal val FieldNames = mapOf("game" to "juego", "condition" to "condición", "reward" to "recompensa")
