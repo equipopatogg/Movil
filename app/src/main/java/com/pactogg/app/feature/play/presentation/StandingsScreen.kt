@@ -34,6 +34,7 @@ import com.pactogg.app.feature.connected.presentation.ConnectedRoute
 import com.pactogg.app.feature.connected.presentation.ConnectedState
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
 import com.pactogg.app.feature.connected.presentation.back
+import com.pactogg.app.feature.connected.presentation.chooseGroupThen
 import com.pactogg.app.feature.play.domain.Commitment
 import com.pactogg.app.feature.play.domain.RankingEntry
 import com.pactogg.app.ui.theme.PactoCyan
@@ -50,7 +51,7 @@ internal fun StandingsScreen(state: ConnectedState, model: ConnectedViewModel) {
         val group = state.group
         if (group == null) {
             EmptyState("Elige un grupo.", "El ranking y los compromisos son de cada grupo.", R.drawable.ic_pacto_users)
-            MakeButton("Ir a grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            MakeButton("Ir a grupos", enabled = !state.busy) { model.chooseGroupThen(ConnectedRoute.STANDINGS) }
             return@MakePage
         }
         Kicker("Grupo privado · ${group.name}", PactoCyan)

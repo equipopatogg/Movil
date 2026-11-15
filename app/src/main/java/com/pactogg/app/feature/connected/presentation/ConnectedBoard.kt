@@ -33,7 +33,7 @@ import com.pactogg.app.ui.theme.PactoCyan
 fun ConnectedBoard(state: ConnectedState, model: ConnectedViewModel) {
     MakePage("Retos", state.group?.name ?: "Selecciona un grupo", onBack = { model.back() }) {
         if (state.group == null) {
-            MakeButton("Elegir grupo", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            MakeButton("Elegir grupo", enabled = !state.busy) { model.chooseGroupThen(ConnectedRoute.BOARD) }
         } else {
             val filter = state.social.boardFilter
             Segmented(listOf("Del grupo", "Mis retos"), if (filter.mine) "Mis retos" else "Del grupo") {

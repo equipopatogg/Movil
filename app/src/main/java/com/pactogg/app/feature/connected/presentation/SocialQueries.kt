@@ -3,7 +3,10 @@ package com.pactogg.app.feature.connected.presentation
 import com.pactogg.app.feature.connected.domain.BoardFilter
 import com.pactogg.app.feature.connected.domain.Challenge
 import com.pactogg.app.feature.connected.domain.Group
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 fun ConnectedViewModel.loadProfile() = perform {
     val profile = socials.profile()
@@ -18,14 +21,32 @@ fun ConnectedViewModel.loadGroups(more: Boolean = false) {
             groups = current.groups.merge(page, more) { item -> item.id })) }
     }
 }
-fun ConnectedViewModel.selectGroup(id: String) = perform { applyGroup(socials.group(id)) }
+/**
+ * Elige un grupo. Si otra pantalla mandó a elegirlo (crear reto, torneo, ranking, voz o una idea de Explorar),
+ * al terminar regresa a esa pantalla para que no haya que volver a buscarla.
+ */
+fun ConnectedViewModel.selectGroup(id: String) {
+    if (state.value.busy) return
+    val play = state.value.play
+    val next = play.afterGroup ?: ConnectedRoute.MEMBERS.takeIf { play.pendingIdea != null }
+    perform { applyGroup(socials.group(id)) }
+    if (next != null) viewModelScope.launch {
+        state.first { !it.busy }
+        val current = state.value
+        if (current.group?.id == id && current.route == ConnectedRoute.GROUPS) navigate(next)
+    }
+}
+
 internal fun ConnectedViewModel.applyGroup(group: Group) {
     queryVersion++
     mutable.value.selectedPhoto?.clear()
-    mutable.update { it.copy(group = group, contract = null, contractStateStale = false,
+    val idea = mutable.value.play.pendingIdea
+    mutable.update { it.copy(play = it.play.copy(pendingIdea = null, afterGroup = null), group = group, contract = null,
+        contractStateStale = false,
         evidence = null, evidenceItems = emptyList(), evidenceLoaded = false, evidenceUnavailable = false,
         evidenceBlockedId = null, selectedPhoto = null, link = "",
-        draft = com.pactogg.app.feature.connected.domain.ChallengeDraft(), reviewing = false,
+        draft = com.pactogg.app.feature.connected.domain.ChallengeDraft(game = idea?.first.orEmpty(),
+            condition = idea?.second.orEmpty()), reviewing = false,
         social = it.social.copy(selectedRival = null, members = ListState(), contracts = ListState(),
             profile = null, pendingAction = null)) }
 }

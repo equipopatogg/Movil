@@ -74,7 +74,9 @@ private fun SignedOut(state: ConnectedState, model: ConnectedViewModel) {
     AccessScreen(state.access.copy(loading = state.busy), model::access,
         fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code) {
         if (state.access.registering) state.social.nicknameNotice?.let { Text(it) }
-        else LinkCard("Probar la demo interactiva", "2 minutos · Sin registro · Sin dinero real",
+        GoogleAccess(state, model)
+        if (!state.access.registering) LinkCard("Probar la demo interactiva",
+            "2 minutos · Sin registro · Sin dinero real",
             R.drawable.ic_pacto_bolt) { if (!state.busy) demo = true }
     }
 }

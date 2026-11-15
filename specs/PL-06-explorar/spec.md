@@ -10,7 +10,7 @@ Explorar deja de estar bloqueado. No muestra datos de otras personas ni "datos d
 - RF2: Se muestran 4 ideas por día. El mismo día salen las mismas 4; al cambiar el día del teléfono cambian.
 - RF3: "Descartar" quita esa idea y entra otra en su lugar. Lo descartado se olvida al salir de la app.
 - RF4: Buscador por juego o texto y categorías Todos / Habilidad / Cooperativo / Constancia, como en la maqueta; se aplican antes de elegir las 4.
-- RF5: "Usar esta idea" guarda juego y condición en el borrador y abre la lista de miembros del grupo para elegir rival (ajuste tras la prueba en teléfono del 2026-11-14). Al tocar "Retar a …" se abre Crear (MO-CON-01) con juego, reto y rival puestos; fecha y fianza las pone la persona. Sin grupo seleccionado se manda a Grupos con un aviso. No se crea nada sin pasar por la revisión de Crear.
+- RF5: "Usar esta idea" guarda juego y condición en el borrador y abre la lista de miembros del grupo para elegir rival (ajuste tras la prueba en teléfono del 2026-11-14). Al tocar "Retar a …" se abre Crear (MO-CON-01) con juego, reto y rival puestos; fecha y fianza las pone la persona. Sin grupo seleccionado se manda a Grupos con un aviso y la idea queda pendiente: al elegir un grupo se aplica al borrador y se abre directo la lista de miembros de ese grupo (corrección del 2026-11-14: antes la idea se perdía al elegir grupo). Si la persona vuelve a Inicio sin elegir grupo, la idea pendiente se descarta. No se crea nada sin pasar por la revisión de Crear.
 - RF6: El catálogo se lee una vez, fuera del hilo principal. Filas inválidas (sin juego, reto de más de 280, categoría desconocida) se omiten.
 - RF7: Sin coincidencias: "Ese pacto aún está por inventar." y botón para ver todas las ideas.
 

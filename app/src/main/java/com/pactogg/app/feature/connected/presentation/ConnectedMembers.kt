@@ -55,7 +55,7 @@ fun ConnectedMembers(state: ConnectedState, model: ConnectedViewModel) {
                 model.loadMembers(true)
             }
         } else {
-            MakeButton("Elegir grupo", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            MakeButton("Elegir grupo", enabled = !state.busy) { model.chooseGroupThen(ConnectedRoute.MEMBERS) }
         }
     }
 }

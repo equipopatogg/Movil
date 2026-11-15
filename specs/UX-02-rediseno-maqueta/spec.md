@@ -28,3 +28,6 @@ Que las pantallas que ya funcionan contra la API se vean como la maqueta. **Solo
 | UX-02-AC1 | Cada pantalla de la tabla se parece a su par de la maqueta (revisión visual del PO). |
 | UX-02-AC2 | Las pruebas JVM y de UI existentes siguen pasando sin cambiar su lógica. |
 | UX-02-AC3 | Detekt y Lint sin hallazgos nuevos. |
+
+## Ajuste tras la prueba en teléfono (2026-11-14)
+- Cuando una pantalla necesita un grupo y manda a Grupos (crear reto, tablero, miembros, torneo nuevo, ranking, voz o una idea de Explorar), al elegir el grupo la app regresa sola a esa pantalla. Antes se quedaba en Grupos y había que volver a entrar. Si la persona se va a Inicio sin elegir, se olvida el regreso pendiente.

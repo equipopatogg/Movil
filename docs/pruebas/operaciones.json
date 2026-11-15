@@ -523,7 +523,8 @@
       "com.pactogg.app.feature.profile.edit.EditProfileApiTest",
       "com.pactogg.app.feature.profile.nickname.CheckNicknameApiTest",
       "com.pactogg.app.feature.tournaments.list.ListTournamentsApiTest",
-      "com.pactogg.app.feature.play.PlayApiTest"
+      "com.pactogg.app.feature.play.PlayApiTest",
+      "com.pactogg.app.feature.auth.google.GoogleAccessApiTest"
     ],
     "security": [
       "com.pactogg.app.core.network.ApiClientFactoryTest",

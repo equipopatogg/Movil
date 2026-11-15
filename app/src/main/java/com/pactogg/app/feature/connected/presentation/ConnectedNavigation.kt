@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pactogg.app.R
+import kotlinx.coroutines.flow.update
 
 /** Las cinco entradas vienen de la maqueta. Explorar abre ideas locales (PL-06), nunca datos de otras personas. */
 @Composable
@@ -70,4 +71,11 @@ internal fun ConnectedViewModel.loadFor(route: ConnectedRoute) {
         ConnectedRoute.EVIDENCE -> loadEvidence()
         else -> com.pactogg.app.feature.play.presentation.onPlayRoute(this, route)
     }
+}
+
+/** Manda a Grupos y recuerda a qué pantalla volver cuando se elija uno. */
+fun ConnectedViewModel.chooseGroupThen(route: ConnectedRoute) {
+    if (state.value.busy) return
+    navigate(ConnectedRoute.GROUPS)
+    mutable.update { it.copy(play = it.play.copy(afterGroup = route)) }
 }

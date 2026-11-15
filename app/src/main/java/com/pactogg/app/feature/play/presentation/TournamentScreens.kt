@@ -37,6 +37,7 @@ import com.pactogg.app.feature.connected.presentation.ConnectedRoute
 import com.pactogg.app.feature.connected.presentation.ConnectedState
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
 import com.pactogg.app.feature.connected.presentation.back
+import com.pactogg.app.feature.connected.presentation.chooseGroupThen
 import com.pactogg.app.feature.play.domain.PlayMatch
 import com.pactogg.app.feature.play.domain.TournamentDetail
 import com.pactogg.app.ui.theme.PactoCyan
@@ -51,7 +52,7 @@ internal fun TournamentNewScreen(state: ConnectedState, model: ConnectedViewMode
         if (group == null) {
             EmptyState("Elige tu grupo primero.", "El torneo se crea o se juega a nombre de un grupo.",
                 R.drawable.ic_pacto_users)
-            MakeButton("Ir a grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            MakeButton("Ir a grupos", enabled = !state.busy) { model.chooseGroupThen(ConnectedRoute.TOURNAMENT_NEW) }
             return@MakePage
         }
         Kicker("Tu grupo · ${group.name}", PactoCyan)

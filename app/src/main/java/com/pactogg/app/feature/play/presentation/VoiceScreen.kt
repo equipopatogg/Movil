@@ -27,6 +27,7 @@ import com.pactogg.app.feature.connected.presentation.ConnectedRoute
 import com.pactogg.app.feature.connected.presentation.ConnectedState
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
 import com.pactogg.app.feature.connected.presentation.back
+import com.pactogg.app.feature.connected.presentation.chooseGroupThen
 import com.pactogg.app.feature.play.domain.VoiceDraft
 import com.pactogg.app.ui.theme.PactoCyan
 import com.pactogg.app.ui.theme.PactoOrange
@@ -39,7 +40,7 @@ internal fun VoiceScreen(state: ConnectedState, model: ConnectedViewModel) {
         val group = state.group
         if (group == null) {
             EmptyState("Necesitas un grupo", "El reto se crea dentro de un grupo.", R.drawable.ic_pacto_users)
-            MakeButton("Ir a grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            MakeButton("Ir a grupos", enabled = !state.busy) { model.chooseGroupThen(ConnectedRoute.VOICE) }
             return@MakePage
         }
         Kicker("Grupo privado · ${group.name}", PactoCyan)

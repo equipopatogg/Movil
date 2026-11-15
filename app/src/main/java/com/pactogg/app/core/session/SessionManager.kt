@@ -20,7 +20,7 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class SessionManager(private val api: PactoApi, private val store: SessionStore,
+class SessionManager(internal val api: PactoApi, private val store: SessionStore,
     private val now: () -> Long = System::currentTimeMillis) {
     private val mutex = Mutex()
     private val mutable = MutableStateFlow<Session?>(null)
@@ -42,7 +42,7 @@ class SessionManager(private val api: PactoApi, private val store: SessionStore,
 
     suspend fun register(body: RegisterRequest) = authenticate { api.register(body).checked(201).data }
 
-    private suspend fun authenticate(call: suspend () -> SessionDto) {
+    internal suspend fun authenticate(call: suspend () -> SessionDto) {
         val ticket = mutex.withLock { generation }
         val session = call().toDomain(now())
         withContext(Dispatchers.IO) {

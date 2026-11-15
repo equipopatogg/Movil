@@ -11,6 +11,11 @@ plugins {
 
 val apiBaseUrl = providers.gradleProperty("pactogg.apiBaseUrl").orElse("https://52-3-200-211.sslip.io/").get()
 val privacyVersion = providers.gradleProperty("pactogg.privacyVersion").orElse("2026-10-01").get()
+// Client ID web de OAuth (público): es el "aud" que valida el backend en POST auth/google. No es un secreto.
+val googleWebClientId = providers.gradleProperty("pactogg.googleWebClientId")
+    .orElse("841778632932-0jnd246u1mvbl6n9djtthsdgvb0um6do.apps.googleusercontent.com").get()
+require(googleWebClientId.isEmpty() || googleWebClientId.matches(
+    Regex("[A-Za-z0-9._-]+\\.apps\\.googleusercontent\\.com"))) { "Client ID web de Google inválido." }
 require(privacyVersion.matches(Regex("[A-Za-z0-9_.-]{1,32}"))) { "Versión de privacidad inválida." }
 require(apiBaseUrl.isEmpty() || URI(apiBaseUrl).let {
     it.scheme == "https" && it.host != null && it.userInfo == null &&
@@ -33,6 +38,7 @@ android {
         versionName = "0.1.0"
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
         buildConfigField("String", "PRIVACY_VERSION", "\"$privacyVersion\"")
+        buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$googleWebClientId\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -93,6 +99,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.exifinterface)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services)
+    implementation(libs.google.identity)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockwebserver)

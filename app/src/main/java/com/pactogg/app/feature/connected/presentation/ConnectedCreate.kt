@@ -57,7 +57,7 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
         if (group == null) {
             EmptyState("Necesitas un grupo", "Selecciona o crea un grupo para usar su configuración.",
                 R.drawable.ic_pacto_users)
-            MakeButton("Ir a grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            MakeButton("Ir a grupos", enabled = !state.busy) { model.chooseGroupThen(ConnectedRoute.CREATE) }
             return@MakePage
         }
         val draft = state.draft

@@ -69,3 +69,4 @@ Las specs `PL-*` cubren pantallas nuevas de la maqueta que usan la API 0.12. Lle
 | [PL-05 — Reto por voz](PL-05-voz/spec.md) | Pantalla escrita; falta compilar y probar en teléfono (requiere IA conectada en el servidor) |
 | [PL-06 — Explorar: ideas del día](PL-06-explorar/spec.md) | Pantalla escrita; falta compilar, cambiar el nombre de la prueba en el script de CI y probar en teléfono |
 | [PL-07 — Demo guiada](PL-07-demo/spec.md) | Pantalla escrita; falta compilar y probar en teléfono |
+| [PL-08 — Continuar con Google](PL-08-google/spec.md) | Escrita; falta compilar, registrar la huella SHA-1 y probar en teléfono |
