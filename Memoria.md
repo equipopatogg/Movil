@@ -5,7 +5,7 @@
 - Pruebas nuevas: `PlayApiTest` (integración, MockWebServer) y `PlayValidationTest` (unitaria), registradas en `docs/pruebas/operaciones.json`. Escritas el 2026-11-14; pendiente verlas pasar.
 - Arreglos de pruebas existentes: el certificado de prueba acepta el nombre que Windows da a `localhost` (Docker Desktop lo cambia a `kubernetes.docker.internal`), y `NicknameQueriesTest`/`EvidenceConfirmationTest` esperan la restauración de sesión antes de cada caso (carrera vista en el job de cobertura).
 - `ErrorMessages` cubre 27 códigos más del servidor (votos, compromisos, torneos, partidas, voz).
-- Explorar y Demo siguen como "próximamente" a propósito: la prueba de dispositivo `navigationKeepsFiveMakeEntriesAndExploreDoesNotNavigate` exige que Explorar no abra datos de prototipo, y la app solo muestra datos reales.
+- Explorar (PL-06, decisión del PO del 2026-11-14 por la noche): deja de decir "próximamente" y muestra 4 ideas del día de un catálogo local de 500 retos y 200 juegos, con descartar y "usar esta idea". La prueba de dispositivo pasa a llamarse `navigationKeepsFiveMakeEntriesAndExploreOpensIdeas` y hay que actualizar ese nombre en `EXPECTED_DEVICE` del script de CI. Demo sigue fuera.
 - Voz depende de que el servidor tenga la IA conectada; sin ella la app ofrece escribir a mano.
 
 # Rediseño según la maqueta y funciones pendientes — 2026-11-14

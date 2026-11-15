@@ -93,6 +93,4 @@ Acuerdo: %3$s</string>
     <string name="nav_create">Crear</string>
     <string name="nav_tournaments">Torneos</string>
     <string name="nav_groups">Grupos</string>
-    <string name="section_upcoming">Esta sección estará disponible próximamente.</string>
-    <string name="understood">Entendido</string>
 </resources>

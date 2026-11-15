@@ -13,7 +13,7 @@ MATRIX = ROOT / "docs/pruebas/operaciones.json"
 OUT = ROOT / "artifacts/android-ci"
 KINDS = ("unit", "integration", "security")
 EXPECTED_DEVICE = {
-    ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "navigationKeepsFiveMakeEntriesAndExploreDoesNotNavigate"),
+    ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "navigationKeepsFiveMakeEntriesAndExploreOpensIdeas"),
     ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "unauthorizedReaderCanRefreshEvidenceWithoutUploadButtons"),
     ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "photoPreviewCanBeDiscardedWithoutUploading"),
     ("com.pactogg.app.feature.connected.presentation.EvidenceUiTest", "linkConfirmationCanBeCancelledWithoutSending"),

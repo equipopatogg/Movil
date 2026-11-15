@@ -497,7 +497,8 @@
       "com.pactogg.app.feature.profile.edit.EditProfileValidationTest",
       "com.pactogg.app.feature.profile.nickname.CheckNicknameValidationTest",
       "com.pactogg.app.feature.tournaments.list.ListTournamentsValidationTest",
-      "com.pactogg.app.feature.play.PlayValidationTest"
+      "com.pactogg.app.feature.play.PlayValidationTest",
+      "com.pactogg.app.feature.explore.presentation.DailyIdeasTest"
     ],
     "integration": [
       "com.pactogg.app.integration.ApiIntegrationTest",

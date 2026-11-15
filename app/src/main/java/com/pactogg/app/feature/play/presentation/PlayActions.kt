@@ -383,6 +383,14 @@ fun ConnectedViewModel.useVoiceDraft(rivalId: String? = null, rivalName: String?
             else "Completa lo que faltó: ${voice.missingFields.joinToString { f -> FieldNames[f] ?: f }}.") }
 }
 
+/** Explorar (PL-06): copia la idea al formulario para elegir rival, plazo y fianza. */
+fun ConnectedViewModel.useIdea(game: String, condition: String) {
+    if (state.value.busy) return
+    mutable.update { it.copy(route = ConnectedRoute.CREATE, reviewing = false, error = null,
+        draft = it.draft.copy(game = game.take(60), condition = condition.take(280)),
+        notice = "Idea copiada. Ajusta el reto y elige rival, fecha y fianza.") }
+}
+
 /** Sin IA: lleva la frase al formulario manual como condición para no perderla (PL-05 RF4). */
 fun ConnectedViewModel.manualFromPhrase() {
     val text = state.value.play.phrase.trim()

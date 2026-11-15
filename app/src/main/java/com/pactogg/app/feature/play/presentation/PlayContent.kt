@@ -21,6 +21,7 @@ fun PlayContent(state: ConnectedState, model: ConnectedViewModel) {
         ConnectedRoute.TOURNAMENT_PLAY -> TournamentPlayScreen(state, model)
         ConnectedRoute.MATCH -> MatchScreen(state, model)
         ConnectedRoute.VOICE -> VoiceScreen(state, model)
+        ConnectedRoute.EXPLORE -> ExplorePage(state, model)
         else -> MakePage("Próximamente", "Esta parte se está terminando", onBack = { model.back() }) {
             EmptyState("Muy pronto.", "Estamos conectando esta pantalla con el servidor.", R.drawable.ic_pacto_clock)
         }

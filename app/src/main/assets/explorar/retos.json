@@ -1,0 +1,3002 @@
+[
+ {
+  "juego": "Valorant",
+  "titulo": "Ace o nada",
+  "reto": "Consigue un ace (5 bajas en una misma ronda) en una partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Valorant",
+  "titulo": "Racha de victorias",
+  "reto": "Gana 3 partidas seguidas y sube captura del historial.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Valorant",
+  "titulo": "Arma impuesta",
+  "reto": "Gana una partida usando solo el arma o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Counter-Strike 2",
+  "titulo": "Clutch 1 contra 3",
+  "reto": "Gana una ronda quedando tú solo contra 3 o más rivales.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Counter-Strike 2",
+  "titulo": "El mejor de la tabla",
+  "reto": "Termina una partida en el primer lugar de la tabla de tu equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Overwatch 2",
+  "titulo": "Jugada de la partida",
+  "reto": "Consigue la Jugada de la partida en una partida competitiva o rápida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Overwatch 2",
+  "titulo": "Dúo imbatible",
+  "reto": "Ganen 2 partidas seguidas jugando en el mismo equipo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Overwatch 2",
+  "titulo": "Semana de puntería",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos y sube captura de cada día.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Rainbow Six Siege",
+  "titulo": "Operador intocable",
+  "reto": "Gana una partida con al menos 8 bajas y máximo 3 muertes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Rainbow Six Siege",
+  "titulo": "Arma impuesta",
+  "reto": "Gana una partida usando solo el arma o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marvel Rivals",
+  "titulo": "MVP inesperado",
+  "reto": "Termina una partida como MVP usando el héroe que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marvel Rivals",
+  "titulo": "Más bajas que muertes",
+  "reto": "Termina 3 partidas seguidas con más bajas que muertes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marvel Rivals",
+  "titulo": "El mejor de la tabla",
+  "reto": "Termina una partida en el primer lugar de la tabla de tu equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Call of Duty: Black Ops 7",
+  "titulo": "Racha de 10",
+  "reto": "Consigue una racha de 10 bajas sin morir en multijugador.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Call of Duty: Black Ops 7",
+  "titulo": "Semana de puntería",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos y sube captura de cada día.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Call of Duty: Mobile",
+  "titulo": "Nuclear de bolsillo",
+  "reto": "Termina primero de la tabla en 2 partidas multijugador seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Call of Duty: Mobile",
+  "titulo": "Racha de victorias",
+  "reto": "Gana 3 partidas seguidas y sube captura del historial.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Call of Duty: Mobile",
+  "titulo": "Arma impuesta",
+  "reto": "Gana una partida usando solo el arma o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Halo Infinite",
+  "titulo": "Frenesí de bajas",
+  "reto": "Consigue una medalla de Frenesí de bajas (10 bajas sin morir) en una partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Halo Infinite",
+  "titulo": "El mejor de la tabla",
+  "reto": "Termina una partida en el primer lugar de la tabla de tu equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Battlefield 6",
+  "titulo": "Escuadra de élite",
+  "reto": "Terminen una partida de Conquista como la mejor escuadra de su equipo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Battlefield 6",
+  "titulo": "Dúo imbatible",
+  "reto": "Ganen 2 partidas seguidas jugando en el mismo equipo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Battlefield 6",
+  "titulo": "Semana de puntería",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos y sube captura de cada día.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "The Finals",
+  "titulo": "Bóveda asegurada",
+  "reto": "Ganen un torneo completo jugando en el mismo equipo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "The Finals",
+  "titulo": "Arma impuesta",
+  "reto": "Gana una partida usando solo el arma o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Team Fortress 2",
+  "titulo": "Dominación total",
+  "reto": "Domina a 3 jugadores distintos en una sola partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Team Fortress 2",
+  "titulo": "Más bajas que muertes",
+  "reto": "Termina 3 partidas seguidas con más bajas que muertes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Team Fortress 2",
+  "titulo": "El mejor de la tabla",
+  "reto": "Termina una partida en el primer lugar de la tabla de tu equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Delta Force",
+  "titulo": "Operación limpia",
+  "reto": "Gana 2 partidas de Guerra seguidas con más bajas que muertes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Delta Force",
+  "titulo": "Semana de puntería",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos y sube captura de cada día.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Marathon",
+  "titulo": "Extracción en equipo",
+  "reto": "Extraigan con todo el equipo vivo en 2 incursiones seguidas.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Marathon",
+  "titulo": "Racha de victorias",
+  "reto": "Gana 3 partidas seguidas y sube captura del historial.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marathon",
+  "titulo": "Arma impuesta",
+  "reto": "Gana una partida usando solo el arma o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Escape from Tarkov",
+  "titulo": "Tres de tres",
+  "reto": "Sobrevive y extrae en 3 incursiones seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Escape from Tarkov",
+  "titulo": "El mejor de la tabla",
+  "reto": "Termina una partida en el primer lugar de la tabla de tu equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Arc Raiders",
+  "titulo": "Vuelta a casa",
+  "reto": "Extraigan juntos con botín en 3 expediciones seguidas.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Arc Raiders",
+  "titulo": "Dúo imbatible",
+  "reto": "Ganen 2 partidas seguidas jugando en el mismo equipo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Arc Raiders",
+  "titulo": "Semana de puntería",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos y sube captura de cada día.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Destiny 2",
+  "titulo": "Incursión impecable",
+  "reto": "Completen una mazmorra o incursión sin que el equipo sea eliminado por completo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Destiny 2",
+  "titulo": "Arma impuesta",
+  "reto": "Gana una partida usando solo el arma o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Fortnite",
+  "titulo": "Victoria magistral con estilo",
+  "reto": "Gana una partida con al menos 6 eliminaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Fortnite",
+  "titulo": "Primer lugar",
+  "reto": "Gana una partida quedando en primer lugar.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Fortnite",
+  "titulo": "Caída caliente",
+  "reto": "Aterriza en la zona más concurrida del mapa y sobrevive hasta el top 10.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Apex Legends",
+  "titulo": "Campeón con 2K",
+  "reto": "Gana una partida haciendo más de 2,000 puntos de daño.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Apex Legends",
+  "titulo": "Top 5 tres veces",
+  "reto": "Termina en el top 5 en tres partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "PUBG: Battlegrounds",
+  "titulo": "Pollo para cenar",
+  "reto": "Gana una partida y sube la captura del Winner Winner Chicken Dinner.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "PUBG: Battlegrounds",
+  "titulo": "Escuadra completa",
+  "reto": "Ganen una partida en dúo o escuadra con todo el equipo vivo al final.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "PUBG: Battlegrounds",
+  "titulo": "Cinco días en la isla",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Call of Duty: Warzone",
+  "titulo": "Gulag y victoria",
+  "reto": "Ganen una partida en la que al menos uno haya regresado del Gulag.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Call of Duty: Warzone",
+  "titulo": "Caída caliente",
+  "reto": "Aterriza en la zona más concurrida del mapa y sobrevive hasta el top 10.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Free Fire",
+  "titulo": "Booyah doble",
+  "reto": "Consigue 2 Booyah el mismo día.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Free Fire",
+  "titulo": "Cazador",
+  "reto": "Consigue 8 o más eliminaciones en una sola partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Free Fire",
+  "titulo": "Top 5 tres veces",
+  "reto": "Termina en el top 5 en tres partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "PUBG Mobile",
+  "titulo": "Conquistador del día",
+  "reto": "Termina en el top 3 en tres partidas clásicas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "PUBG Mobile",
+  "titulo": "Cinco días en la isla",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Naraka: Bladepoint",
+  "titulo": "Último en pie",
+  "reto": "Gana una partida consiguiendo al menos 5 derrotas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Naraka: Bladepoint",
+  "titulo": "Primer lugar",
+  "reto": "Gana una partida quedando en primer lugar.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Naraka: Bladepoint",
+  "titulo": "Caída caliente",
+  "reto": "Aterriza en la zona más concurrida del mapa y sobrevive hasta el top 10.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Fall Guys",
+  "titulo": "Corona en mano",
+  "reto": "Gana una corona en un episodio completo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Fall Guys",
+  "titulo": "Noche de juegos",
+  "reto": "Jueguen 5 rondas; gana quien acumule más victorias.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Stumble Guys",
+  "titulo": "Primero en la meta",
+  "reto": "Gana 2 partidas completas el mismo día.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Stumble Guys",
+  "titulo": "Dos seguidas",
+  "reto": "Gana 2 rondas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Stumble Guys",
+  "titulo": "Revancha",
+  "reto": "Gánale a tu rival en el modo que él elija.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "League of Legends",
+  "titulo": "Pentakill o casi",
+  "reto": "Consigue una cuádruple o pentakill en una partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "League of Legends",
+  "titulo": "Racha de tres",
+  "reto": "Gana 3 partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dota 2",
+  "titulo": "Sin dar ventaja",
+  "reto": "Gana una partida con 2 muertes o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dota 2",
+  "titulo": "KDA de lujo",
+  "reto": "Termina una partida con un KDA de 5 o más.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dota 2",
+  "titulo": "Una diaria",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Mobile Legends: Bang Bang",
+  "titulo": "Salvaje",
+  "reto": "Consigue un Savage o un Maniac en una partida clasificatoria.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mobile Legends: Bang Bang",
+  "titulo": "Fuera de tu rol",
+  "reto": "Gana una partida en el rol o con el personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Honor of Kings",
+  "titulo": "MVP dorado",
+  "reto": "Termina como MVP en 2 partidas el mismo día.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Honor of Kings",
+  "titulo": "Dúo de línea",
+  "reto": "Ganen 2 partidas seguidas jugando juntos.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Honor of Kings",
+  "titulo": "Racha de tres",
+  "reto": "Gana 3 partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "League of Legends: Wild Rift",
+  "titulo": "Racha en la grieta",
+  "reto": "Gana 3 clasificatorias seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "League of Legends: Wild Rift",
+  "titulo": "Casi sin morir",
+  "reto": "Gana una partida con 2 muertes o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon Unite",
+  "titulo": "Anotador estrella",
+  "reto": "Anota más de 150 puntos en una sola partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon Unite",
+  "titulo": "Una diaria",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Pokémon Unite",
+  "titulo": "Fuera de tu rol",
+  "reto": "Gana una partida en el rol o con el personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Deadlock",
+  "titulo": "Carril ganado",
+  "reto": "Gana una partida destruyendo tú el primer guardián de tu carril.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Deadlock",
+  "titulo": "Racha de tres",
+  "reto": "Gana 3 partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Teamfight Tactics",
+  "titulo": "Primer lugar",
+  "reto": "Termina en primer lugar en una partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Teamfight Tactics",
+  "titulo": "Racha de tres",
+  "reto": "Gana 3 partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Teamfight Tactics",
+  "titulo": "Más rápido",
+  "reto": "Gana una partida en menos tiempo o turnos que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "EA Sports FC 26",
+  "titulo": "Goleada",
+  "reto": "Gana un partido en línea por 3 goles o más de diferencia.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "EA Sports FC 26",
+  "titulo": "Mejor de tres",
+  "reto": "Jueguen una serie al mejor de 3 entre ustedes; gana quien se lleve 2.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "eFootball",
+  "titulo": "Portería en cero",
+  "reto": "Gana 2 partidos en línea seguidos sin recibir gol.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "eFootball",
+  "titulo": "Remontada",
+  "reto": "Gana un partido o combate después de ir abajo en el marcador.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "eFootball",
+  "titulo": "Nivel leyenda",
+  "reto": "Gana un partido contra la IA en la dificultad más alta.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "NBA 2K26",
+  "titulo": "Triple doble",
+  "reto": "Consigue un triple doble con un jugador en un partido.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "NBA 2K26",
+  "titulo": "Equipo sorpresa",
+  "reto": "Gana usando el equipo o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Madden NFL 26",
+  "titulo": "Defensa de acero",
+  "reto": "Gana un partido en línea permitiendo 10 puntos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Madden NFL 26",
+  "titulo": "Racha en línea",
+  "reto": "Gana 3 partidos en línea seguidos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Madden NFL 26",
+  "titulo": "Mejor de tres",
+  "reto": "Jueguen una serie al mejor de 3 entre ustedes; gana quien se lleve 2.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "MLB The Show 26",
+  "titulo": "Blanqueada",
+  "reto": "Gana un partido sin permitir carreras.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "MLB The Show 26",
+  "titulo": "Nivel leyenda",
+  "reto": "Gana un partido contra la IA en la dificultad más alta.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Rocket League",
+  "titulo": "Gol aéreo",
+  "reto": "Anota un gol aéreo en una partida en línea y sube el clip.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Rocket League",
+  "titulo": "Temporada corta",
+  "reto": "Juega un partido diario durante 5 días seguidos y sube captura de cada resultado.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Rocket League",
+  "titulo": "Equipo sorpresa",
+  "reto": "Gana usando el equipo o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "EA Sports UFC 5",
+  "titulo": "Nocaut en el primero",
+  "reto": "Gana una pelea en línea por nocaut en el primer asalto.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "EA Sports UFC 5",
+  "titulo": "Mejor de tres",
+  "reto": "Jueguen una serie al mejor de 3 entre ustedes; gana quien se lleve 2.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "WWE 2K26",
+  "titulo": "Campeón del ring",
+  "reto": "Gana un combate Royal Rumble entrando en los primeros 10.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "WWE 2K26",
+  "titulo": "Remontada",
+  "reto": "Gana un partido o combate después de ir abajo en el marcador.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "WWE 2K26",
+  "titulo": "Nivel leyenda",
+  "reto": "Gana un partido contra la IA en la dificultad más alta.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Rematch",
+  "titulo": "Juego en equipo",
+  "reto": "Ganen un partido en el que ambos hayan dado al menos una asistencia.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Rematch",
+  "titulo": "Equipo sorpresa",
+  "reto": "Gana usando el equipo o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "EA Sports F1 25",
+  "titulo": "Pole y victoria",
+  "reto": "Gana una carrera en línea saliendo desde la pole.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "EA Sports F1 25",
+  "titulo": "Podio triple",
+  "reto": "Termina en el podio en 3 carreras seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "EA Sports F1 25",
+  "titulo": "Copa entre amigos",
+  "reto": "Corran una copa de 4 carreras entre ustedes; gana quien sume más puntos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mario Kart World",
+  "titulo": "Gran premio perfecto",
+  "reto": "Gana una copa quedando primero en todas las carreras.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mario Kart World",
+  "titulo": "Vuelta rápida",
+  "reto": "Supera el mejor tiempo de tu rival en la pista que acuerden.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mario Kart 8 Deluxe",
+  "titulo": "200 cc sin miedo",
+  "reto": "Gana una copa completa en 200 cc.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mario Kart 8 Deluxe",
+  "titulo": "Vehículo impuesto",
+  "reto": "Gana una carrera con el vehículo que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mario Kart 8 Deluxe",
+  "titulo": "Piloto constante",
+  "reto": "Corre al menos una carrera diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Forza Horizon 5",
+  "titulo": "Rey del festival",
+  "reto": "Gana 3 carreras en línea seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Forza Horizon 5",
+  "titulo": "Copa entre amigos",
+  "reto": "Corran una copa de 4 carreras entre ustedes; gana quien sume más puntos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Forza Horizon 6",
+  "titulo": "Touge",
+  "reto": "Gana un duelo de montaña cara a cara contra tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Forza Horizon 6",
+  "titulo": "Carrera limpia",
+  "reto": "Gana una carrera sin chocar ni salirte de la pista.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Forza Horizon 6",
+  "titulo": "Vuelta rápida",
+  "reto": "Supera el mejor tiempo de tu rival en la pista que acuerden.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Gran Turismo 7",
+  "titulo": "Vuelta limpia",
+  "reto": "Gana una carrera del modo Sport sin recibir penalizaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Gran Turismo 7",
+  "titulo": "Piloto constante",
+  "reto": "Corre al menos una carrera diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Need for Speed Unbound",
+  "titulo": "Sin que te atrapen",
+  "reto": "Gana una carrera y escapa de una persecución de nivel 4 o más.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Need for Speed Unbound",
+  "titulo": "Podio triple",
+  "reto": "Termina en el podio en 3 carreras seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Need for Speed Unbound",
+  "titulo": "Copa entre amigos",
+  "reto": "Corran una copa de 4 carreras entre ustedes; gana quien sume más puntos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Crew Motorfest",
+  "titulo": "Gran carrera",
+  "reto": "Termina en el top 5 de una Grand Race.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Crew Motorfest",
+  "titulo": "Vuelta rápida",
+  "reto": "Supera el mejor tiempo de tu rival en la pista que acuerden.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Trackmania",
+  "titulo": "Medalla de autor",
+  "reto": "Consigue la medalla de autor en la pista que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Trackmania",
+  "titulo": "Vehículo impuesto",
+  "reto": "Gana una carrera con el vehículo que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Trackmania",
+  "titulo": "Piloto constante",
+  "reto": "Corre al menos una carrera diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Sonic Racing: CrossWorlds",
+  "titulo": "Entre mundos",
+  "reto": "Gana un gran premio completo en dificultad alta.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Sonic Racing: CrossWorlds",
+  "titulo": "Copa entre amigos",
+  "reto": "Corran una copa de 4 carreras entre ustedes; gana quien sume más puntos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Kirby Air Riders",
+  "titulo": "Prueba urbana",
+  "reto": "Gana una partida de Prueba Urbana contra tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Kirby Air Riders",
+  "titulo": "Carrera limpia",
+  "reto": "Gana una carrera sin chocar ni salirte de la pista.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Kirby Air Riders",
+  "titulo": "Vuelta rápida",
+  "reto": "Supera el mejor tiempo de tu rival en la pista que acuerden.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Street Fighter 6",
+  "titulo": "Perfect",
+  "reto": "Gana una ronda sin recibir daño en una partida en línea.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Street Fighter 6",
+  "titulo": "Primero a cinco",
+  "reto": "Jueguen un set a 5 victorias entre ustedes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Tekken 8",
+  "titulo": "Promoción",
+  "reto": "Sube de rango en partidas igualadas antes de la fecha límite.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Tekken 8",
+  "titulo": "Ronda perfecta",
+  "reto": "Gana una ronda sin recibir daño.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Tekken 8",
+  "titulo": "Racha en línea",
+  "reto": "Gana 5 combates en línea seguidos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mortal Kombat 1",
+  "titulo": "Flawless victory",
+  "reto": "Gana un combate en línea con una ronda perfecta y remata con un Fatality.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mortal Kombat 1",
+  "titulo": "Personaje al azar",
+  "reto": "Gana 3 combates en línea con personaje aleatorio.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Super Smash Bros. Ultimate",
+  "titulo": "Tres vidas",
+  "reto": "Gana un combate de 3 vidas sin perder ninguna.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Super Smash Bros. Ultimate",
+  "titulo": "Sin tu principal",
+  "reto": "Gana un set al mejor de 5 sin usar tu personaje principal.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Super Smash Bros. Ultimate",
+  "titulo": "Primero a cinco",
+  "reto": "Jueguen un set a 5 victorias entre ustedes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Guilty Gear Strive",
+  "titulo": "Subir de piso",
+  "reto": "Sube al menos un piso en la torre de clasificación.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Guilty Gear Strive",
+  "titulo": "Racha en línea",
+  "reto": "Gana 5 combates en línea seguidos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dragon Ball: Sparking! Zero",
+  "titulo": "Equipo al azar",
+  "reto": "Gana 3 combates en línea con equipo aleatorio.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dragon Ball: Sparking! Zero",
+  "titulo": "Dojo diario",
+  "reto": "Juega al menos 3 combates diarios durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Dragon Ball: Sparking! Zero",
+  "titulo": "Personaje al azar",
+  "reto": "Gana 3 combates en línea con personaje aleatorio.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "2XKO",
+  "titulo": "Dúo de pelea",
+  "reto": "Ganen 3 combates seguidos jugando en dúo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "2XKO",
+  "titulo": "Primero a cinco",
+  "reto": "Jueguen un set a 5 victorias entre ustedes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Brawlhalla",
+  "titulo": "Sin perder vidas",
+  "reto": "Gana un combate 1v1 conservando todas tus vidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Brawlhalla",
+  "titulo": "Ronda perfecta",
+  "reto": "Gana una ronda sin recibir daño.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Brawlhalla",
+  "titulo": "Racha en línea",
+  "reto": "Gana 5 combates en línea seguidos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Helldivers 2",
+  "titulo": "Por la Supertierra",
+  "reto": "Completen una operación en dificultad 7 o superior extrayendo todos.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Helldivers 2",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Deep Rock Galactic",
+  "titulo": "Roca y piedra",
+  "reto": "Completen una misión en Peligro 4 o superior sin que nadie caiga.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Deep Rock Galactic",
+  "titulo": "Dificultad máxima",
+  "reto": "Completen una partida en la dificultad más alta que tengan desbloqueada.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Deep Rock Galactic",
+  "titulo": "El que más aporta",
+  "reto": "Termina una partida como el jugador con mejor desempeño del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Lethal Company",
+  "titulo": "Cuota cumplida",
+  "reto": "Cumplan 3 cuotas seguidas sin perder a toda la tripulación.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Lethal Company",
+  "titulo": "Contra reloj",
+  "reto": "Completen una misión en menos tiempo que su mejor marca.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "R.E.P.O.",
+  "titulo": "Extracción completa",
+  "reto": "Completen 3 niveles seguidos con todo el equipo vivo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "R.E.P.O.",
+  "titulo": "Tres seguidas",
+  "reto": "Completen 3 partidas seguidas con el equipo completo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "R.E.P.O.",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Peak",
+  "titulo": "Cumbre juntos",
+  "reto": "Lleguen a la cima con todos los integrantes vivos.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Peak",
+  "titulo": "El que más aporta",
+  "reto": "Termina una partida como el jugador con mejor desempeño del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Phasmophobia",
+  "titulo": "Investigación perfecta",
+  "reto": "Identifiquen al fantasma y completen todos los objetivos opcionales sin morir.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Phasmophobia",
+  "titulo": "Noche de squad",
+  "reto": "Jueguen juntos en 3 días distintos de la misma semana.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Phasmophobia",
+  "titulo": "Contra reloj",
+  "reto": "Completen una misión en menos tiempo que su mejor marca.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Left 4 Dead 2",
+  "titulo": "Campaña en Experto",
+  "reto": "Completen una campaña en Avanzado o Experto.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Left 4 Dead 2",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Overcooked! 2",
+  "titulo": "Tres estrellas",
+  "reto": "Consigan 3 estrellas en 5 niveles seguidos.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Overcooked! 2",
+  "titulo": "Dificultad máxima",
+  "reto": "Completen una partida en la dificultad más alta que tengan desbloqueada.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Overcooked! 2",
+  "titulo": "El que más aporta",
+  "reto": "Termina una partida como el jugador con mejor desempeño del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "It Takes Two",
+  "titulo": "Capítulo de una sentada",
+  "reto": "Completen un capítulo entero en una sola sesión.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "It Takes Two",
+  "titulo": "Contra reloj",
+  "reto": "Completen una misión en menos tiempo que su mejor marca.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Split Fiction",
+  "titulo": "Dos historias",
+  "reto": "Completen 2 capítulos en la misma semana.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Split Fiction",
+  "titulo": "Tres seguidas",
+  "reto": "Completen 3 partidas seguidas con el equipo completo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Split Fiction",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Monster Hunter Wilds",
+  "titulo": "Cacería exprés",
+  "reto": "Cacen al monstruo que acuerden en menos de 10 minutos.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Monster Hunter Wilds",
+  "titulo": "El que más aporta",
+  "reto": "Termina una partida como el jugador con mejor desempeño del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Monster Hunter: World",
+  "titulo": "Sin carretas",
+  "reto": "Completen una cacería de rango maestro sin desmayarse ninguna vez.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Monster Hunter: World",
+  "titulo": "Noche de squad",
+  "reto": "Jueguen juntos en 3 días distintos de la misma semana.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Monster Hunter: World",
+  "titulo": "Contra reloj",
+  "reto": "Completen una misión en menos tiempo que su mejor marca.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Warframe",
+  "titulo": "Resistencia",
+  "reto": "Aguanten 20 minutos en una misión de Supervivencia.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Warframe",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Sea of Thieves",
+  "titulo": "Botín a salvo",
+  "reto": "Vendan un cofre de leyendas o un tesoro de fortaleza sin hundirse.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Sea of Thieves",
+  "titulo": "Dificultad máxima",
+  "reto": "Completen una partida en la dificultad más alta que tengan desbloqueada.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Sea of Thieves",
+  "titulo": "El que más aporta",
+  "reto": "Termina una partida como el jugador con mejor desempeño del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Palworld",
+  "titulo": "Jefe de torre",
+  "reto": "Derroten juntos a un jefe de torre.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Palworld",
+  "titulo": "Contra reloj",
+  "reto": "Completen una misión en menos tiempo que su mejor marca.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Valheim",
+  "titulo": "Trofeo en la pared",
+  "reto": "Derroten juntos al siguiente jefe de su mundo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Valheim",
+  "titulo": "Tres seguidas",
+  "reto": "Completen 3 partidas seguidas con el equipo completo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Valheim",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Risk of Rain 2",
+  "titulo": "Bucle",
+  "reto": "Completen un recorrido llegando al menos a la quinta etapa sin que el equipo sea eliminado.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Risk of Rain 2",
+  "titulo": "El que más aporta",
+  "reto": "Termina una partida como el jugador con mejor desempeño del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Borderlands 4",
+  "titulo": "Jefe legendario",
+  "reto": "Derroten juntos al jefe que acuerden sin que nadie quede fuera de combate.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Borderlands 4",
+  "titulo": "Noche de squad",
+  "reto": "Jueguen juntos en 3 días distintos de la misma semana.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Borderlands 4",
+  "titulo": "Contra reloj",
+  "reto": "Completen una misión en menos tiempo que su mejor marca.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Diablo IV",
+  "titulo": "Pesadilla",
+  "reto": "Completen una mazmorra de pesadilla dentro del tiempo límite.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Diablo IV",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Path of Exile 2",
+  "titulo": "Jefe de acto",
+  "reto": "Derroten juntos a un jefe de acto sin morir.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Path of Exile 2",
+  "titulo": "Dificultad máxima",
+  "reto": "Completen una partida en la dificultad más alta que tengan desbloqueada.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Path of Exile 2",
+  "titulo": "El que más aporta",
+  "reto": "Termina una partida como el jugador con mejor desempeño del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Elden Ring Nightreign",
+  "titulo": "Señor de la noche",
+  "reto": "Derroten a un Señor de la Noche con el equipo completo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Elden Ring Nightreign",
+  "titulo": "Contra reloj",
+  "reto": "Completen una misión en menos tiempo que su mejor marca.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Warhammer 40,000: Space Marine 2",
+  "titulo": "Por el Emperador",
+  "reto": "Completen una operación en dificultad Sustancial o superior.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Warhammer 40,000: Space Marine 2",
+  "titulo": "Tres seguidas",
+  "reto": "Completen 3 partidas seguidas con el equipo completo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Warhammer 40,000: Space Marine 2",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Grounded 2",
+  "titulo": "Jefe del jardín",
+  "reto": "Derroten juntos a un insecto jefe.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Grounded 2",
+  "titulo": "El que más aporta",
+  "reto": "Termina una partida como el jugador con mejor desempeño del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Schedule I",
+  "titulo": "Negocio redondo",
+  "reto": "Completen juntos 3 jornadas seguidas sin perder la mercancía.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Schedule I",
+  "titulo": "Noche de squad",
+  "reto": "Jueguen juntos en 3 días distintos de la misma semana.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Schedule I",
+  "titulo": "Contra reloj",
+  "reto": "Completen una misión en menos tiempo que su mejor marca.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Portal 2",
+  "titulo": "Ciencia en pareja",
+  "reto": "Completen una sección entera del modo cooperativo en una sesión.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Portal 2",
+  "titulo": "Nadie se queda atrás",
+  "reto": "Completen una misión o partida sin que nadie del equipo muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Among Us",
+  "titulo": "Impostor perfecto",
+  "reto": "Gana una partida como impostor sin que te voten.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Among Us",
+  "titulo": "Al mejor de tres",
+  "reto": "Jueguen al mejor de 3 partidas entre ustedes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Among Us",
+  "titulo": "Cita semanal",
+  "reto": "Jueguen juntos en 3 días distintos de la misma semana.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Dead by Daylight",
+  "titulo": "Todos escapan",
+  "reto": "Escapen los cuatro supervivientes en una misma partida.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Dead by Daylight",
+  "titulo": "Dificultad máxima",
+  "reto": "Completen una partida en la dificultad más alta que tengan desbloqueada.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Minecraft",
+  "titulo": "Dragón derrotado",
+  "reto": "Derrota al Dragón del End en un mundo nuevo antes de la fecha límite.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Minecraft",
+  "titulo": "Meta de la semana",
+  "reto": "Alcanza el objetivo que acuerden antes de la fecha límite y sube captura del antes y el después.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Minecraft",
+  "titulo": "Tres sesiones sin perder",
+  "reto": "Juega 3 sesiones seguidas sin morir, quebrar ni reiniciar la partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Terraria",
+  "titulo": "Muro de carne",
+  "reto": "Derrota al Muro de Carne para entrar al modo difícil.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Terraria",
+  "titulo": "Desde cero",
+  "reto": "Empieza una partida nueva y llega al punto que acuerden en una semana.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Rust",
+  "titulo": "Base en pie",
+  "reto": "Mantén tu base sin ser asaltada durante 3 días.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Rust",
+  "titulo": "El encargo",
+  "reto": "Consigue o construye lo que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Rust",
+  "titulo": "Diario de partida",
+  "reto": "Juega 30 minutos diarios durante 5 días y sube captura de tu avance.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "ARK: Survival Ascended",
+  "titulo": "Domador",
+  "reto": "Doma a la criatura que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "ARK: Survival Ascended",
+  "titulo": "Tres sesiones sin perder",
+  "reto": "Juega 3 sesiones seguidas sin morir, quebrar ni reiniciar la partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "DayZ",
+  "titulo": "Superviviente",
+  "reto": "Sobrevive 3 horas de juego con el mismo personaje.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "DayZ",
+  "titulo": "Proyecto compartido",
+  "reto": "Completen entre los dos el proyecto que acuerden; cada quien sube captura de su parte.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "DayZ",
+  "titulo": "Desde cero",
+  "reto": "Empieza una partida nueva y llega al punto que acuerden en una semana.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Subnautica 2",
+  "titulo": "A las profundidades",
+  "reto": "Alcanza la profundidad que acuerden sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Subnautica 2",
+  "titulo": "Diario de partida",
+  "reto": "Juega 30 minutos diarios durante 5 días y sube captura de tu avance.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "No Man's Sky",
+  "titulo": "Explorador",
+  "reto": "Descubre y registra 5 planetas nuevos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "No Man's Sky",
+  "titulo": "Meta de la semana",
+  "reto": "Alcanza el objetivo que acuerden antes de la fecha límite y sube captura del antes y el después.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "No Man's Sky",
+  "titulo": "Tres sesiones sin perder",
+  "reto": "Juega 3 sesiones seguidas sin morir, quebrar ni reiniciar la partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "7 Days to Die",
+  "titulo": "Noche de horda",
+  "reto": "Sobrevivan a la horda del día 7 sin perder la base.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "7 Days to Die",
+  "titulo": "Desde cero",
+  "reto": "Empieza una partida nueva y llega al punto que acuerden en una semana.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Satisfactory",
+  "titulo": "Fase completada",
+  "reto": "Completa la siguiente fase del ascensor espacial.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Satisfactory",
+  "titulo": "El encargo",
+  "reto": "Consigue o construye lo que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Satisfactory",
+  "titulo": "Diario de partida",
+  "reto": "Juega 30 minutos diarios durante 5 días y sube captura de tu avance.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Factorio",
+  "titulo": "Cohete al espacio",
+  "reto": "Lanza un cohete antes de la fecha límite.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Factorio",
+  "titulo": "Tres sesiones sin perder",
+  "reto": "Juega 3 sesiones seguidas sin morir, quebrar ni reiniciar la partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Stardew Valley",
+  "titulo": "Centro comunitario",
+  "reto": "Completa un cuarto del centro comunitario en una semana real.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Stardew Valley",
+  "titulo": "Proyecto compartido",
+  "reto": "Completen entre los dos el proyecto que acuerden; cada quien sube captura de su parte.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Stardew Valley",
+  "titulo": "Desde cero",
+  "reto": "Empieza una partida nueva y llega al punto que acuerden en una semana.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Animal Crossing: New Horizons",
+  "titulo": "Isla de 5 estrellas",
+  "reto": "Juega todos los días de la semana y sube captura diaria de tu isla.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Animal Crossing: New Horizons",
+  "titulo": "Diario de partida",
+  "reto": "Juega 30 minutos diarios durante 5 días y sube captura de tu avance.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "The Sims 4",
+  "titulo": "De cero a mansión",
+  "reto": "Lleva a un Sim del nivel 1 al 10 de una carrera.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Sims 4",
+  "titulo": "Meta de la semana",
+  "reto": "Alcanza el objetivo que acuerden antes de la fecha límite y sube captura del antes y el después.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Sims 4",
+  "titulo": "Tres sesiones sin perder",
+  "reto": "Juega 3 sesiones seguidas sin morir, quebrar ni reiniciar la partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Roblox",
+  "titulo": "Experiencia sorpresa",
+  "reto": "Gana una ronda en la experiencia que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Roblox",
+  "titulo": "Desde cero",
+  "reto": "Empieza una partida nueva y llega al punto que acuerden en una semana.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Garry's Mod",
+  "titulo": "Prop Hunt",
+  "reto": "Gana 3 rondas de Prop Hunt como objeto.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Garry's Mod",
+  "titulo": "Equipo ganador",
+  "reto": "Ganen una partida o ronda jugando en el mismo equipo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Garry's Mod",
+  "titulo": "Noche de juegos",
+  "reto": "Jueguen 5 rondas; gana quien acumule más victorias.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dune: Awakening",
+  "titulo": "Cruzar el desierto",
+  "reto": "Cruza un territorio de gusanos sin perder tu vehículo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dune: Awakening",
+  "titulo": "El encargo",
+  "reto": "Consigue o construye lo que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Project Zomboid",
+  "titulo": "Un mes vivo",
+  "reto": "Sobrevive 30 días dentro del juego con el mismo personaje.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Project Zomboid",
+  "titulo": "Tres sesiones sin perder",
+  "reto": "Juega 3 sesiones seguidas sin morir, quebrar ni reiniciar la partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Project Zomboid",
+  "titulo": "Meta de la semana",
+  "reto": "Alcanza el objetivo que acuerden antes de la fecha límite y sube captura del antes y el después.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Cities: Skylines II",
+  "titulo": "Gran ciudad",
+  "reto": "Alcanza 50,000 habitantes con finanzas en positivo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Cities: Skylines II",
+  "titulo": "Proyecto compartido",
+  "reto": "Completen entre los dos el proyecto que acuerden; cada quien sube captura de su parte.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Elden Ring",
+  "titulo": "Sin invocar",
+  "reto": "Derrota al jefe que acuerden sin usar invocaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Elden Ring",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Elden Ring",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dark Souls III",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota a un jefe en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Dark Souls III",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Sekiro: Shadows Die Twice",
+  "titulo": "Sin resurrección",
+  "reto": "Derrota a un jefe sin usar la resurrección.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Sekiro: Shadows Die Twice",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Sekiro: Shadows Die Twice",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Lies of P",
+  "titulo": "Parada perfecta",
+  "reto": "Derrota a un jefe sin usar el espectro de ayuda.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Lies of P",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Black Myth: Wukong",
+  "titulo": "Gran sabio",
+  "reto": "Derrota a un jefe principal sin usar transformaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Black Myth: Wukong",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Black Myth: Wukong",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hollow Knight",
+  "titulo": "Alma de acero",
+  "reto": "Derrota a un jefe del Panteón sin recibir más de 3 golpes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hollow Knight",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Hollow Knight: Silksong",
+  "titulo": "Aguja afilada",
+  "reto": "Derrota al jefe que acuerden en 5 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hollow Knight: Silksong",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Hollow Knight: Silksong",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hades",
+  "titulo": "Escape limpio",
+  "reto": "Completa un escape con al menos 5 de Calor.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hades",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hades II",
+  "titulo": "Noche vencida",
+  "reto": "Completa una noche llegando hasta el jefe final de la ruta.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hades II",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hades II",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Cuphead",
+  "titulo": "Rango A",
+  "reto": "Derrota a un jefe con calificación A o superior.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Cuphead",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Celeste",
+  "titulo": "Lado B",
+  "reto": "Completa un Lado B con menos muertes que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Celeste",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Celeste",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "God of War Ragnarök",
+  "titulo": "Berserker",
+  "reto": "Derrota a un alma berserker.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "God of War Ragnarök",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Ghost of Yōtei",
+  "titulo": "Duelo perfecto",
+  "reto": "Gana un duelo sin recibir daño.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Ghost of Yōtei",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Ghost of Yōtei",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Ghost of Tsushima",
+  "titulo": "Leyendas",
+  "reto": "Completen una misión de Leyendas en dificultad Oro.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Ghost of Tsushima",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Marvel's Spider-Man 2",
+  "titulo": "Base en sigilo",
+  "reto": "Despeja una base enemiga sin ser detectado.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marvel's Spider-Man 2",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marvel's Spider-Man 2",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Legend of Zelda: Tears of the Kingdom",
+  "titulo": "Santuarios",
+  "reto": "Completa 10 santuarios en una semana.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Legend of Zelda: Tears of the Kingdom",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Legend of Zelda: Breath of the Wild",
+  "titulo": "Prueba de la espada",
+  "reto": "Completa la primera etapa de la Prueba de la Espada.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Legend of Zelda: Breath of the Wild",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Legend of Zelda: Breath of the Wild",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Super Mario Odyssey",
+  "titulo": "Lunas",
+  "reto": "Consigue 30 energilunas en una sola sesión.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Super Mario Odyssey",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Donkey Kong Bananza",
+  "titulo": "Banana de oro",
+  "reto": "Consigue 20 bananas doradas en una sesión.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Donkey Kong Bananza",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Donkey Kong Bananza",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Super Mario Bros. Wonder",
+  "titulo": "Sin perder vidas",
+  "reto": "Completen un mundo entero en cooperativo sin quedarse sin vidas.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Super Mario Bros. Wonder",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Resident Evil Requiem",
+  "titulo": "Sin hierbas",
+  "reto": "Completa un capítulo sin usar objetos de curación.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Resident Evil Requiem",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Resident Evil Requiem",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Resident Evil 4",
+  "titulo": "Mercenarios S",
+  "reto": "Consigue rango S en una partida de Mercenarios.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Resident Evil 4",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Crimson Desert",
+  "titulo": "Cazador de jefes",
+  "reto": "Derrota al jefe de zona que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Crimson Desert",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Crimson Desert",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Doom: The Dark Ages",
+  "titulo": "Pesadilla",
+  "reto": "Completa un capítulo en dificultad Pesadilla.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Doom: The Dark Ages",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Doom Eternal",
+  "titulo": "Ultraviolencia",
+  "reto": "Completa un nivel en Ultraviolencia sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Doom Eternal",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Doom Eternal",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Nioh 3",
+  "titulo": "Yokai caído",
+  "reto": "Derrota a un jefe sin usar elixires.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Nioh 3",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Stellar Blade",
+  "titulo": "Esquiva perfecta",
+  "reto": "Derrota a un jefe en dificultad Difícil.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Stellar Blade",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Stellar Blade",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Clair Obscur: Expedition 33",
+  "titulo": "Parry perfecto",
+  "reto": "Derrota a un jefe opcional sin que caiga ningún miembro del equipo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Clair Obscur: Expedition 33",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Baldur's Gate 3",
+  "titulo": "Tirada crítica",
+  "reto": "Completen juntos un acto en modo Táctico.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Baldur's Gate 3",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Baldur's Gate 3",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Cyberpunk 2077",
+  "titulo": "Ciberpsicópata",
+  "reto": "Derrota a 3 ciberpsicópatas sin matarlos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Cyberpunk 2077",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Witcher 3: Wild Hunt",
+  "titulo": "Contrato de brujo",
+  "reto": "Completa 5 contratos de brujo en dificultad Marcha de la Muerte.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Witcher 3: Wild Hunt",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Witcher 3: Wild Hunt",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "The Elder Scrolls V: Skyrim",
+  "titulo": "Sin viaje rápido",
+  "reto": "Completa una cadena de misiones de un gremio sin usar viaje rápido.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Elder Scrolls V: Skyrim",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Elder Scrolls IV: Oblivion Remastered",
+  "titulo": "Campeón de la Arena",
+  "reto": "Conviértete en Gran Campeón de la Arena.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Elder Scrolls IV: Oblivion Remastered",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "The Elder Scrolls IV: Oblivion Remastered",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Starfield",
+  "titulo": "Capitán",
+  "reto": "Captura una nave enemiga abordándola.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Starfield",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Hogwarts Legacy",
+  "titulo": "Duelista",
+  "reto": "Completa todos los combates de la arena de duelos de una casa.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hogwarts Legacy",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Hogwarts Legacy",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Red Dead Redemption 2",
+  "titulo": "Cazador legendario",
+  "reto": "Caza 3 animales legendarios.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Red Dead Redemption 2",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Grand Theft Auto V",
+  "titulo": "Golpe perfecto",
+  "reto": "Completen un golpe de GTA Online sin que nadie muera.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Grand Theft Auto V",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Grand Theft Auto V",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Kingdom Come: Deliverance II",
+  "titulo": "Torneo",
+  "reto": "Gana un torneo de combate.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Kingdom Come: Deliverance II",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Assassin's Creed Shadows",
+  "titulo": "Sombra",
+  "reto": "Completa un castillo sin ser detectado.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Assassin's Creed Shadows",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Assassin's Creed Shadows",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Death Stranding 2: On the Beach",
+  "titulo": "Repartidor",
+  "reto": "Completa 10 entregas con calificación S.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Death Stranding 2: On the Beach",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Metal Gear Solid Delta: Snake Eater",
+  "titulo": "Sin alertas",
+  "reto": "Completa una zona sin activar ninguna alerta.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Metal Gear Solid Delta: Snake Eater",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Metal Gear Solid Delta: Snake Eater",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Silent Hill f",
+  "titulo": "Sin miedo",
+  "reto": "Completa una zona sin usar objetos de curación.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Silent Hill f",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Final Fantasy VII Rebirth",
+  "titulo": "Simulador de combate",
+  "reto": "Completa un desafío del simulador de combate en dificultad Difícil.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Final Fantasy VII Rebirth",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Final Fantasy VII Rebirth",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Persona 5 Royal",
+  "titulo": "Un mes de vida doble",
+  "reto": "Avanza un mes del calendario del juego en una semana.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Persona 5 Royal",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon Legends: Z-A",
+  "titulo": "Rango Z-A",
+  "reto": "Sube 3 rangos en el Royale Z-A.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon Legends: Z-A",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon Legends: Z-A",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Pokémon Escarlata y Púrpura",
+  "titulo": "Teraincursión",
+  "reto": "Ganen juntos una teraincursión de 6 estrellas.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Pokémon Escarlata y Púrpura",
+  "titulo": "Dificultad alta",
+  "reto": "Completa un capítulo o zona en la dificultad más alta disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mina the Hollower",
+  "titulo": "Látigo certero",
+  "reto": "Derrota al jefe que acuerden sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mina the Hollower",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mina the Hollower",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Astro Bot",
+  "titulo": "Bots rescatados",
+  "reto": "Rescata a todos los bots de una galaxia.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Astro Bot",
+  "titulo": "Avance semanal",
+  "reto": "Avanza al menos una misión principal diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Metroid Prime 4: Beyond",
+  "titulo": "Cazarrecompensas",
+  "reto": "Derrota a un jefe sin que tu energía baje de la mitad.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Metroid Prime 4: Beyond",
+  "titulo": "Cien por ciento",
+  "reto": "Completa al 100 % la zona que acuerden.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Metroid Prime 4: Beyond",
+  "titulo": "Más rápido que tu rival",
+  "reto": "Termina el nivel o misión que acuerden en menos tiempo que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "007 First Light",
+  "titulo": "Agente silencioso",
+  "reto": "Completa una misión sin ser detectado.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "007 First Light",
+  "titulo": "Jefe a la tercera",
+  "reto": "Derrota al jefe que acuerden en 3 intentos o menos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Vampire Survivors",
+  "titulo": "Treinta minutos",
+  "reto": "Sobrevive los 30 minutos con el personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Vampire Survivors",
+  "titulo": "Sin curarte",
+  "reto": "Derrota a un jefe o completa una misión sin usar curaciones.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Vampire Survivors",
+  "titulo": "Sin morir",
+  "reto": "Completa una zona o misión entera sin morir.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Balatro",
+  "titulo": "Apuesta 8",
+  "reto": "Gana una partida con la baraja que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Balatro",
+  "titulo": "Reto impuesto",
+  "reto": "Gana una partida con el mazo, facción o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Slay the Spire 2",
+  "titulo": "Cima alcanzada",
+  "reto": "Completa una partida con el personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Slay the Spire 2",
+  "titulo": "Sube de nivel",
+  "reto": "Sube al menos un rango, liga o nivel de dificultad antes de la fecha límite.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Slay the Spire 2",
+  "titulo": "Partida diaria",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "World of Warcraft",
+  "titulo": "Piedra angular",
+  "reto": "Completen una mazmorra Mítica+ dentro del tiempo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "World of Warcraft",
+  "titulo": "Diarias sin falta",
+  "reto": "Completa tus misiones diarias 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Final Fantasy XIV",
+  "titulo": "Prueba extrema",
+  "reto": "Completen juntos una prueba Extrema.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Final Fantasy XIV",
+  "titulo": "Subida exprés",
+  "reto": "Sube los niveles que acuerden antes de la fecha límite.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Final Fantasy XIV",
+  "titulo": "Grupo completo",
+  "reto": "Completen juntos una actividad de grupo sin que nadie caiga.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Old School RuneScape",
+  "titulo": "Nivel 99 a la vista",
+  "reto": "Sube 5 niveles de la habilidad que elija tu rival.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Old School RuneScape",
+  "titulo": "Jefe de la semana",
+  "reto": "Derrota al jefe semanal más difícil que tengas disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Lost Ark",
+  "titulo": "Guardián caído",
+  "reto": "Derroten juntos a un guardián sin usar resurrecciones.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Lost Ark",
+  "titulo": "Farmeo con propósito",
+  "reto": "Consigue el objeto o material que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Lost Ark",
+  "titulo": "Diarias sin falta",
+  "reto": "Completa tus misiones diarias 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Genshin Impact",
+  "titulo": "Abismo",
+  "reto": "Consigue 9 estrellas en un piso del Abismo en espiral.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Genshin Impact",
+  "titulo": "Grupo completo",
+  "reto": "Completen juntos una actividad de grupo sin que nadie caiga.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Honkai: Star Rail",
+  "titulo": "Caos memorable",
+  "reto": "Consigue 3 estrellas en una etapa de Memoria del Caos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Honkai: Star Rail",
+  "titulo": "Contenido difícil",
+  "reto": "Completa el contenido más difícil que tengas desbloqueado.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Honkai: Star Rail",
+  "titulo": "Jefe de la semana",
+  "reto": "Derrota al jefe semanal más difícil que tengas disponible.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Zenless Zone Zero",
+  "titulo": "Defensa de Shiyu",
+  "reto": "Consigue rango S en una etapa de la Defensa de Shiyu.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Zenless Zone Zero",
+  "titulo": "Diarias sin falta",
+  "reto": "Completa tus misiones diarias 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Wuthering Waves",
+  "titulo": "Torre de la adversidad",
+  "reto": "Completa un piso de la Torre con todas las estrellas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Wuthering Waves",
+  "titulo": "Subida exprés",
+  "reto": "Sube los niveles que acuerden antes de la fecha límite.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Wuthering Waves",
+  "titulo": "Grupo completo",
+  "reto": "Completen juntos una actividad de grupo sin que nadie caiga.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Hearthstone",
+  "titulo": "Leyenda en camino",
+  "reto": "Sube 5 rangos en el modo clasificatorio.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Hearthstone",
+  "titulo": "Más rápido",
+  "reto": "Gana una partida en menos tiempo o turnos que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marvel Snap",
+  "titulo": "Snap ganador",
+  "reto": "Gana 5 partidas seguidas en las que hayas hecho Snap.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marvel Snap",
+  "titulo": "Máxima dificultad",
+  "reto": "Gana una partida en la dificultad más alta que tengas desbloqueada.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Marvel Snap",
+  "titulo": "Reto impuesto",
+  "reto": "Gana una partida con el mazo, facción o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Clash Royale",
+  "titulo": "Tres coronas",
+  "reto": "Gana 3 batallas seguidas por tres coronas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Clash Royale",
+  "titulo": "Partida diaria",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Clash of Clans",
+  "titulo": "Ataque perfecto",
+  "reto": "Consigue 3 estrellas en 2 ataques de guerra seguidos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Clash of Clans",
+  "titulo": "Racha de tres",
+  "reto": "Gana 3 partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Clash of Clans",
+  "titulo": "Más rápido",
+  "reto": "Gana una partida en menos tiempo o turnos que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Brawl Stars",
+  "titulo": "Racha estelar",
+  "reto": "Gana 5 partidas seguidas con el brawler que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Brawl Stars",
+  "titulo": "Reto impuesto",
+  "reto": "Gana una partida con el mazo, facción o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon TCG Pocket",
+  "titulo": "Cinco victorias",
+  "reto": "Gana 5 combates seguidos contra otros jugadores.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon TCG Pocket",
+  "titulo": "Sube de nivel",
+  "reto": "Sube al menos un rango, liga o nivel de dificultad antes de la fecha límite.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon TCG Pocket",
+  "titulo": "Partida diaria",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Magic: The Gathering Arena",
+  "titulo": "Draft 7-0",
+  "reto": "Consigue al menos 5 victorias en un draft.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Magic: The Gathering Arena",
+  "titulo": "Más rápido",
+  "reto": "Gana una partida en menos tiempo o turnos que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Yu-Gi-Oh! Master Duel",
+  "titulo": "Duelista",
+  "reto": "Sube un rango completo en duelos clasificatorios.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Yu-Gi-Oh! Master Duel",
+  "titulo": "Máxima dificultad",
+  "reto": "Gana una partida en la dificultad más alta que tengas desbloqueada.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Yu-Gi-Oh! Master Duel",
+  "titulo": "Reto impuesto",
+  "reto": "Gana una partida con el mazo, facción o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Chess.com",
+  "titulo": "Jaque mate",
+  "reto": "Gana 3 partidas rápidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Chess.com",
+  "titulo": "Partida diaria",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Age of Empires II: Definitive Edition",
+  "titulo": "Maravilla",
+  "reto": "Gana una partida contra la IA en dificultad Extrema o contra tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Age of Empires II: Definitive Edition",
+  "titulo": "Racha de tres",
+  "reto": "Gana 3 partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Age of Empires II: Definitive Edition",
+  "titulo": "Más rápido",
+  "reto": "Gana una partida en menos tiempo o turnos que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Age of Empires IV",
+  "titulo": "Edad imperial",
+  "reto": "Gana una partida clasificatoria con la civilización que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Age of Empires IV",
+  "titulo": "Reto impuesto",
+  "reto": "Gana una partida con el mazo, facción o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Civilization VII",
+  "titulo": "Victoria científica",
+  "reto": "Gana una partida por victoria científica.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Civilization VII",
+  "titulo": "Sube de nivel",
+  "reto": "Sube al menos un rango, liga o nivel de dificultad antes de la fecha límite.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Civilization VII",
+  "titulo": "Partida diaria",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "StarCraft II",
+  "titulo": "GG",
+  "reto": "Gana 3 partidas de la escalera seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "StarCraft II",
+  "titulo": "Más rápido",
+  "reto": "Gana una partida en menos tiempo o turnos que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Total War: Warhammer III",
+  "titulo": "Conquista",
+  "reto": "Gana una batalla en línea contra tu rival con el ejército que él elija.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Total War: Warhammer III",
+  "titulo": "Máxima dificultad",
+  "reto": "Gana una partida en la dificultad más alta que tengas desbloqueada.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Total War: Warhammer III",
+  "titulo": "Reto impuesto",
+  "reto": "Gana una partida con el mazo, facción o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Crusader Kings III",
+  "titulo": "Dinastía",
+  "reto": "Convierte un condado en reino con una sola dinastía.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Crusader Kings III",
+  "titulo": "Partida diaria",
+  "reto": "Juega al menos una partida diaria durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Stellaris",
+  "titulo": "Imperio galáctico",
+  "reto": "Sobrevive a la crisis del final de la partida.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Stellaris",
+  "titulo": "Racha de tres",
+  "reto": "Gana 3 partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Stellaris",
+  "titulo": "Más rápido",
+  "reto": "Gana una partida en menos tiempo o turnos que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "GeoGuessr",
+  "titulo": "Geógrafo",
+  "reto": "Gana un duelo contra tu rival al mejor de 3.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "GeoGuessr",
+  "titulo": "Reto impuesto",
+  "reto": "Gana una partida con el mazo, facción o personaje que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Tetris Effect: Connected",
+  "titulo": "Tetris",
+  "reto": "Supera la puntuación de tu rival en una partida de 150 líneas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Tetris Effect: Connected",
+  "titulo": "Récord a vencer",
+  "reto": "Supera la mejor puntuación de tu rival en el nivel o canción que acuerden.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Tetris Effect: Connected",
+  "titulo": "A la primera",
+  "reto": "Completa a la primera el nivel que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mario Party Jamboree",
+  "titulo": "Superestrella",
+  "reto": "Gana un tablero completo contra tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Mario Party Jamboree",
+  "titulo": "Revancha",
+  "reto": "Gánale a tu rival en el modo que él elija.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Jackbox Party Pack",
+  "titulo": "El más ingenioso",
+  "reto": "Gana 2 juegos seguidos en una misma noche.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Jackbox Party Pack",
+  "titulo": "Cita semanal",
+  "reto": "Jueguen juntos en 3 días distintos de la misma semana.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Jackbox Party Pack",
+  "titulo": "Al mejor de tres",
+  "reto": "Jueguen al mejor de 3 partidas entre ustedes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Gartic Phone",
+  "titulo": "Teléfono descompuesto",
+  "reto": "Completen una ronda en la que la frase final coincida con la original.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Gartic Phone",
+  "titulo": "Noche de juegos",
+  "reto": "Jueguen 5 rondas; gana quien acumule más victorias.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pico Park 2",
+  "titulo": "Todos a la meta",
+  "reto": "Completen 5 niveles seguidos sin reiniciar.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Pico Park 2",
+  "titulo": "Dos seguidas",
+  "reto": "Gana 2 rondas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pico Park 2",
+  "titulo": "Revancha",
+  "reto": "Gánale a tu rival en el modo que él elija.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "UNO",
+  "titulo": "Uno",
+  "reto": "Gana 3 partidas seguidas.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "UNO",
+  "titulo": "Al mejor de tres",
+  "reto": "Jueguen al mejor de 3 partidas entre ustedes.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Golf With Your Friends",
+  "titulo": "Hoyo en uno",
+  "reto": "Gana un campo de 18 hoyos y consigue al menos un hoyo en uno.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Golf With Your Friends",
+  "titulo": "Equipo ganador",
+  "reto": "Ganen una partida o ronda jugando en el mismo equipo.",
+  "categoria": "Cooperativo"
+ },
+ {
+  "juego": "Golf With Your Friends",
+  "titulo": "Noche de juegos",
+  "reto": "Jueguen 5 rondas; gana quien acumule más victorias.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Super Bomberman R 2",
+  "titulo": "Última bomba",
+  "reto": "Gana 3 rondas seguidas de batalla.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Super Bomberman R 2",
+  "titulo": "Revancha",
+  "reto": "Gánale a tu rival en el modo que él elija.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Just Dance 2026 Edition",
+  "titulo": "Megaestrella",
+  "reto": "Consigue Megaestrella en la canción que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Just Dance 2026 Edition",
+  "titulo": "Sin fallar",
+  "reto": "Completa un nivel o canción sin cometer errores.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Just Dance 2026 Edition",
+  "titulo": "Duelo de marcas",
+  "reto": "Jueguen el mismo nivel; gana quien consiga la mejor puntuación en 3 intentos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Beat Saber",
+  "titulo": "Combo completo",
+  "reto": "Completa una canción en Experto sin romper el combo.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Beat Saber",
+  "titulo": "Una dificultad arriba",
+  "reto": "Completa un nivel en una dificultad más alta de la que juegas normalmente.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "osu!",
+  "titulo": "Full combo",
+  "reto": "Consigue un full combo en un mapa de 4 estrellas o más.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "osu!",
+  "titulo": "A la primera",
+  "reto": "Completa a la primera el nivel que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "osu!",
+  "titulo": "Récord a vencer",
+  "reto": "Supera la mejor puntuación de tu rival en el nivel o canción que acuerden.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Geometry Dash",
+  "titulo": "Demonio",
+  "reto": "Completa el nivel que elija tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Geometry Dash",
+  "titulo": "Duelo de marcas",
+  "reto": "Jueguen el mismo nivel; gana quien consiga la mejor puntuación en 3 intentos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Subway Surfers",
+  "titulo": "Carrera infinita",
+  "reto": "Supera la mejor puntuación de tu rival en una sola carrera.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Subway Surfers",
+  "titulo": "Práctica diaria",
+  "reto": "Juega 15 minutos diarios durante 5 días y sube tu mejor marca de cada día.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Subway Surfers",
+  "titulo": "Una dificultad arriba",
+  "reto": "Completa un nivel en una dificultad más alta de la que juegas normalmente.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Pokémon GO",
+  "titulo": "Semana de capturas",
+  "reto": "Atrapa al menos 20 Pokémon diarios durante 5 días seguidos.",
+  "categoria": "Constancia"
+ },
+ {
+  "juego": "Pokémon GO",
+  "titulo": "Récord a vencer",
+  "reto": "Supera la mejor puntuación de tu rival en el nivel o canción que acuerden.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Friday Night Funkin'",
+  "titulo": "Sin fallar",
+  "reto": "Completa una semana en Difícil con menos fallos que tu rival.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Friday Night Funkin'",
+  "titulo": "Sin fallar",
+  "reto": "Completa un nivel o canción sin cometer errores.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Friday Night Funkin'",
+  "titulo": "Duelo de marcas",
+  "reto": "Jueguen el mismo nivel; gana quien consiga la mejor puntuación en 3 intentos.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Fortnite Festival",
+  "titulo": "Solo perfecto",
+  "reto": "Consigue 5 estrellas en una canción en Experto.",
+  "categoria": "Habilidad"
+ },
+ {
+  "juego": "Fortnite Festival",
+  "titulo": "Una dificultad arriba",
+  "reto": "Completa un nivel en una dificultad más alta de la que juegas normalmente.",
+  "categoria": "Habilidad"
+ }
+]
