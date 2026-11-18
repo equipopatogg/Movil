@@ -1,5 +1,6 @@
 package com.pactogg.app.feature.connected.presentation
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -25,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.pactogg.app.R
+import com.pactogg.app.feature.play.presentation.openStandings
 import com.pactogg.app.core.designsystem.HeroTitle
 import com.pactogg.app.core.designsystem.Initial
 import com.pactogg.app.core.designsystem.Kicker
@@ -86,7 +88,7 @@ internal fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
             else "Abre o crea un grupo para jugar", R.drawable.ic_pacto_users) { go(ConnectedRoute.GROUPS) }
         HeroTitle("Bienvenido a tu tablero", "Juega con ganas.\nCumple tu palabra.",
             "Todo lo que acuerdas con tu squad, en un mismo lugar.")
-        HomeShortcuts(go)
+        HomeShortcuts(go) { tab -> if (!state.busy) model.openStandings(tab) }
         SectionTitle("Cada pacto, un siguiente paso", "Lo que sigue")
         state.contract?.let { contract ->
             MakeCard(onClick = { go(ConnectedRoute.CONTRACT) }) {
@@ -99,9 +101,8 @@ internal fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
             LinkCard("Tablero de retos", "Los pactos de ${state.group.name}", R.drawable.ic_pacto_bolt) {
                 go(ConnectedRoute.BOARD)
             }
-            LinkCard("Palabra y ranking", "Rey del grupo, compromisos y muro de fama", R.drawable.ic_pacto_trophy) {
-                go(ConnectedRoute.STANDINGS)
-            }
+            LinkCard("Fama y Los Tramposos", "Los mejores retos y los que el jurado declaró trampa",
+                R.drawable.ic_pacto_shield) { if (!state.busy) model.openStandings("fama") }
         } else {
             MakeButton("Elegir grupo", enabled = !state.busy) { go(ConnectedRoute.GROUPS) }
         }
@@ -122,25 +123,33 @@ internal fun ConnectedHome(state: ConnectedState, model: ConnectedViewModel) {
     }
 }
 
+/** Atajos del inicio en 2 x 2: crear, crear por voz, ranking y torneos. */
 @Composable
-private fun HomeShortcuts(go: (ConnectedRoute) -> Unit) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        listOf(Triple(ConnectedRoute.CREATE, R.drawable.ic_pacto_plus, "Nuevo pacto" to "Crea un reto"),
-            Triple(ConnectedRoute.GROUPS, R.drawable.ic_pacto_users, "Tu squad" to "Juega en grupo"),
-            Triple(ConnectedRoute.TOURNAMENTS, R.drawable.ic_pacto_trophy, "Torneos" to "Compite"),
-        ).forEach { (route, icon, text) ->
-            MakeCard(Modifier.weight(1f), onClick = { go(route) }) {
-                Box(Modifier.size(34.dp).background(PactoRaised, RoundedCornerShape(9.dp)),
-                    contentAlignment = Alignment.Center) {
-                    Icon(painterResource(icon), null, tint = PactoCyan, modifier = Modifier.size(19.dp))
+private fun HomeShortcuts(go: (ConnectedRoute) -> Unit, standings: (String) -> Unit) {
+    val items = listOf(
+        Shortcut(R.drawable.ic_pacto_plus, "Nuevo pacto", "Crea un reto") { go(ConnectedRoute.CREATE) },
+        Shortcut(R.drawable.ic_pacto_mic, "Por voz", "Díctalo y listo") { go(ConnectedRoute.VOICE) },
+        Shortcut(R.drawable.ic_pacto_trophy, "Ranking", "Rey del grupo") { standings("ranking") },
+        Shortcut(R.drawable.ic_pacto_users, "Torneos", "Compite") { go(ConnectedRoute.TOURNAMENTS) },
+    )
+    items.chunked(2).forEach { row ->
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            row.forEach { item ->
+                MakeCard(Modifier.weight(1f), onClick = item.onClick) {
+                    Box(Modifier.size(34.dp).background(PactoRaised, RoundedCornerShape(9.dp)),
+                        contentAlignment = Alignment.Center) {
+                        Icon(painterResource(item.icon), null, tint = PactoCyan, modifier = Modifier.size(19.dp))
+                    }
+                    Text(item.title, style = MaterialTheme.typography.titleSmall)
+                    Text(item.copy, style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                Text(text.first, style = MaterialTheme.typography.titleSmall)
-                Text(text.second, style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }
 }
+
+private class Shortcut(@DrawableRes val icon: Int, val title: String, val copy: String, val onClick: () -> Unit)
 
 @Composable
 private fun TournamentLink(onClick: () -> Unit) {

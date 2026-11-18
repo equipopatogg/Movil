@@ -158,6 +158,13 @@ fun ConnectedViewModel.deleteNotice(notice: Notice) = perform {
 
 // ------------------------------------------------------------------ Palabra y ranking (PL-03)
 
+/** Atajo del inicio: abre "Palabra y ranking" directo en una pestaña (ranking, libro, fama o tramposos). */
+fun ConnectedViewModel.openStandings(tab: String) {
+    if (state.value.busy) return
+    updatePlay { it.copy(standingsTab = tab) }
+    navigate(ConnectedRoute.STANDINGS)
+}
+
 fun ConnectedViewModel.standingsTab(tab: String) {
     if (state.value.busy) return
     updatePlay { it.copy(standingsTab = tab) }
@@ -173,7 +180,7 @@ fun ConnectedViewModel.loadStandings() {
             updatePlay { it.copy(iOwe = owe, owedToMe = owed, commitmentsLoaded = true) }
         }
         "fama" -> perform { val fame = play.fame(group.id); updatePlay { it.copy(fame = fame) } }
-        "integridad" -> perform { val shame = play.shame(group.id); updatePlay { it.copy(shame = shame) } }
+        "ban" -> perform { val shame = play.shame(group.id); updatePlay { it.copy(shame = shame) } }
         else -> perform { val ranking = play.ranking(group.id); updatePlay { it.copy(ranking = ranking) } }
     }
 }

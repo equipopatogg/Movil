@@ -40,9 +40,9 @@ import com.pactogg.app.feature.play.domain.RankingEntry
 import com.pactogg.app.ui.theme.PactoCyan
 import com.pactogg.app.ui.theme.PactoOrange
 
-private val Tabs = listOf("Ranking" to "ranking", "Libro" to "libro", "Fama" to "fama", "Integridad" to "integridad")
+private val Tabs = listOf("Ranking" to "ranking", "Libro" to "libro", "Fama" to "fama", "Tramposos" to "ban")
 
-/** Palabra y ranking (maqueta `compromisos`, spec PL-03): Ranking, Libro, Fama e Integridad. */
+/** Palabra y ranking (maqueta `compromisos`, spec PL-03): Ranking, Libro, Muro de la Fama y Los Tramposos. */
 @Composable
 internal fun StandingsScreen(state: ConnectedState, model: ConnectedViewModel) {
     var info by rememberSaveable { mutableStateOf(false) }
@@ -62,7 +62,7 @@ internal fun StandingsScreen(state: ConnectedState, model: ConnectedViewModel) {
         when (play.standingsTab) {
             "libro" -> CommitmentsTab(state, model)
             "fama" -> FameTab(state)
-            "integridad" -> ShameTab(state)
+            "ban" -> ShameTab(state)
             else -> RankingTab(state)
         }
         MakeCard(onClick = { info = !info }) {
@@ -72,7 +72,7 @@ internal fun StandingsScreen(state: ConnectedState, model: ConnectedViewModel) {
                     style = MaterialTheme.typography.bodySmall)
                 Text("Índice de palabra: sube al cumplir retos y compromisos a tiempo; baja con trampas y vencidos.",
                     style = MaterialTheme.typography.bodySmall)
-                Text("Integridad: solo retos que el jurado resolvió como trampa.",
+                Text("Los Tramposos: solo retos que el jurado resolvió como trampa.",
                     style = MaterialTheme.typography.bodySmall)
             }
         }
@@ -182,6 +182,7 @@ private fun FameTab(state: ConnectedState) {
 @Composable
 private fun ShameTab(state: ConnectedState) {
     val shame = state.play.shame.orEmpty()
+    Kicker("Los Tramposos · retos que el jurado declaró trampa")
     if (shame.isEmpty()) {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Pill("Sin casos confirmados", Tone.Orange)

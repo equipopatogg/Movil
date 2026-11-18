@@ -7,8 +7,10 @@ Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLAS ESCRITAS, FALTA COMPI
 - RF2: **Ranking**: `GET /groups/{gid}/ranking` → podio de 3 y lista, con el Rey del Grupo (`king`).
 - RF3: **Libro**: `GET /groups/{gid}/commitments?role=debo|me-deben`; el contador sale del tamaño de cada lista. El acreedor marca "Cumplido" (`POST /commitments/{id}/complete`); el deudor "Ya cumplí" (`POST /commitments/{id}/request-complete`).
 - RF4: **Fama**: `GET /groups/{gid}/fame` con juego, condición, recompensa y fotos/enlaces.
-- RF5: **Integridad**: `GET /groups/{gid}/shame`. Sin casos se muestra el texto de la maqueta ("No señalamos a nadie sin consenso").
+- RF5: **Los Tramposos** (antes "Integridad"; el PO pidió un nombre menos cringe que "Muro de la Vergüenza", 2026-11-17): `GET /groups/{gid}/shame`. Sin casos se muestra el texto de la maqueta ("No señalamos a nadie sin consenso").
 - RF6: Explicación "¿Cómo se calcula?" con el texto de la maqueta.
+
+- RF7 (2026-11-17): el inicio tiene atajos en 2 x 2: Nuevo pacto, Por voz, Ranking (abre la pestaña Ranking) y Torneos; y la tarjeta "Fama y Los Tramposos" abre la pestaña Fama.
 
 ## Criterios
 | ID | Resultado |
