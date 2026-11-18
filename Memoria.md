@@ -236,3 +236,21 @@ Usuario autoriza botones navegables. En catálogo: acceso → tablero; Explorar/
 ## Ajustes visuales locales — 2026-11-05
 
 Zona segura dinámica, mensajes contextuales y confirmaciones modales implementados. [Resultado UX-01](docs/pruebas/ajustes-ux-2026-11-05.md): 239 JVM, 14 Android y controles locales correctos. Revisión visual del usuario pendiente. Sin Git/publicación; recuentos anteriores conservados como históricos.
+
+## Cierre del sprint sin IA — 2026-11-16
+
+Decisión del PO: terminar todo lo pendiente del sprint planning menos la IA. Escrito, sin compilar todavía:
+- Torneos: el tamaño del cuadro ahora es un selector 4/8/16 (el backend rechaza otros valores).
+- [PL-10](specs/PL-10-push/spec.md) notificaciones push con FCM, traído y adaptado de `codex/push-google-notificaciones-20261109`. `google-services.json` sigue fuera de Git.
+- [PL-11](specs/PL-11-recuperar-contrasena/spec.md) recuperar contraseña con enlace del correo.
+- [PL-12](specs/PL-12-sin-conexion/spec.md) lectura sin conexión con Room (solo lectura; las acciones no se repiten solas). Incluye la nota de permisos.
+Pruebas nuevas: `PushRegistrationTest`, `DeviceApiTest`, `PasswordRecoveryApiTest`, `OfflineCacheTest`, registradas en `docs/pruebas/operaciones.json`.
+
+## Correcciones tras la prueba del PO — 2026-11-17
+
+- Fecha y hora con calendario y reloj del sistema (`DateTimeField`) en crear reto y crear torneo.
+- Votación (PL-01 RF7): si no aparece el formulario se explica por qué (parte del reto, no te tocó ser jurado, sin jurado, aún sin evidencia); "Actualizar" recarga la votación; el detalle dice "Ver votación y votar".
+- Fotos de evidencia (PL-01 RF8): dos reintentos automáticos y "Toca para reintentar" en la tarjeta.
+- Foto de perfil (PL-09 RF-FOTO) con el endpoint nuevo del backend USR-07; `AvatarBadge` en perfil y miembros.
+- "Kills" bloqueado: era Comprehend en el backend (F2-D76), no la app.
+Pruebas nuevas: `VoteBlockedReasonTest`, `PlayApiTest.PL_09_avatarPhotoUploadsMultipartAndMapsPhotoUrl`.

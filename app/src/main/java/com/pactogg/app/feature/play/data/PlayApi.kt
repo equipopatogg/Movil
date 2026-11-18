@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
@@ -113,6 +114,11 @@ interface PlayApi {
     suspend fun nextMatch(@Header(Auth) bearer: String): Response<NextMatchEnvelope>
 
     @Multipart
+    @POST("api/v1/users/me/avatar")
+    suspend fun uploadAvatar(@Header(Auth) bearer: String, @Part file: MultipartBody.Part):
+        Response<PlayEnvelope<com.pactogg.app.feature.connected.data.ProfileDto>>
+
+    @Multipart
     @POST("api/v1/matches/{id}/report")
     suspend fun reportMatch(@Header(Auth) bearer: String, @Path("id") id: String, @Part file: MultipartBody.Part,
         @Part("p1_score") p1: RequestBody, @Part("p2_score") p2: RequestBody,
@@ -128,6 +134,20 @@ interface PlayApi {
     @POST("api/v1/matches/{id}/resolve")
     suspend fun resolveMatch(@Header(Auth) bearer: String, @Path("id") id: String,
         @Body body: ResolveMatchRequest): Response<PlayEnvelope<PlayMatchDto>>
+
+    // Cuenta y seguridad
+    @PATCH("api/v1/users/me")
+    suspend fun avatar(@Header(Auth) bearer: String,
+        @Body body: AvatarPatch): Response<PlayEnvelope<com.pactogg.app.feature.connected.data.ProfileDto>>
+
+    @HTTP(method = "DELETE", path = "api/v1/users/me", hasBody = true)
+    suspend fun deleteAccount(@Header(Auth) bearer: String, @Body body: DeleteAccountRequest): Response<Unit>
+
+    @POST("api/v1/reports")
+    suspend fun report(@Header(Auth) bearer: String, @Body body: ReportRequest): Response<Unit>
+
+    @POST("api/v1/users/{id}/block")
+    suspend fun block(@Header(Auth) bearer: String, @Path("id") id: String): Response<Unit>
 
     // Voz
     @POST("api/v1/groups/{gid}/contracts/parse")

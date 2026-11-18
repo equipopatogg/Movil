@@ -20,3 +20,7 @@ La demo es obligatoria. Es un recorrido local, sin cuenta, que explica el produc
 | PL-07-AC2 | La animación de voz escribe primero la frase y luego los campos en orden, sin micrófono. |
 | PL-07-AC3 | Salir o Atrás en el primer paso regresa al acceso; "Crear mi cuenta" abre el registro. |
 | PL-07-AC4 | La demo no hace ninguna llamada de red. |
+
+## Ampliación 2026-11-15 (IDs 3 y 4 del backlog)
+- RF7: Dos pasos más al final, con lo que la demo queda en bienvenida + 6 pasos: **"Tus amigos deciden"** (hay 2 votos de 3; la persona vota legítimo o trampa y ve el resultado simulado) y **"Reta a otros squads"** (cuadro de 4 squads de ejemplo; se toca al ganador de cada partida hasta tener campeón). Todo local.
+| PL-07-AC5 | Votar en la demo muestra un resultado simulado y elegir ganadores arma el cuadro hasta el campeón. |

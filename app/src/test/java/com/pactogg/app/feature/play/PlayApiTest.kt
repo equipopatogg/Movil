@@ -176,4 +176,63 @@ class PlayApiTest {
             assertEquals(1, f.server.requestCount)
         }
     }
+
+    @Test fun PL_09_avatarPatchSendsOnlyAvatarAndMapsProfile() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare()
+            f.server.enqueue(ApiTestFixture.json(ApiTestFixture.envelope(
+                ApiTestFixture.profileJson.replace("\"avatar_id\":\"default\"", "\"avatar_id\":\"cyan\""))))
+            val profile = f.play.avatar("cyan")
+            val request = f.server.takeRequest()
+            assertEquals("PATCH", request.method); assertEquals("/api/v1/users/me", request.path)
+            assertEquals("{\"avatar_id\":\"cyan\"}", request.body.readUtf8())
+            assertEquals("cyan", profile.avatar)
+        }
+    }
+
+    @Test fun PL_09_avatarPhotoUploadsMultipartAndMapsPhotoUrl() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare()
+            val url = "https://cdn.example/avatars/x.jpg"
+            f.server.enqueue(ApiTestFixture.json(ApiTestFixture.envelope(ApiTestFixture.profileJson
+                .replace("\"avatar_id\":\"default\"", "\"avatar_id\":\"photo\",\"avatar_url\":\"$url\""))))
+            val profile = f.play.avatarPhoto(byteArrayOf(1, 2, 3), "image/jpeg")
+            val request = f.server.takeRequest()
+            assertEquals("POST", request.method); assertEquals("/api/v1/users/me/avatar", request.path)
+            assertTrue(request.getHeader("Content-Type").orEmpty().startsWith("multipart/form-data"))
+            assertTrue(request.body.readUtf8().contains("name=\"file\"; filename=\"avatar.jpg\""))
+            assertEquals("photo", profile.avatar); assertEquals(url, profile.avatarUrl)
+        }
+    }
+
+    @Test fun PL_09_deleteAccountSendsConfirmationInDeleteBody() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare()
+            f.server.enqueue(ApiTestFixture.json("", 204))
+            f.play.deleteAccount("clave-de-prueba-123")
+            val request = f.server.takeRequest()
+            assertEquals("DELETE", request.method); assertEquals("/api/v1/users/me", request.path)
+            assertEquals("Bearer $Access", request.getHeader("Authorization"))
+            val body = request.body.readUtf8()
+            assertTrue(body.contains("\"confirm\":\"ELIMINAR\"")); assertTrue(body.contains("\"password\""))
+            assertEquals(1, f.server.requestCount)
+        }
+    }
+
+    @Test fun PL_09_reportAndBlockUseServerRoutesAndReasons() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare()
+            f.server.enqueue(ApiTestFixture.json(ApiTestFixture.envelope("""{"id":"$OtherId"}"""), 201))
+            f.server.enqueue(ApiTestFixture.json("", 204))
+            f.play.reportUser(GroupId, OtherId, "trampa")
+            f.play.blockUser(OtherId)
+            val report = f.server.takeRequest()
+            assertEquals("/api/v1/reports", report.path)
+            val body = report.body.readUtf8()
+            listOf("\"target_type\":\"user\"", "\"target_id\":\"$OtherId\"", "\"reason\":\"trampa\"")
+                .forEach { assertTrue(it, body.contains(it)) }
+            val block = f.server.takeRequest()
+            assertEquals("POST", block.method); assertEquals("/api/v1/users/$OtherId/block", block.path)
+        }
+    }
 }

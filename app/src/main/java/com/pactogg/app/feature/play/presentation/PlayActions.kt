@@ -12,6 +12,7 @@ import com.pactogg.app.feature.connected.presentation.ConnectedRoute
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
 import com.pactogg.app.feature.connected.presentation.ListState
 import com.pactogg.app.feature.play.domain.Commitment
+import com.pactogg.app.feature.play.domain.TournamentSizes
 import com.pactogg.app.feature.play.domain.NewTournament
 import com.pactogg.app.feature.play.domain.Notice
 import java.util.UUID
@@ -200,13 +201,14 @@ fun ConnectedViewModel.createTournament() {
     val max = form.maxGroups.toIntOrNull()
     val entry = form.entryPoints.toIntOrNull()
     val draft = date?.let { day ->
-        if (form.game.isNotBlank() && (max ?: 0) in 2..16 && (entry ?: -1) in 0..500) {
+        val sizeOk = max?.let { it in TournamentSizes } == true
+        if (form.game.isNotBlank() && sizeOk && (entry ?: -1) in 0..500) {
             NewTournament(form.game, max ?: 0, entry ?: 0, day)
         } else null
     }
     if (draft == null) {
-        mutable.update { it.copy(error = "Escribe el juego, de 2 a 16 grupos, inscripción de 0 a 500 " +
-            "y fecha AAAA-MM-DD HH:mm.") }
+        mutable.update { it.copy(error = "Escribe el juego, elige 4, 8 o 16 grupos, inscripción de 0 a 500 " +
+            "y elige la fecha en el calendario.") }
         return
     }
     perform {

@@ -28,6 +28,9 @@ class SessionManager(internal val api: PactoApi, private val store: SessionStore
     private var initialized = false
     private var generation = 0L
 
+    /** Baja del teléfono para push antes de cerrar (PL-10 RF3). Un fallo no impide el cierre local. */
+    var beforeLogout: (suspend () -> Boolean)? = null
+
     suspend fun restore() = withContext(Dispatchers.IO) {
         mutex.withLock {
             if (!initialized) {
@@ -105,6 +108,11 @@ class SessionManager(internal val api: PactoApi, private val store: SessionStore
 
     /** Return true only when remote revocation is confirmed. Always close locally. */
     suspend fun logout(): Boolean = withContext(Dispatchers.IO) {
+        val hook = beforeLogout
+        if (hook != null) {
+            val problem = runCatching { hook() }.exceptionOrNull()
+            if (problem is kotlinx.coroutines.CancellationException) throw problem
+        }
         val previous = mutex.withLock {
             val value = mutable.value
             withContext(NonCancellable) { clearLocked() }

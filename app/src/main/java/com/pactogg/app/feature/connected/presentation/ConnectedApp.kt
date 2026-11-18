@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.LinkCard
+import com.pactogg.app.core.offline.OfflineBanner
 import com.pactogg.app.feature.auth.presentation.AccessEvent
 import com.pactogg.app.feature.auth.presentation.AccessScreen
 import com.pactogg.app.feature.demo.presentation.DemoScreen
@@ -47,6 +48,7 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
         SignedOut(state, model)
         return
     }
+    PushEffects(model)
     BackHandler(state.route != ConnectedRoute.HOME || state.selectedTournament != null) {
         if (state.selectedTournament != null) model.tournament(null) else model.back()
     }
@@ -55,6 +57,7 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
     }, bottomBar = { ConnectedNavigation(state.route, state.busy, model::navigate) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
             if (state.busy) LinearProgressIndicator(Modifier.fillMaxWidth())
+            OfflineBanner()
             Box(Modifier.weight(1f)) { ConnectedContent(state, model) }
         }
     }
@@ -74,6 +77,7 @@ private fun SignedOut(state: ConnectedState, model: ConnectedViewModel) {
     AccessScreen(state.access.copy(loading = state.busy), model::access,
         fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code) {
         if (state.access.registering) state.social.nicknameNotice?.let { Text(it) }
+        if (!state.access.registering) PasswordRecovery(state, model)
         GoogleAccess(state, model)
         if (!state.access.registering) LinkCard("Probar la demo interactiva",
             "2 minutos · Sin registro · Sin dinero real",

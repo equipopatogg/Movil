@@ -4,6 +4,7 @@ import android.content.Context
 import com.pactogg.app.BuildConfig
 import com.pactogg.app.core.network.ApiClientFactory
 import com.pactogg.app.core.network.PactoApi
+import com.pactogg.app.core.offline.OfflineCache
 import com.pactogg.app.core.session.SessionManager
 import com.pactogg.app.feature.auth.data.EncryptedSessionStore
 import com.pactogg.app.feature.auth.domain.SessionStore
@@ -21,15 +22,17 @@ import javax.inject.Singleton
 object ConnectedModule {
     @Provides
     @Singleton
-    fun api(factory: ApiClientFactory): PactoApi {
-        val client = ApiClientFactory.defaultClient().newBuilder().retryOnConnectionFailure(false).build()
+    fun api(factory: ApiClientFactory, offline: OfflineCache): PactoApi {
+        val client = ApiClientFactory.defaultClient().newBuilder().retryOnConnectionFailure(false)
+            .addInterceptor(offline).build()
         return factory.create(BuildConfig.API_BASE_URL, client).create(PactoApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun playApi(factory: ApiClientFactory): com.pactogg.app.feature.play.data.PlayApi {
-        val client = ApiClientFactory.defaultClient().newBuilder().retryOnConnectionFailure(false).build()
+    fun playApi(factory: ApiClientFactory, offline: OfflineCache): com.pactogg.app.feature.play.data.PlayApi {
+        val client = ApiClientFactory.defaultClient().newBuilder().retryOnConnectionFailure(false)
+            .addInterceptor(offline).build()
         return factory.create(BuildConfig.API_BASE_URL, client)
             .create(com.pactogg.app.feature.play.data.PlayApi::class.java)
     }

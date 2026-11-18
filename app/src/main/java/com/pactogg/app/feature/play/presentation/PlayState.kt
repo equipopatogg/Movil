@@ -61,6 +61,8 @@ data class PlayState(
     // Voz
     // Acceso con Google: ID token en espera de apodo y consentimiento (solo en memoria).
     val googleToken: String? = null,
+    // Recuperar contraseña: token del enlace del correo (solo en memoria, PL-11).
+    val resetToken: String? = null,
     // Pantalla que pidió elegir grupo: al elegirlo se regresa a ella.
     val afterGroup: com.pactogg.app.feature.connected.presentation.ConnectedRoute? = null,
     // Explorar: idea (juego, reto) elegida sin grupo; se aplica al elegir uno.

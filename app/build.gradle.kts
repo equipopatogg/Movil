@@ -1,3 +1,4 @@
+import groovy.json.JsonSlurper
 import java.net.URI
 
 plugins {
@@ -22,6 +23,23 @@ require(apiBaseUrl.isEmpty() || URI(apiBaseUrl).let {
         it.query == null && it.fragment == null && it.path.endsWith("/")
 }) { "pactogg.apiBaseUrl debe ser una URL HTTPS pública, sin credenciales y terminada en /." }
 
+// PL-10: solo la parte pública del cliente Android de Firebase; nunca una cuenta de servicio.
+// google-services.json no se versiona: sin él la app compila y el push queda "no configurado".
+val firebaseConfig = file("google-services.json").takeIf { it.exists() }?.let { JsonSlurper().parse(it) as Map<*, *> }
+require(firebaseConfig?.get("type") != "service_account") { "Usa la configuración Android, no una cuenta de servicio." }
+val firebaseClient = (firebaseConfig?.get("client") as? List<*>)?.filterIsInstance<Map<*, *>>()?.singleOrNull {
+    ((it["client_info"] as? Map<*, *>)?.get("android_client_info") as? Map<*, *>)?.get("package_name") ==
+        "com.pactogg.app"
+}
+require(firebaseConfig == null || firebaseClient != null) { "google-services.json no corresponde a com.pactogg.app." }
+val firebaseValues = mapOf(
+    "google_app_id" to (firebaseClient?.get("client_info") as? Map<*, *>)?.get("mobilesdk_app_id"),
+    "gcm_defaultSenderId" to (firebaseConfig?.get("project_info") as? Map<*, *>)?.get("project_number"),
+    "project_id" to (firebaseConfig?.get("project_info") as? Map<*, *>)?.get("project_id"),
+    "google_api_key" to ((firebaseClient?.get("api_key") as? List<*>)?.firstOrNull() as? Map<*, *>)?.get("current_key"),
+).mapValues { (_, value) -> value?.toString().orEmpty() }
+require(firebaseValues.values.all { it.matches(Regex("[A-Za-z0-9_:.-]*")) }) { "Configuración Firebase inválida." }
+
 android {
     namespace = "com.pactogg.app"
     compileSdk {
@@ -39,6 +57,7 @@ android {
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
         buildConfigField("String", "PRIVACY_VERSION", "\"$privacyVersion\"")
         buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$googleWebClientId\"")
+        firebaseValues.forEach { (name, value) -> resValue("string", name, value) }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -60,6 +79,7 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        resValues = true
     }
     lint {
         abortOnError = true
@@ -102,6 +122,7 @@ dependencies {
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services)
     implementation(libs.google.identity)
+    implementation(libs.firebase.messaging)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockwebserver)

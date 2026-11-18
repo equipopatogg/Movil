@@ -3,7 +3,7 @@
 Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLAS ESCRITAS, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Amplía MO-TOR-02 (consulta). Backend: TOR-01, TOR-03, TOR-06, TOR-07, TOR-08, MAT-01..07 (API 0.12.x). Maqueta: `torneos`, `torneo/nuevo`, `torneo/bracket`, `torneo/reportar`, `torneo/confirmar`.
 
 ## Requisitos
-- RF1: **Nuevo torneo** (admin del grupo seleccionado): juego, formato (por defecto eliminación directa), máx. grupos (2–16), inscripción en puntos y fecha → `POST /groups/{gid}/tournaments`. Muestra el código para compartir.
+- RF1: **Nuevo torneo** (admin del grupo seleccionado): juego, formato (por defecto eliminación directa), tamaño del cuadro 4, 8 o 16 grupos (selector; el backend rechaza otros valores, corrección 2026-11-16), inscripción en puntos y fecha → `POST /groups/{gid}/tournaments`. Muestra el código para compartir.
 - RF2: **Inscribirse con código**: `POST /tournaments/{code}/join` con `group_id` del grupo seleccionado e `Idempotency-Key`. Salir: `DELETE /tournaments/{id}/join`.
 - RF3: **Detalle** (`GET /tournaments/{id}`): grupos con su nombre, bolsa, estado y bracket por rondas con nombres de grupo. El organizador ve "Iniciar torneo" (`POST /tournaments/{id}/start`) cuando hay 2 o más grupos.
 - RF4: **Partida** (`GET /matches/{id}`): foto del resultado (`screenshot_url`), marcador y estado.

@@ -56,6 +56,15 @@ data class VoiceMember(val id: String, val nickname: String)
 data class VoiceDraft(val targetId: String?, val targetNickname: String?, val game: String, val condition: String,
     val reward: String, val missingFields: List<String>, val rivalUnmatched: Boolean, val members: List<VoiceMember>)
 
+/** Avatares de color de la maqueta. "default" se muestra como naranja. */
+val AvatarIds = listOf("violet", "cyan", "orange")
+
+/** Motivos que acepta el servidor para un reporte, con su texto en pantalla. */
+val ReportReasons = listOf("Ofensivo" to "ofensivo", "Trampa" to "trampa", "Spam" to "spam", "Otro" to "otro")
+
+/** Tamaños que acepta el backend para el cuadro de eliminación directa (TOR-01). */
+val TournamentSizes = listOf(4, 8, 16)
+
 data class NewTournament(val game: String, val maxGroups: Int, val entryPoints: Int, val scheduledAt: String)
 
 @Suppress("TooManyFunctions")
@@ -93,4 +102,10 @@ interface PlayRepository {
     suspend fun resolveMatch(id: String, winnerGroupId: String, reason: String?): PlayMatch
 
     suspend fun parsePhrase(groupId: String, phrase: String): VoiceDraft
+
+    suspend fun avatar(id: String): com.pactogg.app.feature.connected.domain.Profile
+    suspend fun avatarPhoto(photo: ByteArray, mimeType: String): com.pactogg.app.feature.connected.domain.Profile
+    suspend fun deleteAccount(password: String?)
+    suspend fun reportUser(groupId: String, userId: String, reason: String)
+    suspend fun blockUser(userId: String)
 }

@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.ButtonKind
+import com.pactogg.app.core.designsystem.DateTimeField
 import com.pactogg.app.core.designsystem.EmptyState
 import com.pactogg.app.core.designsystem.GameMark
 import com.pactogg.app.core.designsystem.InfoRow
@@ -74,8 +75,8 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
             MakeField("Videojuego", draft.game, { model.draft(draft.copy(game = it)) })
             MakeField("¿Qué hay que conseguir?", draft.condition, { model.draft(draft.copy(condition = it)) },
                 hint = "Sé específico para evitar dudas del jurado.", multiline = true)
-            MakeField("Fecha límite (AAAA-MM-DD HH:mm)", state.deadlineLocal, model::deadline,
-                hint = "Hora de tu teléfono; se envía en UTC.")
+            DateTimeField("Fecha límite", state.deadlineLocal, enabled = !state.busy,
+                hint = "Toca para elegir en el calendario y el reloj.", onChange = model::deadline)
         }
         MakeCard {
             StepIntro("02", "Elige a tu rival", "La invitación queda pendiente hasta que acepte.")
@@ -141,7 +142,8 @@ fun ConnectedContract(state: ConnectedState, model: ConnectedViewModel) {
         }
         ConnectedContractActions(state, model, contract)
         if (contract.status in setOf("voting", "fulfilled", "cheating")) {
-            MakeButton("Votación y resultado", ButtonKind.Secondary, enabled = !state.busy) {
+            MakeButton(if (contract.status == "voting") "Ver votación y votar" else "Ver resultado",
+                ButtonKind.Secondary, enabled = !state.busy) {
                 model.openVote(contract)
             }
         }

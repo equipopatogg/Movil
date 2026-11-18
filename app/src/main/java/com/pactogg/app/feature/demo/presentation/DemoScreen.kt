@@ -50,15 +50,18 @@ import kotlinx.coroutines.delay
 
 private const val TickMillis = 38L
 private const val PulseMillis = 700
-private val StepNames = listOf("Bienvenida", "Descubre", "Arma tu reto", "Comprueba", "Revisión")
+private val StepNames = listOf("Bienvenida", "Descubre", "Arma tu reto", "Comprueba", "Evidencia", "Jurado",
+    "Torneos")
 private val Titles = listOf("Prueba PactoGG en 2 minutos", "Una partida. Un pacto.", "Dilo y la IA arma tu reto",
-    "Todo claro antes de jugar", "Tu evidencia, en buenas manos")
+    "Todo claro antes de jugar", "Tu evidencia, en buenas manos", "Tus amigos deciden", "Reta a otros squads")
 private val Captions = listOf(
     "Sin registro. Sin dinero real. Descubre una nueva forma de cumplir tu palabra.",
     "Transforma una partida entre amigos en un acuerdo con reglas claras.",
     "Mira cómo una frase se convierte en un reto. Aquí es una animación: nadie habla ni se envía nada.",
     "Comprueba las condiciones del acuerdo antes de lanzarlo.",
-    "Subes tu prueba y un jurado de amigos decide. No hay ganador automático.")
+    "Subes tu prueba y un jurado de amigos decide. No hay ganador automático.",
+    "Tres amigos del grupo ven la evidencia y votan. Prueba a votar tú.",
+    "Tu grupo contra otros en eliminación directa. Toca a quien gana para que avance.")
 
 /** Demo guiada antes de iniciar sesión (maqueta `demo`, spec PL-07). Todo es local y de ejemplo. */
 @Composable
@@ -79,7 +82,9 @@ fun DemoScreen(onExit: () -> Unit, onRegister: () -> Unit) {
             1 -> DemoAgreement()
             2 -> DemoVoice()
             3 -> DemoReview()
-            else -> DemoEvidence()
+            4 -> DemoEvidence()
+            5 -> DemoJury()
+            else -> DemoTournament()
         }
         DemoFooter(step, onNext = { if (step < DemoLastStep) step++ else onRegister() },
             onBack = { if (step > 0) step-- else onExit() })

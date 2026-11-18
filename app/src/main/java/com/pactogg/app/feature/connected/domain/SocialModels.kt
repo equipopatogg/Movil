@@ -4,9 +4,9 @@ import com.pactogg.app.feature.auth.domain.Account
 
 data class Profile(val account: Account, val avatar: String, val emailVerified: Boolean,
     val completed: Int, val cheated: Int, val streak: Int, val trophies: Int, val wordIndex: Int,
-    val groupsCount: Int)
+    val groupsCount: Int, val avatarUrl: String? = null)
 data class Member(val id: String, val nickname: String, val avatar: String, val role: String,
-    val points: Int, val joinedAt: String)
+    val points: Int, val joinedAt: String, val avatarUrl: String? = null)
 data class Page<T>(val items: List<T>, val hasMore: Boolean, val cursor: String?)
 data class BoardFilter(val status: String? = null, val mine: Boolean = false,
     val game: String = "", val query: String = "")

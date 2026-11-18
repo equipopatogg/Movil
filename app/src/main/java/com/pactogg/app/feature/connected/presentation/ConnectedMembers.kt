@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.ButtonKind
 import com.pactogg.app.core.designsystem.EmptyState
-import com.pactogg.app.core.designsystem.Initial
+import com.pactogg.app.core.designsystem.AvatarBadge
 import com.pactogg.app.core.designsystem.MakeButton
 import com.pactogg.app.core.designsystem.MakeCard
 import com.pactogg.app.core.designsystem.MakeField
@@ -20,6 +20,7 @@ import com.pactogg.app.core.designsystem.MakePage
 import com.pactogg.app.core.designsystem.Pill
 import com.pactogg.app.core.designsystem.Tone
 import com.pactogg.app.core.designsystem.statusLabel
+import com.pactogg.app.feature.play.presentation.MemberSafety
 
 /** Miembros del grupo con el estilo de la maqueta; "Retar" lleva al formulario con el rival elegido. */
 @Composable
@@ -35,7 +36,7 @@ fun ConnectedMembers(state: ConnectedState, model: ConnectedViewModel) {
                 MakeCard {
                     Row(verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Initial(member.nickname, if (member.id == state.account?.id) Tone.Orange else Tone.Violet, 36)
+                        AvatarBadge(member.nickname, member.avatar, member.avatarUrl, 36)
                         Column(Modifier.weight(1f)) {
                             Text(member.nickname, style = MaterialTheme.typography.titleSmall)
                             Text("${member.points} puntos virtuales", style = MaterialTheme.typography.bodySmall,
@@ -48,6 +49,7 @@ fun ConnectedMembers(state: ConnectedState, model: ConnectedViewModel) {
                             model.targetMember(member.id)
                             model.navigate(ConnectedRoute.CREATE)
                         }
+                        MemberSafety(member, state.busy, model)
                     }
                 }
             }

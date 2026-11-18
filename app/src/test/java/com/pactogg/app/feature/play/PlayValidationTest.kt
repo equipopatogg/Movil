@@ -37,6 +37,7 @@ class PlayValidationTest {
         rejected { play.reportMatch(ContractId, 2, 1, null, byteArrayOf(), "image/jpeg") }
         rejected { play.reportMatch(ContractId, 2, 1, null, byteArrayOf(1), "image/gif") }
         rejected { play.createTournament(GroupId, NewTournament("Halo", 17, 0, "2099-11-10T00:00:00Z")) }
+        rejected { play.createTournament(GroupId, NewTournament("Halo", 6, 0, "2099-11-10T00:00:00Z")) }
         rejected { play.createTournament(GroupId, NewTournament("", 4, 0, "2099-11-10T00:00:00Z")) }
         rejected { play.joinTournament("ab", GroupId, "k") }
         rejected { play.disputeMatch(ContractId, "no") }
@@ -45,5 +46,13 @@ class PlayValidationTest {
     @Test fun PL_05_emptyOrTooLongPhraseIsRejected() {
         rejected { play.parsePhrase(GroupId, "   ") }
         rejected { play.parsePhrase(GroupId, "x".repeat(301)) }
+    }
+
+    @Test fun PL_09_unknownAvatarReasonOrOversizedPasswordAreRejected() {
+        rejected { play.avatar("dorado") }
+        rejected { play.reportUser(GroupId, ContractId, "porque sí") }
+        rejected { play.deleteAccount("x".repeat(129)) }
+        rejected { play.avatarPhoto(byteArrayOf(), "image/jpeg") }
+        rejected { play.avatarPhoto(byteArrayOf(1), "image/gif") }
     }
 }

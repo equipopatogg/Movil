@@ -1,6 +1,6 @@
 package com.pactogg.app.feature.demo.presentation
 
-const val DemoLastStep = 4
+const val DemoLastStep = 6
 const val DemoPhrase = "Reto a Vortex a ganarme un 1 contra 1 en EA Sports FC 26. Quien pierda invita la pizza."
 private const val DemoPause = 10
 

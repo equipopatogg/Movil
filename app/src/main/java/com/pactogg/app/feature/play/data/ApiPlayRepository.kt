@@ -4,6 +4,10 @@ import com.pactogg.app.core.network.checked
 import com.pactogg.app.core.network.failure
 import com.pactogg.app.core.session.SessionManager
 import com.pactogg.app.feature.connected.data.ApiProductRepository
+import com.pactogg.app.feature.connected.domain.Profile
+import com.pactogg.app.feature.play.domain.AvatarIds
+import com.pactogg.app.feature.play.domain.TournamentSizes
+import com.pactogg.app.feature.play.domain.ReportReasons
 import com.pactogg.app.feature.play.domain.Commitment
 import com.pactogg.app.feature.play.domain.FameEntry
 import com.pactogg.app.feature.play.domain.NewTournament
@@ -114,7 +118,7 @@ class ApiPlayRepository(private val api: PlayApi, private val sessions: SessionM
     // ------------------------------------------------------------ Torneos
 
     override suspend fun createTournament(groupId: String, input: NewTournament): TournamentDetail {
-        require(input.game.trim().length in 1..60 && input.maxGroups in 2..16 && input.entryPoints in 0..500)
+        require(input.game.trim().length in 1..60 && input.maxGroups in TournamentSizes && input.entryPoints in 0..500)
         val body = CreateTournamentRequest(input.game.trim(), maxGroups = input.maxGroups,
             entryPoints = input.entryPoints, scheduledAt = input.scheduledAt)
         return sessions.authorized { api.createTournament(it, checkId(groupId), body) }.checked(201).data.toDomain()
@@ -182,5 +186,36 @@ class ApiPlayRepository(private val api: PlayApi, private val sessions: SessionM
         return sessions.authorized { api.parsePhrase(it, checkId(groupId), ParseRequest(phrase.trim())) }
             .checked(200).data.toDomain()
     }
-}
 
+    // ------------------------------------------------------------ Cuenta y seguridad
+
+    /** USR-07: foto de perfil; el servidor la modera antes de guardarla. */
+    override suspend fun avatarPhoto(photo: ByteArray, mimeType: String): Profile {
+        require(photo.size in 1..ApiProductRepository.MaxPhotoBytes)
+        require(mimeType in ApiProductRepository.AllowedPhotoTypes)
+        val extension = when (mimeType) { "image/png" -> "png"; "image/webp" -> "webp"; else -> "jpg" }
+        val file = MultipartBody.Part.createFormData("file", "avatar.$extension",
+            photo.toRequestBody(mimeType.toMediaType()))
+        return sessions.authorized { api.uploadAvatar(it, file) }.checked(200).data.toDomain()
+    }
+
+    override suspend fun avatar(id: String): Profile {
+        require(id in AvatarIds)
+        return sessions.authorized { api.avatar(it, AvatarPatch(id)) }.checked(200).data.toDomain()
+    }
+
+    override suspend fun deleteAccount(password: String?) {
+        require(password == null || password.length in 1..128)
+        sessions.authorized { api.deleteAccount(it, DeleteAccountRequest(password)) }.noContent(204)
+    }
+
+    override suspend fun reportUser(groupId: String, userId: String, reason: String) {
+        require(ReportReasons.any { it.second == reason })
+        sessions.authorized { api.report(it, ReportRequest(checkId(groupId), "user", checkId(userId), reason)) }
+            .noContent(200, 201)
+    }
+
+    override suspend fun blockUser(userId: String) {
+        sessions.authorized { api.block(it, checkId(userId)) }.noContent(204)
+    }
+}

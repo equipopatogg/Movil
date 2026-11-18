@@ -262,6 +262,23 @@ data class NextMatchDto(
     fun toDomain() = NextMatch(match.toDomain(), myGroupId, opponentGroupId, game, scheduledAt)
 }
 
+// ---------------------------------------------------------------- Cuenta y seguridad (USR-03/04, REP)
+
+@Serializable
+data class AvatarPatch(@SerialName("avatar_id") val avatarId: String)
+
+@Serializable
+data class DeleteAccountRequest(val password: String? = null, val confirm: String = "ELIMINAR")
+
+@Serializable
+data class ReportRequest(
+    @SerialName("group_id") val groupId: String,
+    @SerialName("target_type") val targetType: String,
+    @SerialName("target_id") val targetId: String,
+    val reason: String,
+    val details: String? = null,
+)
+
 // ---------------------------------------------------------------- Voz (CON-08)
 
 @Serializable

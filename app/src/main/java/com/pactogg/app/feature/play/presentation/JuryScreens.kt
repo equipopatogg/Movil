@@ -31,6 +31,7 @@ import com.pactogg.app.feature.connected.presentation.ConnectedState
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
 import com.pactogg.app.feature.connected.presentation.EvidenceCard
 import com.pactogg.app.feature.connected.presentation.back
+import com.pactogg.app.feature.connected.domain.Challenge
 import com.pactogg.app.feature.play.domain.VoteResult
 import com.pactogg.app.feature.play.domain.VoteSummary
 import com.pactogg.app.ui.theme.PactoCyan
@@ -89,15 +90,23 @@ internal fun VoteScreen(state: ConnectedState, model: ConnectedViewModel) {
         play.voteEvidence.forEach { EvidenceCard(it) }
         play.voteSummary?.let { VoteProgress(it) }
         play.voteResult?.let { ResultCard(it) }
-        val summary = play.voteSummary
-        val canVote = summary != null && summary.iAmJuror && !summary.iVoted && contract.status == "voting"
-        if (canVote) VoteForm(state, model)
-        if (summary?.adminCanResolve == true && play.voteResult == null) AdminResolve(state, model)
+        VoteActions(state, model, contract)
     }
     if (play.confirmVote) ActionConfirmation("¿Confirmar tu voto?",
         if (play.voteChoice == "legit") "Votarás que el reto se cumplió de forma legítima." else
             "Votarás que hizo trampa. Esto afecta su índice de palabra.",
         "Confirmar voto", !state.busy, onConfirm = { model.castVote() }, onDismiss = { model.requestVote(false) })
+}
+
+/** Votar, o el motivo por el que no se puede, y la decisión del administrador (PL-01 RF6, RF7). */
+@Composable
+private fun VoteActions(state: ConnectedState, model: ConnectedViewModel, contract: Challenge) {
+    val summary = state.play.voteSummary
+    val canVote = summary != null && summary.iAmJuror && !summary.iVoted && contract.status == "voting"
+    if (canVote) VoteForm(state, model)
+    else voteBlockedReason(contract, summary, state.account?.id)?.let { SafetyNote(it) }
+    if (summary?.adminCanResolve == true && state.play.voteResult == null) AdminResolve(state, model)
+    MakeButton("Actualizar", ButtonKind.Ghost, enabled = !state.busy) { model.openVote(contract) }
 }
 
 @Composable
@@ -140,10 +149,32 @@ private fun AdminResolve(state: ConnectedState, model: ConnectedViewModel) {
 private fun ResultCard(result: VoteResult) {
     MakeCard {
         Kicker("Resultado")
+        when (result.outcome) {
+            "fulfilled" -> Text("¡Reto cumplido! 🏆", style = MaterialTheme.typography.headlineSmall, color = PactoCyan)
+            "cheating" -> Text("El jurado decidió: hizo trampa.", style = MaterialTheme.typography.titleMedium)
+            else -> Unit
+        }
         Pill(statusLabel(result.outcome), statusTone(result.outcome))
+        if (result.reward.isNotBlank()) InfoRow("Recompensa", result.reward)
         InfoRow("Legítimo", result.legitVotes.toString())
         InfoRow("Hizo trampa", result.cheatVotes.toString())
         InfoRow("Fianza", "${result.bond} pts")
         result.votes.mapNotNull { it.second }.forEach { Text("“$it”", style = MaterialTheme.typography.bodySmall) }
+    }
+}
+
+/** Por qué no aparece el formulario de voto, en vez de dejar la pantalla sin botón (PL-01 RF7). */
+internal fun voteBlockedReason(contract: Challenge, summary: VoteSummary?, accountId: String?): String? {
+    val party = accountId != null && accountId in setOf(contract.challengerId, contract.acceptedBy,
+        contract.executorId, contract.targetId.takeIf { contract.targetType == "member" })
+    return when {
+        summary == null -> "No pudimos consultar la votación. Pulsa Actualizar."
+        contract.status == "in_progress" -> "La votación empieza cuando llegue la primera evidencia."
+        contract.status != "voting" -> null
+        summary.iVoted -> null
+        party -> "Eres parte de este reto, así que no votas: lo decide el jurado (hasta 3 miembros del grupo " +
+            "que no participan). Te avisaremos del resultado."
+        summary.jurorsAssigned == 0 -> "No hay jurado disponible en el grupo; lo resolverá un administrador."
+        else -> "No te tocó ser jurado de este reto: el servidor eligió a otros miembros al azar."
     }
 }
