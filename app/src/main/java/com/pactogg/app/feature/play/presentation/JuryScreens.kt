@@ -87,7 +87,10 @@ internal fun VoteScreen(state: ConnectedState, model: ConnectedViewModel) {
         Kicker("Evidencia recibida")
         if (play.voteEvidence.isEmpty()) Text("No pudimos mostrar la evidencia de este reto.",
             style = MaterialTheme.typography.bodySmall)
-        play.voteEvidence.forEach { EvidenceCard(it) }
+        play.voteEvidence.forEach { evidence ->
+            EvidenceCard(evidence)
+            EvidenceReport(evidence.id, state.busy, model)
+        }
         play.voteSummary?.let { VoteProgress(it) }
         play.voteResult?.let { ResultCard(it) }
         VoteActions(state, model, contract)

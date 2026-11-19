@@ -62,6 +62,11 @@ val AvatarIds = listOf("violet", "cyan", "orange")
 /** Motivos que acepta el servidor para un reporte, con su texto en pantalla. */
 val ReportReasons = listOf("Ofensivo" to "ofensivo", "Trampa" to "trampa", "Spam" to "spam", "Otro" to "otro")
 
+/** Motivos para reportar una evidencia (foto o enlace); el backend acepta los mismos valores. */
+val EvidenceReportReasons = listOf(
+    "Ofensivo" to "ofensivo", "Sexual" to "sexual", "Trampa" to "trampa", "Otro" to "otro",
+)
+
 /** Tamaños que acepta el backend para el cuadro de eliminación directa (TOR-01). */
 val TournamentSizes = listOf(4, 8, 16)
 
@@ -108,4 +113,6 @@ interface PlayRepository {
     suspend fun deleteAccount(password: String?)
     suspend fun reportUser(groupId: String, userId: String, reason: String)
     suspend fun blockUser(userId: String)
+    suspend fun unblockUser(userId: String)
+    suspend fun reportEvidence(groupId: String, evidenceId: String, reason: String)
 }

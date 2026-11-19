@@ -3,5 +3,20 @@
     <string name="privacy_accept">He leído y acepto el aviso de privacidad</string>
     <string name="privacy_title">Aviso de privacidad · versión %1$s</string>
     <string name="privacy_close">Cerrar aviso</string>
-    <string name="privacy_basic">PactoGG es un proyecto académico en desarrollo. El equipo PactoGG administra los datos enviados a su servicio. Contacto: equipopatogg@gmail.com.\n\nTratamos correo, apodo y credenciales para crear la cuenta y gestionar el acceso. El servicio almacena una representación protegida de la contraseña, no la contraseña en texto. La app conserva los tokens de sesión cifrados en este dispositivo.\n\nSi utilizas grupos, retos o evidencias, se envían sus datos al backend. Las fotos seleccionadas y los enlaces se analizan antes del almacenamiento conforme al servicio de moderación. El backend utiliza servicios de nube y moderación de terceros. No selecciones documentos, imágenes personales o datos sensibles que no sean necesarios para el reto. La app no utiliza cámara integrada ni permite cargar videos.\n\nLa app solo accede a la imagen que eliges mediante el selector del sistema. Los enlaces externos pueden estar sujetos a avisos de sus respectivos servicios.\n\nEl servicio puede conservar registros técnicos y de seguridad para operar y proteger las cuentas. Los plazos concretos, ubicación de tratamiento y procedimientos definitivos de conservación están pendientes de precisar por el equipo.\n\nPuedes contactar al equipo para solicitar información, corrección o eliminación de datos y retirar tu consentimiento. La eliminación de cuenta todavía no está disponible dentro de la app; debe solicitarse por el contacto indicado. Cerrar sesión elimina las credenciales locales, pero no elimina la cuenta o datos del servidor.\n\nEste es un aviso básico provisional para pruebas académicas. Requiere revisión y ampliación antes de una distribución pública. La versión indicada corresponde al identificador de consentimiento que exige actualmente el backend, no a una fecha de aprobación jurídica.</string>
+    <string name="privacy_full">Ver aviso completo</string>
+    <string name="privacy_basic">PactoGG es un proyecto académico del equipo PactoGG (UTTT). Responsable y contacto: equipopatogg@gmail.com.
+
+Qué datos usamos: correo, apodo y contraseña (se guarda protegida con Argon2id, nunca en texto); si entras con Google, el identificador de tu cuenta de Google; tu foto de perfil si decides subir una; lo que publicas en tus grupos (retos, evidencias en foto o enlace, votos y comentarios, puntos, compromisos, reportes y bloqueos); el texto de la frase que dictas al crear un reto por voz; el identificador de notificaciones de este teléfono; y registros técnicos de seguridad.
+
+Para qué: crear y proteger tu cuenta, que funcionen los grupos, retos, jurado y torneos, revisar que fotos y textos no sean inapropiados antes de guardarlos y mandarte avisos. No vendemos tus datos ni mostramos publicidad.
+
+Con quién se procesan: Amazon Web Services (servidores, fotos, moderación con Rekognition y Comprehend, en EE. UU.), MongoDB Atlas (base de datos), Google (Firebase para notificaciones, acceso con Google y envío de correos) y Groq (convierte la frase dictada en un borrador de reto; solo recibe el texto y los apodos de tu grupo). El dictado lo hace el reconocedor de voz de tu teléfono; la app no graba ni envía audio.
+
+Cuánto tiempo: las fotos de evidencia se borran a los 30 días, salvo las que el grupo guarda en el Muro de la Fama; los avisos, a los 30 días; las sesiones, a los 30 días sin uso. La frase dictada no se guarda.
+
+Tus derechos: puedes ver y corregir tu perfil en la app, eliminar tu cuenta desde Perfil > Eliminar mi cuenta (se borran tus datos personales y tus fotos, y los retos cerrados quedan sin tu nombre) o escribirnos para acceso, rectificación, cancelación u oposición. Respondemos en un máximo de 20 días hábiles.
+
+Permisos: notificaciones (opcional). Las fotos se eligen con el selector del sistema; la app no usa cámara, ubicación ni contactos.
+
+El aviso completo está en la página de PactoGG. Si cambia, te pediremos aceptarlo de nuevo.</string>
 </resources>

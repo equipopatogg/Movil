@@ -49,7 +49,8 @@ private val ApiMessages = mapOf(
     "INVALID_GOOGLE_TOKEN" to "Google no confirmó tu cuenta. Intenta de nuevo o usa otra cuenta.",
     "GOOGLE_AUTH_UNAVAILABLE" to "El acceso con Google no está disponible por ahora. Usa tu correo y contraseña.",
     "NICKNAME_REQUIRED" to "Es tu primera vez: elige un apodo para terminar tu cuenta.",
-    "EMAIL_NOT_VERIFIED" to "Verifica tu correo para crear o unirte a un grupo. Hazlo desde tu perfil.",
+    "EMAIL_NOT_VERIFIED" to "Verifica tu correo para crear o unirte a un grupo. Abre el enlace que te mandamos " +
+        "o toca \"Reenviar correo\".",
     "EMAIL_ALREADY_VERIFIED" to "Tu correo ya está verificado.",
     "INVALID_OR_EXPIRED_TOKEN" to "El código no es válido o ya caducó. Pide uno nuevo.",
     "ALREADY_REPORTED" to "Ya habías reportado esto. El administrador del grupo lo revisará.",

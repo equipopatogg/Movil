@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import com.pactogg.app.BuildConfig
 import com.pactogg.app.R
@@ -20,6 +21,7 @@ import com.pactogg.app.R
 @Composable
 fun PrivacyConsent(accepted: Boolean, enabled: Boolean, onAccepted: (Boolean) -> Unit) {
     var visible by remember { mutableStateOf(false) }
+    val links = LocalUriHandler.current
     Row {
         Checkbox(accepted, onCheckedChange = onAccepted, enabled = enabled)
         TextButton(onClick = { visible = true }, enabled = enabled) {
@@ -29,5 +31,10 @@ fun PrivacyConsent(accepted: Boolean, enabled: Boolean, onAccepted: (Boolean) ->
     if (visible) AlertDialog(onDismissRequest = { visible = false },
         title = { Text(stringResource(R.string.privacy_title, BuildConfig.PRIVACY_VERSION)) },
         text = { Text(stringResource(R.string.privacy_basic), Modifier.verticalScroll(rememberScrollState())) },
-        confirmButton = { TextButton(onClick = { visible = false }) { Text(stringResource(R.string.privacy_close)) } })
+        confirmButton = { TextButton(onClick = { visible = false }) { Text(stringResource(R.string.privacy_close)) } },
+        dismissButton = {
+            TextButton(onClick = { runCatching { links.openUri(BuildConfig.PRIVACY_URL) } }) {
+                Text(stringResource(R.string.privacy_full))
+            }
+        })
 }

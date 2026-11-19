@@ -8,6 +8,7 @@ import com.pactogg.app.feature.connected.domain.Profile
 import com.pactogg.app.feature.play.domain.AvatarIds
 import com.pactogg.app.feature.play.domain.TournamentSizes
 import com.pactogg.app.feature.play.domain.ReportReasons
+import com.pactogg.app.feature.play.domain.EvidenceReportReasons
 import com.pactogg.app.feature.play.domain.Commitment
 import com.pactogg.app.feature.play.domain.FameEntry
 import com.pactogg.app.feature.play.domain.NewTournament
@@ -217,5 +218,18 @@ class ApiPlayRepository(private val api: PlayApi, private val sessions: SessionM
 
     override suspend fun blockUser(userId: String) {
         sessions.authorized { api.block(it, checkId(userId)) }.noContent(204)
+    }
+
+    /** REP-06: quitar el bloqueo. El servidor responde 204 aunque no estuviera bloqueado. */
+    override suspend fun unblockUser(userId: String) {
+        val id = checkId(userId)
+        sessions.authorized { api.unblock(it, id) }.noContent(204)
+    }
+
+    /** REP-01 con target_type=evidence: lo revisa el administrador del grupo. */
+    override suspend fun reportEvidence(groupId: String, evidenceId: String, reason: String) {
+        require(EvidenceReportReasons.any { it.second == reason })
+        val body = ReportRequest(checkId(groupId), "evidence", checkId(evidenceId), reason)
+        sessions.authorized { api.report(it, body) }.noContent(200, 201)
     }
 }

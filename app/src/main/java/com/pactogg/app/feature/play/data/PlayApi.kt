@@ -149,6 +149,9 @@ interface PlayApi {
     @POST("api/v1/users/{id}/block")
     suspend fun block(@Header(Auth) bearer: String, @Path("id") id: String): Response<Unit>
 
+    @DELETE("api/v1/users/{id}/block")
+    suspend fun unblock(@Header(Auth) bearer: String, @Path("id") id: String): Response<Unit>
+
     // Voz
     @POST("api/v1/groups/{gid}/contracts/parse")
     suspend fun parsePhrase(@Header(Auth) bearer: String, @Path("gid") gid: String,

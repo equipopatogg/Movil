@@ -205,6 +205,23 @@ class PlayApiTest {
         }
     }
 
+    @Test fun PL_09_unblockAndReportEvidenceUseServerRoutes() = runBlocking {
+        ApiTestFixture().use { f ->
+            f.prepare()
+            f.server.enqueue(ApiTestFixture.json("", 204))
+            f.server.enqueue(ApiTestFixture.json(ApiTestFixture.envelope("""{"id":"$OtherId"}"""), 201))
+            f.play.unblockUser(OtherId)
+            f.play.reportEvidence(GroupId, ContractId, "sexual")
+            val unblock = f.server.takeRequest()
+            assertEquals("DELETE", unblock.method); assertEquals("/api/v1/users/$OtherId/block", unblock.path)
+            val report = f.server.takeRequest()
+            assertEquals("/api/v1/reports", report.path)
+            val body = report.body.readUtf8()
+            listOf("\"target_type\":\"evidence\"", "\"target_id\":\"$ContractId\"", "\"reason\":\"sexual\"")
+                .forEach { assertTrue(it, body.contains(it)) }
+        }
+    }
+
     @Test fun PL_09_deleteAccountSendsConfirmationInDeleteBody() = runBlocking {
         ApiTestFixture().use { f ->
             f.prepare()
