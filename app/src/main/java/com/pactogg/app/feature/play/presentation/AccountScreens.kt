@@ -89,6 +89,12 @@ fun ConnectedViewModel.blockMember(member: Member) = perform {
     mutable.update { it.copy(notice = "Bloqueaste a ${member.nickname}. Ya no podrán retarse entre ustedes.") }
 }
 
+/** REP-06: quita el bloqueo; vuelven a poder retarse. */
+fun ConnectedViewModel.unblockMember(member: Member) = perform {
+    play.unblockUser(member.id)
+    mutable.update { it.copy(notice = "Desbloqueaste a ${member.nickname}. Ya pueden volver a retarse.") }
+}
+
 /** Selector de avatar del perfil: tres colores como en la maqueta. */
 @Composable
 fun AvatarPicker(profile: Profile, busy: Boolean, model: ConnectedViewModel) {
@@ -143,10 +149,25 @@ fun DeleteAccountCard(state: ConnectedState, model: ConnectedViewModel) {
 fun MemberSafety(member: Member, busy: Boolean, model: ConnectedViewModel) {
     var reporting by rememberSaveable(member.id) { mutableStateOf(false) }
     var blocking by rememberSaveable(member.id) { mutableStateOf(false) }
+    var unblocking by rememberSaveable(member.id) { mutableStateOf(false) }
     var reason by rememberSaveable(member.id) { mutableStateOf(ReportReasons.first().first) }
     Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-        TextButton(onClick = { reporting = !reporting; blocking = false }, enabled = !busy) { Text("Reportar") }
-        TextButton(onClick = { blocking = !blocking; reporting = false }, enabled = !busy) { Text("Bloquear") }
+        TextButton(onClick = { reporting = !reporting; blocking = false; unblocking = false }, enabled = !busy) {
+            Text("Reportar")
+        }
+        TextButton(onClick = { blocking = !blocking; reporting = false; unblocking = false }, enabled = !busy) {
+            Text("Bloquear")
+        }
+        TextButton(onClick = { unblocking = !unblocking; reporting = false; blocking = false }, enabled = !busy) {
+            Text("Desbloquear")
+        }
+    }
+    if (unblocking) {
+        Text("Si lo habías bloqueado, podrán volver a retarse.", style = MaterialTheme.typography.bodySmall)
+        MakeButton("Desbloquear a ${member.nickname}", ButtonKind.Ghost, enabled = !busy, icon = null) {
+            unblocking = false
+            model.unblockMember(member)
+        }
     }
     if (reporting) {
         Segmented(ReportReasons.map { it.first }, reason) { reason = it }

@@ -43,6 +43,7 @@ private val GroupTabs = listOf("Mis grupos", "Unirme", "Crear grupo")
 fun ConnectedGroups(state: ConnectedState, model: ConnectedViewModel) {
     var tab by rememberSaveable { mutableStateOf(GroupTabs.first()) }
     MakePage("Grupos", "Un espacio privado. Tu gente. Tus pactos.") {
+        if (state.needsVerification()) VerifyEmailCard(state, model)
         Segmented(GroupTabs, tab) { tab = it }
         when (tab) {
             "Unirme" -> MakeCard {

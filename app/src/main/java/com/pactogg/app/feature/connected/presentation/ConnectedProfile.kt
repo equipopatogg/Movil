@@ -12,7 +12,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import com.pactogg.app.BuildConfig
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.ButtonKind
 import com.pactogg.app.core.designsystem.AvatarBadge
@@ -53,6 +55,7 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
             state.social.profile?.let { AvatarPicker(it, state.busy, model) }
             MakeButton("Actualizar perfil", ButtonKind.Ghost, enabled = !state.busy) { model.loadProfile() }
         }
+        if (state.needsVerification()) VerifyEmailCard(state, model)
         state.social.profile?.let { profile ->
             WordCard(profile)
             MakeCard {
@@ -77,14 +80,7 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
         LinkCard("Privacidad y seguridad", "Cómo se protege tu palabra", R.drawable.ic_pacto_shield) {
             privacy = !privacy
         }
-        if (privacy) MakeCard {
-            Text("Los grupos son privados: solo sus miembros pueden consultar sus contratos.",
-                style = MaterialTheme.typography.bodySmall)
-            Text("El historial de acciones es de solo agregar: los resultados cerrados no se editan.",
-                style = MaterialTheme.typography.bodySmall)
-            Text("Cerrar sesión borra la sesión de este teléfono; no elimina tu cuenta.",
-                style = MaterialTheme.typography.bodySmall)
-        }
+        if (privacy) PrivacyCard()
         MakeButton("Cerrar sesión", ButtonKind.Ghost, enabled = !state.busy) { confirmLogout = true }
         DeleteAccountCard(state, model)
     }
@@ -113,5 +109,22 @@ private fun Stat(label: String, value: Int, modifier: Modifier) {
     Column(modifier) {
         Text(value.toString(), style = MaterialTheme.typography.titleLarge)
         Kicker(label)
+    }
+}
+
+/** Resumen de privacidad en el perfil y enlace al aviso completo de la página (requisito 16). */
+@Composable
+private fun PrivacyCard() {
+    MakeCard {
+        Text("Los grupos son privados: solo sus miembros pueden consultar sus contratos.",
+            style = MaterialTheme.typography.bodySmall)
+        Text("El historial de acciones es de solo agregar: los resultados cerrados no se editan.",
+            style = MaterialTheme.typography.bodySmall)
+        Text("Cerrar sesión borra la sesión de este teléfono; no elimina tu cuenta.",
+            style = MaterialTheme.typography.bodySmall)
+        val links = LocalUriHandler.current
+        MakeButton("Ver aviso de privacidad", ButtonKind.Ghost, icon = null) {
+            runCatching { links.openUri(BuildConfig.PRIVACY_URL) }
+        }
     }
 }

@@ -54,5 +54,7 @@ class PlayValidationTest {
         rejected { play.deleteAccount("x".repeat(129)) }
         rejected { play.avatarPhoto(byteArrayOf(), "image/jpeg") }
         rejected { play.avatarPhoto(byteArrayOf(1), "image/gif") }
+        rejected { play.reportEvidence(GroupId, ContractId, "feo") }
+        rejected { play.unblockUser("no-es-id") }
     }
 }

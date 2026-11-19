@@ -74,3 +74,4 @@ Las specs `PL-*` cubren pantallas nuevas de la maqueta que usan la API 0.12. Lle
 | [PL-10 — Notificaciones push](PL-10-push/spec.md) | Escrita; falta compilar, configurar Firebase en el servidor y probar en teléfono |
 | [PL-11 — Recuperar contraseña](PL-11-recuperar-contrasena/spec.md) | Escrita; falta compilar y probar en teléfono |
 | [PL-12 — Modo sin conexión con Room](PL-12-sin-conexion/spec.md) | Escrita; falta compilar, subir el esquema 2 y probar en modo avión |
+| [PL-13 — Correo verificado obligatorio](PL-13-correo-verificado/spec.md) | Escrita; falta activar en el servidor y probar |

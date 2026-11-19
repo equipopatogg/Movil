@@ -12,6 +12,10 @@ plugins {
 
 val apiBaseUrl = providers.gradleProperty("pactogg.apiBaseUrl").orElse("https://52-3-200-211.sslip.io/").get()
 val privacyVersion = providers.gradleProperty("pactogg.privacyVersion").orElse("2026-10-01").get()
+// Aviso completo publicado en la página del equipo (requisito 16: vincular el aviso a la landing).
+val privacyUrl = providers.gradleProperty("pactogg.privacyUrl")
+    .orElse("https://black-river-065cb1710.6.azurestaticapps.net/privacidad").get()
+require(privacyUrl.startsWith("https://") && privacyUrl.none(Char::isWhitespace)) { "URL del aviso inválida." }
 // Client ID web de OAuth (público): es el "aud" que valida el backend en POST auth/google. No es un secreto.
 val googleWebClientId = providers.gradleProperty("pactogg.googleWebClientId")
     .orElse("841778632932-0jnd246u1mvbl6n9djtthsdgvb0um6do.apps.googleusercontent.com").get()
@@ -56,6 +60,7 @@ android {
         versionName = "0.1.0"
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
         buildConfigField("String", "PRIVACY_VERSION", "\"$privacyVersion\"")
+        buildConfigField("String", "PRIVACY_URL", "\"$privacyUrl\"")
         buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$googleWebClientId\"")
         firebaseValues.forEach { (name, value) -> resValue("string", name, value) }
 

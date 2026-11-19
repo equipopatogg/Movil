@@ -254,3 +254,10 @@ Pruebas nuevas: `PushRegistrationTest`, `DeviceApiTest`, `PasswordRecoveryApiTes
 - Foto de perfil (PL-09 RF-FOTO) con el endpoint nuevo del backend USR-07; `AvatarBadge` en perfil y miembros.
 - "Kills" bloqueado: era Comprehend en el backend (F2-D76), no la app.
 Pruebas nuevas: `VoteBlockedReasonTest`, `PlayApiTest.PL_09_avatarPhotoUploadsMultipartAndMapsPhotoUrl`.
+
+## Cierre de pendientes de la app — 2026-11-18
+
+- PL-13: tarjeta "Verifica tu correo" con "Reenviar correo" y "Ya lo verifiqué" en Grupos y Perfil.
+- PL-09: "Desbloquear" en Miembros y "Reportar evidencia" en la revisión del jurado (motivos ofensivo, sexual, trampa, otro).
+- Aviso de privacidad de la app actualizado a lo que hace hoy (Groq, Firebase, foto de perfil, eliminar cuenta) y enlace al aviso web (`BuildConfig.PRIVACY_URL`, por defecto `/privacidad` en la página del equipo).
+- IA de voz en producción con Groq `openai/gpt-oss-20b` (backend F2-D78).
