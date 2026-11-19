@@ -24,14 +24,30 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.text.AnnotatedString
 import com.pactogg.app.MainActivity
+import androidx.test.platform.app.InstrumentationRegistry
+import com.pactogg.app.PactoGGApplication
+import kotlinx.coroutines.runBlocking
 import java.util.concurrent.atomic.AtomicBoolean
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.ExternalResource
+import org.junit.rules.RuleChain
 
 class AccessNavigationTest {
-    @get:Rule val compose = createAndroidComposeRule<MainActivity>()
+    val compose = createAndroidComposeRule<MainActivity>()
+
+    /** Starts every test signed out, even on a phone where the debug app already has a session. */
+    @get:Rule val rules: RuleChain = RuleChain.outerRule(SignedOut()).around(compose)
+
+    private class SignedOut : ExternalResource() {
+        override fun before() {
+            val app = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
+            // Closes locally first; a remote failure (offline, expired token) does not matter here.
+            runCatching { runBlocking { (app as PactoGGApplication).sessions.logout() } }
+        }
+    }
 
     @Test fun emptyLoginCannotBypassAuthentication() {
         compose.waitUntil(5000) {
