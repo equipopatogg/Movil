@@ -1,0 +1,64 @@
+# Copiar a .github/workflows/android-release.yml
+# Entrega continua de la app: compila el AAB firmado con la versión de esta ejecución y lo sube a Google Play.
+# Corre al publicar una etiqueta v* (por ejemplo v1.0.0) o a mano desde Actions.
+# Secretos necesarios (Settings > Secrets and variables > Actions):
+#   PACTOGG_UPLOAD_KEYSTORE_BASE64  llave de subida (.jks) en base64
+#   PACTOGG_UPLOAD_STORE_PASSWORD, PACTOGG_UPLOAD_KEY_ALIAS, PACTOGG_UPLOAD_KEY_PASSWORD
+#   PLAY_SERVICE_ACCOUNT_JSON       cuenta de servicio con permiso de "Lanzamientos" en Play Console
+name: Android Release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      track:
+        description: Pista de Google Play
+        type: choice
+        options: [internal, alpha, beta, production]
+        default: internal
+permissions:
+  contents: read
+concurrency:
+  group: android-release
+  cancel-in-progress: false
+jobs:
+  release:
+    name: Build and publish to Google Play
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    environment: play
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/android-setup
+      - name: Tests before publishing
+        run: bash ./gradlew :app:testDebugUnitTest :app:lintDebug :app:detekt --console=plain
+      - name: Restore upload key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.PACTOGG_UPLOAD_KEYSTORE_BASE64 }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload.jks"
+          echo "PACTOGG_UPLOAD_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
+      - name: Build signed bundle
+        env:
+          PACTOGG_UPLOAD_STORE_PASSWORD: ${{ secrets.PACTOGG_UPLOAD_STORE_PASSWORD }}
+          PACTOGG_UPLOAD_KEY_ALIAS: ${{ secrets.PACTOGG_UPLOAD_KEY_ALIAS }}
+          PACTOGG_UPLOAD_KEY_PASSWORD: ${{ secrets.PACTOGG_UPLOAD_KEY_PASSWORD }}
+        run: bash ./gradlew :app:bundleRelease --console=plain
+      - name: Publish to Google Play
+        env:
+          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          PLAY_TRACK: ${{ inputs.track || 'internal' }}
+        run: |
+          python3 -m pip install --quiet google-auth==2.38.0 google-api-python-client==2.160.0
+          python3 scripts/play-upload.py app/build/outputs/bundle/release/app-release.aab
+      - name: Remove upload key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/upload.jks"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: android-release-${{ github.run_number }}
+          path: app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 30
