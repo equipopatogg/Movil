@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.pactogg.app.core.database.PactoDatabase
 import com.pactogg.app.core.environment.BuildEnvironmentRepository
 import com.pactogg.app.core.environment.EnvironmentRepository
+import com.pactogg.app.core.offline.OfflineCache
+import com.pactogg.app.core.offline.RoomSnapshotStore
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -27,4 +29,9 @@ object DatabaseModule {
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): PactoDatabase =
         Room.databaseBuilder(context, PactoDatabase::class.java, "pactogg.db").build()
+
+    @Provides
+    @Singleton
+    fun provideOfflineCache(database: PactoDatabase): OfflineCache =
+        OfflineCache(RoomSnapshotStore(database.snapshotDao()))
 }

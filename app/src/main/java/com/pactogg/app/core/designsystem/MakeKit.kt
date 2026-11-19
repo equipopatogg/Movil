@@ -295,6 +295,13 @@ private val StatusLabels = mapOf(
     "member" to "Miembro",
 )
 
+/** Color del avatar elegido en el perfil (maqueta: violeta, cian o naranja). */
+fun avatarTone(avatar: String): Tone = when (avatar) {
+    "violet" -> Tone.Violet
+    "cyan" -> Tone.Cyan
+    else -> Tone.Orange
+}
+
 /** Acción "volver" para páginas que no la reciben por parámetro (p. ej. evidencias). */
 val LocalPageBack = staticCompositionLocalOf<(() -> Unit)?> { null }
 

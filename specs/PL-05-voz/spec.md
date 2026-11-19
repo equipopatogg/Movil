@@ -1,6 +1,6 @@
 # PL-05 — Crear reto por voz
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; DATOS LISTOS, PANTALLA PENDIENTE**. Backend: CON-08 `POST /groups/{gid}/contracts/parse` y CON-01 con `source=voice` + `original_phrase` (API 0.12.0, spec backend 005). Maqueta: `voz` y la opción "Crear por voz" de `crear`.
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLA ESCRITA, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Backend: CON-08 `POST /groups/{gid}/contracts/parse` y CON-01 con `source=voice` + `original_phrase` (API 0.12.0, spec backend 005). Maqueta: `voz` y la opción "Crear por voz" de `crear`.
 
 ## Requisitos
 - RF1: Dictado con el reconocedor del sistema (`RecognizerIntent.ACTION_RECOGNIZE_SPEECH`, idioma es-MX). No se graba ni se manda audio; solo el texto. Si el teléfono no tiene reconocedor, se puede escribir la frase.
@@ -11,5 +11,5 @@ Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; DATOS LISTOS, PANTALLA PENDIENT
 ## Criterios
 | ID | Resultado |
 |---|---|
-| MO-VOZ-AC1 | Con la IA conectada, una frase llena el formulario y el reto se crea con `source=voice`. |
-| MO-VOZ-AC2 | Sin IA, la app ofrece escribir a mano sin perder la frase. |
+| PL-05-AC1 | Con la IA conectada, una frase llena el formulario y el reto se crea con `source=voice`. |
+| PL-05-AC2 | Sin IA, la app ofrece escribir a mano sin perder la frase. |

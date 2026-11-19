@@ -63,6 +63,7 @@ class ApiTestFixture : AutoCloseable {
     val sessions: SessionManager
     val products: ApiProductRepository
     val social: ApiSocialRepository
+    val play: com.pactogg.app.feature.play.data.ApiPlayRepository
     init {
         val certificate = HeldCertificate.Builder().commonName("localhost")
             .addSubjectAlternativeName("localhost").addSubjectAlternativeName("127.0.0.1")
@@ -75,10 +76,13 @@ class ApiTestFixture : AutoCloseable {
         val client = OkHttpClient.Builder().sslSocketFactory(trust.sslSocketFactory(), trust.trustManager)
             .retryOnConnectionFailure(false).followRedirects(false).followSslRedirects(false)
             .callTimeout(5, TimeUnit.SECONDS).build()
-        api = ApiClientFactory().create(server.url("/").toString(), client).create(PactoApi::class.java)
+        val retrofit = ApiClientFactory().create(server.url("/").toString(), client)
+        api = retrofit.create(PactoApi::class.java)
         sessions = SessionManager(api, store) { now }
         products = ApiProductRepository(api, sessions)
         social = ApiSocialRepository(api, sessions)
+        play = com.pactogg.app.feature.play.data.ApiPlayRepository(
+            retrofit.create(com.pactogg.app.feature.play.data.PlayApi::class.java), sessions)
     }
     suspend fun prepare(signedIn: Boolean = true) {
         if (signedIn) store.saved = Session(Account(UserId, "qa@example.com", "Player"), Access, Refresh, 100000)

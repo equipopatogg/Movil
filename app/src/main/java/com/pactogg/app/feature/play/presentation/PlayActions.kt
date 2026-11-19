@@ -12,6 +12,7 @@ import com.pactogg.app.feature.connected.presentation.ConnectedRoute
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
 import com.pactogg.app.feature.connected.presentation.ListState
 import com.pactogg.app.feature.play.domain.Commitment
+import com.pactogg.app.feature.play.domain.TournamentSizes
 import com.pactogg.app.feature.play.domain.NewTournament
 import com.pactogg.app.feature.play.domain.Notice
 import java.util.UUID
@@ -24,7 +25,7 @@ private val ClosedStatuses = setOf("fulfilled", "cheating", "expired", "cancelle
 /** Cargas al entrar a cada pantalla nueva (lo llama ConnectedViewModel.navigate). */
 fun onPlayRoute(model: ConnectedViewModel, route: ConnectedRoute) {
     when (route) {
-        ConnectedRoute.HOME -> model.refreshHome()
+        ConnectedRoute.HOME -> { model.dropPendingIdea(); model.refreshHome() }
         ConnectedRoute.JURY -> model.loadPendingVotes()
         ConnectedRoute.NOTIFICATIONS -> model.loadNotices()
         ConnectedRoute.STANDINGS -> model.loadStandings()
@@ -36,6 +37,13 @@ private fun ConnectedViewModel.updatePlay(change: (PlayState) -> PlayState) =
     mutable.update { it.copy(play = change(it.play)) }
 
 /** Consultas de fondo para el inicio: si fallan no muestran error ni bloquean botones. */
+/** Si la persona se va a Inicio sin elegir grupo, la idea pendiente de Explorar se descarta. */
+internal fun ConnectedViewModel.dropPendingIdea() {
+    val play = state.value.play
+    if (play.pendingIdea == null && play.afterGroup == null) return
+    updatePlay { it.copy(pendingIdea = null, afterGroup = null) }
+}
+
 private fun ConnectedViewModel.quiet(block: suspend () -> Unit) {
     if (state.value.account == null) return
     viewModelScope.launch {
@@ -150,6 +158,13 @@ fun ConnectedViewModel.deleteNotice(notice: Notice) = perform {
 
 // ------------------------------------------------------------------ Palabra y ranking (PL-03)
 
+/** Atajo del inicio: abre "Palabra y ranking" directo en una pestaña (ranking, libro, fama o tramposos). */
+fun ConnectedViewModel.openStandings(tab: String) {
+    if (state.value.busy) return
+    updatePlay { it.copy(standingsTab = tab) }
+    navigate(ConnectedRoute.STANDINGS)
+}
+
 fun ConnectedViewModel.standingsTab(tab: String) {
     if (state.value.busy) return
     updatePlay { it.copy(standingsTab = tab) }
@@ -165,7 +180,7 @@ fun ConnectedViewModel.loadStandings() {
             updatePlay { it.copy(iOwe = owe, owedToMe = owed, commitmentsLoaded = true) }
         }
         "fama" -> perform { val fame = play.fame(group.id); updatePlay { it.copy(fame = fame) } }
-        "integridad" -> perform { val shame = play.shame(group.id); updatePlay { it.copy(shame = shame) } }
+        "ban" -> perform { val shame = play.shame(group.id); updatePlay { it.copy(shame = shame) } }
         else -> perform { val ranking = play.ranking(group.id); updatePlay { it.copy(ranking = ranking) } }
     }
 }
@@ -193,13 +208,14 @@ fun ConnectedViewModel.createTournament() {
     val max = form.maxGroups.toIntOrNull()
     val entry = form.entryPoints.toIntOrNull()
     val draft = date?.let { day ->
-        if (form.game.isNotBlank() && (max ?: 0) in 2..16 && (entry ?: -1) in 0..500) {
+        val sizeOk = max?.let { it in TournamentSizes } == true
+        if (form.game.isNotBlank() && sizeOk && (entry ?: -1) in 0..500) {
             NewTournament(form.game, max ?: 0, entry ?: 0, day)
         } else null
     }
     if (draft == null) {
-        mutable.update { it.copy(error = "Escribe el juego, de 2 a 16 grupos, inscripción de 0 a 500 " +
-            "y fecha AAAA-MM-DD HH:mm.") }
+        mutable.update { it.copy(error = "Escribe el juego, elige 4, 8 o 16 grupos, inscripción de 0 a 500 " +
+            "y elige la fecha en el calendario.") }
         return
     }
     perform {
@@ -383,4 +399,30 @@ fun ConnectedViewModel.useVoiceDraft(rivalId: String? = null, rivalName: String?
             else "Completa lo que faltó: ${voice.missingFields.joinToString { f -> FieldNames[f] ?: f }}.") }
 }
 
-private val FieldNames = mapOf("game" to "juego", "condition" to "condición", "reward" to "recompensa")
+/**
+ * Explorar (PL-06): copia la idea al borrador y manda a elegir rival entre los miembros del grupo.
+ * Al tocar "Retar a ..." se abre Crear con juego, reto y rival ya puestos. Sin grupo, la idea queda pendiente:
+ * al elegir el grupo se aplica al borrador y se abre la lista de miembros (ver `selectGroup` y `applyGroup`).
+ */
+fun ConnectedViewModel.useIdea(game: String, condition: String) {
+    if (state.value.busy) return
+    mutable.update { it.copy(reviewing = false,
+        draft = it.draft.copy(game = game.take(60), condition = condition.take(280))) }
+    if (state.value.group == null) {
+        navigate(ConnectedRoute.GROUPS)
+        updatePlay { it.copy(pendingIdea = game.take(60) to condition.take(280)) }
+        mutable.update { it.copy(notice = "Idea guardada. Elige el grupo y luego a quién retar.") }
+    } else {
+        navigate(ConnectedRoute.MEMBERS)
+    }
+}
+
+/** Sin IA: lleva la frase al formulario manual como condición para no perderla (PL-05 RF4). */
+fun ConnectedViewModel.manualFromPhrase() {
+    val text = state.value.play.phrase.trim()
+    mutable.update { it.copy(route = ConnectedRoute.CREATE, reviewing = false,
+        draft = if (it.draft.condition.isBlank()) it.draft.copy(condition = text.take(280)) else it.draft,
+        notice = "Completa el reto a mano.") }
+}
+
+internal val FieldNames = mapOf("game" to "juego", "condition" to "condición", "reward" to "recompensa")

@@ -25,7 +25,7 @@ class EvidenceUiTest {
     private val contract = Challenge("contract", "group", "Halo", "Ganar", "Elegir juego",
         "2099-01-01T00:00:00Z", 25, "in_progress", targetType = "member", targetId = "qa", acceptedBy = "qa")
 
-    @Test fun navigationKeepsFiveMakeEntriesAndExploreDoesNotNavigate() {
+    @Test fun navigationKeepsFiveMakeEntriesAndExploreOpensIdeas() {
         val route = mutableStateOf(ConnectedRoute.HOME)
         var navigations = 0
         compose.setContent { PactoGGTheme {
@@ -35,13 +35,11 @@ class EvidenceUiTest {
             compose.onNodeWithText(it).assertIsDisplayed()
         }
         compose.onNodeWithText("Explorar").performClick()
-        compose.onNodeWithText("Esta sección estará disponible próximamente.").assertIsDisplayed()
-        compose.onNodeWithText("Entendido").performClick()
-        compose.onAllNodes(isDialog()).assertCountEquals(0)
-        compose.runOnIdle { assertEquals(0, navigations) }
+        compose.onNodeWithText("Explorar").assertIsSelected()
+        compose.runOnIdle { assertEquals(ConnectedRoute.EXPLORE, route.value); assertEquals(1, navigations) }
         compose.onNodeWithText("Grupos").performClick()
         compose.onNodeWithText("Grupos").assertIsSelected()
-        compose.runOnIdle { assertEquals(ConnectedRoute.GROUPS, route.value); assertEquals(1, navigations) }
+        compose.runOnIdle { assertEquals(ConnectedRoute.GROUPS, route.value); assertEquals(2, navigations) }
     }
 
     @Test fun unauthorizedReaderCanRefreshEvidenceWithoutUploadButtons() {

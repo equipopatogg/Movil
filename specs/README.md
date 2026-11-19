@@ -66,4 +66,11 @@ Las specs `PL-*` cubren pantallas nuevas de la maqueta que usan la API 0.12. Lle
 | [PL-02 — Avisos dentro de la app](PL-02-avisos/spec.md) | Pantallas escritas y compiladas; falta prueba en teléfono |
 | [PL-03 — Palabra y ranking](PL-03-palabra/spec.md) | Pantallas escritas y compiladas; falta prueba en teléfono |
 | [PL-04 — Crear, inscribirse y jugar torneos](PL-04-torneos-jugar/spec.md) | Pantallas escritas; falta compilar y probar en teléfono |
-| [PL-05 — Reto por voz](PL-05-voz/spec.md) | Datos listos; pantalla pendiente |
+| [PL-05 — Reto por voz](PL-05-voz/spec.md) | Pantalla escrita; falta compilar y probar en teléfono (requiere IA conectada en el servidor) |
+| [PL-06 — Explorar: ideas del día](PL-06-explorar/spec.md) | Pantalla escrita; falta compilar, cambiar el nombre de la prueba en el script de CI y probar en teléfono |
+| [PL-07 — Demo guiada](PL-07-demo/spec.md) | Pantalla escrita; falta compilar y probar en teléfono |
+| [PL-08 — Continuar con Google](PL-08-google/spec.md) | Escrita; falta compilar, registrar la huella SHA-1 y probar en teléfono |
+| [PL-09 — Avatar, eliminar cuenta, reportar y bloquear](PL-09-cuenta-seguridad/spec.md) | Escrita; falta compilar y probar en teléfono |
+| [PL-10 — Notificaciones push](PL-10-push/spec.md) | Escrita; falta compilar, configurar Firebase en el servidor y probar en teléfono |
+| [PL-11 — Recuperar contraseña](PL-11-recuperar-contrasena/spec.md) | Escrita; falta compilar y probar en teléfono |
+| [PL-12 — Modo sin conexión con Room](PL-12-sin-conexion/spec.md) | Escrita; falta compilar, subir el esquema 2 y probar en modo avión |

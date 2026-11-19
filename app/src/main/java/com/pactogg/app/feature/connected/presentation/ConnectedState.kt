@@ -13,6 +13,8 @@ enum class ConnectedRoute {
     HOME, GROUPS, MEMBERS, BOARD, CREATE, CONTRACT, EVIDENCE, TOURNAMENTS, PROFILE,
     // Specs PL-01, PL-02, PL-03, PL-04 y PL-05 (2026-11-14).
     JURY, VOTE, NOTIFICATIONS, STANDINGS, TOURNAMENT_NEW, TOURNAMENT_PLAY, MATCH, VOICE,
+    // Spec PL-06: Explorar abre el catálogo local de ideas.
+    EXPLORE,
 }
 
 data class FailureDiagnostic(val status: Int, val code: String, val requestId: String?)

@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.ButtonKind
+import com.pactogg.app.core.designsystem.DateTimeField
 import com.pactogg.app.core.designsystem.EmptyState
 import com.pactogg.app.core.designsystem.GameMark
 import com.pactogg.app.core.designsystem.InfoRow
@@ -57,7 +58,7 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
         if (group == null) {
             EmptyState("Necesitas un grupo", "Selecciona o crea un grupo para usar su configuración.",
                 R.drawable.ic_pacto_users)
-            MakeButton("Ir a grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            MakeButton("Ir a grupos", enabled = !state.busy) { model.chooseGroupThen(ConnectedRoute.CREATE) }
             return@MakePage
         }
         val draft = state.draft
@@ -66,13 +67,16 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
             Kicker("Grupo privado", PactoCyan)
             Text(group.name, style = MaterialTheme.typography.titleMedium)
         }
+        MakeButton("Crear por voz", ButtonKind.Secondary, enabled = !state.busy, icon = R.drawable.ic_pacto_mic) {
+            model.navigate(ConnectedRoute.VOICE)
+        }
         MakeCard {
             StepIntro("01", "Define el reto", "Que sea claro, posible y fácil de comprobar.")
             MakeField("Videojuego", draft.game, { model.draft(draft.copy(game = it)) })
             MakeField("¿Qué hay que conseguir?", draft.condition, { model.draft(draft.copy(condition = it)) },
                 hint = "Sé específico para evitar dudas del jurado.", multiline = true)
-            MakeField("Fecha límite (AAAA-MM-DD HH:mm)", state.deadlineLocal, model::deadline,
-                hint = "Hora de tu teléfono; se envía en UTC.")
+            DateTimeField("Fecha límite", state.deadlineLocal, enabled = !state.busy,
+                hint = "Toca para elegir en el calendario y el reloj.", onChange = model::deadline)
         }
         MakeCard {
             StepIntro("02", "Elige a tu rival", "La invitación queda pendiente hasta que acepte.")
@@ -138,7 +142,8 @@ fun ConnectedContract(state: ConnectedState, model: ConnectedViewModel) {
         }
         ConnectedContractActions(state, model, contract)
         if (contract.status in setOf("voting", "fulfilled", "cheating")) {
-            MakeButton("Votación y resultado", ButtonKind.Secondary, enabled = !state.busy) {
+            MakeButton(if (contract.status == "voting") "Ver votación y votar" else "Ver resultado",
+                ButtonKind.Secondary, enabled = !state.busy) {
                 model.openVote(contract)
             }
         }

@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.ButtonKind
+import com.pactogg.app.core.designsystem.DateTimeField
 import com.pactogg.app.core.designsystem.EmptyState
 import com.pactogg.app.core.designsystem.GameMark
 import com.pactogg.app.core.designsystem.InfoRow
@@ -28,6 +29,7 @@ import com.pactogg.app.core.designsystem.MakeField
 import com.pactogg.app.core.designsystem.MakePage
 import com.pactogg.app.core.designsystem.Pill
 import com.pactogg.app.core.designsystem.SafetyNote
+import com.pactogg.app.core.designsystem.Segmented
 import com.pactogg.app.core.designsystem.Tone
 import com.pactogg.app.core.designsystem.localDate
 import com.pactogg.app.core.designsystem.statusLabel
@@ -37,8 +39,10 @@ import com.pactogg.app.feature.connected.presentation.ConnectedRoute
 import com.pactogg.app.feature.connected.presentation.ConnectedState
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
 import com.pactogg.app.feature.connected.presentation.back
+import com.pactogg.app.feature.connected.presentation.chooseGroupThen
 import com.pactogg.app.feature.play.domain.PlayMatch
 import com.pactogg.app.feature.play.domain.TournamentDetail
+import com.pactogg.app.feature.play.domain.TournamentSizes
 import com.pactogg.app.ui.theme.PactoCyan
 import com.pactogg.app.ui.theme.PactoOrange
 
@@ -51,7 +55,7 @@ internal fun TournamentNewScreen(state: ConnectedState, model: ConnectedViewMode
         if (group == null) {
             EmptyState("Elige tu grupo primero.", "El torneo se crea o se juega a nombre de un grupo.",
                 R.drawable.ic_pacto_users)
-            MakeButton("Ir a grupos", enabled = !state.busy) { model.navigate(ConnectedRoute.GROUPS) }
+            MakeButton("Ir a grupos", enabled = !state.busy) { model.chooseGroupThen(ConnectedRoute.TOURNAMENT_NEW) }
             return@MakePage
         }
         Kicker("Tu grupo · ${group.name}", PactoCyan)
@@ -80,12 +84,14 @@ internal fun TournamentNewScreen(state: ConnectedState, model: ConnectedViewMode
 private fun TournamentFormFields(form: TournamentForm, onChange: (TournamentForm) -> Unit) {
     MakeField("Juego", form.game, { onChange(form.copy(game = it.take(40))) })
     Kicker("Formato: eliminación directa")
-    MakeField("Máximo de grupos (2 a 16)", form.maxGroups, { onChange(form.copy(maxGroups = it.filter(Char::isDigit)
-        .take(2))) }, number = true)
+    Kicker("Grupos en el cuadro")
+    Segmented(TournamentSizes.map(Int::toString), form.maxGroups) { onChange(form.copy(maxGroups = it)) }
     MakeField("Inscripción en puntos (0 a 500)", form.entryPoints, {
         onChange(form.copy(entryPoints = it.filter(Char::isDigit).take(3)))
     }, number = true)
-    MakeField("Fecha y hora", form.date, { onChange(form.copy(date = it.take(16))) }, hint = "AAAA-MM-DD HH:mm")
+    DateTimeField("Fecha y hora", form.date, hint = "Toca para elegir en el calendario y el reloj.") {
+        onChange(form.copy(date = it))
+    }
 }
 
 /** Detalle para jugar: grupos, bolsa, iniciar/salir y cuadro (maqueta `torneo/bracket`, PL-04 RF3). */

@@ -12,6 +12,8 @@ Que el miembro asignado como jurado vea los retos que le toca revisar, consulte 
 - RF4: Errores con mensaje propio: `NOT_JUROR` (403), `ALREADY_VOTED`, `VOTING_CLOSED` (409).
 - RF5: Si el reto ya cerró, `GET /contracts/{id}/result` (VOT-05) muestra el resultado y los votos revelados.
 - RF6: Un administrador neutral ve "Decidir" cuando `admin_can_resolve` es verdadero: `POST /contracts/{id}/votes/resolve` con `outcome` e `Idempotency-Key`.
+- RF7 (2026-11-17, prueba del PO): si no aparece el formulario de voto, la pantalla dice por qué: eres parte del reto (decide el jurado), no te tocó ser jurado, no hay jurado en el grupo o la votación aún no empieza. "Actualizar" recarga la votación sin salir. En el detalle del reto el botón dice "Ver votación y votar".
+- RF8 (2026-11-17): la foto de una evidencia se reintenta sola dos veces si la primera descarga falla, y después muestra "Toca para reintentar" en la misma tarjeta.
 
 ## 3. No funcionales
 Mismas reglas del repo: HTTPS, sin registrar tokens ni cuerpos, mensajes por `code`, botones deshabilitados mientras hay una petición, nada inventado si el servidor no lo manda.
@@ -24,3 +26,4 @@ Mismas reglas del repo: HTTPS, sin registrar tokens ni cuerpos, mensajes por `co
 | PL-01-AC3 | Un segundo voto o fuera de plazo muestra el mensaje del código 409 sin cerrar la pantalla. |
 | PL-01-AC4 | Un reto cerrado muestra resultado, conteo y movimiento de fianza. |
 | PL-01-AC5 | Un admin neutral puede decidir cuando el servidor lo permite; los demás no ven el botón. |
+| PL-01-AC6 | Quien creó o aceptó el reto ve "Eres parte de este reto…" y no el formulario (`VoteBlockedReasonTest`). |

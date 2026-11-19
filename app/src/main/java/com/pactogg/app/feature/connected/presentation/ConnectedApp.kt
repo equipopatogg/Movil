@@ -15,11 +15,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.pactogg.app.R
+import com.pactogg.app.core.designsystem.LinkCard
+import com.pactogg.app.core.offline.OfflineBanner
+import com.pactogg.app.feature.auth.presentation.AccessEvent
 import com.pactogg.app.feature.auth.presentation.AccessScreen
+import com.pactogg.app.feature.demo.presentation.DemoScreen
 
 @Composable
 fun ConnectedApp(model: ConnectedViewModel) {
@@ -37,12 +45,10 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
         return
     }
     if (state.account == null) {
-        AccessScreen(state.access.copy(loading = state.busy), model::access,
-            fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code) {
-            if (state.access.registering) state.social.nicknameNotice?.let { Text(it) }
-        }
+        SignedOut(state, model)
         return
     }
+    PushEffects(model)
     BackHandler(state.route != ConnectedRoute.HOME || state.selectedTournament != null) {
         if (state.selectedTournament != null) model.tournament(null) else model.back()
     }
@@ -51,8 +57,31 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
     }, bottomBar = { ConnectedNavigation(state.route, state.busy, model::navigate) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
             if (state.busy) LinearProgressIndicator(Modifier.fillMaxWidth())
+            OfflineBanner()
             Box(Modifier.weight(1f)) { ConnectedContent(state, model) }
         }
+    }
+}
+
+/** Sin sesión: acceso o la demo guiada (PL-07). La demo es local y no toca el ViewModel. */
+@Composable
+private fun SignedOut(state: ConnectedState, model: ConnectedViewModel) {
+    var demo by rememberSaveable { mutableStateOf(false) }
+    if (demo) {
+        DemoScreen(onExit = { demo = false }, onRegister = {
+            demo = false
+            if (!state.access.registering) model.access(AccessEvent.SwitchMode)
+        })
+        return
+    }
+    AccessScreen(state.access.copy(loading = state.busy), model::access,
+        fieldError = state.inlineFeedback(), fieldErrorCode = state.diagnostic?.code) {
+        if (state.access.registering) state.social.nicknameNotice?.let { Text(it) }
+        if (!state.access.registering) PasswordRecovery(state, model)
+        GoogleAccess(state, model)
+        if (!state.access.registering) LinkCard("Probar la demo interactiva",
+            "2 minutos · Sin registro · Sin dinero real",
+            R.drawable.ic_pacto_bolt) { if (!state.busy) demo = true }
     }
 }
 

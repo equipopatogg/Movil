@@ -17,6 +17,22 @@ class RegisterRequest(
     @SerialName("privacy_version") val privacyVersion: String,
 )
 
+/** AUTH-02: el backend valida el ID token; apodo y consentimiento solo van al crear la cuenta. */
+@Serializable
+class GoogleRequest(
+    @SerialName("id_token") val idToken: String,
+    val nickname: String? = null,
+    @SerialName("accept_privacy") val acceptPrivacy: Boolean? = null,
+    @SerialName("privacy_version") val privacyVersion: String? = null,
+)
+
+/** AUTH-05: token del enlace o código de 6 dígitos del correo. */
+@Serializable
+class VerifyEmailRequest(val token: String)
+
+@Serializable
+class VerifyEmailResponse(@SerialName("email_verified") val emailVerified: Boolean = false)
+
 @Serializable
 class RefreshRequest(@SerialName("refresh_token") val refreshToken: String)
 

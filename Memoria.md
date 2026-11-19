@@ -1,3 +1,13 @@
+# Bloques PL-01 a PL-05 y arreglos de CI — 2026-11-14 (tarde)
+
+- Pantallas escritas y compiladas: jurado/votación (PL-01), avisos con campana (PL-02), palabra y ranking (PL-03), torneos para jugar con partida (PL-04) y reto por voz (PL-05). Ninguna se ha probado todavía en teléfono.
+- Las specs nuevas usan prefijo `PL-` porque la matriz de CI exige exactamente las 19 operaciones `MO-*`.
+- Pruebas nuevas: `PlayApiTest` (integración, MockWebServer) y `PlayValidationTest` (unitaria), registradas en `docs/pruebas/operaciones.json`. Escritas el 2026-11-14; pendiente verlas pasar.
+- Arreglos de pruebas existentes: el certificado de prueba acepta el nombre que Windows da a `localhost` (Docker Desktop lo cambia a `kubernetes.docker.internal`), y `NicknameQueriesTest`/`EvidenceConfirmationTest` esperan la restauración de sesión antes de cada caso (carrera vista en el job de cobertura).
+- `ErrorMessages` cubre 27 códigos más del servidor (votos, compromisos, torneos, partidas, voz).
+- Explorar (PL-06, decisión del PO del 2026-11-14 por la noche): deja de decir "próximamente" y muestra 4 ideas del día de un catálogo local de 500 retos y 200 juegos, con descartar y "usar esta idea". La prueba de dispositivo pasa a llamarse `navigationKeepsFiveMakeEntriesAndExploreOpensIdeas` y hay que actualizar ese nombre en `EXPECTED_DEVICE` del script de CI. La demo entra con PL-07: recorrido local de 5 pasos desde el acceso; el paso de voz es una animación (frase y campos se escriben solos), sin micrófono ni red.
+- Voz depende de que el servidor tenga la IA conectada; sin ella la app ofrece escribir a mano.
+
 # Rediseño según la maqueta y funciones pendientes — 2026-11-14
 
 - Estado: el PO (David) autoriza rehacer la apariencia de las pantallas conectadas según la maqueta de Figma Make (exportada a `G:\PactoGGMovil\MaquetaFigmaMake`, commit `02db210`) y terminar las funciones que faltan antes del martes 2026-11-18. El acceso (login/registro) ya está aprobado y no se toca.
@@ -226,3 +236,21 @@ Usuario autoriza botones navegables. En catálogo: acceso → tablero; Explorar/
 ## Ajustes visuales locales — 2026-11-05
 
 Zona segura dinámica, mensajes contextuales y confirmaciones modales implementados. [Resultado UX-01](docs/pruebas/ajustes-ux-2026-11-05.md): 239 JVM, 14 Android y controles locales correctos. Revisión visual del usuario pendiente. Sin Git/publicación; recuentos anteriores conservados como históricos.
+
+## Cierre del sprint sin IA — 2026-11-16
+
+Decisión del PO: terminar todo lo pendiente del sprint planning menos la IA. Escrito, sin compilar todavía:
+- Torneos: el tamaño del cuadro ahora es un selector 4/8/16 (el backend rechaza otros valores).
+- [PL-10](specs/PL-10-push/spec.md) notificaciones push con FCM, traído y adaptado de `codex/push-google-notificaciones-20261109`. `google-services.json` sigue fuera de Git.
+- [PL-11](specs/PL-11-recuperar-contrasena/spec.md) recuperar contraseña con enlace del correo.
+- [PL-12](specs/PL-12-sin-conexion/spec.md) lectura sin conexión con Room (solo lectura; las acciones no se repiten solas). Incluye la nota de permisos.
+Pruebas nuevas: `PushRegistrationTest`, `DeviceApiTest`, `PasswordRecoveryApiTest`, `OfflineCacheTest`, registradas en `docs/pruebas/operaciones.json`.
+
+## Correcciones tras la prueba del PO — 2026-11-17
+
+- Fecha y hora con calendario y reloj del sistema (`DateTimeField`) en crear reto y crear torneo.
+- Votación (PL-01 RF7): si no aparece el formulario se explica por qué (parte del reto, no te tocó ser jurado, sin jurado, aún sin evidencia); "Actualizar" recarga la votación; el detalle dice "Ver votación y votar".
+- Fotos de evidencia (PL-01 RF8): dos reintentos automáticos y "Toca para reintentar" en la tarjeta.
+- Foto de perfil (PL-09 RF-FOTO) con el endpoint nuevo del backend USR-07; `AvatarBadge` en perfil y miembros.
+- "Kills" bloqueado: era Comprehend en el backend (F2-D76), no la app.
+Pruebas nuevas: `VoteBlockedReasonTest`, `PlayApiTest.PL_09_avatarPhotoUploadsMultipartAndMapsPhotoUrl`.

@@ -15,15 +15,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.ButtonKind
-import com.pactogg.app.core.designsystem.Initial
+import com.pactogg.app.core.designsystem.AvatarBadge
 import com.pactogg.app.core.designsystem.Kicker
 import com.pactogg.app.core.designsystem.LinkCard
 import com.pactogg.app.core.designsystem.MakeButton
 import com.pactogg.app.core.designsystem.MakeCard
 import com.pactogg.app.core.designsystem.MakeField
 import com.pactogg.app.core.designsystem.MakePage
+import com.pactogg.app.core.push.PushCard
 import com.pactogg.app.core.designsystem.SectionTitle
-import com.pactogg.app.core.designsystem.Tone
+import com.pactogg.app.feature.play.presentation.AvatarPicker
+import com.pactogg.app.feature.play.presentation.DeleteAccountCard
 import com.pactogg.app.feature.connected.domain.Profile
 import com.pactogg.app.ui.theme.PactoCyan
 
@@ -39,7 +41,8 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
     MakePage("Tu perfil", "Tu identidad dentro del squad", onBack = { model.back() }) {
         MakeCard {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-                Initial(state.account?.nickname.orEmpty(), Tone.Orange, 56)
+                AvatarBadge(state.account?.nickname.orEmpty(), state.social.profile?.avatar.orEmpty(),
+                    state.social.profile?.avatarUrl, 56)
                 Column(Modifier.weight(1f)) {
                     Kicker("Tu identidad gamer", PactoCyan)
                     Text(state.account?.nickname.orEmpty(), style = MaterialTheme.typography.titleLarge)
@@ -47,6 +50,7 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
+            state.social.profile?.let { AvatarPicker(it, state.busy, model) }
             MakeButton("Actualizar perfil", ButtonKind.Ghost, enabled = !state.busy) { model.loadProfile() }
         }
         state.social.profile?.let { profile ->
@@ -66,6 +70,7 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
         }
         LinkCard("Notificaciones", "Retos, votos y resultados", R.drawable.ic_pacto_bell,
             badge = state.play.unread.takeIf { it > 0 }?.toString()) { model.navigate(ConnectedRoute.NOTIFICATIONS) }
+        PushCard()
         LinkCard("Palabra y ranking", "Ranking, libro de compromisos, fama e integridad", R.drawable.ic_pacto_trophy) {
             model.navigate(ConnectedRoute.STANDINGS)
         }
@@ -81,6 +86,7 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
                 style = MaterialTheme.typography.bodySmall)
         }
         MakeButton("Cerrar sesión", ButtonKind.Ghost, enabled = !state.busy) { confirmLogout = true }
+        DeleteAccountCard(state, model)
     }
 }
 

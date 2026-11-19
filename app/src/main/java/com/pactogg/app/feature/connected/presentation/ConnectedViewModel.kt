@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ConnectedViewModel @Inject constructor(
-    private val sessions: SessionManager,
+    internal val sessions: SessionManager,
     internal val products: ProductRepository,
     internal val socials: com.pactogg.app.feature.connected.domain.SocialRepository,
     internal val play: com.pactogg.app.feature.play.domain.PlayRepository,

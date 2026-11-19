@@ -20,13 +20,16 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class SessionManager(private val api: PactoApi, private val store: SessionStore,
+class SessionManager(internal val api: PactoApi, private val store: SessionStore,
     private val now: () -> Long = System::currentTimeMillis) {
     private val mutex = Mutex()
     private val mutable = MutableStateFlow<Session?>(null)
     val current = mutable.asStateFlow()
     private var initialized = false
     private var generation = 0L
+
+    /** Baja del teléfono para push antes de cerrar (PL-10 RF3). Un fallo no impide el cierre local. */
+    var beforeLogout: (suspend () -> Boolean)? = null
 
     suspend fun restore() = withContext(Dispatchers.IO) {
         mutex.withLock {
@@ -42,7 +45,7 @@ class SessionManager(private val api: PactoApi, private val store: SessionStore,
 
     suspend fun register(body: RegisterRequest) = authenticate { api.register(body).checked(201).data }
 
-    private suspend fun authenticate(call: suspend () -> SessionDto) {
+    internal suspend fun authenticate(call: suspend () -> SessionDto) {
         val ticket = mutex.withLock { generation }
         val session = call().toDomain(now())
         withContext(Dispatchers.IO) {
@@ -105,6 +108,11 @@ class SessionManager(private val api: PactoApi, private val store: SessionStore,
 
     /** Return true only when remote revocation is confirmed. Always close locally. */
     suspend fun logout(): Boolean = withContext(Dispatchers.IO) {
+        val hook = beforeLogout
+        if (hook != null) {
+            val problem = runCatching { hook() }.exceptionOrNull()
+            if (problem is kotlinx.coroutines.CancellationException) throw problem
+        }
         val previous = mutex.withLock {
             val value = mutable.value
             withContext(NonCancellable) { clearLocked() }

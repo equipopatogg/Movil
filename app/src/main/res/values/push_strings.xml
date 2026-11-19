@@ -1,0 +1,4 @@
+<resources>
+    <string name="push_channel">Avisos de PactoGG</string>
+    <string name="push_new_notice">Tienes novedades. Abre PactoGG para verlas.</string>
+</resources>
