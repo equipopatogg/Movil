@@ -12,7 +12,7 @@ runs:
         validate-wrappers: true
         allow-snapshot-wrappers: false
         cache-provider: basic
-        cache-read-only: true
+        cache-read-only: ${{ github.ref != 'refs/heads/main' }}
         dependency-graph: disabled
     - uses: android-actions/setup-android@035682743ab223ec9c6169af09811dff8247e520
       with:
