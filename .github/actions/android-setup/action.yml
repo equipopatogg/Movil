@@ -22,8 +22,9 @@ runs:
       shell: bash
       run: |
         for attempt in 1 2 3 4; do
-          if bash ./gradlew --console=plain help; then exit 0; fi
+          if bash ./gradlew --console=plain help ${REFRESH:-}; then exit 0; fi
           echo "::warning::Descarga de Gradle falló (intento $attempt); reintentando"
+          REFRESH=--refresh-dependencies
           sleep $((attempt * 20))
         done
         exit 1
