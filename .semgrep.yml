@@ -20,3 +20,31 @@ rules:
     pattern-regex: '\.addJavascriptInterface\s*\('
     paths:
       include: ['app/src/main/**/*.kt']
+  - id: pactogg-no-log-sensitive
+    languages: [generic]
+    message: No escribir tokens, contraseñas ni secretos en Logcat.
+    severity: ERROR
+    pattern-regex: '(?i)\bLog\.(v|d|i|w|e|wtf)\s*\([^)\n]*(token|password|contrase|secret|bearer)'
+    paths:
+      include: ['app/src/main/**/*.kt']
+  - id: pactogg-no-world-accessible-files
+    languages: [generic]
+    message: Los archivos de la app deben ser privados (MODE_PRIVATE).
+    severity: ERROR
+    pattern-regex: 'MODE_WORLD_(READABLE|WRITEABLE)'
+    paths:
+      include: ['app/src/main/**/*.kt']
+  - id: pactogg-no-empty-trust-manager
+    languages: [generic]
+    message: Un TrustManager que no valida acepta cualquier certificado (MITM).
+    severity: ERROR
+    pattern-regex: 'checkServerTrusted\s*\([^)\n]*\)\s*\{\s*\}'
+    paths:
+      include: ['app/src/main/**/*.kt']
+  - id: pactogg-no-webview-file-access
+    languages: [generic]
+    message: No dar acceso a archivos locales desde un WebView.
+    severity: ERROR
+    pattern-regex: '(allowFileAccess\s*=\s*true|setAllowFileAccess\s*\(\s*true\s*\)|allowUniversalAccessFromFileURLs\s*=\s*true)'
+    paths:
+      include: ['app/src/main/**/*.kt']

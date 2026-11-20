@@ -22,7 +22,7 @@ def expected_cases(source):
             expected.add((line.split("// ruleid: ")[1].strip(), number + 1))
         if "// ok: " in line:
             negatives.add((line.split("// ok: ")[1].strip(), number + 1))
-    if len(expected) != 3 or len(negatives) != 3 or {x[0] for x in expected} != {x[0] for x in negatives}:
+    if not expected or len(expected) != len(negatives) or {x[0] for x in expected} != {x[0] for x in negatives}:
         raise ValueError("Three positive/negative rule pairs required")
     return expected
 
@@ -62,7 +62,7 @@ def main():
                           detections=[dict(rule=r["check_id"], file=r["path"], line=r["start"]["line"])
                                       for r in data.get("results", [])])
             verify(data, result.returncode, expected)
-            report.update(state="PASS", positive=3, negative=3, outsideProductionPath=3)
+            report.update(state="PASS", positive=len(expected), negative=len(expected), outsideProductionPath=len(expected))
     except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError):
         report["reason"] = "Rules/fixtures, engine, expected detections or scope verification failed"
     scanner.save(scanner.OUT / "semgrep-rules.json", report)

@@ -10,6 +10,20 @@ plugins {
     alias(libs.plugins.cyclonedx)
 }
 
+// Versión de la app (requisito 11): se sube en cada despliegue.
+// versionName lleva la versión del producto; versionCode crece solo en CI con el número de ejecución
+// de GitHub Actions, así cada APK/AAB publicado tiene un código mayor que el anterior.
+val appVersionName = "1.0.0"
+val appVersionCode = providers.environmentVariable("GITHUB_RUN_NUMBER").map { it.toInt() + 100 }.orElse(100).get()
+
+// Firma de subida a Google Play: solo en CI de entrega, con la llave en secretos del repositorio.
+// Sin estas variables el release queda sin firmar (como hasta ahora) y nada cambia en local.
+val uploadKeystore = providers.environmentVariable("PACTOGG_UPLOAD_KEYSTORE").orNull
+val uploadStorePassword = providers.environmentVariable("PACTOGG_UPLOAD_STORE_PASSWORD").orNull
+val uploadKeyAlias = providers.environmentVariable("PACTOGG_UPLOAD_KEY_ALIAS").orNull
+val uploadKeyPassword = providers.environmentVariable("PACTOGG_UPLOAD_KEY_PASSWORD").orNull
+val canSignUpload = listOf(uploadKeystore, uploadStorePassword, uploadKeyAlias, uploadKeyPassword).all { !it.isNullOrBlank() }
+
 val apiBaseUrl = providers.gradleProperty("pactogg.apiBaseUrl").orElse("https://52-3-200-211.sslip.io/").get()
 val privacyVersion = providers.gradleProperty("pactogg.privacyVersion").orElse("2026-10-01").get()
 // Aviso completo publicado en la página del equipo (requisito 16: vincular el aviso a la landing).
@@ -56,8 +70,8 @@ android {
         applicationId = "com.pactogg.app"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
         buildConfigField("String", "PRIVACY_VERSION", "\"$privacyVersion\"")
         buildConfigField("String", "PRIVACY_URL", "\"$privacyUrl\"")
@@ -68,6 +82,16 @@ android {
     }
 
     testCoverage { jacocoVersion = "0.8.14" }
+    if (canSignUpload) {
+        signingConfigs {
+            create("upload") {
+                storeFile = file(requireNotNull(uploadKeystore))
+                storePassword = uploadStorePassword
+                keyAlias = uploadKeyAlias
+                keyPassword = uploadKeyPassword
+            }
+        }
+    }
     buildTypes {
         debug { enableUnitTestCoverage = true }
         release {
@@ -75,6 +99,7 @@ android {
                 enable = true
             }
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            if (canSignUpload) signingConfig = signingConfigs.getByName("upload")
         }
     }
     compileOptions {
@@ -154,7 +179,7 @@ tasks.register<JavaExec>("detekt") {
 }
 
 group = "com.pactogg"
-version = "0.1.0"
+version = appVersionName
 tasks.named<org.cyclonedx.gradle.CyclonedxDirectTask>("cyclonedxDirectBom") {
     includeConfigs = listOf("releaseRuntimeClasspath")
 }

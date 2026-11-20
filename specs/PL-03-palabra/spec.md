@@ -1,6 +1,6 @@
 # PL-03 — Palabra y ranking
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLAS ESCRITAS, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Backend: ACH-03 (ranking y Rey del Grupo), COM-01/03/04/05 (libro de compromisos), ACH-01 (Muro de la Fama), ACH-02 (Muro de la Vergüenza). Maqueta: pantalla `compromisos` con pestañas Ranking / Libro / Fama / Integridad.
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos)**. Backend: ACH-03 (ranking y Rey del Grupo), COM-01/03/04/05 (libro de compromisos), ACH-01 (Muro de la Fama), ACH-02 (Muro de la Vergüenza). Maqueta: pantalla `compromisos` con pestañas Ranking / Libro / Fama / Integridad.
 
 ## Requisitos
 - RF1: Se trabaja sobre el grupo seleccionado; sin grupo, se pide elegir uno en Grupos.

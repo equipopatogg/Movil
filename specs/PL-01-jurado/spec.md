@@ -1,6 +1,6 @@
 # PL-01 — Jurado: votar retos de otros
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA EN LOCAL / aceptación en dispositivo pendiente**. Backend: VOT-01..05 (API 0.12.x, `docs/API-movil.md` §VOT). Maqueta: pantalla `jurado` y filtro "Jurado" del inicio (`MaquetaFigmaMake/src/App.tsx`, función `Jury`).
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos); probada en el teléfono (votación y explicación de por qué no puedes votar)**. Backend: VOT-01..05 (API 0.12.x, `docs/API-movil.md` §VOT). Maqueta: pantalla `jurado` y filtro "Jurado" del inicio (`MaquetaFigmaMake/src/App.tsx`, función `Jury`).
 
 ## 1. Objetivo
 Que el miembro asignado como jurado vea los retos que le toca revisar, consulte la evidencia, vote **Legítimo** o **Hizo trampa** (con comentario opcional) y vea el avance y el resultado final. Sin esto ningún reto llega a `fulfilled` o `cheating`.

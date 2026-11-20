@@ -28,7 +28,7 @@ Fecha de preparación: 2026-10-29. Fuente ejecutable: Movil/gradle/libs.versions
 | cyclonedx | 3.5.1 |
 
 Gradle Wrapper 9.5.0, compileSdk 36.1, targetSdk 36, minSdk 24, bytecode JVM 17.
-La versión de aplicación es 0.1.0 (código 1). Confirmar applicationId y requisito vigente de Play antes de publicar.
+La versión de aplicación es **1.0.0**. El `versionCode` lo pone CI: número de ejecución de GitHub Actions + 100 (en local vale 100). Así cada APK/AAB que sale de CI tiene un código mayor que el anterior, como pide Play.
 Lint conserva advertencias como errores salvo avisos de versiones más nuevas/target más nuevo: las actualizaciones se revisan expresamente. No se desactivaron controles de seguridad de código o manifiesto.
 
 ## Matriz de versionamiento y compatibilidad previa a nuevos desarrollos
@@ -58,3 +58,13 @@ Por despliegue futuro registrar fecha, responsables, fuente/commit si existe, ve
 ## Verificación release — 2026-11-05
 
 Sin cambiar versiones: graphics-path y DataStore cumplen la inspección actual LOAD/RELRO/ZIP en las ocho bibliotecas del release. Se corrigió el diagnóstico histórico de fin RELRO por el LOAD contenedor. Mismo APK con firma local de prueba comprobado en 4 KB y acceso en 16 KB. [Manifiesto y límites](pruebas/cierre-pendientes-2026-11-04.md). No acredita AAB ni distribución Play.
+
+## Versionamiento aplicado — 2026-11-19
+
+| Elemento | Valor | Regla |
+|---|---|---|
+| versionName | 1.0.0 | Semántico. Se cambia a mano en `app/build.gradle.kts` (`appVersionName`): parche = arreglos, menor = funciones nuevas, mayor = cambio incompatible. |
+| versionCode | `GITHUB_RUN_NUMBER + 100` | Lo calcula Gradle en cada ejecución de CI; nunca baja y no hay que editarlo. En local queda en 100. |
+| Versión reportada al servidor | `BuildConfig.VERSION_NAME` | La app la manda al registrar el teléfono para push (`app_version`). |
+| Contrato con el backend | `api/openapi.yaml` del repositorio backend | La app consume solo rutas `/api/v1`; un cambio incompatible exige `/api/v2`. |
+| Base local Room | Esquema 2 (migración automática 1→2) | Cada cambio de esquema sube la versión y exporta el JSON en `app/schemas`. |

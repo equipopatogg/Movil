@@ -501,7 +501,9 @@
       "com.pactogg.app.feature.explore.presentation.DailyIdeasTest",
       "com.pactogg.app.feature.demo.presentation.DemoScriptTest",
       "com.pactogg.app.core.push.PushRegistrationTest",
-      "com.pactogg.app.feature.play.presentation.VoteBlockedReasonTest"
+      "com.pactogg.app.feature.play.presentation.VoteBlockedReasonTest",
+      "com.pactogg.app.feature.play.PlayRulesTest",
+      "com.pactogg.app.core.session.AccountRulesTest"
     ],
     "integration": [
       "com.pactogg.app.integration.ApiIntegrationTest",
@@ -529,7 +531,8 @@
       "com.pactogg.app.feature.auth.google.GoogleAccessApiTest",
       "com.pactogg.app.core.push.DeviceApiTest",
       "com.pactogg.app.feature.auth.recovery.PasswordRecoveryApiTest",
-      "com.pactogg.app.core.offline.OfflineCacheTest"
+      "com.pactogg.app.core.offline.OfflineCacheTest",
+      "com.pactogg.app.feature.play.PlayRoutesApiTest"
     ],
     "security": [
       "com.pactogg.app.core.network.ApiClientFactoryTest",
@@ -552,7 +555,10 @@
       "com.pactogg.app.feature.profile.detail.ProfileDetailsSecurityTest",
       "com.pactogg.app.feature.profile.edit.EditProfileSecurityTest",
       "com.pactogg.app.feature.profile.nickname.CheckNicknameSecurityTest",
-      "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest"
+      "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest",
+      "com.pactogg.app.feature.play.PlaySecurityTest",
+      "com.pactogg.app.core.session.AccountSecurityTest",
+      "com.pactogg.app.core.network.NetworkSecurityConfigTest"
     ]
   },
   "required_regressions": {
@@ -784,6 +790,46 @@
       {
         "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
         "name": "unavailableEvidenceListDoesNotInventAnEmptyHistoryOrResend"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRulesTest",
+        "name": "PL_RULES_everyIdentifierMustBeA24CharLowercaseObjectId"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRulesTest",
+        "name": "PL_02_noticeWithoutReadFlagCountsAsUnread"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRulesTest",
+        "name": "PL_01_summaryAndResultKeepCountersAndRevealedVotes"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRulesTest",
+        "name": "PL_03_rankingCommitmentsFameAndCheatersMapNames"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRulesTest",
+        "name": "PL_04_tournamentWithoutGroupsAndNextMatchMapSafely"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountRulesTest",
+        "name": "PL_11_recoveryRejectsBadEmailTokenAndShortPassword"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountRulesTest",
+        "name": "PL_08_googleRejectsMalformedTokenAndNicknameWithoutConsent"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountRulesTest",
+        "name": "PL_10_pushTokenMustHaveSaneLengthAndNoSpaces"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRulesTest",
+        "name": "PL_02_listsAndBulkActionsNeedSessionBeforeAnyRequest"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountRulesTest",
+        "name": "PL_13_verifyEmailSendsOnlyTheTokenAndResendNeedsSession"
       }
     ],
     "security": [
@@ -1054,6 +1100,58 @@
       {
         "class": "com.pactogg.app.feature.evidence.send.SendEvidenceSecurityTest",
         "name": "EVI_02_cdnRequestStripsAuthorizationAndNeverFollowsRedirect"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlaySecurityTest",
+        "name": "PL_SEC_everyOperationWithoutSessionFailsBeforeTouchingTheNetwork"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlaySecurityTest",
+        "name": "PL_SEC_revokedSessionIsClearedAndTokensNeverLeak"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlaySecurityTest",
+        "name": "PL_SEC_manipulatedIdentifiersAreRejectedOnTheDevice"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlaySecurityTest",
+        "name": "PL_SEC_writesAreNotReplayedAfterRenewingTheSession"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountSecurityTest",
+        "name": "PL_10_pushIsNeverRegisteredWithoutAccountPermissionOrValidToken"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountSecurityTest",
+        "name": "PL_10_closingSessionBlocksLateRegistrations"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountSecurityTest",
+        "name": "PL_10_deviceRoutesWithoutSessionNeverReachTheServer"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountSecurityTest",
+        "name": "PL_11_recoveryNeverSendsTheSessionTokenNorTouchesTheSession"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountSecurityTest",
+        "name": "PL_13_resendVerificationRequiresSession"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountSecurityTest",
+        "name": "PL_08_rejectedGoogleTokenNeverCreatesSessionNorSendsBearer"
+      },
+      {
+        "class": "com.pactogg.app.core.session.AccountSecurityTest",
+        "name": "PL_13_verifyEmailLinkNeverCarriesTheSessionToken"
+      },
+      {
+        "class": "com.pactogg.app.core.network.NetworkSecurityConfigTest",
+        "name": "NET_SEC_cleartextIsForbiddenEverywhere"
+      },
+      {
+        "class": "com.pactogg.app.core.network.NetworkSecurityConfigTest",
+        "name": "NET_SEC_apiHostIsPinnedWithBackupPinsThatOutliveTheEvaluation"
       }
     ],
     "integration": [
@@ -1296,6 +1394,82 @@
       {
         "class": "com.pactogg.app.feature.evidence.send.SendEvidenceApiTest",
         "name": "EVI_02_photoCannotBeConfirmedByALinkResponse"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "NOT_03_markReadPatchesOneNotice"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "NOT_04_markAllReadAcceptsNoContent"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "NOT_05_deleteNoticeUsesDelete"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "COM_03_creditorMarksCommitmentAsCompleted"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "COM_04_debtorRequestsCompletion"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "MAT_04_confirmMapsFinishedMatch"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "MAT_05_disputeSendsTrimmedReason"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "MAT_06_resolveSendsWinnerAndOmitsBlankReason"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "TOR_06_startReturnsBracket"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "USR_08_resendVerificationUsesSessionToken"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "VOT_05_resultRevealsVotesAfterClosing"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "VOT_06_adminResolutionSendsOutcomeAndIdempotencyKey"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "PTS_03_rankingMapsKingAndPositions"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "COM_02_summaryReturnsBothCounters"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "REP_03_fameMapsExecutorAndPhotos"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "REP_04_cheatersListUsesShameRoute"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "TOR_03_detailMapsBracket"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "MAT_02_matchDetailMapsScores"
+      },
+      {
+        "class": "com.pactogg.app.feature.play.PlayRoutesApiTest",
+        "name": "AUTH_05_verifyEmailSendsOnlyTheTokenWithoutSession"
       }
     ]
   }

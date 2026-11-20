@@ -1,6 +1,6 @@
 # PL-02 — Avisos dentro de la app
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLAS ESCRITAS, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Backend: NOT-01..04. Maqueta: campana del encabezado y pantalla `notificaciones`. El push nativo (DEV-01..03, FCM) queda fuera de esta spec hasta tener `google-services.json` en la app.
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos)**. Backend: NOT-01..04. Maqueta: campana del encabezado y pantalla `notificaciones`. El push nativo (DEV-01..03, FCM) queda fuera de esta spec hasta tener `google-services.json` en la app.
 
 ## Requisitos
 - RF1: `GET /api/v1/notifications` (paginado, `unread=true` opcional) al abrir la pantalla; la campana muestra el número de no leídos (`GET ?unread=true&limit=50`) al entrar al inicio.

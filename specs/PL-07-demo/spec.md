@@ -1,6 +1,6 @@
 # PL-07 — Demo guiada antes de iniciar sesión
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLA ESCRITA, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Sin backend. Maqueta: `demo` ("Probar la demo interactiva" en el acceso).
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos)**. Sin backend. Maqueta: `demo` ("Probar la demo interactiva" en el acceso).
 
 ## Decisión del PO (2026-11-14)
 La demo es obligatoria. Es un recorrido local, sin cuenta, que explica el producto. Todo lo que muestra está marcado como simulación o ejemplo. El paso de "reto por voz" **no pide hablar**: es una animación en la que la frase y los campos se escriben solos.

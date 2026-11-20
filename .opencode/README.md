@@ -6,10 +6,9 @@ Paquete local en formato OpenCode: 13 perfiles, 14 skills y 6 comandos. Se redac
 - skills/<nombre>/SKILL.md: guías reutilizables cargadas según contexto.
 - commands/*.md: solicitudes documentales con $ARGUMENTS; no contienen ejecución shell.
 
-No hay un agente por proceso ni invocaciones realizadas. No se ha elegido modelo/proveedor ni instalado contenido global. Este paquete no configura MCP, cuentas, hooks ni descargas automáticas.
-Los comandos declaran un subagente; al invocarlos en un cliente compatible se iniciará esa revisión. No se han invocado durante la preparación.
+Los perfiles son roles de revisión que se aplican con los comandos de abajo desde OpenCode (por ejemplo, la auditoría del docente se corrió con OpenCode sobre este repositorio). El código se escribió con agentes de IA (OpenCode, Codex y Claude Code) siguiendo la constitución, estas skills y el ciclo SDD (spec, plan, tareas, pruebas); la bitácora de cada cambio está en `Memoria.md`. MCP del proyecto: `.mcp.json` (Figma, usado para llevar la maqueta a Compose).
 
-Ejemplos futuros dentro de OpenCode, abiertos desde la raíz PactoGG:
+Comandos dentro de OpenCode, abiertos desde la raíz PactoGG:
 
 - /pactogg-spec-draft <fuentes o spec>
 - /pactogg-plan-review <spec o plan>

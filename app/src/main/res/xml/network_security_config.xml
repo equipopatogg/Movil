@@ -3,4 +3,24 @@
     <base-config cleartextTrafficPermitted="false">
         <trust-anchors><certificates src="system" /></trust-anchors>
     </base-config>
+    <!--
+        MASVS-NETWORK-2: fijación de certificados para la API (Caddy emite con Let's Encrypt y, si falla,
+        con ZeroSSL). Se fijan las llaves públicas (SPKI SHA-256) de las raíces de ambas autoridades, así una
+        renovación normal del certificado no rompe la app, pero un certificado de otra autoridad (proxy o
+        CA comprometida) se rechaza. La fecha de expiración evita dejar la app sin servicio si la cadena cambia.
+    -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="false">52-3-200-211.sslip.io</domain>
+        <pin-set expiration="2027-06-30">
+            <!-- ISRG Root X1 (Let's Encrypt RSA) -->
+            <pin digest="SHA-256">C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=</pin>
+            <!-- ISRG Root X2 (Let's Encrypt ECDSA) -->
+            <pin digest="SHA-256">diGVwiVYbubAI3RW4hB9xU8e/CH2GnkuvVFZE8zmgzI=</pin>
+            <!-- USERTrust RSA (ZeroSSL, respaldo de Caddy) -->
+            <pin digest="SHA-256">x4QzPSC810K5/cMjb05Qm4k3Bw5zBn4lTdO/nEW/Td4=</pin>
+            <!-- USERTrust ECC (ZeroSSL, respaldo de Caddy) -->
+            <pin digest="SHA-256">ICGRfpgmOUXIWcQ/HXPLQTkFPEFPoDyjvH7ohhQpjzs=</pin>
+        </pin-set>
+        <trust-anchors><certificates src="system" /></trust-anchors>
+    </domain-config>
 </network-security-config>

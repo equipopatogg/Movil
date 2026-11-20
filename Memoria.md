@@ -261,3 +261,21 @@ Pruebas nuevas: `VoteBlockedReasonTest`, `PlayApiTest.PL_09_avatarPhotoUploadsMu
 - PL-09: "Desbloquear" en Miembros y "Reportar evidencia" en la revisión del jurado (motivos ofensivo, sexual, trampa, otro).
 - Aviso de privacidad de la app actualizado a lo que hace hoy (Groq, Firebase, foto de perfil, eliminar cuenta) y enlace al aviso web (`BuildConfig.PRIVACY_URL`, por defecto `/privacidad` en la página del equipo).
 - IA de voz en producción con Groq `openai/gpt-oss-20b` (backend F2-D78).
+
+## Auditoría v2 del docente — 2026-11-19
+
+- Pruebas instrumentadas: `AccessNavigationTest` cierra sesión antes de cada caso (fallaban en un teléfono con sesión iniciada). En el Motorola edge 40 neo: 23 pasan, 6 omitidas (requieren cuenta QA), 0 fallan.
+- Seguridad de todos los flujos PL: `PlaySecurityTest` recorre las 35 operaciones del módulo de juego (sin sesión no sale ninguna petición; sesión revocada se borra y no filtra tokens; ids manipulados se rechazan en el teléfono; las escrituras no se repiten solas tras renovar). `AccountSecurityTest` cubre push, recuperar contraseña, Google y correo verificado.
+- Endpoints que no tenían prueba: `PlayRoutesApiTest` (avisos leído/todos/borrar, compromisos, partidas confirmar/disputar/resolver, iniciar torneo, resultado y resolución del jurado, ranking, fama, tramposos, detalle de torneo y partida, verificar y reenviar correo).
+- Unitarias por operación: `PlayRulesTest` y `AccountRulesTest`.
+- `docs/pruebas/matriz-endpoints.md` (generada con `scripts/matriz-endpoints.py`): los 62 endpoints con sus pruebas unitarias, de integración y de seguridad.
+- Versión 1.0.0; `versionCode` = número de ejecución de CI + 100 (`docs/versiones.md`). Firma de subida opcional por variables de entorno y flujo de entrega a Google Play en `docs/cd/android-release.yml` (copiar a `.github/workflows`).
+- `.mcp.json` con el MCP de Figma usado para llevar el prototipo a Compose.
+
+## Auditoría v2 con OpenCode — segunda pasada — 2026-11-19
+
+- Fijación de certificados de la API (raíces de Let's Encrypt y ZeroSSL, expiración 2027-06-30) con `NetworkSecurityConfigTest`.
+- Semgrep pasa de 3 a 7 reglas con sus casos positivo/negativo.
+- `docs/seguridad/masvs-checklist.md` con la verificación ejecutada por grupo MASVS (resiliencia como riesgo aceptado).
+- Specs PL-01 a PL-13 con su estado real; `docs/entrega/google-play.md`; `CHANGELOG.md` y etiquetas `vX.Y.Z`.
+- La landing (repo `web`) ya publica `/privacidad`, enlaza la ficha de Play y tiene cabeceras de seguridad.

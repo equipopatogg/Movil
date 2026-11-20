@@ -1,6 +1,6 @@
 # PL-11 — Recuperar contraseña
 
-Fecha: 2026-11-16. Estado: **APROBADA POR EL PO; ESCRITA, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Backend: AUTH-06 `POST /api/v1/auth/forgot-password` (202) y AUTH-07 `POST /api/v1/auth/reset-password` (ya desplegados). Sprint planning: ID 16.
+Fecha: 2026-11-16. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos)**. Backend: AUTH-06 `POST /api/v1/auth/forgot-password` (202) y AUTH-07 `POST /api/v1/auth/reset-password` (ya desplegados). Sprint planning: ID 16.
 
 ## Requisitos
 - RF1: En iniciar sesión hay "¿Olvidaste tu contraseña?". Pide el correo y llama a `forgot-password`. El aviso es el mismo exista o no la cuenta, para no revelar qué correos están registrados.
