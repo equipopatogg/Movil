@@ -12,9 +12,18 @@ runs:
         validate-wrappers: true
         allow-snapshot-wrappers: false
         cache-provider: basic
-        cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+        cache-read-only: false
         dependency-graph: disabled
     - uses: android-actions/setup-android@035682743ab223ec9c6169af09811dff8247e520
       with:
         packages: platforms;android-36.1 build-tools;36.0.0
         log-accepted-android-sdk-licenses: false
+    - name: Warm Gradle plugins and dependencies (retries)
+      shell: bash
+      run: |
+        for attempt in 1 2 3 4; do
+          if bash ./gradlew --console=plain help; then exit 0; fi
+          echo "::warning::Descarga de Gradle falló (intento $attempt); reintentando"
+          sleep $((attempt * 20))
+        done
+        exit 1
