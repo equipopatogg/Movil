@@ -1,6 +1,6 @@
 # PL-04 — Crear, inscribirse y jugar torneos
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLAS ESCRITAS, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Amplía MO-TOR-02 (consulta). Backend: TOR-01, TOR-03, TOR-06, TOR-07, TOR-08, MAT-01..07 (API 0.12.x). Maqueta: `torneos`, `torneo/nuevo`, `torneo/bracket`, `torneo/reportar`, `torneo/confirmar`.
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos)**. Amplía MO-TOR-02 (consulta). Backend: TOR-01, TOR-03, TOR-06, TOR-07, TOR-08, MAT-01..07 (API 0.12.x). Maqueta: `torneos`, `torneo/nuevo`, `torneo/bracket`, `torneo/reportar`, `torneo/confirmar`.
 
 ## Requisitos
 - RF1: **Nuevo torneo** (admin del grupo seleccionado): juego, formato (por defecto eliminación directa), tamaño del cuadro 4, 8 o 16 grupos (selector; el backend rechaza otros valores, corrección 2026-11-16), inscripción en puntos y fecha → `POST /groups/{gid}/tournaments`. Muestra el código para compartir.

@@ -14,7 +14,7 @@ Endpoints consumidos: **62** · sin prueba de integración: **0**
 | POST | `/api/v1/auth/refresh` | RefreshSessionValidationTest | ApiIntegrationTest, RefreshSessionApiTest | PlaySecurityTest, RefreshSessionSecurityTest |
 | POST | `/api/v1/auth/register` | RegisterValidationTest | ApiIntegrationTest, RegisterApiTest | RegisterSecurityTest |
 | POST | `/api/v1/auth/reset-password` | AccountRulesTest | PasswordRecoveryApiTest | AccountSecurityTest |
-| POST | `/api/v1/auth/verify-email` | — | PlayRoutesApiTest | AccountSecurityTest |
+| POST | `/api/v1/auth/verify-email` | AccountRulesTest | PlayRoutesApiTest | AccountSecurityTest |
 | POST | `/api/v1/auth/verify-email/resend` | AccountRulesTest | PlayRoutesApiTest | AccountSecurityTest |
 | POST | `/api/v1/commitments/{id}/complete` | PlayRulesTest | PlayRoutesApiTest | PlaySecurityTest |
 | POST | `/api/v1/commitments/{id}/request-complete` | PlayRulesTest | PlayRoutesApiTest | PlaySecurityTest |
@@ -64,8 +64,8 @@ Endpoints consumidos: **62** · sin prueba de integración: **0**
 | GET | `/api/v1/users/check-nickname` | CheckNicknameValidationTest, NicknameQueriesTest | CheckNicknameApiTest, SocialApiIntegrationTest | CheckNicknameSecurityTest |
 | DELETE | `/api/v1/users/me` | EditProfileValidationTest, PlayValidationTest, ProfileDetailsValidationTest | EditProfileApiTest, PlayApiTest, ProfileDetailsApiTest, SocialApiIntegrationTest | EditProfileSecurityTest, PlaySecurityTest, ProfileDetailsSecurityTest |
 | GET | `/api/v1/users/me` | EditProfileValidationTest, NicknameQueriesTest, ProfileDetailsValidationTest | EditProfileApiTest, PlayApiTest, ProfileDetailsApiTest, SocialApiIntegrationTest | EditProfileSecurityTest, ProfileDetailsSecurityTest |
-| PATCH | `/api/v1/users/me` | EditProfileValidationTest, PlayValidationTest, ProfileDetailsValidationTest | EditProfileApiTest, PlayApiTest, ProfileDetailsApiTest, SocialApiIntegrationTest | EditProfileSecurityTest, PlaySecurityTest, ProfileDetailsSecurityTest |
 | PATCH | `/api/v1/users/me` | EditProfileValidationTest, NicknameQueriesTest, ProfileDetailsValidationTest | EditProfileApiTest, PlayApiTest, ProfileDetailsApiTest, SocialApiIntegrationTest | EditProfileSecurityTest, ProfileDetailsSecurityTest |
+| PATCH | `/api/v1/users/me` | EditProfileValidationTest, PlayValidationTest, ProfileDetailsValidationTest | EditProfileApiTest, PlayApiTest, ProfileDetailsApiTest, SocialApiIntegrationTest | EditProfileSecurityTest, PlaySecurityTest, ProfileDetailsSecurityTest |
 | POST | `/api/v1/users/me/avatar` | PlayValidationTest | PlayApiTest | PlaySecurityTest |
 | DELETE | `/api/v1/users/{id}/block` | PlayRulesTest, PlayValidationTest | PlayApiTest | PlaySecurityTest |
 | POST | `/api/v1/users/{id}/block` | AccountRulesTest, PlayRulesTest, PlayValidationTest | OfflineCacheTest, PlayApiTest | PlaySecurityTest |

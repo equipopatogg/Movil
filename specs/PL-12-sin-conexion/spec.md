@@ -1,6 +1,6 @@
 # PL-12 — Modo sin conexión con Room
 
-Fecha: 2026-11-16. Estado: **APROBADA POR EL PO; ESCRITA, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Sprint planning: "Room (SQLite) y sincronización sin conexión" (requisito del docente). Sin cambios en el backend.
+Fecha: 2026-11-16. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos)**. Sprint planning: "Room (SQLite) y sincronización sin conexión" (requisito del docente). Sin cambios en el backend.
 
 ## Alcance acordado
 Solo lectura sin conexión. Las acciones que mueven puntos, fianzas o votos **no** se guardan para enviarlas después: repetirlas sin saber el estado del servidor podría cobrar dos veces o votar fuera de tiempo. Se mantiene el mensaje actual de "Se perdió la conexión…" para esas acciones.

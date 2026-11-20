@@ -557,7 +557,8 @@
       "com.pactogg.app.feature.profile.nickname.CheckNicknameSecurityTest",
       "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest",
       "com.pactogg.app.feature.play.PlaySecurityTest",
-      "com.pactogg.app.core.session.AccountSecurityTest"
+      "com.pactogg.app.core.session.AccountSecurityTest",
+      "com.pactogg.app.core.network.NetworkSecurityConfigTest"
     ]
   },
   "required_regressions": {
@@ -1143,6 +1144,14 @@
       {
         "class": "com.pactogg.app.core.session.AccountSecurityTest",
         "name": "PL_13_verifyEmailLinkNeverCarriesTheSessionToken"
+      },
+      {
+        "class": "com.pactogg.app.core.network.NetworkSecurityConfigTest",
+        "name": "NET_SEC_cleartextIsForbiddenEverywhere"
+      },
+      {
+        "class": "com.pactogg.app.core.network.NetworkSecurityConfigTest",
+        "name": "NET_SEC_apiHostIsPinnedWithBackupPinsThatOutliveTheEvaluation"
       }
     ],
     "integration": [

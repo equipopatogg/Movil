@@ -2,9 +2,9 @@
 
 ## Implementados en la base
 
-- HTTPS obligatorio; confianza en certificados del sistema; sin HTTP claro ni bypass TLS.
+- HTTPS obligatorio; certificados del sistema y **fijación de certificados** (SPKI de las raíces de Let's Encrypt y ZeroSSL, expiración 2027-06-30) para la API; sin HTTP claro ni bypass TLS (`network_security_config.xml`, `NetworkSecurityConfigTest`).
 - Sin claves/credenciales de servicios ni datos de usuarios. API vacía por defecto.
-- Sin permisos de cámara, micrófono, contactos, ubicación o acceso general a galería. Solo INTERNET.
+- Sin permisos de cámara, micrófono, contactos, ubicación o acceso general a galería. Solo INTERNET y POST_NOTIFICATIONS (en tiempo de ejecución).
 - Backup y transferencia de datos excluidos; actividad launcher exportada, resto sin componentes exportados adicionales.
 - Cliente sin logging de payloads/tokens. Errores categorizados y request_id restringido.
 - R8/optimización de release habilitada. No equivale a protección absoluta ante ingeniería inversa.
@@ -37,16 +37,16 @@ Revisión documental del 2026-10-30 al preparar PG-00: fijar referencias no demu
 ## Antes de incorporar datos reales
 
 Modelar amenazas y revisar controles MASVS/MASTG para Android y ASVS/API Security para backend.
-Definir tokens con cifrado respaldado por Keystore, revocación y limpieza en logout; DataStore y Room no cifran por sí mismos.
+Hecho: tokens cifrados con Keystore, revocación y limpieza en logout (Room guarda solo lecturas públicas del grupo y se borra al cerrar sesión).
 Revisar autorización por recurso en servidor, idempotencia de votos/puntos/inscripciones, privacidad y retención.
 La IA propone borradores editables: salida no confiable validada por esquema, sin secretos de proveedor en APK.
 S3 privado, validación de archivo, EXIF, cuotas y análisis previo son responsabilidades de integración pendientes.
 
 ## Publicación
 
-No existe keystore de producción, cuenta de servicio, conexión Play ni despliegue automático.
-Antes de publicar: identificador definitivo, firma, aviso de privacidad, declaración de datos, SDK requerido por Play,
-pruebas instrumentadas, revisión de versión release y controles pendientes ratificados.
+- La app está en **prueba cerrada en Google Play** (`com.pactogg.app`), subida por el responsable de la entrega (Diego S.) con firma de la app administrada por Google Play. Detalle en `docs/entrega/google-play.md`.
+- Entrega continua preparada: `docs/cd/android-release.yml` firma el AAB con la llave de subida (secretos del repositorio) y lo sube a la pista elegida con `scripts/play-upload.py`; se activa copiándolo a `.github/workflows/`.
+- Aviso de privacidad publicado en la landing (`/privacidad`) y enlazado desde la app (`BuildConfig.PRIVACY_URL`).
 
 Fuentes oficiales: https://mas.owasp.org/MASVS/ ; https://developer.android.com/privacy-and-security ;
 https://dagger.dev/hilt/gradle-setup ; https://github.com/CycloneDX/cyclonedx-gradle-plugin .

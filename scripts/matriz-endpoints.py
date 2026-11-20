@@ -29,7 +29,8 @@ for file in sorted(TEST.rglob("*.kt")):
 
 # Nombre del método del repositorio cuando difiere del de la interfaz de Retrofit.
 ALIASES = {"uploadAvatar": ["avatarPhoto"], "report": ["reportUser", "reportEvidence"], "block": ["blockUser"],
-           "unblock": ["unblockUser"], "registerDevice": ["sync"], "removeDevice": ["detach"]}
+           "unblock": ["unblockUser"], "registerDevice": ["sync"], "removeDevice": ["detach"],
+           "verifyEmail": ["VerifyEmailRequest"]}
 MATRIX = __import__("json").loads((ROOT / "docs/pruebas/operaciones.json").read_text(encoding="utf-8"))
 
 

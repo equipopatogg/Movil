@@ -271,3 +271,11 @@ Pruebas nuevas: `VoteBlockedReasonTest`, `PlayApiTest.PL_09_avatarPhotoUploadsMu
 - `docs/pruebas/matriz-endpoints.md` (generada con `scripts/matriz-endpoints.py`): los 62 endpoints con sus pruebas unitarias, de integración y de seguridad.
 - Versión 1.0.0; `versionCode` = número de ejecución de CI + 100 (`docs/versiones.md`). Firma de subida opcional por variables de entorno y flujo de entrega a Google Play en `docs/cd/android-release.yml` (copiar a `.github/workflows`).
 - `.mcp.json` con el MCP de Figma usado para llevar el prototipo a Compose.
+
+## Auditoría v2 con OpenCode — segunda pasada — 2026-11-19
+
+- Fijación de certificados de la API (raíces de Let's Encrypt y ZeroSSL, expiración 2027-06-30) con `NetworkSecurityConfigTest`.
+- Semgrep pasa de 3 a 7 reglas con sus casos positivo/negativo.
+- `docs/seguridad/masvs-checklist.md` con la verificación ejecutada por grupo MASVS (resiliencia como riesgo aceptado).
+- Specs PL-01 a PL-13 con su estado real; `docs/entrega/google-play.md`; `CHANGELOG.md` y etiquetas `vX.Y.Z`.
+- La landing (repo `web`) ya publica `/privacidad`, enlaza la ficha de Play y tiene cabeceras de seguridad.

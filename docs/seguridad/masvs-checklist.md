@@ -4,18 +4,22 @@ Fecha de consulta: 2026-10-29. Referencias: [OWASP MASVS](https://mas.owasp.org/
 
 La selección de versión/perfil, IDs concretos y pruebas MASTG aplicables queda pendiente para la spec y artefacto que se evalúen. No se traslada la checklist ASVS L2 ni sus casillas marcadas del profesor.
 
-| Grupo MASVS | Revisión propuesta para PactoGG | Evidencia que se planeará | Estado de esta integración |
-|---|---|---|---|
-| STORAGE | Sesión, caché, logs y backups sin exposición sensible | Inspección de datos y pruebas de limpieza | NO_EJECUTADO |
-| CRYPTO | Claves y uso de criptografía adecuados al diseño | Revisión de custodia/Keystore y fallos | NO_EJECUTADO |
-| AUTH | Sesión y separación de autenticación/autorización | Casos de expiración, revocación y denegación | NO_EJECUTADO |
-| NETWORK | Transporte seguro y autenticación del servidor | Pruebas de confianza TLS y configuración release | NO_EJECUTADO |
-| PLATFORM | Permisos, componentes e intercambio con otras apps | Revisión de manifiesto/intents y dinámica | NO_EJECUTADO |
-| CODE | Dependencias, entradas y mantenimiento seguro | SAST/SCA y tratamiento de hallazgos | NO_EJECUTADO |
-| RESILIENCE | Riesgo de modificación y análisis del cliente | Revisión de necesidad y pruebas justificadas | NO_EJECUTADO |
-| PRIVACY | Minimización, transparencia y control de datos | Revisión de flujos y borrado | NO_EJECUTADO |
+## Verificación ejecutada — 2026-11-19
 
-La resiliencia se selecciona según riesgo; no autoriza instalar antitampering, root detection, pinning u otras dependencias por defecto. La firma Android y la autorización del servidor siguen siendo asuntos propios, con evidencia diferenciada.
+Cada grupo se verificó con pruebas automáticas que corren en CI (`android-ci.yml`) y en el teléfono (Motorola edge 40 neo, Android 15: 23 pasan, 6 omitidas por requerir cuenta QA, 0 fallan). Estado: **CUMPLE** (con evidencia), **RIESGO ACEPTADO** (justificado).
+
+| Grupo MASVS | Control aplicado en PactoGG | Evidencia (prueba o archivo) | Estado |
+|---|---|---|---|
+| STORAGE | Sesión cifrada con AES-GCM y llave en Android Keystore; `allowBackup=false` y reglas de extracción vacías; la copia sin conexión (Room) se borra al cerrar sesión y es por cuenta; sin datos sensibles en logs | `EncryptedSessionStoreTest` (instrumentada), `OfflineCacheTest.PL_12_anotherAccountNeverSeesSavedDataAndClearRemovesIt`, `AccessNavigationTest.rotationAndRecreationKeepDraftWithoutSavingPasswordOrAuthenticating`, Semgrep `pactogg-no-log-sensitive` y `pactogg-no-world-accessible-files` | CUMPLE |
+| CRYPTO | Solo primitivas de la plataforma (Keystore, AES-GCM); sin llaves ni secretos en el APK | `EncryptedSessionStoreTest.corruptedOrMissingKeyDoesNotRestoreAnAccount`, Gitleaks en CI | CUMPLE |
+| AUTH | Token corto con renovación serializada; sesión revocada se borra; escrituras no se repiten tras renovar; logout con endpoint y baja del push | `PlaySecurityTest` (35 operaciones), `AccountSecurityTest`, `RefreshSessionSecurityTest`, `LogoutSecurityTest`, `DeviceApiTest.PL_10_logoutRunsDeviceRemovalBeforeClearingAndSurvivesItsFailure` | CUMPLE |
+| NETWORK | Solo HTTPS (`cleartextTrafficPermitted=false`), certificados fijados para la API (raíces de Let's Encrypt y ZeroSSL, con expiración), sin `hostnameVerifier` ni `TrustManager` permisivos | `NetworkSecurityConfigTest`, `ApiClientFactoryTest`, Semgrep `pactogg-no-cleartext-source-url`, `pactogg-no-trust-all-hostname-verifier` y `pactogg-no-empty-trust-manager` | CUMPLE |
+| PLATFORM | Permisos mínimos (`INTERNET`, `POST_NOTIFICATIONS` en tiempo de ejecución); fotos por Photo Picker y voz por el reconocedor del sistema (sin cámara ni micrófono); sin WebView ni puentes JavaScript; deep link de restablecer contraseña valida el token | `AndroidManifest.xml`, Semgrep `pactogg-no-javascript-interface` y `pactogg-no-webview-file-access`, `PasswordRecoveryApiTest.PL_11_badEmailTokenOrShortPasswordNeverReachTheNetwork` | CUMPLE |
+| CODE | Validación de entradas antes de la red (ids, textos, fotos); dependencias con SBOM y Trivy; Detekt y Lint con advertencias como error | `PlayRulesTest`, `PlayValidationTest`, `AccountRulesTest`, `*ValidationTest`, Trivy + CycloneDX (`android-security.yml`) | CUMPLE |
+| RESILIENCE | R8 con ofuscación y reducción en release. Sin detección de root ni Play Integrity: la app no maneja dinero ni datos financieros, las reglas viven en el servidor y Play Integrity exige verificación en el backend | `app/build.gradle.kts` (`optimization`), `proguard-rules.pro` | RIESGO ACEPTADO |
+| PRIVACY | Aviso en la app y en la landing (`/privacidad`, misma versión 2026-10-01), consentimiento al registrarse, eliminar cuenta desde el perfil, datos mínimos | `AccessNavigationTest.registerDisplaysProvisionalPrivacyBeforeAnySubmission`, `PlayApiTest.PL_09_deleteAccountSendsConfirmationInDeleteBody`, landing `tests/landing.test.js` | CUMPLE |
+
+La resiliencia se selecciona según riesgo: con el análisis anterior se decidió fijar certificados y no instalar antitampering ni detección de root. La firma Android y la autorización del servidor siguen siendo asuntos propios, con evidencia diferenciada.
 
 Los resultados técnicos históricos están en [verificación local](../verificacion-local.md). No se reejecutaron aquí ni acreditan todos los requisitos de una categoría. Cada evaluación futura registrará requisito/versión, artefacto, prueba concreta, resultado y límites con la [plantilla de evidencia](../../.specify/templates/evidencia-template.md).
 

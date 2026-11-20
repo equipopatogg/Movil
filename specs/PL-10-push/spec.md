@@ -1,6 +1,6 @@
 # PL-10 — Notificaciones push
 
-Fecha: 2026-11-16. Estado: **APROBADA POR EL PO; ESCRITA, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Backend: DEV-01 `PUT /api/v1/devices/me`, DEV-02 `DELETE /api/v1/devices/me?fcm_token=` y el envío FCM de NOT-05 (ya desplegados). Origen: la rama sin fusionar `codex/push-google-notificaciones-20261109`; se trae el registro y la recepción, adaptados a la app actual. Sprint planning: ID 69 y ID 143.
+Fecha: 2026-11-16. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos); en el teléfono falta guardar la cuenta de servicio de Firebase en el servidor (`scripts/configure-firebase.sh`)**. Backend: DEV-01 `PUT /api/v1/devices/me`, DEV-02 `DELETE /api/v1/devices/me?fcm_token=` y el envío FCM de NOT-05 (ya desplegados). Origen: la rama sin fusionar `codex/push-google-notificaciones-20261109`; se trae el registro y la recepción, adaptados a la app actual. Sprint planning: ID 69 y ID 143.
 
 ## Requisitos
 - RF1: La configuración de Firebase sale de `app/google-services.json` (no versionado). Gradle solo lee la parte pública del cliente Android `com.pactogg.app` y rechaza una cuenta de servicio. Sin el archivo la app compila y muestra "no configurado".

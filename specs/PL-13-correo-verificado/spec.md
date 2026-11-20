@@ -1,6 +1,6 @@
 # PL-13 — Correo verificado obligatorio en la app
 
-Fecha: 2026-11-18. Estado: **APROBADA POR EL PO; ESCRITA, FALTA COMPILAR Y PROBAR**. Backend: AUTH-05 (`verify-email`, `verify-email/resend`), `Auth__RequireVerifiedEmail=true` (CLARIFICACION #5 y #223), página web de verificación del equipo (F2-D75).
+Fecha: 2026-11-18. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos); la verificación obligatoria se enciende con `Auth__RequireVerifiedEmail=true` en SSM**. Backend: AUTH-05 (`verify-email`, `verify-email/resend`), `Auth__RequireVerifiedEmail=true` (CLARIFICACION #5 y #223), página web de verificación del equipo (F2-D75).
 
 ## Requisitos
 - RF1: Si el perfil dice `email_verified=false` o el servidor responde `EMAIL_NOT_VERIFIED`, Grupos y Perfil muestran la tarjeta "Verifica tu correo".

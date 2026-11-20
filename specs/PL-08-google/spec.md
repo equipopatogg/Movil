@@ -1,6 +1,6 @@
 # PL-08 — Continuar con Google
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; ESCRITA, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Backend: AUTH-02 `POST /api/v1/auth/google` (ya desplegado). Origen: el botón existía en la rama sin fusionar `codex/push-google-notificaciones-20261109`; aquí se trae solo el acceso con Google, adaptado a la app actual.
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos); en el teléfono falta registrar la huella SHA-1 en Google Cloud**. Backend: AUTH-02 `POST /api/v1/auth/google` (ya desplegado). Origen: el botón existía en la rama sin fusionar `codex/push-google-notificaciones-20261109`; aquí se trae solo el acceso con Google, adaptado a la app actual.
 
 ## Requisitos
 - RF1: En iniciar sesión y en crear cuenta hay un botón "Continuar con Google". Usa Credential Manager con selección explícita de cuenta.

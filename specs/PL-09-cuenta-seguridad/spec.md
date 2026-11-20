@@ -1,6 +1,6 @@
 # PL-09 — Avatar, eliminar cuenta, reportar y bloquear
 
-Fecha: 2026-11-15. Estado: **APROBADA POR EL PO; ESCRITA, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Backend ya desplegado: USR-03 (`PATCH /users/me` con `avatar_id`), USR-04 (`DELETE /users/me`), REP-01 (`POST /reports`) y REP-05 (`POST /users/{id}/block`). Historias: ID 22/23 (avatar), ID 29 (eliminar cuenta), ID 149 (reportar), ID 153 (bloquear) e ID 98 (celebración del reto cumplido).
+Fecha: 2026-11-15. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos); foto de perfil, desbloquear y reportar evidencia probados en el teléfono**. Backend ya desplegado: USR-03 (`PATCH /users/me` con `avatar_id`), USR-04 (`DELETE /users/me`), REP-01 (`POST /reports`) y REP-05 (`POST /users/{id}/block`). Historias: ID 22/23 (avatar), ID 29 (eliminar cuenta), ID 149 (reportar), ID 153 (bloquear) e ID 98 (celebración del reto cumplido).
 
 ## Requisitos
 - RF1 **Avatar**: en el perfil se elige uno de tres colores (violeta, cian, naranja). Se guarda en el servidor y se usa en el perfil y en la lista de miembros. `default` se muestra naranja.

@@ -1,6 +1,6 @@
 # PL-06 — Explorar: ideas del día
 
-Fecha: 2026-11-14. Estado: **APROBADA POR EL PO; PANTALLA ESCRITA, FALTA COMPILAR Y PROBAR EN EL CELULAR**. Sin backend: catálogo local. Maqueta: `explorar`. Sustituye el aviso "Esta sección estará disponible próximamente" de la navegación.
+Fecha: 2026-11-14. Estado: **APROBADA POR EL PO E IMPLEMENTADA. Compila con Detekt y Lint sin advertencias; pruebas JVM (unitarias, integración y seguridad) en verde el 2026-11-19 (344 casos)**. Sin backend: catálogo local. Maqueta: `explorar`. Sustituye el aviso "Esta sección estará disponible próximamente" de la navegación.
 
 ## Decisión del PO (2026-11-14)
 Explorar deja de estar bloqueado. No muestra datos de otras personas ni "datos de ejemplo": muestra ideas de retos de un catálogo incluido en la app (`app/src/main/assets/explorar/retos.json`, 500 ideas de 200 juegos). La lista de juegos es una selección editorial, no un ranking oficial, y los retos propios de cada juego deben revisarse por alguien que los juegue.
