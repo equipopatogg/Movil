@@ -505,7 +505,8 @@
       "com.pactogg.app.feature.play.PlayRulesTest",
       "com.pactogg.app.core.session.AccountRulesTest",
       "com.pactogg.app.feature.assist.ScoreParserTest",
-      "com.pactogg.app.feature.assist.AiIdeasViewModelTest"
+      "com.pactogg.app.feature.assist.AiIdeasViewModelTest",
+      "com.pactogg.app.feature.onboarding.TutorialTest"
     ],
     "integration": [
       "com.pactogg.app.integration.ApiIntegrationTest",
@@ -846,6 +847,10 @@
       {
         "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
         "name": "reviewRequiresChoosingRivalOrOpeningToWholeGroup"
+      },
+      {
+        "class": "com.pactogg.app.feature.onboarding.TutorialTest",
+        "name": "PL_15_opensOnceOnFirstUseAndAgainOnlyWhenAsked"
       }
     ],
     "security": [
