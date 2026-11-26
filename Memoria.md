@@ -279,3 +279,11 @@ Pruebas nuevas: `VoteBlockedReasonTest`, `PlayApiTest.PL_09_avatarPhotoUploadsMu
 - `docs/seguridad/masvs-checklist.md` con la verificación ejecutada por grupo MASVS (resiliencia como riesgo aceptado).
 - Specs PL-01 a PL-13 con su estado real; `docs/entrega/google-play.md`; `CHANGELOG.md` y etiquetas `vX.Y.Z`.
 - La landing (repo `web`) ya publica `/privacidad`, enlaza la ficha de Play y tiene cabeceras de seguridad.
+
+## Auditoría v3 con OpenCode — 2026-11-26
+
+- Crear reto: el rival ya no queda en "Todo el grupo" sin querer; hay que elegir rival o tocar "Abrir a todo el grupo" (el PO vio que un reto le llegó a todo el grupo).
+- PL-14: ML en el teléfono (ML Kit lee el marcador de la captura al reportar partida) e IA generativa en la app ("Ideas con IA" en Explorar con Gemini por Firebase AI Logic, sin llave en el código, solo se envía el nombre del juego). El reto por voz sigue con Groq en el backend: el servicio de IA del equipo (`pactogg-ai`) se declaró a sí mismo NO-GO el 2026-11-26 (su endpoint responde 422 por contrato incompatible).
+- Aviso de root en "Privacidad y seguridad" (MASVS-RESILIENCE parcial).
+- `docs/seguridad/owasp-mobile-top10.md` y `docs/seguridad/porcentaje-seguridad.md` (91.9 %, 0 vulnerabilidades críticas como criterio de compuerta).
+- Tutorial de primer uso (PL-15).

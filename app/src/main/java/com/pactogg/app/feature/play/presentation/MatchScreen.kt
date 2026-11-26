@@ -10,6 +10,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -30,6 +35,7 @@ import com.pactogg.app.core.designsystem.SafetyNote
 import com.pactogg.app.core.designsystem.localDate
 import com.pactogg.app.core.designsystem.statusLabel
 import com.pactogg.app.core.designsystem.statusTone
+import com.pactogg.app.feature.assist.data.MlKitScoreReader
 import com.pactogg.app.feature.connected.data.PhotoPreparer
 import com.pactogg.app.feature.connected.presentation.ConnectedState
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
@@ -98,6 +104,19 @@ private fun ReportForm(state: ConnectedState, model: ConnectedViewModel, tournam
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) model.prepareReportPhoto { PhotoPreparer(context).prepare(uri) }
     }
+    // PL-14 (ML): ML Kit lee el marcador de la captura en el teléfono y lo propone si los campos están vacíos.
+    val reader = remember { MlKitScoreReader() }
+    var detected by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(play.reportPhoto) {
+        val photo = play.reportPhoto ?: return@LaunchedEffect
+        detected = null
+        val score = runCatching { reader.read(photo.bytes) }.getOrNull() ?: return@LaunchedEffect
+        detected = "${score.first} – ${score.second}"
+        val current = model.state.value.play
+        if (current.scoreFirst.isBlank() && current.scoreSecond.isBlank()) {
+            model.scores(score.first.toString(), score.second.toString())
+        }
+    }
     MakeCard {
         Text("Registrar resultado", style = MaterialTheme.typography.titleMedium)
         MakeField(tournament.groupName(match.p1), play.scoreFirst, { model.scores(it, play.scoreSecond) },
@@ -112,6 +131,10 @@ private fun ReportForm(state: ConnectedState, model: ConnectedViewModel, tournam
         MakeButton(if (photo == null) "Elegir foto del resultado" else "Cambiar foto", ButtonKind.Secondary,
             enabled = !state.busy) {
             picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+        detected?.let {
+            Text("Marcador leído de la foto con ML Kit: $it. Revísalo antes de enviar.",
+                style = MaterialTheme.typography.bodySmall, color = PactoCyan)
         }
         MakeButton("Enviar reporte", enabled = !state.busy && photo != null) { model.reportMatch() }
     }

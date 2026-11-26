@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.ButtonKind
 import com.pactogg.app.core.designsystem.EmptyState
@@ -30,6 +32,7 @@ import com.pactogg.app.core.designsystem.SafetyNote
 import com.pactogg.app.core.designsystem.SectionTitle
 import com.pactogg.app.core.designsystem.Segmented
 import com.pactogg.app.core.designsystem.Tone
+import com.pactogg.app.feature.assist.presentation.AiIdeasViewModel
 import com.pactogg.app.feature.connected.presentation.ConnectedState
 import com.pactogg.app.feature.connected.presentation.ConnectedViewModel
 import com.pactogg.app.feature.explore.presentation.ExploreState
@@ -37,6 +40,8 @@ import com.pactogg.app.feature.explore.presentation.IdeaCategory
 import com.pactogg.app.feature.explore.presentation.IdeaPresentation
 import com.pactogg.app.feature.explore.presentation.dailyIdeas
 import com.pactogg.app.feature.explore.presentation.parseIdeas
+import com.pactogg.app.ui.theme.PactoCyan
+import com.pactogg.app.ui.theme.PactoViolet
 import java.util.Calendar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -62,6 +67,7 @@ internal fun ExplorePage(state: ConnectedState, model: ConnectedViewModel) {
     MakePage("Explorar", "No necesitas una gran idea. Solo un buen pacto.") {
         HeroTitle("Elige tu próximo desafío", "Menos hablar.\nMás demostrar.",
             "Ideas para poner a prueba tu habilidad y la palabra de tu squad.")
+        AiIdeasCard(state.busy, onUse = { game, condition -> model.useIdea(game, condition) })
         MakeField("Busca un juego o un reto", query, { query = it.take(40) })
         Segmented(CategoryLabels.map { it.first }, CategoryLabels.first { it.second == category }.first) { label ->
             category = CategoryLabels.first { it.first == label }.second
@@ -86,6 +92,31 @@ internal fun ExplorePage(state: ConnectedState, model: ConnectedViewModel) {
             }
         }
         SafetyNote("Reglas editables: eliges rival, plazo y fianza al crear el pacto. Solo puntos virtuales.")
+    }
+}
+
+/** PL-14: "Ideas con IA" con Gemini (Firebase AI Logic). Solo se manda el nombre del juego. */
+@Composable
+private fun AiIdeasCard(busy: Boolean, onUse: (String, String) -> Unit,
+    ai: AiIdeasViewModel = viewModel()) {
+    val assist by ai.state.collectAsStateWithLifecycle()
+    MakeCard(accent = PactoViolet) {
+        Kicker("Ideas con IA · Gemini", PactoCyan)
+        MakeField("¿A qué juego?", assist.game, ai::game, hint = "Solo se envía el nombre del juego.")
+        MakeButton(if (assist.loading) "Pensando ideas…" else "Generar 3 ideas", ButtonKind.Secondary,
+            enabled = !busy && !assist.loading, icon = R.drawable.ic_pacto_plus) { ai.generate() }
+        assist.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+        assist.ideas.forEach { idea ->
+            Text(idea.title, style = MaterialTheme.typography.titleSmall)
+            Text(idea.condition, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            MakeButton("Usar esta idea", ButtonKind.Ghost, enabled = !busy) {
+                onUse(assist.game.trim(), idea.condition)
+            }
+        }
+        if (assist.ideas.isNotEmpty()) {
+            Text("Generado por IA: revísalo antes de crear el reto.", style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
     }
 }
 

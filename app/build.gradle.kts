@@ -13,7 +13,7 @@ plugins {
 // Versión de la app (requisito 11): se sube en cada despliegue.
 // versionName lleva la versión del producto; versionCode crece solo en CI con el número de ejecución
 // de GitHub Actions, así cada APK/AAB publicado tiene un código mayor que el anterior.
-val appVersionName = "1.0.0"
+val appVersionName = "1.1.0"
 val appVersionCode = providers.environmentVariable("GITHUB_RUN_NUMBER").map { it.toInt() + 100 }.orElse(100).get()
 
 // Firma de subida a Google Play: solo en CI de entrega, con la llave en secretos del repositorio.
@@ -35,6 +35,9 @@ val googleWebClientId = providers.gradleProperty("pactogg.googleWebClientId")
     .orElse("841778632932-0jnd246u1mvbl6n9djtthsdgvb0um6do.apps.googleusercontent.com").get()
 require(googleWebClientId.isEmpty() || googleWebClientId.matches(
     Regex("[A-Za-z0-9._-]+\\.apps\\.googleusercontent\\.com"))) { "Client ID web de Google inválido." }
+// PL-14: modelo de Gemini Developer API (Firebase AI Logic) que no requiere facturación.
+val geminiModel = providers.gradleProperty("pactogg.geminiModel").orElse("gemini-3.8-flash").get()
+require(geminiModel.matches(Regex("gemini-[a-z0-9.-]{1,40}"))) { "Modelo de Gemini inválido." }
 require(privacyVersion.matches(Regex("[A-Za-z0-9_.-]{1,32}"))) { "Versión de privacidad inválida." }
 require(apiBaseUrl.isEmpty() || URI(apiBaseUrl).let {
     it.scheme == "https" && it.host != null && it.userInfo == null &&
@@ -76,6 +79,7 @@ android {
         buildConfigField("String", "PRIVACY_VERSION", "\"$privacyVersion\"")
         buildConfigField("String", "PRIVACY_URL", "\"$privacyUrl\"")
         buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"$googleWebClientId\"")
+        buildConfigField("String", "GEMINI_MODEL", "\"$geminiModel\"")
         firebaseValues.forEach { (name, value) -> resValue("string", name, value) }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -153,6 +157,8 @@ dependencies {
     implementation(libs.androidx.credentials.play.services)
     implementation(libs.google.identity)
     implementation(libs.firebase.messaging)
+    implementation(libs.firebase.ai)
+    implementation(libs.mlkit.text.recognition)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockwebserver)

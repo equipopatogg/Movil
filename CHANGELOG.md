@@ -2,7 +2,11 @@
 
 Versión semántica en `app/build.gradle.kts` (`appVersionName`); el `versionCode` lo pone CI. Cada versión publicada lleva una etiqueta `vX.Y.Z` en Git. Política completa en `docs/versiones.md`.
 
-## Sin publicar
+## 1.1.0 — 2026-11-26
+- ML en la app: al reportar el resultado de una partida, ML Kit lee el marcador de la captura en el teléfono (PL-14).
+- IA generativa en la app: "Ideas con IA" en Explorar con Gemini (Firebase AI Logic); solo se envía el nombre del juego (PL-14).
+- Aviso de root en "Privacidad y seguridad".
+- Matriz OWASP Mobile Top 10 y porcentaje de seguridad (`docs/seguridad/`).
 - Crear reto: el rival ya no queda en "Todo el grupo" sin querer. Hay que elegir rival o tocar "Abrir a todo el grupo"; si no, "Revisar reto" lo pide (`ConnectedFlowTest.reviewRequiresChoosingRivalOrOpeningToWholeGroup`).
 
 ## 1.0.0 — 2026-11-19
