@@ -159,6 +159,7 @@ class LiveBackendTest {
         fill("Recompensa sin dinero", "Elegir el juego de la siguiente partida")
         fill("Fecha local: AAAA-MM-DD HH:mm", "2026-11-10 18:00")
         click(requireNotNull(model.state.value.group).bonds.first().toString())
+        click("Abrir a todo el grupo")
         click("Revisar reto")
         compose.waitForIdle()
         check(model.state.value.reviewing) {

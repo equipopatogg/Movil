@@ -30,6 +30,7 @@ import com.pactogg.app.core.designsystem.Tone
 import com.pactogg.app.core.designsystem.localDate
 import com.pactogg.app.core.designsystem.statusLabel
 import com.pactogg.app.core.designsystem.statusTone
+import com.pactogg.app.feature.connected.domain.ChallengeDraft
 import com.pactogg.app.feature.play.presentation.openVote
 import com.pactogg.app.prototype.Choices
 import com.pactogg.app.ui.theme.PactoCyan
@@ -48,6 +49,13 @@ internal fun StepIntro(number: String, title: String, copy: String) {
             Text(copy, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
+}
+
+/** Texto del rival: nadie elegido todavía, todo el grupo (a propósito) o el apodo del rival. */
+internal fun rivalLabel(draft: ChallengeDraft, nickname: String?): String = when {
+    draft.targetId != null -> nickname.orEmpty()
+    draft.openToGroup -> "Todo el grupo (cualquiera puede aceptar)"
+    else -> "Sin elegir"
 }
 
 /** Crear reto manual con los tres pasos de la maqueta (`Create`). La lógica es la misma de antes. */
@@ -80,11 +88,11 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
         }
         MakeCard {
             StepIntro("02", "Elige a tu rival", "La invitación queda pendiente hasta que acepte.")
-            InfoRow("Rival", if (draft.targetId == null) "Todo el grupo" else rival?.nickname.orEmpty())
+            InfoRow("Rival", rivalLabel(draft, rival?.nickname))
             MakeButton("Elegir rival del grupo", ButtonKind.Ghost, enabled = !state.busy) {
                 model.navigate(ConnectedRoute.MEMBERS)
             }
-            if (draft.targetId != null) MakeButton("Retar a todo el grupo", ButtonKind.Ghost, enabled = !state.busy) {
+            if (!draft.openToGroup) MakeButton("Abrir a todo el grupo", ButtonKind.Ghost, enabled = !state.busy) {
                 model.targetMember(null)
             }
             MakeField("Recompensa o pacto de honor", draft.reward, { model.draft(draft.copy(reward = it)) },
@@ -100,7 +108,7 @@ fun ConnectedCreate(state: ConnectedState, model: ConnectedViewModel) {
                 Pill("Invitación", Tone.Orange)
                 Text(draft.condition, style = MaterialTheme.typography.titleLarge)
                 InfoRow("Juego", draft.game)
-                InfoRow("Rival", if (draft.targetId == null) "Grupo" else rival?.nickname.orEmpty())
+                InfoRow("Rival", rivalLabel(draft, rival?.nickname))
                 InfoRow("Acuerdo", draft.reward)
                 InfoRow("Fianza", "${draft.bond} pts virtuales")
                 InfoRow("Fecha límite", localDate(draft.deadline))

@@ -184,6 +184,23 @@ class ConnectedFlowTest {
         model.targetMember(rival.id); assertEquals(rival, model.state.value.social.selectedRival)
         model.targetMember(null); assertNull(model.state.value.social.selectedRival)
     }
+    @Test fun reviewRequiresChoosingRivalOrOpeningToWholeGroup() = runTest(dispatcher) {
+        runCurrent(); val rival = Member("444444444444444444444444", "Rival", "default", "member", 100, "date")
+        val ready = ChallengeDraft(game = "Halo", condition = "Ganar 3 partidas", reward = "Invita las pizzas",
+            deadline = "2099-01-01T00:00:00Z", bond = 25)
+        model.mutable.value = model.mutable.value.copy(draft = ready,
+            social = SocialState(members = ListState(listOf(rival))))
+        model.review()
+        assertFalse(model.state.value.reviewing); assertTrue(model.state.value.error.orEmpty().contains("rival"))
+        model.targetMember(null); model.review()
+        assertTrue(model.state.value.draft.openToGroup); assertTrue(model.state.value.reviewing)
+        assertEquals("Todo el grupo (cualquiera puede aceptar)", rivalLabel(model.state.value.draft, null))
+        model.targetMember(rival.id)
+        assertFalse(model.state.value.draft.openToGroup); assertFalse(model.state.value.reviewing)
+        model.review(); assertTrue(model.state.value.reviewing)
+        assertEquals("Rival", rivalLabel(model.state.value.draft, rival.nickname))
+        assertEquals("Sin elegir", rivalLabel(ready, null))
+    }
     @Test fun challengeCreationRequiresReviewAndResetsDraftAfterConfirmation() = runTest(dispatcher) {
         runCurrent(); handlers["createChallenge"] = { contract }
         model.createChallenge(); assertTrue(calls.isEmpty())

@@ -39,5 +39,8 @@ fun ConnectedViewModel.review() {
     if (current.busy) return
     if (current.group == null || !InputRules.challenge(current.group, current.draft, System.currentTimeMillis())) {
         mutable.update { it.copy(error = "Completa el reto, una fecha futura válida y una fianza del grupo.") }
+    } else if (current.draft.targetId == null && !current.draft.openToGroup) {
+        // Antes, sin elegir rival el reto salía para todo el grupo sin que la persona lo notara.
+        mutable.update { it.copy(error = "Elige a tu rival o marca \"Abrir a todo el grupo\".") }
     } else mutable.update { it.copy(reviewing = true, error = null) }
 }
