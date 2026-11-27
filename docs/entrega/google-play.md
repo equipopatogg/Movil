@@ -18,4 +18,4 @@
 
 ## Entrega continua desde GitHub (requisito 16)
 
-`docs/cd/android-release.yml` → copiar a `.github/workflows/android-release.yml`. Al publicar una etiqueta `v*` corre pruebas, Lint y Detekt, firma el AAB y lo sube a la pista interna con `scripts/play-upload.py`. Secretos: `PACTOGG_UPLOAD_KEYSTORE_BASE64`, `PACTOGG_UPLOAD_STORE_PASSWORD`, `PACTOGG_UPLOAD_KEY_ALIAS`, `PACTOGG_UPLOAD_KEY_PASSWORD` y `PLAY_SERVICE_ACCOUNT_JSON`.
+`docs/cd/android-release.yml` → copiar a `.github/workflows/android-release.yml`. Al publicar una etiqueta `v*` corre pruebas, Lint y Detekt, firma el AAB y lo sube a la pista interna con `scripts/play-upload.py`. Secretos: `PACTOGG_UPLOAD_KEYSTORE_BASE64`, `PACTOGG_UPLOAD_STORE_PASSWORD`, `PACTOGG_UPLOAD_KEY_ALIAS`, `PACTOGG_UPLOAD_KEY_PASSWORD`, `PLAY_SERVICE_ACCOUNT_JSON` y `GOOGLE_SERVICES_JSON_BASE64` (el `google-services.json` de Firebase en base64; el workflow lo escribe antes de compilar, valida que sea de `com.pactogg.app` y lo borra al terminar).
