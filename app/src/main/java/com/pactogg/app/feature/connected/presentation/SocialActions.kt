@@ -42,7 +42,7 @@ fun ConnectedViewModel.targetMember(id: String?) {
     val current = mutable.value
     if (current.busy || id == current.account?.id) return
     if (id != null && current.social.members.items.none { it.id == id }) return
-    mutable.update { it.copy(draft = it.draft.copy(targetId = id), reviewing = false,
+    mutable.update { it.copy(draft = it.draft.copy(targetId = id, openToGroup = id == null), reviewing = false,
         social = it.social.copy(selectedRival = it.social.members.items.firstOrNull { member -> member.id == id })) }
 }
 fun ConnectedViewModel.requestContractAction(action: String) {

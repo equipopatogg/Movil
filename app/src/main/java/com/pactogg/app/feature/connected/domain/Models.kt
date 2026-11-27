@@ -13,6 +13,8 @@ data class Challenge(val id: String, val groupId: String, val game: String,
 
 data class ChallengeDraft(val game: String = "", val condition: String = "", val reward: String = "",
     val deadline: String = "", val bond: Int? = null, val targetId: String? = null,
+    /** La persona eligió a propósito retar a todo el grupo (sin rival, cualquiera puede aceptar). */
+    val openToGroup: Boolean = false,
     /** Frase dictada (PL-05); si existe el reto se crea con `source=voice`. */
     val originalPhrase: String? = null)
 

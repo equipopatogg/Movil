@@ -2,6 +2,9 @@
 
 Versión semántica en `app/build.gradle.kts` (`appVersionName`); el `versionCode` lo pone CI. Cada versión publicada lleva una etiqueta `vX.Y.Z` en Git. Política completa en `docs/versiones.md`.
 
+## Sin publicar
+- Crear reto: el rival ya no queda en "Todo el grupo" sin querer. Hay que elegir rival o tocar "Abrir a todo el grupo"; si no, "Revisar reto" lo pide (`ConnectedFlowTest.reviewRequiresChoosingRivalOrOpeningToWholeGroup`).
+
 ## 1.0.0 — 2026-11-19
 - Fijación de certificados para la API y reglas Semgrep nuevas (logs sensibles, archivos públicos, TrustManager vacío, WebView con archivos).
 - Pruebas de seguridad de todas las operaciones de juego y cuenta (`PlaySecurityTest`, `AccountSecurityTest`, `NetworkSecurityConfigTest`) e integración de los 61 endpoints (`docs/pruebas/matriz-endpoints.md`).
