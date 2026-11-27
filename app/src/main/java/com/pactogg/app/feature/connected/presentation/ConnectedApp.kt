@@ -22,12 +22,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.LinkCard
 import com.pactogg.app.core.offline.OfflineBanner
 import com.pactogg.app.feature.auth.presentation.AccessEvent
 import com.pactogg.app.feature.auth.presentation.AccessScreen
 import com.pactogg.app.feature.demo.presentation.DemoScreen
+import com.pactogg.app.feature.onboarding.TutorialScreen
+import com.pactogg.app.feature.onboarding.TutorialViewModel
 
 @Composable
 fun ConnectedApp(model: ConnectedViewModel) {
@@ -49,6 +52,14 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
         return
     }
     PushEffects(model)
+    // PL-15: tutorial la primera vez en este teléfono (y desde Perfil · Cómo usar PactoGG).
+    val tutorial: TutorialViewModel = viewModel()
+    val showTutorial by tutorial.visible.collectAsStateWithLifecycle()
+    if (showTutorial) TutorialScreen(tutorial) else SignedIn(state, model)
+}
+
+@Composable
+private fun SignedIn(state: ConnectedState, model: ConnectedViewModel) {
     BackHandler(state.route != ConnectedRoute.HOME || state.selectedTournament != null) {
         if (state.selectedTournament != null) model.tournament(null) else model.back()
     }

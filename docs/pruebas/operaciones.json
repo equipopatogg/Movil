@@ -503,7 +503,10 @@
       "com.pactogg.app.core.push.PushRegistrationTest",
       "com.pactogg.app.feature.play.presentation.VoteBlockedReasonTest",
       "com.pactogg.app.feature.play.PlayRulesTest",
-      "com.pactogg.app.core.session.AccountRulesTest"
+      "com.pactogg.app.core.session.AccountRulesTest",
+      "com.pactogg.app.feature.assist.ScoreParserTest",
+      "com.pactogg.app.feature.assist.AiIdeasViewModelTest",
+      "com.pactogg.app.feature.onboarding.TutorialTest"
     ],
     "integration": [
       "com.pactogg.app.integration.ApiIntegrationTest",
@@ -558,7 +561,9 @@
       "com.pactogg.app.feature.tournaments.list.ListTournamentsSecurityTest",
       "com.pactogg.app.feature.play.PlaySecurityTest",
       "com.pactogg.app.core.session.AccountSecurityTest",
-      "com.pactogg.app.core.network.NetworkSecurityConfigTest"
+      "com.pactogg.app.core.network.NetworkSecurityConfigTest",
+      "com.pactogg.app.feature.assist.IdeaPromptTest",
+      "com.pactogg.app.core.security.DeviceIntegrityTest"
     ]
   },
   "required_regressions": {
@@ -830,6 +835,22 @@
       {
         "class": "com.pactogg.app.core.session.AccountRulesTest",
         "name": "PL_13_verifyEmailSendsOnlyTheTokenAndResendNeedsSession"
+      },
+      {
+        "class": "com.pactogg.app.feature.assist.ScoreParserTest",
+        "name": "PL_14_readsCommonScoreboardFormats"
+      },
+      {
+        "class": "com.pactogg.app.feature.assist.AiIdeasViewModelTest",
+        "name": "PL_14_invalidGameNeverCallsTheModel"
+      },
+      {
+        "class": "com.pactogg.app.feature.connected.presentation.ConnectedFlowTest",
+        "name": "reviewRequiresChoosingRivalOrOpeningToWholeGroup"
+      },
+      {
+        "class": "com.pactogg.app.feature.onboarding.TutorialTest",
+        "name": "PL_15_opensOnceOnFirstUseAndAgainOnlyWhenAsked"
       }
     ],
     "security": [
@@ -1152,6 +1173,18 @@
       {
         "class": "com.pactogg.app.core.network.NetworkSecurityConfigTest",
         "name": "NET_SEC_apiHostIsPinnedWithBackupPinsThatOutliveTheEvaluation"
+      },
+      {
+        "class": "com.pactogg.app.feature.assist.IdeaPromptTest",
+        "name": "PL_14_onlyAPlainGameNameReachesTheModel"
+      },
+      {
+        "class": "com.pactogg.app.feature.assist.IdeaPromptTest",
+        "name": "PL_14_dropsMoneyEmptyDuplicatedOversizedAndExtraIdeas"
+      },
+      {
+        "class": "com.pactogg.app.core.security.DeviceIntegrityTest",
+        "name": "PL_09_suBinaryMagiskOrTestKeysAreFlagged"
       }
     ],
     "integration": [

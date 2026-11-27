@@ -10,7 +10,7 @@ Qué datos usamos: correo, apodo y contraseña (se guarda protegida con Argon2id
 
 Para qué: crear y proteger tu cuenta, que funcionen los grupos, retos, jurado y torneos, revisar que fotos y textos no sean inapropiados antes de guardarlos y mandarte avisos. No vendemos tus datos ni mostramos publicidad.
 
-Con quién se procesan: Amazon Web Services (servidores, fotos, moderación con Rekognition y Comprehend, en EE. UU.), MongoDB Atlas (base de datos), Google (Firebase para notificaciones, acceso con Google y envío de correos) y Groq (convierte la frase dictada en un borrador de reto; solo recibe el texto y los apodos de tu grupo). El dictado lo hace el reconocedor de voz de tu teléfono; la app no graba ni envía audio.
+Con quién se procesan: Amazon Web Services (servidores, fotos, moderación con Rekognition y Comprehend, en EE. UU.), MongoDB Atlas (base de datos), Google (Firebase para notificaciones, acceso con Google y envío de correos) y Groq (convierte la frase dictada en un borrador de reto; solo recibe el texto y los apodos de tu grupo). El dictado lo hace el reconocedor de voz de tu teléfono; la app no graba ni envía audio. En Explorar, “Ideas con IA” usa Gemini de Google (Firebase AI Logic) y solo le manda el nombre del juego que escribes. Al reportar un resultado de torneo, la app lee el marcador de la foto con ML Kit dentro de tu teléfono; esa lectura no envía la foto a ningún servicio.
 
 Cuánto tiempo: las fotos de evidencia se borran a los 30 días, salvo las que el grupo guarda en el Muro de la Fama; los avisos, a los 30 días; las sesiones, a los 30 días sin uso. La frase dictada no se guarda.
 

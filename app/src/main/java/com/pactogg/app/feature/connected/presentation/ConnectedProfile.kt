@@ -8,12 +8,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pactogg.app.BuildConfig
 import com.pactogg.app.R
 import com.pactogg.app.core.designsystem.ButtonKind
@@ -25,10 +27,12 @@ import com.pactogg.app.core.designsystem.MakeCard
 import com.pactogg.app.core.designsystem.MakeField
 import com.pactogg.app.core.designsystem.MakePage
 import com.pactogg.app.core.push.PushCard
+import com.pactogg.app.core.security.DeviceIntegrity
 import com.pactogg.app.core.designsystem.SectionTitle
 import com.pactogg.app.feature.play.presentation.AvatarPicker
 import com.pactogg.app.feature.play.presentation.DeleteAccountCard
 import com.pactogg.app.feature.connected.domain.Profile
+import com.pactogg.app.feature.onboarding.TutorialViewModel
 import com.pactogg.app.ui.theme.PactoCyan
 
 /** Perfil según la maqueta (`Profile`): identidad, palabra, accesos, privacidad y cierre de sesión. */
@@ -81,6 +85,10 @@ fun ConnectedProfile(state: ConnectedState, model: ConnectedViewModel) {
             privacy = !privacy
         }
         if (privacy) PrivacyCard()
+        val tutorial: TutorialViewModel = viewModel()
+        LinkCard("Cómo usar PactoGG", "Tutorial: para qué sirve cada botón", R.drawable.ic_pacto_bolt) {
+            if (!state.busy) tutorial.open()
+        }
         MakeButton("Cerrar sesión", ButtonKind.Ghost, enabled = !state.busy) { confirmLogout = true }
         DeleteAccountCard(state, model)
     }
@@ -122,6 +130,11 @@ private fun PrivacyCard() {
             style = MaterialTheme.typography.bodySmall)
         Text("Cerrar sesión borra la sesión de este teléfono; no elimina tu cuenta.",
             style = MaterialTheme.typography.bodySmall)
+        val rooted = remember { DeviceIntegrity.current() }
+        if (rooted) {
+            Text("Este teléfono parece tener root: otras apps podrían leer los datos de PactoGG guardados aquí.",
+                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+        }
         val links = LocalUriHandler.current
         MakeButton("Ver aviso de privacidad", ButtonKind.Ghost, icon = null) {
             runCatching { links.openUri(BuildConfig.PRIVACY_URL) }
