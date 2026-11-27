@@ -55,10 +55,11 @@ private fun ConnectedBody(state: ConnectedState, model: ConnectedViewModel) {
     // PL-15: tutorial la primera vez en este teléfono (y desde Perfil · Cómo usar PactoGG).
     val tutorial: TutorialViewModel = viewModel()
     val showTutorial by tutorial.visible.collectAsStateWithLifecycle()
-    if (showTutorial) {
-        TutorialScreen(tutorial)
-        return
-    }
+    if (showTutorial) TutorialScreen(tutorial) else SignedIn(state, model)
+}
+
+@Composable
+private fun SignedIn(state: ConnectedState, model: ConnectedViewModel) {
     BackHandler(state.route != ConnectedRoute.HOME || state.selectedTournament != null) {
         if (state.selectedTournament != null) model.tournament(null) else model.back()
     }
